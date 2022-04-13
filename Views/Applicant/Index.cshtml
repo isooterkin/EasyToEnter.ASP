@@ -34,43 +34,48 @@
     </div>
 </form>
 
+
 <div class="container mt-3">
+    <div class="row">
 <!-- Вывод направленностей -->
+@{Random Random = new(1);}
 @for(var i = 0; i < ViewBag.Focuss.Count; i++)
 {
-    <div class="row shadow-sm mt-4 bg-white rounded-3 border border-light">
-        <div class="col-sm-offset-0 col-sm-3 p-0 overlay-dark">
-            <img src="https://cdn.postupi.online/images/images335x232/13/143.jpg" alt="" class="w-100 img-responsive rounded overlay-dark">
-        </div>
-        <div class="col-sm-offset-0 col-sm-6 m-2">
-            <div class="row">
-                <em>
-                    @ViewBag.Focuss[i].FocusModel.DirectionModel.GroupModel.Code.
-                    @ViewBag.Focuss[i].LevelModel.Code.
-                    @ViewBag.Focuss[i].FocusModel.DirectionModel.Code
+        <div class="card bg-dark text-white mb-3 rounded-3 shadow" style="background-color: #333;">
+            <div class="card-body">
+                <p class="card-text fst-italic">
+                    @ViewBag.Focuss[i].FullCode
                     @ViewBag.Focuss[i].FocusModel.DirectionModel.Name
-                </em>
-            </div>
-            <div class="row">
-                <strong>
+                </p>
+                <h3 class="card-title">
                     @ViewBag.Focuss[i].FocusModel.Name
-                </strong>
-            </div>
-            <div class="row">
-                <p>@ViewBag.Focuss[i].FocusModel.Description</p>
-            </div>
-            <div class="row position-absolute bottom-0">
-                <button type="button" class="btn btn-secondary btn-lg">
-                        @{Random Random = new();}
-                        @Random.Next(3, 1000) варианта обучения
-                </button>
+                </h3>
+                <p class="card-text text-truncate">
+                    @ViewBag.Focuss[i].FocusModel.Description
+                </p>
+                <div class="row p-0">
+                    <div class="col">
+                        <a href="#" class="btn btn-light">
+                            @Random.Next(3, 20) варианта обучения
+                        </a>
+                    </div>
+                    <div class="col">
+                        <p>от <span class="fs-5 fw-bold">@Random.Next(10, 900) @Random.Next(100, 900)</span> руб.</p>
+                    </div>
+                    <div class="col">
+                        <p><span class="fs-5 fw-bold">@Random.Next(20, 1000)</span> места</p>
+                    </div>
+                    <div class="col-sm-5">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-sm-offset-0 col-sm-3">
-        </div>
-    </div>
 }
+    </div>
 </div>
+
+<!-- Навигация -->
+
 <!-- Отправка формы при клике на select-->
 @section Scripts 
 {

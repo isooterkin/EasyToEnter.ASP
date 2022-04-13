@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,700;1,300&display=swap');
+
 html {
   font-size: 14px;
 }
@@ -14,15 +16,9 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
-/*
-    
-    Удалить
-    
-    */
-
-*:focus {
-    outline: none;
+* {
+    font-family: 'Ubuntu';
 }
