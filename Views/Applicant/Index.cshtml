@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Поис направления</h1>
+
+<!-- Фильтры -->
+<form method="get">
+    <div class="form-inline form-group">
+
+        <!-- Уровень -->
+        <select name="level" class="form-control select_send_ajax" asp-items="ViewBag.Levels">
+            <option value="">Выберите уровень</option>
+        </select>
+
+        <!-- Наука -->
+        <select name="science" class="form-control select_send_ajax" asp-items="ViewBag.Sciences">
+            <option value="">Выберите науку</option>
+        </select>
+
+        <!-- Группа -->
+        <select name="group" class="form-control select_send_ajax" asp-items="ViewBag.Groups">
+            <option value="">Выберите группу</option>
+        </select>
+
+        <!-- Направление -->
+        <select name="direction" class="form-control select_send_ajax" asp-items="ViewBag.Directions">
+            <option value="">Выберите направление</option>
+        </select>
+    </div>
+</form>
+
+<!-- Вывод направленностей -->
+@for(var i = 0; i < ViewBag.Focuss.Count; i++)
+{
+    <div>@ViewBag.Focuss[i].FocusModel.Name</div>
+}
+
+<!-- Отправка формы при клике на select-->
+@section Scripts 
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $('.select_send_ajax').on('change', function() 
+        {
+            $(this.form).submit();
+        });
+    </script>
+}
