@@ -6,27 +6,33 @@
 
 <!-- Фильтры -->
 <form method="get">
-    <div class="form-inline form-group">
-
-        <!-- Уровень -->
-        <select name="level" class="form-control select_send_ajax" asp-items="ViewBag.Levels">
-            <option value="">Выберите уровень</option>
-        </select>
-
-        <!-- Наука -->
-        <select name="science" class="form-control select_send_ajax" asp-items="ViewBag.Sciences">
-            <option value="">Выберите науку</option>
-        </select>
-
-        <!-- Группа -->
-        <select name="group" class="form-control select_send_ajax" asp-items="ViewBag.Groups">
-            <option value="">Выберите группу</option>
-        </select>
-
-        <!-- Направление -->
-        <select name="direction" class="form-control select_send_ajax" asp-items="ViewBag.Directions">
-            <option value="">Выберите направление</option>
-        </select>
+    <div class="container">
+        <div class="row">
+            <div class="col-4 col-sm-3">
+                <!-- Уровень -->
+                <select name="level" class="select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="ViewBag.Levels">
+                    <option value="">Выберите уровень</option>
+                </select>
+            </div>
+            <div class="col-4 col-sm-3">
+                <!-- Наука -->
+                <select name="science" class="select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="ViewBag.Sciences">
+                    <option value="">Выберите науку</option>
+                </select>
+            </div>
+            <div class="col-4 col-sm-3">
+                <!-- Группа -->
+                <select name="group" class="select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="ViewBag.Groups">
+                    <option value="">Выберите группу</option>
+                </select>
+            </div>
+            <div class="col-4 col-sm-3">
+                <!-- Направление -->
+                <select name="direction" class="select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="ViewBag.Directions">
+                    <option value="">Выберите направление</option>
+                </select>
+            </div>
+        </div>
     </div>
 </form>
 
