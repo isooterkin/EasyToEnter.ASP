@@ -85,7 +85,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             if (science != null) focuss = focuss.Where(l => l.FocusModel.DirectionModel.GroupModel.ScienceModel.Id == science).ToList();
             if (group != null) focuss = focuss.Where(l => l.FocusModel.DirectionModel.GroupModel.Id == group).ToList();
             if (direction != null) focuss = focuss.Where(l => l.FocusModel.DirectionModel.Id == direction).ToList();
-            ViewData["Focuss"] = focuss;
+            ViewData["Focuss"] = focuss.OrderBy(l => l.LevelId);
 
             return View();
         }
