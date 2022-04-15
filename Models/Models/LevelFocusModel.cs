@@ -22,10 +22,6 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Направленность")]
         public FocusModel? FocusModel { get; set; }
 
-        //ViewBag.Focuss[i].FocusModel.DirectionModel.GroupModel.Code
-        //ViewBag.Focuss[i].LevelModel.Code
-        //ViewBag.Focuss[i].FocusModel.DirectionModel.Code; }
-
         [NotMapped]
         public string FullCode => FocusModel?.DirectionModel?.GroupModel?.Code + "." + LevelModel?.Code + "." + FocusModel?.DirectionModel?.Code;
         public string FullCodeName => FullCode + " " + FocusModel?.DirectionModel?.Name;

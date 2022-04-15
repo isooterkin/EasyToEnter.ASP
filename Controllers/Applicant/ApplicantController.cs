@@ -81,11 +81,14 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             ViewData["Directions"] = directionsSelectList;
 
             // Направленность
-            if (level != null) focuss = focuss.Where(l => l.LevelModel.Id == level).ToList();
-            if (science != null) focuss = focuss.Where(l => l.FocusModel.DirectionModel.GroupModel.ScienceModel.Id == science).ToList();
-            if (group != null) focuss = focuss.Where(l => l.FocusModel.DirectionModel.GroupModel.Id == group).ToList();
-            if (direction != null) focuss = focuss.Where(l => l.FocusModel.DirectionModel.Id == direction).ToList();
-            ViewData["Focuss"] = focuss.OrderBy(l => l.LevelId);
+            if (level != null) focuss = focuss.Where(l => l.LevelModel?.Id == level).ToList();
+            if (science != null) focuss = focuss.Where(l => l.FocusModel?.DirectionModel?.GroupModel?.ScienceModel?.Id == science).ToList();
+            if (group != null) focuss = focuss.Where(l => l.FocusModel?.DirectionModel?.GroupModel?.Id == group).ToList();
+            if (direction != null) focuss = focuss.Where(l => l.FocusModel?.DirectionModel?.Id == direction).ToList();
+            ViewData["Focuss"] = focuss.OrderBy(l => l.FocusModel?.DirectionModel?.GroupModel?.Code)
+                .ThenBy(l => l.LevelModel?.Code)
+                .ThenBy(l => l.FocusModel?.DirectionModel?.Code)
+                .ThenBy(l => l.FocusModel?.Name);
 
             return View();
         }
