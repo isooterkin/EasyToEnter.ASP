@@ -23,7 +23,7 @@ namespace EasyToEnter.ASP.Controllers
         // GET: LevelFocusModels
         public async Task<IActionResult> Index()
         {
-            var easyToEnterDbContext = _context.LevelGroup.Include(l => l.FocusModel).Include(l => l.LevelModel);
+            var easyToEnterDbContext = _context.LevelFocus.Include(l => l.FocusModel).Include(l => l.LevelModel);
             return View(await easyToEnterDbContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace EasyToEnter.ASP.Controllers
                 return NotFound();
             }
 
-            var levelFocusModel = await _context.LevelGroup
+            var levelFocusModel = await _context.LevelFocus
                 .Include(l => l.FocusModel)
                 .Include(l => l.LevelModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -81,7 +81,7 @@ namespace EasyToEnter.ASP.Controllers
                 return NotFound();
             }
 
-            var levelFocusModel = await _context.LevelGroup.FindAsync(id);
+            var levelFocusModel = await _context.LevelFocus.FindAsync(id);
             if (levelFocusModel == null)
             {
                 return NotFound();
@@ -136,7 +136,7 @@ namespace EasyToEnter.ASP.Controllers
                 return NotFound();
             }
 
-            var levelFocusModel = await _context.LevelGroup
+            var levelFocusModel = await _context.LevelFocus
                 .Include(l => l.FocusModel)
                 .Include(l => l.LevelModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -153,15 +153,15 @@ namespace EasyToEnter.ASP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var levelFocusModel = await _context.LevelGroup.FindAsync(id);
-            _context.LevelGroup.Remove(levelFocusModel);
+            var levelFocusModel = await _context.LevelFocus.FindAsync(id);
+            _context.LevelFocus.Remove(levelFocusModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LevelFocusModelExists(int id)
         {
-            return _context.LevelGroup.Any(e => e.Id == id);
+            return _context.LevelFocus.Any(e => e.Id == id);
         }
     }
 }

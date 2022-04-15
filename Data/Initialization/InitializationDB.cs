@@ -7,7 +7,7 @@ namespace EasyToEnter.ASP.Data.Initialization
         public static void Initialize(EasyToEnterDbContext context)
         {
             // Удаляем БД если она существует
-            // Context.Database.EnsureDeleted();
+            // context.Database.EnsureDeleted();
 
             // Создаем БД если она не существует
             context.Database.EnsureCreated();
@@ -28,10 +28,10 @@ namespace EasyToEnter.ASP.Data.Initialization
             InitializationDirection.Initialize(context);
 
             // Добавляем в базу данных "Направленность"
-            // InitializationFocus.Initialize(context);
+            InitializationFocus.Initialize(context);
 
             // Добавляем в базу данных "Уровень - Направленность"
-            // InitializationLevelGroup.Initialize(context);
+            InitializationLevelFocus.Initialize(context);
         }
     }
 }

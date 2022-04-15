@@ -15,10 +15,10 @@ namespace EasyToEnter.ASP.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             // Вывести группы Бакалавра
-            var allGroup = _context.LevelGroup.Where(l => l.LevelId == 1)
+            var allGroup = _context.LevelFocus.Where(l => l.LevelId == 1)
                 .Include(lf => lf.FocusModel)
                 .ThenInclude(f => f.DirectionModel)
                 .ThenInclude(d => d.GroupModel)

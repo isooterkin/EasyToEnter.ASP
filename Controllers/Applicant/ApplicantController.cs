@@ -20,7 +20,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
         // Открытие страницы
         public IActionResult Index(int? level = null, int? science = null, int? group = null, int? direction = null)
         {
-            List<LevelFocusModel> focuss = _context.LevelGroup
+            List<LevelFocusModel> focuss = _context.LevelFocus
                 .Include(l => l.LevelModel)
                 .Include(lf => lf.FocusModel)
                 .ThenInclude(f => f.DirectionModel)

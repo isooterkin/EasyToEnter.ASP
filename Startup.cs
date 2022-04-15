@@ -12,9 +12,10 @@ namespace EasyToEnter.ASP
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            
+
             // Строка подключения к БД
-            void configureDbContext(DbContextOptionsBuilder o) => o.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext"));
+            //void configureDbContext(DbContextOptionsBuilder o) => o.UseSqlServer(Configuration.GetConnectionString("MSSQL"));
+            void configureDbContext(DbContextOptionsBuilder o) => o.UseMySQL(Configuration.GetConnectionString("MYSQL"));
 
             // Регистрация контекста БД
             services.AddDbContextPool<EasyToEnterDbContext>(configureDbContext);

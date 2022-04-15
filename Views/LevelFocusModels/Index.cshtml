@@ -39,3 +39,20 @@
 }
     </tbody>
 </table>
+
+@*<h>Context.AddRange(new Class[]<br></h>
+<h>{</h>
+@{
+    int i = 0;
+}
+@foreach (var item in Model) {
+    i++;
+    <h>
+    <br>new Class // @i
+    <br>{
+        <br>FocusId = @item.FocusId,
+        <br>LevelId = @item.LevelId
+    <br>},
+</h>
+}
+<h><br>});</h>*@

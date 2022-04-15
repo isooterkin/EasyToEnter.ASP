@@ -26,6 +26,6 @@ namespace EasyToEnter.ASP.Data
         public DbSet<ScienceModel> Science { get; set; }
 
         // Таблица "Уровень - Направленность"
-        public DbSet<LevelFocusModel> LevelGroup { get; set; }
+        public DbSet<LevelFocusModel> LevelFocus { get; set; }
     }
 }
