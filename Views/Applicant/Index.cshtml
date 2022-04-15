@@ -34,7 +34,6 @@
     </div>
 </form>
 
-
 <div class="container mt-3">
     <div class="row">
 <!-- Вывод направленностей -->
@@ -44,8 +43,7 @@
         <div class="card bg-dark text-white mb-3 rounded-3 shadow" style="background-color: #333;">
             <div class="card-body">
                 <p class="card-text fst-italic">
-                    @ViewBag.Focuss[i].FullCode
-                    @ViewBag.Focuss[i].FocusModel.DirectionModel.Name
+                    @ViewBag.Focuss[i].FullCodeName
                 </p>
                 <h3 class="card-title">
                     @ViewBag.Focuss[i].FocusModel.Name
@@ -55,17 +53,26 @@
                 </p>
                 <div class="row p-0">
                     <div class="col">
-                        <a href="#" class="btn btn-light">
-                            @Random.Next(3, 20) варианта обучения
-                        </a>
+                        <div class="row">
+                            <div class="col">
+                                <a href="#" class="btn btn-light">
+                                    @Random.Next(3, 20) варианта обучения
+                                </a>
+                            </div>
+                            <div class="col">
+                                <p class="text-truncate">от <span class="fs-5 fw-bold ">@Random.Next(10, 900) @Random.Next(100, 900)</span> руб.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="col">
-                        <p>от <span class="fs-5 fw-bold">@Random.Next(10, 900) @Random.Next(100, 900)</span> руб.</p>
-                    </div>
-                    <div class="col">
-                        <p><span class="fs-5 fw-bold">@Random.Next(20, 1000)</span> места</p>
-                    </div>
-                    <div class="col-sm-5">
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-truncate"><span class="fs-5 fw-bold">@Random.Next(20, 1000)</span> мест</p>
+                            </div>
+                            <div class="col">
+                                <p class="text-truncate">от <span class="fs-5 fw-bold">@Random.Next(36, 60)</span> баллов</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

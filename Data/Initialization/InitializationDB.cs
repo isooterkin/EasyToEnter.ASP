@@ -1,32 +1,37 @@
-﻿namespace EasyToEnter.ASP.Data.Initialization
+﻿using EasyToEnter.ASP.Data.Initialization.Models;
+
+namespace EasyToEnter.ASP.Data.Initialization
 {
     public class InitializationDB
     {
-        public static void Initialize(EasyToEnterDbContext Context)
+        public static void Initialize(EasyToEnterDbContext context)
         {
             // Удаляем БД если она существует
             // Context.Database.EnsureDeleted();
 
             // Создаем БД если она не существует
-            Context.Database.EnsureCreated();
+            context.Database.EnsureCreated();
 
             // Была ли ранее создана БД
-            //if (Context.Science.Any()) return;
+            if (context.Science.Any()) return;
 
             // Добавляем в базу данных "Наука"
-            //InitializationScience.Initialize(Context);
+            InitializationScience.Initialize(context);
 
             // Добавляем в базу данных "Уровень"
-            //InitializationLevel.Initialize(Context);
+            InitializationLevel.Initialize(context);
 
             // Добавляем в базу данных "Группа"
-            //InitializationGroup.Initialize(Context);
-
-            // Добавляем в базу данных "Уровень - Группа"
-            //InitializationLevelGroup.Initialize(Context);
+            InitializationGroup.Initialize(context);
 
             // Добавляем в базу данных "Направление"
-            //InitializationDirection.Initialize(Context);
+            InitializationDirection.Initialize(context);
+
+            // Добавляем в базу данных "Направленность"
+            // InitializationFocus.Initialize(context);
+
+            // Добавляем в базу данных "Уровень - Направленность"
+            // InitializationLevelGroup.Initialize(context);
         }
     }
 }

@@ -28,5 +28,6 @@ namespace EasyToEnter.ASP.Models.Models
 
         [NotMapped]
         public string FullCode => FocusModel?.DirectionModel?.GroupModel?.Code + "." + LevelModel?.Code + "." + FocusModel?.DirectionModel?.Code;
+        public string FullCodeName => FullCode + " " + FocusModel?.DirectionModel?.Name;
     }
 }
