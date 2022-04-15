@@ -30,52 +30,52 @@ namespace EasyToEnter.ASP.Controllers.Applicant
  
             // Уровень
             List<LevelFocusModel> levelsList = focuss;
-            if (science != null) levelsList = levelsList.Where(l => l.FocusModel.DirectionModel.GroupModel.ScienceModel.Id == science).ToList();
-            if (group != null) levelsList = levelsList.Where(l => l.FocusModel.DirectionModel.GroupModel.Id == group).ToList();
-            if (direction != null) levelsList = levelsList.Where(l => l.FocusModel.DirectionModel.Id == direction).ToList();
+            if (science != null) levelsList = levelsList.Where(l => l.FocusModel?.DirectionModel?.GroupModel?.ScienceModel?.Id == science).ToList();
+            if (group != null) levelsList = levelsList.Where(l => l.FocusModel?.DirectionModel?.GroupModel?.Id == group).ToList();
+            if (direction != null) levelsList = levelsList.Where(l => l.FocusModel?.DirectionModel?.Id == direction).ToList();
             List<SelectListItem> levelsSelectList = levelsList.Select(g => g.LevelModel).Distinct().Select(l => new SelectListItem
             {
-                Value = l.Id.ToString(),
-                Text = l.Name
+                Value = l?.Id.ToString(),
+                Text = l?.Name
             }).ToList();
             if (levelsSelectList.Any(l => l.Value == level.ToString())) levelsSelectList.First(l => l.Value == level.ToString()).Selected = true;
             ViewData["Levels"] = levelsSelectList;
 
             // Наука
             List<LevelFocusModel> sciencesList = focuss;
-            if (level != null) sciencesList = sciencesList.Where(l => l.LevelModel.Id == level).ToList();
-            if (group != null) sciencesList = sciencesList.Where(l => l.FocusModel.DirectionModel.GroupModel.Id == group).ToList();
-            if (direction != null) sciencesList = sciencesList.Where(l => l.FocusModel.DirectionModel.Id == direction).ToList();
-            List<SelectListItem> sciencesSelectList = sciencesList.Select(g => g.FocusModel.DirectionModel.GroupModel.ScienceModel).Distinct().Select(l => new SelectListItem
+            if (level != null) sciencesList = sciencesList.Where(l => l.LevelModel?.Id == level).ToList();
+            if (group != null) sciencesList = sciencesList.Where(l => l.FocusModel?.DirectionModel?.GroupModel?.Id == group).ToList();
+            if (direction != null) sciencesList = sciencesList.Where(l => l.FocusModel?.DirectionModel?.Id == direction).ToList();
+            List<SelectListItem> sciencesSelectList = sciencesList.Select(g => g.FocusModel?.DirectionModel?.GroupModel?.ScienceModel).Distinct().Select(l => new SelectListItem
             {
-                Value = l.Id.ToString(),
-                Text = l.Name
+                Value = l?.Id.ToString(),
+                Text = l?.Name
             }).ToList();
             if (sciencesSelectList.Any(l => l.Value == science.ToString())) sciencesSelectList.First(l => l.Value == science.ToString()).Selected = true;
             ViewData["Sciences"] = sciencesSelectList;
 
             // Группа
             List<LevelFocusModel> groupsList = focuss;
-            if (level != null) groupsList = groupsList.Where(l => l.LevelModel.Id == level).ToList();
-            if (science != null) groupsList = groupsList.Where(l => l.FocusModel.DirectionModel.GroupModel.ScienceModel.Id == science).ToList();
-            if (direction != null) groupsList = groupsList.Where(l => l.FocusModel.DirectionModel.Id == direction).ToList();
-            List<SelectListItem> groupsSelectList = groupsList.Select(g => g.FocusModel.DirectionModel.GroupModel).Distinct().Select(l => new SelectListItem
+            if (level != null) groupsList = groupsList.Where(l => l.LevelModel?.Id == level).ToList();
+            if (science != null) groupsList = groupsList.Where(l => l.FocusModel?.DirectionModel?.GroupModel?.ScienceModel?.Id == science).ToList();
+            if (direction != null) groupsList = groupsList.Where(l => l.FocusModel?.DirectionModel?.Id == direction).ToList();
+            List<SelectListItem> groupsSelectList = groupsList.Select(g => g.FocusModel?.DirectionModel?.GroupModel).Distinct().Select(l => new SelectListItem
             {
-                Value = l.Id.ToString(),
-                Text = l.Name
+                Value = l?.Id.ToString(),
+                Text = l?.Name
             }).ToList();
             if (groupsSelectList.Any(l => l.Value == group.ToString())) groupsSelectList.First(l => l.Value == group.ToString()).Selected = true;
             ViewData["Groups"] = groupsSelectList;
 
             // Направление
             List<LevelFocusModel> directionsList = focuss;
-            if (level != null) directionsList = directionsList.Where(l => l.LevelModel.Id == level).ToList();
-            if (science != null) directionsList = directionsList.Where(l => l.FocusModel.DirectionModel.GroupModel.ScienceModel.Id == science).ToList();
-            if (group != null) directionsList = directionsList.Where(l => l.FocusModel.DirectionModel.GroupModel.Id == group).ToList();
-            List<SelectListItem> directionsSelectList = directionsList.Select(g => g.FocusModel.DirectionModel).Distinct().Select(l => new SelectListItem
+            if (level != null) directionsList = directionsList.Where(l => l.LevelModel?.Id == level).ToList();
+            if (science != null) directionsList = directionsList.Where(l => l.FocusModel?.DirectionModel?.GroupModel?.ScienceModel?.Id == science).ToList();
+            if (group != null) directionsList = directionsList.Where(l => l.FocusModel?.DirectionModel?.GroupModel?.Id == group).ToList();
+            List<SelectListItem> directionsSelectList = directionsList.Select(g => g.FocusModel?.DirectionModel).Distinct().Select(l => new SelectListItem
             {
-                Value = l.Id.ToString(),
-                Text = l.Name
+                Value = l?.Id.ToString(),
+                Text = l?.Name
             }).ToList();
             if (directionsSelectList.Any(l => l.Value == direction.ToString())) directionsSelectList.First(l => l.Value == direction.ToString()).Selected = true;
             ViewData["Directions"] = directionsSelectList;
@@ -85,6 +85,8 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             if (science != null) focuss = focuss.Where(l => l.FocusModel?.DirectionModel?.GroupModel?.ScienceModel?.Id == science).ToList();
             if (group != null) focuss = focuss.Where(l => l.FocusModel?.DirectionModel?.GroupModel?.Id == group).ToList();
             if (direction != null) focuss = focuss.Where(l => l.FocusModel?.DirectionModel?.Id == direction).ToList();
+
+            // Сортировка Направленнойстей по коду (06.03.01), а далее по имени (Биология)
             ViewData["Focuss"] = focuss.OrderBy(l => l.FocusModel?.DirectionModel?.GroupModel?.Code)
                 .ThenBy(l => l.LevelModel?.Code)
                 .ThenBy(l => l.FocusModel?.DirectionModel?.Code)
