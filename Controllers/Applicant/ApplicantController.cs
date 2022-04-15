@@ -88,7 +88,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             ViewData["Focuss"] = focuss.OrderBy(l => l.FocusModel?.DirectionModel?.GroupModel?.Code)
                 .ThenBy(l => l.LevelModel?.Code)
                 .ThenBy(l => l.FocusModel?.DirectionModel?.Code)
-                .ThenBy(l => l.FocusModel?.Name);
+                .ThenBy(l => l.FocusModel?.Name).ToList();
 
             return View();
         }
