@@ -16,6 +16,8 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Группа")]
         public GroupModel? GroupModel { get; set; }
 
-        List<FocusModel> Focuss { get; set; }
+        // Лист моделей "Направленность", принадлежащих модели "Направление"
+        [Display(Name = "Направленности выбранного направления")]
+        public List<FocusModel>? Focuss { get; set; }
     }
 }

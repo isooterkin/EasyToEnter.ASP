@@ -14,8 +14,8 @@ namespace EasyToEnter.ASP
             services.AddControllersWithViews();
 
             // Строка подключения к БД
-            //void configureDbContext(DbContextOptionsBuilder o) => o.UseSqlServer(Configuration.GetConnectionString("MSSQL"));
-            void configureDbContext(DbContextOptionsBuilder o) => o.UseMySQL(Configuration.GetConnectionString("MYSQL"));
+            void configureDbContext(DbContextOptionsBuilder o) => o.UseSqlServer(Configuration.GetConnectionString("MSSQL"));
+            //void configureDbContext(DbContextOptionsBuilder o) => o.UseMySQL(Configuration.GetConnectionString("MYSQL"));
 
             // Регистрация контекста БД
             services.AddDbContextPool<EasyToEnterDbContext>(configureDbContext);

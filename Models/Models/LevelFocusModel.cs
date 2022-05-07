@@ -1,9 +1,13 @@
 ﻿using EasyToEnter.ASP.Dependence;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EasyToEnter.ASP.Models.Models
 {
+    // Модель "Уровень - Направленность"
+    [Display(Name = "Уровень - Направленность")]
+    [Index(nameof(LevelId), nameof(FocusId), IsUnique = true)]
     public class LevelFocusModel : ModelWithId
     {
         // Внешний ключ модели "Уровень"
@@ -23,7 +27,11 @@ namespace EasyToEnter.ASP.Models.Models
         public FocusModel? FocusModel { get; set; }
 
         [NotMapped]
-        public string FullCode => FocusModel?.DirectionModel?.GroupModel?.Code + "." + LevelModel?.Code + "." + FocusModel?.DirectionModel?.Code;
-        public string FullCodeName => FullCode + " " + FocusModel?.DirectionModel?.Name;
+        [Display(Name = "Код")]
+        public string FullCode => $"{FocusModel?.DirectionModel?.GroupModel?.Code}.{LevelModel?.Code}.{FocusModel?.DirectionModel?.Code}";
+        
+        [NotMapped]
+        [Display(Name = "Наименование")]
+        public string FullCodeName => $"{FullCode} {FocusModel?.DirectionModel?.Name}";
     }
 }

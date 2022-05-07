@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
+using static EasyToEnter.ASP.Tools.DBSqlException;
 
 namespace EasyToEnter.ASP.Controllers
 {
@@ -56,17 +57,22 @@ namespace EasyToEnter.ASP.Controllers
         }
 
         // POST: LevelFocusModels/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("LevelId,FocusId,Id")] LevelFocusModel levelFocusModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(levelFocusModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(levelFocusModel);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception exception)
+                {
+                    CheckedDBSqlException(exception, ModelState);
+                }
             }
             ViewData["FocusId"] = new SelectList(_context.Focus, "Id", "Name", levelFocusModel.FocusId);
             ViewData["LevelId"] = new SelectList(_context.Level, "Id", "Name", levelFocusModel.LevelId);

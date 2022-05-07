@@ -7,6 +7,8 @@ namespace EasyToEnter.ASP.Models.Models
     [Display(Name = "Наука")]
     public class ScienceModel : ModelWithIdNameDescription
     {
-        List<GroupModel> Groups { get; set; }
+        // Лист моделей "Группа", принадлежащих модели "Наука"
+        [Display(Name = "Группы выбранной науки")]
+        public List<GroupModel>? Groups { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model EasyToEnter.ASP.ViewsModels.AllInfoViewModel
+
+@{
     ViewData["Title"] = "Поис направленностей";
 }
 
@@ -10,24 +12,24 @@
         <div class="row">
 
                 <!-- Уровень -->
-                <select name="level" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="ViewBag.Levels">
-                    <option value="">Выберите уровень</option>
+                <select name="level" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.Levels">
+                    <option value=@null>Выберите уровень</option>
                 </select>
 
                 <!-- Наука -->
-                <select name="science" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="ViewBag.Sciences">
-                    <option value="">Выберите науку</option>
+                <select name="science" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.Sciences">
+                    <option value=@null>Выберите науку</option>
                 </select>
 
 
                 <!-- Группа -->
-                <select name="group" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="ViewBag.Groups">
-                    <option value="">Выберите группу</option>
+                <select name="group" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.Groups">
+                    <option value=@null>Выберите группу</option>
                 </select>
 
                 <!-- Направление -->
-                <select name="direction" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="ViewBag.Directions">
-                    <option value="">Выберите направление</option>
+                <select name="direction" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.Directions">
+                    <option value=@null>Выберите направление</option>
                 </select>
 
         </div>
@@ -38,18 +40,19 @@
     <div class="row">
 <!-- Вывод направленностей -->
 @{Random Random = new();}
-@for(var i = 0; i < ViewBag.Focuss.Count; i++)
+@for(var i = 0; i < Model.Focuss.Count; i++)
 {
         <div class="card bg-dark text-white mb-3 rounded-3 shadow" style="background-color: #333;">
             <div class="card-body">
                 <p class="card-text fst-italic">
-                    @ViewBag.Focuss[i].FullCodeName
+                    @Model.Focuss[i]?.FullCodeName
                 </p>
                 <h3 class="card-title">
-                    @ViewBag.Focuss[i].FocusModel.Name
+                    <a href="/Applicant?level=3">ewqrw</a>
+                    @Model.Focuss[i]?.FocusModel?.Name
                 </h3>
                 <p class="card-text text-truncate">
-                    @ViewBag.Focuss[i].FocusModel.Description
+                    @Model.Focuss[i]?.FocusModel?.Description
                 </p>
                 <div class="row p-0">
                     <div class="col">

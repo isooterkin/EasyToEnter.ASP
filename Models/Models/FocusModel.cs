@@ -15,5 +15,9 @@ namespace EasyToEnter.ASP.Models.Models
         [ForeignKey(nameof(DirectionId))]
         [Display(Name = "Направление")]
         public DirectionModel? DirectionModel { get; set; }
+
+        // Лист моделей "Уровень - Направленность", принадлежащих модели "Направленность"
+        [Display(Name = "Уровни - направленности выбранной направленности")]
+        public List<LevelFocusModel>? LevelFocuss { get; set; }
     }
 }
