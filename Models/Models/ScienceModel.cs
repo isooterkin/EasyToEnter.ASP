@@ -1,4 +1,4 @@
-﻿using EasyToEnter.ASP.Dependence;
+﻿using EasyToEnter.ASP.Models.Dependence;
 using System.ComponentModel.DataAnnotations;
 
 namespace EasyToEnter.ASP.Models.Models

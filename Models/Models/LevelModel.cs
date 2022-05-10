@@ -1,4 +1,4 @@
-﻿using EasyToEnter.ASP.Dependence;
+﻿using EasyToEnter.ASP.Models.Dependence;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 

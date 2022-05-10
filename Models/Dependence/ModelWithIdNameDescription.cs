@@ -1,7 +1,6 @@
-﻿using EasyToEnter.ASP.Models.Dependence;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace EasyToEnter.ASP.Dependence
+namespace EasyToEnter.ASP.Models.Dependence
 {
     public class ModelWithIdNameDescription : ModelWithIdName
     {

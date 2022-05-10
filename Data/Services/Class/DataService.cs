@@ -1,4 +1,4 @@
-﻿using EasyToEnter.ASP.Dependence;
+﻿using EasyToEnter.ASP.Models.Dependence;
 using EasyToEnter.EntityFrameworkCore.Services.Interface;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;

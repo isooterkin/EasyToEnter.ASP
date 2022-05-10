@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EasyToEnter.ASP.Dependence
+namespace EasyToEnter.ASP.Models.Dependence
 {
     public class ModelWithId
     {
