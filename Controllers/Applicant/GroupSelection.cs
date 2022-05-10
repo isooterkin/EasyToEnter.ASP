@@ -18,7 +18,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .ThenInclude(s => s!.ScienceModel)
                 .Where(l => l.FocusModel!.DirectionModel!.GroupModel!.ScienceModel!.Id == science);
 
-            return View(new GroupSelectionContainerViewModel(levelFocusCollection, level, science));
+            return View(new GroupSelectionContainerViewModel(levelFocusCollection, level));
         }
     }
 }
