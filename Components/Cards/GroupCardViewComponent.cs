@@ -1,4 +1,4 @@
-﻿using EasyToEnter.ASP.Models.Models;
+﻿using EasyToEnter.ASP.ViewsModels.Applicant;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasyToEnter.ASP.Components.Cards
@@ -6,6 +6,6 @@ namespace EasyToEnter.ASP.Components.Cards
     [ViewComponent]
     public class GroupCardViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(GroupModel data) => View(data);
+        public IViewComponentResult Invoke(GroupSelectionCardViewModel data) => View(data);
     }
 }

@@ -1,1 +1,17 @@
-﻿@model EasyToEnter.ASP.Models.Models.GroupModel;
+﻿@model EasyToEnter.ASP.ViewsModels.Applicant.GroupSelectionCardViewModel;
+
+<div class="card bg-dark text-white mb-3 rounded-3 shadow" style="background-color: #333;">
+    <div class="card-body">
+        <h3 class="card-title">
+            @Model.Group.Name
+        </h3>
+        <p class="card-text">
+            @Model.Group.Description
+        </p>
+        <div class="col p-0 ">
+            <a href="/Applicant/DirectionSelection?level=@Model.LevelId&science=@Model.ScienceId&group=@Model.Group.Id" class="btn btn-light">
+                @Model.LevelFocusCount варианта поступления
+            </a>
+        </div>
+    </div>
+</div>

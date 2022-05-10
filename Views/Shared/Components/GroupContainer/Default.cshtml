@@ -1,1 +1,11 @@
-﻿@model EasyToEnter.ASP.Models.Models.GroupModel;
+﻿@model EasyToEnter.ASP.ViewsModels.Applicant.GroupSelectionContainerViewModel;
+@using EasyToEnter.ASP.ViewsModels.Applicant;
+
+<div class="container mt-3">
+    <div class="row">
+@for(var i = 0; i < Model.GroupList.Count; i++)
+{
+        <vc:group-card data="@new GroupSelectionCardViewModel(@Model, @Model.GroupList[i]!)"/>
+}
+    </div>
+</div>

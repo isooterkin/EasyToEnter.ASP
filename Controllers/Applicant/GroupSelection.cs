@@ -7,7 +7,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 {
     public partial class ApplicantController
     {
-        public IActionResult ScienceSelection(int level)
+        public IActionResult GroupSelection(int level, int science)
         {
             IEnumerable<LevelFocusModel> levelFocusCollection = _context.LevelFocus
                 .Where(l => l.LevelId == level)
@@ -15,9 +15,10 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .Include(lf => lf.FocusModel)
                 .ThenInclude(f => f!.DirectionModel)
                 .ThenInclude(d => d!.GroupModel)
-                .ThenInclude(s => s!.ScienceModel);
+                .ThenInclude(s => s!.ScienceModel)
+                .Where(l => l.FocusModel!.DirectionModel!.GroupModel!.ScienceModel!.Id == science);
 
-            return View(new ScienceSelectionContainerViewModel(levelFocusCollection, level));
+            return View(new GroupSelectionContainerViewModel(levelFocusCollection, level, science));
         }
     }
 }

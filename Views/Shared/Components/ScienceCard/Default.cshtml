@@ -9,7 +9,7 @@
             @Model.Science.Description
         </p>
         <div class="col p-0 ">
-            <a href="/Applicant/LevelSelection?level=@Model.Science.Id" class="btn btn-light">
+            <a href="/Applicant/GroupSelection?level=@Model.LevelId&science=@Model.Science.Id" class="btn btn-light">
                 @Model.LevelFocusCount варианта поступления
             </a>
         </div>

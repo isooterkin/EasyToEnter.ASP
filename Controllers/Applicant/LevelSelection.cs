@@ -8,18 +8,14 @@ namespace EasyToEnter.ASP.Controllers.Applicant
     {
         public IActionResult LevelSelection()
         {
-            List<LevelModel?> levelList = new ();
-
-            IEnumerable<LevelFocusModel?> levelFocusCollection = _context.LevelFocus
+            IEnumerable<LevelFocusModel> levelFocusCollection = _context.LevelFocus
                 .Include(l => l.LevelModel)
-                .Include(lf => lf.FocusModel)
-                .ThenInclude(f => f!.DirectionModel)
-                .ThenInclude(d => d!.GroupModel)
-                .ThenInclude(s => s!.ScienceModel);
+                .Include(lf => lf.FocusModel);
 
-            if (levelFocusCollection.Any() == false) return View(levelList);
-
-            levelList = levelFocusCollection.Select(g => g!.LevelModel).Distinct().ToList();
+            List<LevelModel?> levelList = levelFocusCollection
+                .Select(g => g!.LevelModel)
+                .Distinct()
+                .ToList();
 
             return View(levelList);
         }
