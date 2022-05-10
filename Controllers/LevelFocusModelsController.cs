@@ -1,9 +1,4 @@
-﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
@@ -22,28 +17,19 @@ namespace EasyToEnter.ASP.Controllers
         }
 
         // GET: LevelFocusModels
-        public async Task<IActionResult> Index()
-        {
-            var easyToEnterDbContext = _context.LevelFocus.Include(l => l.FocusModel).Include(l => l.LevelModel);
-            return View(await easyToEnterDbContext.ToListAsync());
-        }
+        public async Task<IActionResult> Index() => View(await _context.LevelFocus.Include(l => l.FocusModel).Include(l => l.LevelModel).ToListAsync());
 
         // GET: LevelFocusModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var levelFocusModel = await _context.LevelFocus
                 .Include(l => l.FocusModel)
                 .Include(l => l.LevelModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (levelFocusModel == null)
-            {
-                return NotFound();
-            }
+            
+            if (levelFocusModel == null) return NotFound();
 
             return View(levelFocusModel);
         }
@@ -62,7 +48,6 @@ namespace EasyToEnter.ASP.Controllers
         public async Task<IActionResult> Create([Bind("LevelId,FocusId,Id")] LevelFocusModel levelFocusModel)
         {
             if (ModelState.IsValid)
-            {
                 try
                 {
                     _context.Add(levelFocusModel);
@@ -73,7 +58,7 @@ namespace EasyToEnter.ASP.Controllers
                 {
                     CheckedDBSqlException(exception, ModelState);
                 }
-            }
+
             ViewData["FocusId"] = new SelectList(_context.Focus, "Id", "Name", levelFocusModel.FocusId);
             ViewData["LevelId"] = new SelectList(_context.Level, "Id", "Name", levelFocusModel.LevelId);
             return View(levelFocusModel);
@@ -82,32 +67,23 @@ namespace EasyToEnter.ASP.Controllers
         // GET: LevelFocusModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var levelFocusModel = await _context.LevelFocus.FindAsync(id);
-            if (levelFocusModel == null)
-            {
-                return NotFound();
-            }
+            
+            if (levelFocusModel == null) return NotFound();
+
             ViewData["FocusId"] = new SelectList(_context.Focus, "Id", "Name", levelFocusModel.FocusId);
             ViewData["LevelId"] = new SelectList(_context.Level, "Id", "Name", levelFocusModel.LevelId);
             return View(levelFocusModel);
         }
 
         // POST: LevelFocusModels/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("LevelId,FocusId,Id")] LevelFocusModel levelFocusModel)
         {
-            if (id != levelFocusModel.Id)
-            {
-                return NotFound();
-            }
+            if (id != levelFocusModel.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -118,14 +94,8 @@ namespace EasyToEnter.ASP.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LevelFocusModelExists(levelFocusModel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!LevelFocusModelExists(levelFocusModel.Id)) return NotFound();
+                    else throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -137,19 +107,14 @@ namespace EasyToEnter.ASP.Controllers
         // GET: LevelFocusModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var levelFocusModel = await _context.LevelFocus
                 .Include(l => l.FocusModel)
                 .Include(l => l.LevelModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (levelFocusModel == null)
-            {
-                return NotFound();
-            }
+            
+            if (levelFocusModel == null) return NotFound();
 
             return View(levelFocusModel);
         }
@@ -159,15 +124,13 @@ namespace EasyToEnter.ASP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var levelFocusModel = await _context.LevelFocus.FindAsync(id);
+            LevelFocusModel? levelFocusModel = await _context.LevelFocus.FindAsync(id);
+            if (levelFocusModel == null) return RedirectToAction(nameof(Index));
             _context.LevelFocus.Remove(levelFocusModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LevelFocusModelExists(int id)
-        {
-            return _context.LevelFocus.Any(e => e.Id == id);
-        }
+        private bool LevelFocusModelExists(int id) => _context.LevelFocus.Any(e => e.Id == id);
     }
 }

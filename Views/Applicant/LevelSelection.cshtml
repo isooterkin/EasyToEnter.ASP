@@ -1,0 +1,11 @@
+﻿@model List<EasyToEnter.ASP.Models.Models.LevelModel>;
+
+@{
+    ViewData["Title"] = "Выбор уровня";
+}
+
+<div class="text-center m-3">
+    <h2>Выбор уровня</h2>
+</div>
+
+<vc:level-container data="@Model"/>

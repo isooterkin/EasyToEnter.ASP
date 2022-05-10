@@ -1,10 +1,12 @@
-﻿@model EasyToEnter.ASP.ViewsModels.AllInfoViewModel
+﻿@model EasyToEnter.ASP.ViewsModels.AllInfoViewModel;
 
 @{
     ViewData["Title"] = "Поис направленностей";
 }
 
-<div class="text-center m-3"><h2>Поис направленностей</h2></div>
+<div class="text-center m-3">
+    <h2>Выбор уровня</h2>
+</div>
 
 <!-- Фильтры -->
 <form method="get">
@@ -42,44 +44,7 @@
 @{Random Random = new();}
 @for(var i = 0; i < Model.Focuss.Count; i++)
 {
-        <div class="card bg-dark text-white mb-3 rounded-3 shadow" style="background-color: #333;">
-            <div class="card-body">
-                <p class="card-text fst-italic">
-                    @Model.Focuss[i]?.FullCodeName
-                </p>
-                <h3 class="card-title">
-                    <a href="/Applicant?level=3">ewqrw</a>
-                    @Model.Focuss[i]?.FocusModel?.Name
-                </h3>
-                <p class="card-text text-truncate">
-                    @Model.Focuss[i]?.FocusModel?.Description
-                </p>
-                <div class="row p-0">
-                    <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                <a href="#" class="btn btn-light">
-                                    @Random.Next(3, 20) варианта обучения
-                                </a>
-                            </div>
-                            <div class="col">
-                                <p class="text-truncate">от <span class="fs-5 fw-bold ">@Random.Next(10, 900) @Random.Next(100, 900)</span> руб.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                <p class="text-truncate"><span class="fs-5 fw-bold">@Random.Next(20, 1000)</span> мест</p>
-                            </div>
-                            <div class="col">
-                                <p class="text-truncate">от <span class="fs-5 fw-bold">@Random.Next(36, 60)</span> баллов</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <vc:level-focus-card data="@Model.Focuss[i]"/>
 }
     </div>
 </div>

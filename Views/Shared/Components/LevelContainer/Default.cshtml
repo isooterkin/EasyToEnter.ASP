@@ -1,0 +1,10 @@
+﻿@model List<EasyToEnter.ASP.Models.Models.LevelModel>;
+
+<div class="container mt-3">
+    <div class="row">
+@for(var i = 0; i < Model.Count; i++)
+{
+    <vc:level-card level="@Model[i]"/>
+}
+    </div>
+</div>

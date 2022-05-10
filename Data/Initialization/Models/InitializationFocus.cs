@@ -150,35 +150,29 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                 },
                 new Class // 24
                 {
-                    Name = "Автоматизированные системы обработки информации и управления",
+                    Name = "Информационные системы и технологии в геодезии и картографии",
                     Description = "",
                     DirectionId = 41
                 },
                 new Class // 25
                 {
-                    Name = "Информационные системы и технологии в геодезии и картографии",
+                    Name = "Информационные системы в нефтегазовой отрасли",
                     Description = "",
                     DirectionId = 41
                 },
                 new Class // 26
                 {
-                    Name = "Информационные системы в нефтегазовой отрасли",
-                    Description = "",
-                    DirectionId = 41
-                },
-                new Class // 27
-                {
                     Name = "Безопасность компьютерных систем",
                     Description = "",
                     DirectionId = 44
                 },
-                new Class // 28
+                new Class // 27
                 {
                     Name = "Организация и технология защиты информации (на транспорте)",
                     Description = "",
                     DirectionId = 44
                 },
-                new Class // 29
+                new Class // 28
                 {
                     Name = "Техническая защита информации",
                     Description = "",

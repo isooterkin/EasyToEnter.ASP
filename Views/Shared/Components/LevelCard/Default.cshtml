@@ -1,0 +1,17 @@
+﻿@model EasyToEnter.ASP.Models.Models.LevelModel;
+
+<div class="card bg-dark text-white mb-3 rounded-3 shadow" style="background-color: #333;">
+    <div class="card-body">
+        <h3 class="card-title">
+            @Model.Name
+        </h3>
+        <p class="card-text">
+            @Model.Description
+        </p>
+        <div class="col p-0 ">
+            <a href="/Applicant/ScienceSelection?level=@Model.Id" class="btn btn-light">
+                @Model.LevelFocuss!.Count варианта поступления
+            </a>
+        </div>
+    </div>
+</div>

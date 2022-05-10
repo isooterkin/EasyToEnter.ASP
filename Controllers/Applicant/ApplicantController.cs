@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace EasyToEnter.ASP.Controllers.Applicant
 {
-    public class ApplicantController : Controller
+    public partial class ApplicantController : Controller
     {
         private readonly EasyToEnterDbContext _context;
 

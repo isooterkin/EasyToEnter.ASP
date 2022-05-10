@@ -14,7 +14,7 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                 },
                 new Class // 2
                 {
-                    Name = "Инженерное дело, технологии и технические"
+                    Name = "Инженерное дело, технологии и технические науки"
                 },
                 new Class // 3
                 {

@@ -169,57 +169,7 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                 {
                     FocusId = 21,
                     LevelId = 4
-                },
-                new Class // 33
-                {
-                    FocusId = 23,
-                    LevelId = 1
-                },
-                new Class // 34
-                {
-                    FocusId = 24,
-                    LevelId = 1
-                },
-                new Class // 35
-                {
-                    FocusId = 25,
-                    LevelId = 2
-                },
-                new Class // 36
-                {
-                    FocusId = 26,
-                    LevelId = 2
-                },
-                new Class // 37
-                {
-                    FocusId = 26,
-                    LevelId = 4
-                },
-                new Class // 38
-                {
-                    FocusId = 23,
-                    LevelId = 3
-                },
-                new Class // 39
-                {
-                    FocusId = 27,
-                    LevelId = 1
-                },
-                new Class // 40
-                {
-                    FocusId = 28,
-                    LevelId = 2
-                },
-                new Class // 41
-                {
-                    FocusId = 29,
-                    LevelId = 3
-                },
-                new Class // 42
-                {
-                    FocusId = 27,
-                    LevelId = 4
-                },
+                }
             });
 
             Context.SaveChanges();
