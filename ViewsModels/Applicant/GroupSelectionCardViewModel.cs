@@ -15,6 +15,5 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
 
         public int LevelFocusCount => GroupSelectionContainer.LevelFocusCollection.Where(l => l.FocusModel!.DirectionModel!.GroupModel == Group).Count();
         public int LevelId => GroupSelectionContainer.LevelId;
-        public int ScienceId => GroupSelectionContainer.ScienceId;
     }
 }

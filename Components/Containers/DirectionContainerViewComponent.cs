@@ -1,4 +1,4 @@
-﻿using EasyToEnter.ASP.Models.Models;
+﻿using EasyToEnter.ASP.ViewsModels.Applicant;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasyToEnter.ASP.Components.Containers
@@ -6,6 +6,6 @@ namespace EasyToEnter.ASP.Components.Containers
     [ViewComponent]
     public class DirectionContainerViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(List<DirectionModel> data) => View(data);
+        public IViewComponentResult Invoke(DirectionSelectionContainerViewModel data) => View(data);
     }
 }

@@ -7,14 +7,12 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
         public readonly List<GroupModel?> GroupList;
         public readonly IEnumerable<LevelFocusModel> LevelFocusCollection;
         public readonly int LevelId;
-        public readonly int ScienceId;
 
         public GroupSelectionContainerViewModel(IEnumerable<LevelFocusModel> levelFocusCollection, int level, int science)
         {
             GroupList = levelFocusCollection.Select(g => g!.FocusModel!.DirectionModel!.GroupModel).Distinct().ToList();
             LevelFocusCollection = levelFocusCollection;
             LevelId = level;
-            ScienceId = science;
         }
     }
 }

@@ -30,10 +30,7 @@ namespace EasyToEnter.ASP.Controllers
         // GET: GroupModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var groupModel = await _context.Group
                 .Include(g => g.ScienceModel)
