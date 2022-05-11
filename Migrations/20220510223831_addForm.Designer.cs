@@ -3,6 +3,7 @@ using EasyToEnter.ASP.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyToEnter.ASP.Migrations
 {
     [DbContext(typeof(EasyToEnterDbContext))]
-    partial class EasyToEnterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220510223831_addForm")]
+    partial class addForm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
