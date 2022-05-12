@@ -15,6 +15,9 @@ namespace EasyToEnter.ASP.Data.Initialization
             // Была ли ранее создана БД
             if (context.Science.Any()) return;
 
+            // Добавляем в базу данных "Аккредитация"
+            InitializationAccreditation.Initialize(context);
+
             // Добавляем в базу данных "Формат"
             InitializationFormat.Initialize(context);
 

@@ -10,6 +10,9 @@ namespace EasyToEnter.ASP.Data
         // Конструктор
         public EasyToEnterDbContext(DbContextOptions options) : base(options) { }
 
+        // Таблица "Аккредитация"
+        public DbSet<AccreditationModel> Accreditation { get; set; }
+
         // Таблица "Формат"
         public DbSet<FormatModel> Format { get; set; }
 
