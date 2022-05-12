@@ -19,6 +19,10 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Адрес")]
         public string Address { get; set; }
 
+        [Required(ErrorMessage = "Укажите наличие военной кафедры.")]
+        [Display(Name = "Военная кафедра")]
+        public bool MilitaryDepartment { get; set; } = false;
+
         // Внешний ключ модели "Город"
         [Display(Name = "Город")]
         [Required(ErrorMessage = "Укажите город.")]
