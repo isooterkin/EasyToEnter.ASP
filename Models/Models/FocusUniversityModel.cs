@@ -1,4 +1,5 @@
 ﻿using EasyToEnter.ASP.Models.Dependence;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,6 +7,7 @@ namespace EasyToEnter.ASP.Models.Models
 {
     // Модель "Направленность ВУЗа"
     [Display(Name = "Направленность ВУЗа")]
+    [Index(nameof(LevelFocusId), nameof(UniversityId), IsUnique = true)]
     public class FocusUniversityModel : ModelWithId
     {
         // Внешний ключ модели "Уровень - Направленность"
