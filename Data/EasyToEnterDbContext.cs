@@ -10,11 +10,29 @@ namespace EasyToEnter.ASP.Data
         // Конструктор
         public EasyToEnterDbContext(DbContextOptions options) : base(options) { }
 
-        // Таблица "Общежитие"
-        public DbSet<DormitoryModel> Dormitory { get; set; }
+        // Таблица "Уровень"
+        public DbSet<LevelModel> Level { get; set; }
 
-        // Таблица "ВУЗ"
-        public DbSet<UniversityModel> University { get; set; }
+        // Таблица "Группа"
+        public DbSet<GroupModel> Group { get; set; }
+
+        // Таблица "Направление"
+        public DbSet<DirectionModel> Direction { get; set; }
+
+        // Таблица "Направленность"
+        public DbSet<FocusModel> Focus { get; set; }
+
+        // Таблица "Наука"
+        public DbSet<ScienceModel> Science { get; set; }
+
+        // Таблица "Уровень - Направленность"
+        public DbSet<LevelFocusModel> LevelFocus { get; set; }
+
+        // Таблица "Субъект"
+        public DbSet<RegionModel> Region { get; set; }
+
+        // Таблица "Город"
+        public DbSet<CityModel> City { get; set; }
 
         // Таблица "Специализация"
         public DbSet<SpecializationModel> Specialization { get; set; }
@@ -37,28 +55,16 @@ namespace EasyToEnter.ASP.Data
         // Таблица "Предмет"
         public DbSet<SubjectModel> Subject { get; set; }
 
-        // Таблица "Субъект"
-        public DbSet<RegionModel> Region { get; set; }
+        // Таблица "ВУЗ"
+        public DbSet<UniversityModel> University { get; set; }
 
-        // Таблица "Город"
-        public DbSet<CityModel> City { get; set; }
+        // Таблица "Общежитие"
+        public DbSet<DormitoryModel> Dormitory { get; set; }
 
-        // Таблица "Уровень"
-        public DbSet<LevelModel> Level { get; set; }
+        // Таблица "Область - ВУЗ"
+        public DbSet<AreaUniversityModel> AreaUniversity { get; set; }
 
-        // Таблица "Группа"
-        public DbSet<GroupModel> Group { get; set; }
-
-        // Таблица "Направление"
-        public DbSet<DirectionModel> Direction { get; set; }
-
-        // Таблица "Направленность"
-        public DbSet<FocusModel> Focus { get; set; }
-
-        // Таблица "Наука"
-        public DbSet<ScienceModel> Science { get; set; }
-
-        // Таблица "Уровень - Направленность"
-        public DbSet<LevelFocusModel> LevelFocus { get; set; }
+        // Добавляем в базу данных "Специализация - ВУЗ"
+        public DbSet<SpecializationUniversityModel> SpecializationUniversity { get; set; }
     }
 }
