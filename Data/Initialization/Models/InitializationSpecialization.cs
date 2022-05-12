@@ -26,105 +26,101 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                 },
                 new Class // 5
                 {
-                    Name = "Гуманитарные"
+                    Name = "Дизайнерские"
                 },
                 new Class // 6
                 {
-                    Name = "Дизайнерские"
+                    Name = "Дистанционные"
                 },
                 new Class // 7
                 {
-                    Name = "Дистанционные"
+                    Name = "Естественно-научные"
                 },
                 new Class // 8
                 {
-                    Name = "Естественно-научные"
+                    Name = "Железнодорожные"
                 },
                 new Class // 9
                 {
-                    Name = "Железнодорожные"
+                    Name = "Информационные"
                 },
                 new Class // 10
                 {
-                    Name = "Информационные"
+                    Name = "Лингвистические"
                 },
                 new Class // 11
                 {
-                    Name = "Лингвистические"
+                    Name = "Медицинские"
                 },
                 new Class // 12
                 {
-                    Name = "Медицинские"
+                    Name = "Музыкальные"
                 },
                 new Class // 13
                 {
-                    Name = "Музыкальные"
+                    Name = "Педагогические"
                 },
                 new Class // 14
                 {
-                    Name = "Педагогические"
+                    Name = "Психологические"
                 },
                 new Class // 15
                 {
-                    Name = "Психологические"
+                    Name = "Связи"
                 },
                 new Class // 16
                 {
-                    Name = "Связи"
+                    Name = "Сельскохозяйственные"
                 },
                 new Class // 17
                 {
-                    Name = "Сельскохозяйственные"
+                    Name = "Спортивные"
                 },
                 new Class // 18
                 {
-                    Name = "Спортивные"
+                    Name = "Строительные"
                 },
                 new Class // 19
                 {
-                    Name = "Строительные"
+                    Name = "Таможенные"
                 },
                 new Class // 20
                 {
-                    Name = "Таможенные"
+                    Name = "Творческие, культуры"
                 },
                 new Class // 21
                 {
-                    Name = "Творческие, культуры"
+                    Name = "Театральные"
                 },
                 new Class // 22
                 {
-                    Name = "Театральные"
+                    Name = "Технические"
                 },
                 new Class // 23
                 {
-                    Name = "Технические"
+                    Name = "Технологические"
                 },
                 new Class // 24
                 {
-                    Name = "Технологические"
+                    Name = "Транспортные"
                 },
                 new Class // 25
                 {
-                    Name = "Транспортные"
+                    Name = "Фармацевтические"
                 },
                 new Class // 26
                 {
-                    Name = "Фармацевтические"
+                    Name = "Физические"
                 },
                 new Class // 27
                 {
-                    Name = "Физические"
+                    Name = "Художественные"
                 },
                 new Class // 28
                 {
-                    Name = "Художественные"
-                },
-                new Class // 29
-                {
                     Name = "Экономические"
                 },
-                new Class // 30
+                new Class // 29
                 {
                     Name = "Юридические"
                 }
