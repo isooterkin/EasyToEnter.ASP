@@ -66,5 +66,8 @@ namespace EasyToEnter.ASP.Data
 
         // Добавляем в базу данных "Специализация - ВУЗ"
         public DbSet<SpecializationUniversityModel> SpecializationUniversity { get; set; }
+
+        // Добавляем в базу данных "Направленность ВУЗа"
+        public DbSet<FocusUniversityModel> FocusUniversity { get; set; }
     }
 }
