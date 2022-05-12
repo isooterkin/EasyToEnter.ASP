@@ -1,4 +1,5 @@
 ﻿using EasyToEnter.ASP.Models.Dependence;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,6 +7,7 @@ namespace EasyToEnter.ASP.Models.Models
 {
     // Модель "Область - ВУЗ"
     [Display(Name = "Область - ВУЗ")]
+    [Index(nameof(AreaId), nameof(UniversityId), IsUnique = true)]
     public class AreaUniversityModel: ModelWithId
     {
         // Внешний ключ модели "Область"
