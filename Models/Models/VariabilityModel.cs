@@ -1,4 +1,5 @@
 ﻿using EasyToEnter.ASP.Models.Dependence;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,6 +7,7 @@ namespace EasyToEnter.ASP.Models.Models
 {
     // Модель "Вариативность"
     [Display(Name = "Вариативность")]
+    [Index(nameof(FormId), nameof(FocusUniversityId), nameof(PaymentId), nameof(FormatId), IsUnique = true)]
     public class VariabilityModel: ModelWithId
     {
         [Required(ErrorMessage = "Укажите проходной балл.")]
