@@ -10,6 +10,9 @@ namespace EasyToEnter.ASP.Data
         // Конструктор
         public EasyToEnterDbContext(DbContextOptions options) : base(options) { }
 
+        // Таблица "Специализация"
+        public DbSet<SpecializationModel> Specialization { get; set; }
+
         // Таблица "Область"
         public DbSet<AreaModel> Area { get; set; }
 
