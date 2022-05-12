@@ -69,5 +69,8 @@ namespace EasyToEnter.ASP.Data
 
         // Добавляем в базу данных "Направленность ВУЗа"
         public DbSet<FocusUniversityModel> FocusUniversity { get; set; }
+
+        // Добавляем в базу данных "Вариативность"
+        public DbSet<VariabilityModel> Variability { get; set; }
     }
 }
