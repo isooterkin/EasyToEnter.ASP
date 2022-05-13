@@ -32,6 +32,11 @@ namespace EasyToEnter.ASP.Models.Models
         [Url(ErrorMessage = "Неверная ссылка.")]
         public string Website { get; set; }
 
+        [Required(ErrorMessage = "Укажите контактный телефон.")]
+        [Display(Name = "Контактный телефон")]
+        [Phone(ErrorMessage = "Неверный телефон.")]
+        public string PhoneNumber { get; set; }
+
         // Внешний ключ модели "Город"
         [Display(Name = "Город")]
         [Required(ErrorMessage = "Укажите город.")]

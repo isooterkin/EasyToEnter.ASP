@@ -59,7 +59,7 @@ namespace EasyToEnter.ASP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Abbreviation,EmailAddress,Address,MilitaryDepartment,Website,CityId,AccreditationId,Description,Name,Id")] UniversityModel universityModel)
+        public async Task<IActionResult> Create([Bind("Abbreviation,EmailAddress,Address,MilitaryDepartment,Website,PhoneNumber,CityId,AccreditationId,Description,Name,Id")] UniversityModel universityModel)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace EasyToEnter.ASP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Abbreviation,EmailAddress,Address,MilitaryDepartment,Website,CityId,AccreditationId,Description,Name,Id")] UniversityModel universityModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Abbreviation,EmailAddress,Address,MilitaryDepartment,Website,PhoneNumber,CityId,AccreditationId,Description,Name,Id")] UniversityModel universityModel)
         {
             if (id != universityModel.Id)
             {
