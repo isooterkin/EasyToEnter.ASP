@@ -10,7 +10,16 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
             {
                 new Class // 1
                 {
-                    Name = ""
+                    Name = "Санкт-Петербургский государственный технологический институт (Технический университет)",
+                    Abbreviation = "СПбГТИ(ТУ)",
+                    Address = "Россия, Санкт-Петербург, Московский проспект, 24-26/49",
+                    EmailAddress = "office@technolog.edu.ru",
+                    PhoneNumber = "78127101120",
+                    Description = "",
+                    Website = "https://technolog.edu.ru/",
+                    MilitaryDepartment = false,
+                    AccreditationId = 1,
+                    CityId = 78
                 }
             });
 
