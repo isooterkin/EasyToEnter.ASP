@@ -12,7 +12,6 @@ namespace EasyToEnter.ASP.Models.Models
     {
         [Required(ErrorMessage = "Укажите aббревиатурe.")]
         [Display(Name = "Аббревиатура")]
-        [EmailAddress(ErrorMessage = "Неверная aббревиатура.")]
         public string Abbreviation { get; set; }
 
         [Required(ErrorMessage = "Укажите электронную почту.")]
