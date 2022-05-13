@@ -33,5 +33,9 @@ namespace EasyToEnter.ASP.Models.Models
         [NotMapped]
         [Display(Name = "Наименование")]
         public string FullCodeName => $"{FullCode} {FocusModel?.DirectionModel?.Name}";
+
+        [NotMapped]
+        [Display(Name = "Наименование")]
+        public string CodeName => $"{FullCode} {FocusModel?.Name}";
     }
 }
