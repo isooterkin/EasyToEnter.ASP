@@ -74,9 +74,6 @@ namespace EasyToEnter.ASP.Data.Initialization
 
             // Добавляем в базу данных "Направленность ВУЗа"
             // InitializationFocusUniversity.Initialize(context);
-
-            // Добавляем в базу данных "Вариативность"
-            // InitializationVariability.Initialize(context);
         }
     }
 }

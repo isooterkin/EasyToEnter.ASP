@@ -71,6 +71,6 @@ namespace EasyToEnter.ASP.Data
         public DbSet<FocusUniversityModel> FocusUniversity { get; set; }
 
         // Добавляем в базу данных "Вариативность"
-        public DbSet<VariabilityModel> Variability { get; set; }
+        public DbSet<FocusUniversityModel> Variability { get; set; }
     }
 }
