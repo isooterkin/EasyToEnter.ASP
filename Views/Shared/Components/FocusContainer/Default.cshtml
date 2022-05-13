@@ -3,9 +3,9 @@
 
 <div class="container mt-3">
     <div class="row">
-@for(var i = 0; i < Model.FocusList.Count; i++)
+@for(var i = 0; i < Model.LevelFocusList.Count; i++)
 {
-        <vc:focus-card data="@new FocusSelectionCardViewModel(@Model, @Model.FocusList[i]!)"/>
+        <vc:focus-card data="@new FocusSelectionCardViewModel(@Model, @Model.LevelFocusList[i]!)"/>
 }
     </div>
 </div>

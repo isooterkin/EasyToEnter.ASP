@@ -8,4 +8,28 @@
     <h2>Выбор направленности</h2>
 </div>
 
+<!-- Фильтры -->
+<form method="get">
+    <div class="container">
+        <div class="row">
+            <!-- Область -->
+            <select name="level" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.AreaFocusList">
+                <option value=@null>Выберите уровень</option>
+            </select>
+        </div>
+    </div>
+</form>
+
 <vc:focus-container data="@Model"/>
+
+<!-- Отправка формы при клике на select-->
+@section Scripts 
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $('.select_send_ajax').on('change', function() 
+        {
+            $(this.form).submit();
+        });
+    </script>
+}

@@ -4,16 +4,13 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     public class FocusSelectionCardViewModel
     {
-        public readonly FocusSelectionContainerViewModel FocusSelectionContainer;
-        public readonly FocusModel Focus;
+        public readonly LevelFocusModel LevelFocus;
+        public readonly int FocusUniversityCount;
 
-        public FocusSelectionCardViewModel(FocusSelectionContainerViewModel focusSelectionContainer, FocusModel focus)
+        public FocusSelectionCardViewModel(FocusSelectionContainerViewModel focusSelectionContainer, LevelFocusModel levelFocus)
         {
-            FocusSelectionContainer = focusSelectionContainer;
-            Focus = focus;
+            LevelFocus = levelFocus;
+            FocusUniversityCount = focusSelectionContainer.FocusUniversityCollection.Where(f => f.LevelFocusModel == levelFocus).Count();
         }
-
-        public int FocusUniversityCount => FocusSelectionContainer.FocusUniversityCollection.Where(l => l.LevelFocusModel!.FocusModel == Focus).Count();
-        public int LevelId => FocusSelectionContainer.LevelId;
     }
 }

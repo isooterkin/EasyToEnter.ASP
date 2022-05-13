@@ -1,20 +1,19 @@
 ﻿using EasyToEnter.ASP.Models.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     public class FocusSelectionContainerViewModel
     {
-        public readonly List<FocusModel?> FocusList;
-        public readonly IEnumerable<LevelFocusModel> LevelFocusCollection;
+        public readonly List<LevelFocusModel> LevelFocusList;
         public readonly IEnumerable<FocusUniversityModel> FocusUniversityCollection;
-        public readonly int LevelId;
+        public readonly List<SelectListItem> AreaFocusList;
 
-        public FocusSelectionContainerViewModel(IEnumerable<LevelFocusModel> levelFocusCollection, IEnumerable<FocusUniversityModel> focusUniversityCollection, int level)
+        public FocusSelectionContainerViewModel(List<LevelFocusModel> levelFocusList, IEnumerable<FocusUniversityModel> focusUniversityCollection, List<SelectListItem> areaFocusList)
         {
-            FocusList = levelFocusCollection.Select(g => g!.FocusModel).Distinct().ToList();
-            LevelFocusCollection = levelFocusCollection;
+            LevelFocusList = levelFocusList;
             FocusUniversityCollection = focusUniversityCollection;
-            LevelId = level;
+            AreaFocusList = areaFocusList;
         }
     }
 }
