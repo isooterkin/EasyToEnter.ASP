@@ -10,6 +10,11 @@ namespace EasyToEnter.ASP.Models.Models
     [Display(Name = "ВУЗ")]
     public class UniversityModel: ModelWithIdNameDescription
     {
+        [Required(ErrorMessage = "Укажите aббревиатурe.")]
+        [Display(Name = "Аббревиатура")]
+        [EmailAddress(ErrorMessage = "Неверная aббревиатура.")]
+        public string Abbreviation { get; set; }
+
         [Required(ErrorMessage = "Укажите электронную почту.")]
         [Display(Name = "Электронная почта")]
         [EmailAddress(ErrorMessage = "Неверная электронная почта.")]
