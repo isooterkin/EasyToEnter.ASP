@@ -14,9 +14,23 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .Include(l => l.LevelModel)
                 .Include(lf => lf.FocusModel)
                 .ThenInclude(f => f!.DirectionModel)
-                .Where(l => l.FocusModel!.DirectionModel!.Id == direction);
+                .Where(l => l.FocusModel!.DirectionId == direction);
 
-            return View(new FocusSelectionContainerViewModel(levelFocusCollection, level));
+            IEnumerable<FocusUniversityModel> focusUniversityCollection = _context.FocusUniversity
+                .Include(f => f.PaymentModel)
+                .Include(f => f.FormModel)
+                .Include(f => f.FormatModel)
+                .Include(f => f.UniversityModel)
+                .Include(f => f.LevelFocusModel)
+                .ThenInclude(f => f!.LevelModel)
+                .Where(f => f.LevelFocusModel!.LevelId == level)
+                .Include(f => f.LevelFocusModel)
+                .ThenInclude(f => f!.FocusModel)
+                .ThenInclude(f => f!.DirectionModel)
+                .ThenInclude(f => f!.GroupModel)
+                .Where(f => f.LevelFocusModel!.FocusModel!.DirectionId == direction);
+
+            return View(new FocusSelectionContainerViewModel(levelFocusCollection, focusUniversityCollection, level));
         }
     }
 }

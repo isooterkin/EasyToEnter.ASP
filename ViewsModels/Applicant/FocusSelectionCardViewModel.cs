@@ -13,7 +13,7 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
             Focus = focus;
         }
 
-        public int LevelFocusCount => FocusSelectionContainer.LevelFocusCollection.Where(l => l.FocusModel == Focus).Count();
+        public int FocusUniversityCount => FocusSelectionContainer.FocusUniversityCollection.Where(l => l.LevelFocusModel!.FocusModel == Focus).Count();
         public int LevelId => FocusSelectionContainer.LevelId;
     }
 }
