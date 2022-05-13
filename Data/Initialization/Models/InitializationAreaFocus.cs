@@ -1,8 +1,8 @@
-﻿using Class = EasyToEnter.ASP.Models.Models.AreaUniversityModel;
+﻿using Class = EasyToEnter.ASP.Models.Models.AreaFocusModel;
 
 namespace EasyToEnter.ASP.Data.Initialization.Models
 {
-    public class InitializationAreaUniversity
+    public class InitializationAreaFocus
     {
         public static void Initialize(EasyToEnterDbContext Context)
         {

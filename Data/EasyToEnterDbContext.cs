@@ -61,8 +61,8 @@ namespace EasyToEnter.ASP.Data
         // Таблица "Общежитие"
         public DbSet<DormitoryModel> Dormitory { get; set; }
 
-        // Таблица "Область - ВУЗ"
-        public DbSet<AreaUniversityModel> AreaUniversity { get; set; }
+        // Таблица "Область - Направленность"
+        public DbSet<AreaFocusModel> AreaUniversity { get; set; }
 
         // Добавляем в базу данных "Специализация - ВУЗ"
         public DbSet<SpecializationUniversityModel> SpecializationUniversity { get; set; }

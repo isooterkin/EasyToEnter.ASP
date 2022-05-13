@@ -66,8 +66,8 @@ namespace EasyToEnter.ASP.Data.Initialization
             // Добавляем в базу данных "Общежитие"
             // InitializationDormitory.Initialize(context);
 
-            // Добавляем в базу данных "Область - ВУЗ"
-            // InitializationAreaUniversity.Initialize(context);
+            // Добавляем в базу данных "Область - Направленность"
+            // InitializationAreaFocus.Initialize(context);
 
             // Добавляем в базу данных "Специализация - ВУЗ"
             // InitializationSpecializationUniversity.Initialize(context);
