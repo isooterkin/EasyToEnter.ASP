@@ -8,15 +8,25 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 {
     public partial class ApplicantController
     {
-        public async Task<IActionResult> FocusSelection(int level, int direction)
+        public async Task<IActionResult> FocusSelection(
+            [FromQuery(Name = "level")] int level,
+            [FromQuery(Name = "direction")] int direction,
+            [FromQuery(Name = "area")] int? area)
         {
-            List<LevelFocusModel> levelFocusList = await _context.LevelFocus
+            if ((level <= 0 || direction <= 0) || (area != null && area <= 0)) return NotFound();
+
+            List <LevelFocusModel> levelFocusList = await _context.LevelFocus
                 .Where(l => l.LevelId == level)
                 .Include(l => l.LevelModel)
                 .Include(lf => lf.FocusModel)
-                .ThenInclude(f => f!.DirectionModel)
-                .ThenInclude(f => f!.GroupModel)
+                    .ThenInclude(f => f!.DirectionModel)
                 .Where(l => l.FocusModel!.DirectionId == direction)
+                .Include(lf => lf.FocusModel)
+                    .ThenInclude(f => f!.DirectionModel)
+                        .ThenInclude(f => f!.GroupModel)
+                .Include(lf => lf.FocusModel)
+                    .ThenInclude(lf => lf!.AreaFocuss)
+                        !.ThenInclude(lf => lf!.AreaModel)
                 .ToListAsync();
 
             IEnumerable<FocusUniversityModel> focusUniversityCollection = _context.FocusUniversity
@@ -25,23 +35,38 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .Include(f => f.FormatModel)
                 .Include(f => f.UniversityModel)
                 .Include(f => f.LevelFocusModel)
-                .ThenInclude(f => f!.LevelModel)
+                    .ThenInclude(f => f!.LevelModel)
                 .Where(f => f.LevelFocusModel!.LevelId == level)
                 .Include(f => f.LevelFocusModel)
-                .ThenInclude(f => f!.FocusModel)
-                .ThenInclude(f => f!.DirectionModel)
-                .ThenInclude(f => f!.GroupModel)
+                    .ThenInclude(f => f!.FocusModel)
+                        .ThenInclude(f => f!.DirectionModel)
+                            .ThenInclude(f => f!.GroupModel)
                 .Where(f => f.LevelFocusModel!.FocusModel!.DirectionId == direction);
 
-            int[] levelFocusIdArray = levelFocusList.Select(f => f.FocusId).Distinct().ToArray();
+            // Все возможные области
+            IEnumerable<AreaFocusModel> areaFocusList = levelFocusList
+                .SelectMany(f => f.FocusModel!.AreaFocuss!);
 
-            List<SelectListItem> areaFocusList = await _context.AreaFocus
-                .Where(l => levelFocusIdArray.Contains(l.FocusId))
-                .Include(l => l.AreaModel)
+            // Области в фильтрах
+            List<SelectListItem> areaFocusSelectList = areaFocusList
                 .Select(l => new SelectListItem(l.AreaModel!.Name, l.Id.ToString()))
-                .ToListAsync();
+                .ToList();
 
-            return View(new FocusSelectionContainerViewModel(levelFocusList, focusUniversityCollection, areaFocusList));
+            // !!! попробовать в БД засунуть в Направленность слабую сущность
+
+            if (area != null)
+            {
+                var inContains = areaFocusList.Where(a => a.Id == area).First();
+
+                levelFocusList = levelFocusList
+                    .Where(f => f.FocusModel!.AreaFocuss!.Contains(inContains))
+                    .ToList();
+                
+                if (areaFocusSelectList.Any(l => l.Value == area.ToString()))
+                    areaFocusSelectList.First(l => l.Value == area.ToString()).Selected = true;
+            }
+
+            return View(new FocusSelectionContainerViewModel(levelFocusList, focusUniversityCollection, areaFocusSelectList, level, direction));
         }
     }
 }

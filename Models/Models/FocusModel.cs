@@ -16,6 +16,10 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Направление")]
         public DirectionModel? DirectionModel { get; set; }
 
+        // Лист моделей "Область - Направленность", принадлежащих модели "Направленность"
+        [Display(Name = "Области - направленности выбранной направленности")]
+        public List<AreaFocusModel>? AreaFocuss { get; set; }
+
         // Лист моделей "Уровень - Направленность", принадлежащих модели "Направленность"
         [Display(Name = "Уровни - направленности выбранной направленности")]
         public List<LevelFocusModel>? LevelFocuss { get; set; }

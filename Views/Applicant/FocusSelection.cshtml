@@ -13,7 +13,9 @@
     <div class="container">
         <div class="row">
             <!-- Область -->
-            <select name="level" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.AreaFocusList">
+            <input type="hidden" name="level" asp-for="Level"/>
+            <input type="hidden" name="direction" asp-for="Direction"/>
+            <select name="area" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.AreaFocusSelectList">
                 <option value=@null>Выберите уровень</option>
             </select>
         </div>
