@@ -52,5 +52,13 @@ namespace EasyToEnter.ASP.Models.Models
         [ForeignKey(nameof(AccreditationId))]
         [Display(Name = "Аккредитация")]
         public AccreditationModel? AccreditationModel { get; set; }
+
+        // Лист моделей "Специальность - ВУЗ", принадлежащих модели "ВУЗ"
+        [Display(Name = "Специальности - вуза выбранного вуза")]
+        public List<SpecializationUniversityModel>? SpecializationUniversitys { get; set; }
+
+        // Лист моделей "Общежитие", принадлежащих модели "ВУЗ"
+        [Display(Name = "Общежития выбранного вуза")]
+        public List<DormitoryModel>? Dormitorys { get; set; }
     }
 }

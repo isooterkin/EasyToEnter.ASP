@@ -1,4 +1,5 @@
 ﻿using EasyToEnter.ASP.Models.Dependence;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,6 +9,7 @@ namespace EasyToEnter.ASP.Models.Models
 {
     // Модель "Общежитие"
     [Display(Name = "Общежитие")]
+    [Index(nameof(Address), nameof(UniversityId), IsUnique = true)]
     public class DormitoryModel: ModelWithIdName
     {
         [Required(ErrorMessage = "Укажите адрес.")]
