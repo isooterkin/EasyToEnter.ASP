@@ -9,16 +9,23 @@ namespace EasyToEnter.ASP.Controllers.Applicant
     {
         public IActionResult GroupSelection(int level, int science)
         {
-            IEnumerable<LevelFocusModel> levelFocusCollection = _context.LevelFocus
-                .Where(l => l.LevelId == level)
-                .Include(l => l.LevelModel)
-                .Include(lf => lf.FocusModel)
-                .ThenInclude(f => f!.DirectionModel)
-                .ThenInclude(d => d!.GroupModel)
-                .ThenInclude(s => s!.ScienceModel)
-                .Where(l => l.FocusModel!.DirectionModel!.GroupModel!.ScienceModel!.Id == science);
+            IEnumerable<FocusUniversityModel> focusUniversityCollection = _context.FocusUniversity
+                .Include(fu => fu.LevelFocusModel)
+                    .ThenInclude(lf => lf!.LevelModel)
+                .Include(fu => fu.LevelFocusModel)
+                    .ThenInclude(lf => lf!.FocusModel)
+                        .ThenInclude(f => f!.DirectionModel)
+                            .ThenInclude(d => d!.GroupModel)
+                                .ThenInclude(g => g!.ScienceModel)
+                .Where(fu => fu.LevelFocusModel!.LevelId == level)
+                .Where(fu => fu.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceId == science);
 
-            return View(new GroupSelectionContainerViewModel(levelFocusCollection, level));
+            List<GroupModel> groupList = focusUniversityCollection
+                .Select(fu => fu.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!)
+                .Distinct()
+                .ToList();
+
+            return View(new GroupSelectionContainerViewModel(focusUniversityCollection, groupList, level));
         }
     }
 }

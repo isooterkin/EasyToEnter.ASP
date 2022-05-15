@@ -4,16 +4,15 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     public class DirectionSelectionCardViewModel
     {
-        public readonly DirectionSelectionContainerViewModel DirectionSelectionContainer;
         public readonly DirectionModel Direction;
+        public readonly int FocusUniversityCount;
+        public readonly int LevelId;
 
         public DirectionSelectionCardViewModel(DirectionSelectionContainerViewModel directionSelectionContainer, DirectionModel direction)
         {
-            DirectionSelectionContainer = directionSelectionContainer;
             Direction = direction;
+            FocusUniversityCount = directionSelectionContainer.FocusUniversityCollection.Where(f => f.LevelFocusModel!.FocusModel!.DirectionModel == direction).Count();
+            LevelId = directionSelectionContainer.LevelId;
         }
-
-        public int LevelFocusCount => DirectionSelectionContainer.LevelFocusCollection.Where(l => l.FocusModel!.DirectionModel == Direction).Count();
-        public int LevelId => DirectionSelectionContainer.LevelId;
     }
 }

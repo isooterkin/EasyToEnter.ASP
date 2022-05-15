@@ -4,16 +4,15 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     public class GroupSelectionCardViewModel
     {
-        public readonly GroupSelectionContainerViewModel GroupSelectionContainer;
         public readonly GroupModel Group;
+        public readonly int FocusUniversityCount;
+        public readonly int LevelId;
 
         public GroupSelectionCardViewModel(GroupSelectionContainerViewModel groupSelectionContainer, GroupModel group)
         {
-            GroupSelectionContainer = groupSelectionContainer;
             Group = group;
+            FocusUniversityCount = groupSelectionContainer.FocusUniversityCollection.Where(f => f.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel == group).Count();
+            LevelId = groupSelectionContainer.LevelId;
         }
-
-        public int LevelFocusCount => GroupSelectionContainer.LevelFocusCollection.Where(l => l.FocusModel!.DirectionModel!.GroupModel == Group).Count();
-        public int LevelId => GroupSelectionContainer.LevelId;
     }
 }

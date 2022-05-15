@@ -9,15 +9,22 @@ namespace EasyToEnter.ASP.Controllers.Applicant
     {
         public IActionResult DirectionSelection(int level, int group)
         {
-            IEnumerable<LevelFocusModel> levelFocusCollection = _context.LevelFocus
-                .Where(l => l.LevelId == level)
-                .Include(l => l.LevelModel)
-                .Include(lf => lf.FocusModel)
-                .ThenInclude(f => f!.DirectionModel)
-                .ThenInclude(d => d!.GroupModel)
-                .Where(l => l.FocusModel!.DirectionModel!.GroupModel!.Id == group);
+            IEnumerable<FocusUniversityModel> focusUniversityCollection = _context.FocusUniversity
+                .Include(fu => fu.LevelFocusModel)
+                    .ThenInclude(lf => lf!.LevelModel)
+                .Include(fu => fu.LevelFocusModel)
+                    .ThenInclude(lf => lf!.FocusModel)
+                        .ThenInclude(f => f!.DirectionModel)
+                            .ThenInclude(d => d!.GroupModel)
+                .Where(fu => fu.LevelFocusModel!.LevelId == level)
+                .Where(fu => fu.LevelFocusModel!.FocusModel!.DirectionModel!.GroupId == group);
 
-            return View(new DirectionSelectionContainerViewModel(levelFocusCollection, level));
+            List<DirectionModel> directionList = focusUniversityCollection
+                .Select(fu => fu.LevelFocusModel!.FocusModel!.DirectionModel!)
+                .Distinct()
+                .ToList();
+
+            return View(new DirectionSelectionContainerViewModel(focusUniversityCollection, directionList, level));
         }
     }
 }
