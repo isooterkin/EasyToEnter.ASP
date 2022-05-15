@@ -52,8 +52,6 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .Select(l => new SelectListItem(l.AreaModel!.Name, l.Id.ToString()))
                 .ToList();
 
-            // !!! попробовать в БД засунуть в Направленность слабую сущность
-
             if (area != null)
             {
                 var inContains = areaFocusList.Where(a => a.Id == area).First();
