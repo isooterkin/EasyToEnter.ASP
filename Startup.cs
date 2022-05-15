@@ -1,5 +1,6 @@
 ﻿using EasyToEnter.ASP.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace EasyToEnter.ASP
 {
@@ -13,9 +14,16 @@ namespace EasyToEnter.ASP
         {
             services.AddControllersWithViews();
 
-            // Строка подключения к БД
-            void configureDbContext(DbContextOptionsBuilder o) => o.UseSqlServer(Configuration.GetConnectionString("MSSQL"));
-            //void configureDbContext(DbContextOptionsBuilder o) => o.UseMySQL(Configuration.GetConnectionString("MYSQL"));
+            // Конфигурация БД
+            void configureDbContext(DbContextOptionsBuilder o)
+            {
+                // Строка подключения к БД
+                o.UseSqlServer(Configuration.GetConnectionString("MSSQL"));
+                // o.UseMySQL(Configuration.GetConnectionString("MYSQL"));
+
+                // Убрать предупреждение о большом количестве Include
+                o.ConfigureWarnings(x => x.Ignore(RelationalEventId.MultipleCollectionIncludeWarning));
+            }
 
             // Регистрация контекста БД
             services.AddDbContextPool<EasyToEnterDbContext>(configureDbContext);

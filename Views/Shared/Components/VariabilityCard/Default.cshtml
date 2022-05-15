@@ -1,0 +1,42 @@
+﻿@model EasyToEnter.ASP.ViewsModels.Applicant.VariabilitySelectionCardViewModel;
+
+<div class="card bg-dark text-white mb-3 rounded-3 shadow" style="background-color: #333;">
+    <div class="card-body">
+        <p class="card-text fst-italic">
+            @Model.Variability!.FocusUniversityModel!.UniversityModel!.Name
+        </p>
+        <h3 class="card-title">
+            @Model.Variability!.FocusUniversityModel!.LevelFocusModel!.FullCodeName
+        </h3>
+        <p class="card-text text-truncate">
+            @Model.Variability!.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name
+        </p>
+        <p class="card-text text-truncate">
+            <span class="fs-5 fw-bold ">@Model.Variability.PaymentModel!.Name, @Model.Variability.FormatModel!.Name, @Model.Variability.FormModel!.Name</span>
+        </p>
+        <div class="row p-0">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <a href="#" class="btn btn-light">
+                            Подробнее
+                        </a>
+                    </div>
+                    <div class="col">
+                        <p class="text-truncate"><span class="fs-5 fw-bold ">@Model.Variability.Tuition</span> руб.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <p class="text-truncate"><span class="fs-5 fw-bold">@Model.Variability.NumberSeats</span> мест</p>
+                    </div>
+                    <div class="col">
+                        <p class="text-truncate"><span class="fs-5 fw-bold">@Model.Variability.PassingGrade</span> баллов</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

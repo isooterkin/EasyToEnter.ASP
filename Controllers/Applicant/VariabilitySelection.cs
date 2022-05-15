@@ -11,32 +11,35 @@ namespace EasyToEnter.ASP.Controllers.Applicant
         {
             if (levelFocus <= 0) return NotFound();
 
-            IEnumerable<FocusUniversityModel> focusUniversityCollection = _context.FocusUniversity
-                .Include(fu => fu.LevelFocusModel)
-                    .ThenInclude(lf => lf!.LevelModel)
-                .Include(fu => fu.LevelFocusModel)
-                    .ThenInclude(lf => lf!.FocusModel)
-                        .ThenInclude(f => f!.DirectionModel)
-                            .ThenInclude(d => d!.GroupModel)
-                .Include(fu => fu.Variabilitys)
-                    !.ThenInclude(v => v.FormatModel)
-                .Include(fu => fu.Variabilitys)
-                    !.ThenInclude(v => v.FormModel)
-                .Include(fu => fu.Variabilitys)
-                    !.ThenInclude(v => v.PaymentModel)
-                .Include(fu => fu.UniversityModel)
-                    .ThenInclude(u => u!.AccreditationModel)
-                .Include(fu => fu.UniversityModel)
-                    .ThenInclude(u => u!.CityModel)
-                        .ThenInclude(c => c!.RegionModel)
-                .Include(fu => fu.UniversityModel)
-                    .ThenInclude(u => u!.Dormitorys)
-                .Include(fu => fu.UniversityModel)
-                    .ThenInclude(u => u!.SpecializationUniversitys)
-                        !.ThenInclude(su => su!.SpecializationModel)
-                .Where(fu => fu!.LevelFocusId == levelFocus);
+            List<VariabilityModel> variabilityList = _context.Variability
+                .Include(v => v.FormModel)
+                .Include(v => v.FormatModel)
+                .Include(v => v.PaymentModel)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.LevelFocusModel)
+                        .ThenInclude(lf => lf!.LevelModel)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.LevelFocusModel)
+                        .ThenInclude(lf => lf!.FocusModel)
+                            .ThenInclude(f => f!.DirectionModel)
+                                .ThenInclude(d => d!.GroupModel)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.UniversityModel)
+                        .ThenInclude(u => u!.AccreditationModel)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.UniversityModel)
+                        .ThenInclude(u => u!.CityModel)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.UniversityModel)
+                        .ThenInclude(u => u!.Dormitorys)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.UniversityModel)
+                        .ThenInclude(u => u!.SpecializationUniversitys)
+                            !.ThenInclude(su => su.SpecializationModel)
+                .Where(v => v.FocusUniversityModel!.LevelFocusId == levelFocus)
+                .ToList();
 
-            return View();
+            return View(new VariabilitySelectionContainerViewModel(variabilityList, levelFocus));
         }
     }
 }
