@@ -1,0 +1,83 @@
+﻿@model IEnumerable<EasyToEnter.ASP.Models.Models.VariabilityModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PassingGrade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tuition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberSeats)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodStudy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EntranceExams)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormatModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FocusUniversityModel)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassingGrade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tuition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberSeats)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PeriodStudy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EntranceExams)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormModel.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentModel.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormatModel.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FocusUniversityModel.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

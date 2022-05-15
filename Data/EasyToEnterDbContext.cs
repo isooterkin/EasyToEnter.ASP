@@ -64,13 +64,13 @@ namespace EasyToEnter.ASP.Data
         // Таблица "Область - Направленность"
         public DbSet<AreaFocusModel> AreaFocus { get; set; }
 
-        // Добавляем в базу данных "Специализация - ВУЗ"
+        // Таблица "Специализация - ВУЗ"
         public DbSet<SpecializationUniversityModel> SpecializationUniversity { get; set; }
 
-        // Добавляем в базу данных "Направленность ВУЗа"
+        // Таблица "Направленность ВУЗа"
         public DbSet<FocusUniversityModel> FocusUniversity { get; set; }
 
-        // Добавляем в базу данных "Вариативность"
-        public DbSet<FocusUniversityModel> Variability { get; set; }
+        // Таблица "Вариативность"
+        public DbSet<VariabilityModel> Variability { get; set; }
     }
 }

@@ -13,46 +13,6 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="PassingGrade" class="control-label"></label>
-                <input asp-for="PassingGrade" class="form-control" />
-                <span asp-validation-for="PassingGrade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tuition" class="control-label"></label>
-                <input asp-for="Tuition" class="form-control" />
-                <span asp-validation-for="Tuition" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumberSeats" class="control-label"></label>
-                <input asp-for="NumberSeats" class="form-control" />
-                <span asp-validation-for="NumberSeats" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PeriodStudy" class="control-label"></label>
-                <input asp-for="PeriodStudy" class="form-control" />
-                <span asp-validation-for="PeriodStudy" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="EntranceExams" /> @Html.DisplayNameFor(model => model.EntranceExams)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="FormId" class="control-label"></label>
-                <select asp-for="FormId" class="form-control" asp-items="ViewBag.FormId"></select>
-                <span asp-validation-for="FormId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaymentId" class="control-label"></label>
-                <select asp-for="PaymentId" class="form-control" asp-items="ViewBag.PaymentId"></select>
-                <span asp-validation-for="PaymentId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FormatId" class="control-label"></label>
-                <select asp-for="FormatId" class="form-control" asp-items="ViewBag.FormatId"></select>
-                <span asp-validation-for="FormatId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="UniversityId" class="control-label"></label>
                 <select asp-for="UniversityId" class="form-control" asp-items="ViewBag.UniversityId"></select>
                 <span asp-validation-for="UniversityId" class="text-danger"></span>

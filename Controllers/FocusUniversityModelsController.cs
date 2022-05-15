@@ -22,7 +22,7 @@ namespace EasyToEnter.ASP.Controllers
         // GET: FocusUniversityModels
         public async Task<IActionResult> Index()
         {
-            var easyToEnterDbContext = _context.FocusUniversity.Include(f => f.FormModel).Include(f => f.FormatModel).Include(f => f.LevelFocusModel).Include(f => f.PaymentModel).Include(f => f.UniversityModel);
+            var easyToEnterDbContext = _context.FocusUniversity.Include(f => f.LevelFocusModel).Include(f => f.UniversityModel);
             return View(await easyToEnterDbContext.ToListAsync());
         }
 
@@ -35,10 +35,7 @@ namespace EasyToEnter.ASP.Controllers
             }
 
             var focusUniversityModel = await _context.FocusUniversity
-                .Include(f => f.FormModel)
-                .Include(f => f.FormatModel)
                 .Include(f => f.LevelFocusModel)
-                .Include(f => f.PaymentModel)
                 .Include(f => f.UniversityModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (focusUniversityModel == null)
@@ -52,14 +49,7 @@ namespace EasyToEnter.ASP.Controllers
         // GET: FocusUniversityModels/Create
         public IActionResult Create()
         {
-            ViewData["FormId"] = new SelectList(_context.Form, "Id", "Name");
-            ViewData["FormatId"] = new SelectList(_context.Format, "Id", "Name");
-            ViewData["LevelFocusId"] = new SelectList(_context.LevelFocus
-                .Include(f => f.LevelModel)
-                .Include(f => f.FocusModel)
-                .ThenInclude(f => f!.DirectionModel)
-                .ThenInclude(f => f!.GroupModel), "Id", "CodeName");
-            ViewData["PaymentId"] = new SelectList(_context.Payment, "Id", "Name");
+            ViewData["LevelFocusId"] = new SelectList(_context.LevelFocus, "Id", "Id");
             ViewData["UniversityId"] = new SelectList(_context.University, "Id", "Abbreviation");
             return View();
         }
@@ -69,7 +59,7 @@ namespace EasyToEnter.ASP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PassingGrade,Tuition,NumberSeats,PeriodStudy,EntranceExams,FormId,PaymentId,FormatId,UniversityId,LevelFocusId,Id")] FocusUniversityModel focusUniversityModel)
+        public async Task<IActionResult> Create([Bind("UniversityId,LevelFocusId,Id")] FocusUniversityModel focusUniversityModel)
         {
             if (ModelState.IsValid)
             {
@@ -77,10 +67,7 @@ namespace EasyToEnter.ASP.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FormId"] = new SelectList(_context.Form, "Id", "Name", focusUniversityModel.FormId);
-            ViewData["FormatId"] = new SelectList(_context.Format, "Id", "Name", focusUniversityModel.FormatId);
             ViewData["LevelFocusId"] = new SelectList(_context.LevelFocus, "Id", "Id", focusUniversityModel.LevelFocusId);
-            ViewData["PaymentId"] = new SelectList(_context.Payment, "Id", "Name", focusUniversityModel.PaymentId);
             ViewData["UniversityId"] = new SelectList(_context.University, "Id", "Abbreviation", focusUniversityModel.UniversityId);
             return View(focusUniversityModel);
         }
@@ -98,10 +85,7 @@ namespace EasyToEnter.ASP.Controllers
             {
                 return NotFound();
             }
-            ViewData["FormId"] = new SelectList(_context.Form, "Id", "Name", focusUniversityModel.FormId);
-            ViewData["FormatId"] = new SelectList(_context.Format, "Id", "Name", focusUniversityModel.FormatId);
             ViewData["LevelFocusId"] = new SelectList(_context.LevelFocus, "Id", "Id", focusUniversityModel.LevelFocusId);
-            ViewData["PaymentId"] = new SelectList(_context.Payment, "Id", "Name", focusUniversityModel.PaymentId);
             ViewData["UniversityId"] = new SelectList(_context.University, "Id", "Abbreviation", focusUniversityModel.UniversityId);
             return View(focusUniversityModel);
         }
@@ -111,7 +95,7 @@ namespace EasyToEnter.ASP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PassingGrade,Tuition,NumberSeats,PeriodStudy,EntranceExams,FormId,PaymentId,FormatId,UniversityId,LevelFocusId,Id")] FocusUniversityModel focusUniversityModel)
+        public async Task<IActionResult> Edit(int id, [Bind("UniversityId,LevelFocusId,Id")] FocusUniversityModel focusUniversityModel)
         {
             if (id != focusUniversityModel.Id)
             {
@@ -138,10 +122,7 @@ namespace EasyToEnter.ASP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FormId"] = new SelectList(_context.Form, "Id", "Name", focusUniversityModel.FormId);
-            ViewData["FormatId"] = new SelectList(_context.Format, "Id", "Name", focusUniversityModel.FormatId);
             ViewData["LevelFocusId"] = new SelectList(_context.LevelFocus, "Id", "Id", focusUniversityModel.LevelFocusId);
-            ViewData["PaymentId"] = new SelectList(_context.Payment, "Id", "Name", focusUniversityModel.PaymentId);
             ViewData["UniversityId"] = new SelectList(_context.University, "Id", "Abbreviation", focusUniversityModel.UniversityId);
             return View(focusUniversityModel);
         }
@@ -155,10 +136,7 @@ namespace EasyToEnter.ASP.Controllers
             }
 
             var focusUniversityModel = await _context.FocusUniversity
-                .Include(f => f.FormModel)
-                .Include(f => f.FormatModel)
                 .Include(f => f.LevelFocusModel)
-                .Include(f => f.PaymentModel)
                 .Include(f => f.UniversityModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (focusUniversityModel == null)
