@@ -4,14 +4,14 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     public class ScienceSelectionContainerViewModel
     {
-        public readonly List<ScienceModel?> ScienceList;
-        public readonly IEnumerable<LevelFocusModel> LevelFocusCollection;
+        public readonly IEnumerable<FocusUniversityModel> FocusUniversityCollection;
+        public readonly List<ScienceModel> ScienceList;
         public readonly int LevelId;
 
-        public ScienceSelectionContainerViewModel(IEnumerable<LevelFocusModel> levelFocusCollection, int level)
+        public ScienceSelectionContainerViewModel(IEnumerable<FocusUniversityModel> focusUniversityCollection, List<ScienceModel> scienceList, int level)
         {
-            ScienceList = levelFocusCollection.Select(g => g!.FocusModel!.DirectionModel!.GroupModel!.ScienceModel).Distinct().ToList();
-            LevelFocusCollection = levelFocusCollection;
+            FocusUniversityCollection = focusUniversityCollection;
+            ScienceList = scienceList;
             LevelId = level;
         }
     }

@@ -1,10 +1,11 @@
-﻿@model List<EasyToEnter.ASP.Models.Models.LevelModel>;
+﻿@model EasyToEnter.ASP.ViewsModels.Applicant.LevelSelectionContainerViewModel;
+@using EasyToEnter.ASP.ViewsModels.Applicant;
 
 <div class="container mt-3">
     <div class="row">
-@for(var i = 0; i < Model.Count; i++)
+@for(var i = 0; i < Model.LevelList.Count; i++)
 {
-    <vc:level-card data="@Model[i]"/>
+        <vc:level-card data="@new LevelSelectionCardViewModel(@Model, @Model.LevelList[i]!)"/>
 }
     </div>
 </div>

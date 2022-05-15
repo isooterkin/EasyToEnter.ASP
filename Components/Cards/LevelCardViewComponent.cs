@@ -1,4 +1,4 @@
-﻿using EasyToEnter.ASP.Models.Models;
+﻿using EasyToEnter.ASP.ViewsModels.Applicant;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasyToEnter.ASP.Components.Cards
@@ -6,6 +6,6 @@ namespace EasyToEnter.ASP.Components.Cards
     [ViewComponent]
     public class LevelCardViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(LevelModel data) => View(data);
+        public IViewComponentResult Invoke(LevelSelectionCardViewModel data) => View(data);
     }
 }

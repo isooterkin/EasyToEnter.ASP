@@ -8,14 +8,14 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 {
     public partial class ApplicantController
     {
-        public async Task<IActionResult> FocusSelection(
+        public IActionResult FocusSelection(
             [FromQuery(Name = "level")] int level,
             [FromQuery(Name = "direction")] int direction,
             [FromQuery(Name = "area")] int? area)
         {
             if ((level <= 0 || direction <= 0) || (area != null && area <= 0)) return NotFound();
 
-            IEnumerable<FocusUniversityModel> focusUniversityCollection = await _context.FocusUniversity
+            IEnumerable<FocusUniversityModel> focusUniversityCollection = _context.FocusUniversity
                 .Include(fu => fu.LevelFocusModel)
                     .ThenInclude(lf => lf!.LevelModel)
                 .Include(fu => fu.LevelFocusModel)
@@ -27,8 +27,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                         .ThenInclude(f => f!.AreaFocuss)
                             !.ThenInclude(f => f!.AreaModel)
                 .Where(fu => fu!.LevelFocusModel!.LevelId == level)
-                .Where(fu => fu!.LevelFocusModel!.FocusModel!.DirectionId == direction)
-                .ToListAsync();
+                .Where(fu => fu!.LevelFocusModel!.FocusModel!.DirectionId == direction);
 
             // Все возможные области
             IEnumerable<AreaFocusModel> areaFocusCollection = focusUniversityCollection
