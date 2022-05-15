@@ -29,6 +29,11 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .Include(fu => fu.UniversityModel)
                     .ThenInclude(u => u!.CityModel)
                         .ThenInclude(c => c!.RegionModel)
+                .Include(fu => fu.UniversityModel)
+                    .ThenInclude(u => u!.Dormitorys)
+                .Include(fu => fu.UniversityModel)
+                    .ThenInclude(u => u!.SpecializationUniversitys)
+                        !.ThenInclude(su => su!.SpecializationModel)
                 .Where(fu => fu!.LevelFocusId == levelFocus);
 
             return View();
