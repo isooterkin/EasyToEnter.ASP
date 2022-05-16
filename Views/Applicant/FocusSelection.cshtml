@@ -12,11 +12,12 @@
 <form method="get">
     <div class="container">
         <div class="row">
-            <!-- Область -->
+            <!-- Предыдущие значения -->
             <input type="hidden" name="level" asp-for="Level"/>
             <input type="hidden" name="direction" asp-for="Direction"/>
+            <!-- Область -->
             <select name="area" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.AreaFocusSelectList">
-                <option value=@null>Выберите уровень</option>
+                <option value=@null>Область обучения</option>
             </select>
         </div>
     </div>
