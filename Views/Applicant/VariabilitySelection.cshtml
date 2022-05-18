@@ -48,7 +48,7 @@
                 <option value=@null>Аккредитация</option>
             </select>
             <!-- Военная кафедра -->
-            <select name="militaryDepartment" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true">
+            <select name="militaryDepartment" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.MilitaryDepartmentSelectListItem">
                 <option value=@null>Военная кафедра</option>
             </select>
             <!-- Общежитие -->

@@ -11,9 +11,10 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
         public readonly List<SelectListItem> PaymentSelectListItem;
         public readonly List<SelectListItem> EntranceExamsSelectListItem;
         public readonly List<SelectListItem> AccreditationSelectListItem;
+        public readonly List<SelectListItem> MilitaryDepartmentSelectListItem;
         public readonly int LevelFocusId;
 
-        public VariabilitySelectionContainerViewModel(List<VariabilityModel> variabilityList, List<SelectListItem> formSelectListItem, List<SelectListItem> formatSelectListItem, List<SelectListItem> paymentSelectListItem, List<SelectListItem> entranceExamsSelectListItem, List<SelectListItem> accreditationSelectListItem, int levelFocus)
+        public VariabilitySelectionContainerViewModel(List<VariabilityModel> variabilityList, List<SelectListItem> formSelectListItem, List<SelectListItem> formatSelectListItem, List<SelectListItem> paymentSelectListItem, List<SelectListItem> entranceExamsSelectListItem, List<SelectListItem> accreditationSelectListItem, List<SelectListItem> militaryDepartmentSelectListItem, int levelFocus)
         {
             VariabilityList = variabilityList;
             FormSelectListItem = formSelectListItem;
@@ -21,6 +22,7 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
             PaymentSelectListItem = paymentSelectListItem;
             EntranceExamsSelectListItem = entranceExamsSelectListItem;
             AccreditationSelectListItem = accreditationSelectListItem;
+            MilitaryDepartmentSelectListItem = militaryDepartmentSelectListItem;
             LevelFocusId = levelFocus;
         }
     }
