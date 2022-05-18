@@ -7,8 +7,10 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 {
     public partial class ApplicantController
     {
-        public IActionResult ScienceSelection(int level)
+        public IActionResult ScienceSelection([FromQuery(Name = "level")] int level)
         {
+            if (level <= 0) return NotFound();
+
             // Все "Вариативность"
             List<VariabilityModel> variabilityList = _context.Variability
                 .Include(v => v.FocusUniversityModel)
