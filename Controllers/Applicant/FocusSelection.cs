@@ -41,7 +41,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .Distinct()
                 .ToList();
 
-            // Все "Уровень - Направленность" для фильтра по "Область"
+            // Все "Уровень - Направленность"
             List<LevelFocusModel> levelFocusList = variabilityList
                 .Select(v => v.FocusUniversityModel!.LevelFocusModel!)
                 .Distinct()
@@ -70,6 +70,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                     .Where(f => f.FocusUniversityModel!.LevelFocusModel!.FocusModel!.AreaFocuss!.Select(af => af.AreaModel).Contains(selectArea))
                     .ToList();
 
+                // Все "Уровень - Направленность"
                 levelFocusList = variabilityList
                     .Select(v => v.FocusUniversityModel!.LevelFocusModel!)
                     .Distinct()
