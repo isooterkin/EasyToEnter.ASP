@@ -52,7 +52,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .Select(a => new SelectListItem
                 {
                     Text = $"{a.Name} ({levelFocusList.Where(f => f.FocusModel!.AreaFocuss!.Select(af => af.AreaModel).Contains(a)).Count()})",
-                    Value = $"{a.Id}",
+                    Value = a.Id.ToString(),
                     Selected = a.Id == area
                 }).ToList();
 
