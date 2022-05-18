@@ -9,22 +9,26 @@ namespace EasyToEnter.ASP.Controllers.Applicant
     {
         public IActionResult ScienceSelection(int level)
         {
-            IEnumerable<FocusUniversityModel> focusUniversityCollection = _context.FocusUniversity
-                .Include(fu => fu.LevelFocusModel)
-                    .ThenInclude(lf => lf!.LevelModel)
-                .Include(fu => fu.LevelFocusModel)
-                    .ThenInclude(lf => lf!.FocusModel)
-                        .ThenInclude(f => f!.DirectionModel)
-                            .ThenInclude(d => d!.GroupModel)
-                                .ThenInclude(g => g!.ScienceModel)
-                .Where(fu => fu.LevelFocusModel!.LevelId == level);
+            // Все "Вариативность"
+            List<VariabilityModel> variabilityList = _context.Variability
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.LevelFocusModel)
+                        .ThenInclude(lf => lf!.LevelModel)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.LevelFocusModel)
+                        .ThenInclude(lf => lf!.FocusModel)
+                            .ThenInclude(f => f!.DirectionModel)
+                                .ThenInclude(d => d!.GroupModel)
+                                    .ThenInclude(g => g!.ScienceModel)
+                .Where(v => v.FocusUniversityModel!.LevelFocusModel!.LevelId == level)
+                .ToList();
 
-            List<ScienceModel> scienceList = focusUniversityCollection
-                .Select(fu => fu.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceModel!)
+            List<ScienceModel> scienceList = variabilityList
+                .Select(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceModel!)
                 .Distinct()
                 .ToList();
 
-            return View(new ScienceSelectionContainerViewModel(focusUniversityCollection, scienceList, level));
+            return View(new ScienceSelectionContainerViewModel(variabilityList, scienceList, level));
         }
     }
 }

@@ -9,22 +9,27 @@ namespace EasyToEnter.ASP.Controllers.Applicant
     {
         public IActionResult DirectionSelection(int level, int group)
         {
-            IEnumerable<FocusUniversityModel> focusUniversityCollection = _context.FocusUniversity
-                .Include(fu => fu.LevelFocusModel)
-                    .ThenInclude(lf => lf!.LevelModel)
-                .Include(fu => fu.LevelFocusModel)
-                    .ThenInclude(lf => lf!.FocusModel)
-                        .ThenInclude(f => f!.DirectionModel)
-                            .ThenInclude(d => d!.GroupModel)
-                .Where(fu => fu.LevelFocusModel!.LevelId == level)
-                .Where(fu => fu.LevelFocusModel!.FocusModel!.DirectionModel!.GroupId == group);
+            // Все "Вариативность"
+            List<VariabilityModel> variabilityList = _context.Variability
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.LevelFocusModel)
+                        .ThenInclude(lf => lf!.LevelModel)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.LevelFocusModel)
+                        .ThenInclude(lf => lf!.FocusModel)
+                            .ThenInclude(f => f!.DirectionModel)
+                                .ThenInclude(d => d!.GroupModel)
+                .Where(v => v.FocusUniversityModel!.LevelFocusModel!.LevelId == level)
+                .Where(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupId == group)
+                .ToList();
 
-            List<DirectionModel> directionList = focusUniversityCollection
-                .Select(fu => fu.LevelFocusModel!.FocusModel!.DirectionModel!)
+            // Все "Направление"
+            List<DirectionModel> directionList = variabilityList
+                .Select(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!)
                 .Distinct()
                 .ToList();
 
-            return View(new DirectionSelectionContainerViewModel(focusUniversityCollection, directionList, level));
+            return View(new DirectionSelectionContainerViewModel(variabilityList, directionList, level));
         }
     }
 }

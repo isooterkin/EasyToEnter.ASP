@@ -4,12 +4,12 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     public class LevelSelectionContainerViewModel
     {
-        public readonly IEnumerable<FocusUniversityModel> FocusUniversityCollection;
+        public readonly List<VariabilityModel> VariabilityList;
         public readonly List<LevelModel> LevelList;
 
-        public LevelSelectionContainerViewModel(IEnumerable<FocusUniversityModel> focusUniversityCollection, List<LevelModel> levelList)
+        public LevelSelectionContainerViewModel(List<VariabilityModel> variabilityList, List<LevelModel> levelList)
         {
-            FocusUniversityCollection = focusUniversityCollection;
+            VariabilityList = variabilityList;
             LevelList = levelList;
         }
     }

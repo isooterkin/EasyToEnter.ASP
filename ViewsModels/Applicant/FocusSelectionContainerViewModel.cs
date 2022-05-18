@@ -5,17 +5,17 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     public class FocusSelectionContainerViewModel
     {
+        public readonly List<VariabilityModel> VariabilityList;
         public readonly List<LevelFocusModel> LevelFocusList;
-        public readonly IEnumerable<FocusUniversityModel> FocusUniversityCollection;
-        public readonly List<SelectListItem> AreaFocusSelectList;
+        public readonly List<SelectListItem> AreaSelectListItem;
         public readonly int Level;
         public readonly int Direction;
 
-        public FocusSelectionContainerViewModel(List<LevelFocusModel> levelFocusList, IEnumerable<FocusUniversityModel> focusUniversityCollection, List<SelectListItem> areaFocusSelectList, int level, int direction)
+        public FocusSelectionContainerViewModel(List<VariabilityModel> variabilityList, List<LevelFocusModel> levelFocusList, List<SelectListItem> areaSelectListItem, int level, int direction)
         {
+            VariabilityList = variabilityList;
             LevelFocusList = levelFocusList;
-            FocusUniversityCollection = focusUniversityCollection;
-            AreaFocusSelectList = areaFocusSelectList;
+            AreaSelectListItem = areaSelectListItem;
             Level = level;
             Direction = direction;
         }

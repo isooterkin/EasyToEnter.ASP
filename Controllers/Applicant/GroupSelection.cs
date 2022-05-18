@@ -9,23 +9,27 @@ namespace EasyToEnter.ASP.Controllers.Applicant
     {
         public IActionResult GroupSelection(int level, int science)
         {
-            IEnumerable<FocusUniversityModel> focusUniversityCollection = _context.FocusUniversity
-                .Include(fu => fu.LevelFocusModel)
-                    .ThenInclude(lf => lf!.LevelModel)
-                .Include(fu => fu.LevelFocusModel)
-                    .ThenInclude(lf => lf!.FocusModel)
-                        .ThenInclude(f => f!.DirectionModel)
-                            .ThenInclude(d => d!.GroupModel)
-                                .ThenInclude(g => g!.ScienceModel)
-                .Where(fu => fu.LevelFocusModel!.LevelId == level)
-                .Where(fu => fu.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceId == science);
+            // Все "Вариативность"
+            List<VariabilityModel> variabilityList = _context.Variability
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.LevelFocusModel)
+                        .ThenInclude(lf => lf!.LevelModel)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.LevelFocusModel)
+                        .ThenInclude(lf => lf!.FocusModel)
+                            .ThenInclude(f => f!.DirectionModel)
+                                .ThenInclude(d => d!.GroupModel)
+                                    .ThenInclude(g => g!.ScienceModel)
+                .Where(v => v.FocusUniversityModel!.LevelFocusModel!.LevelId == level)
+                .Where(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceId == science)
+                .ToList();
 
-            List<GroupModel> groupList = focusUniversityCollection
-                .Select(fu => fu.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!)
+            List<GroupModel> groupList = variabilityList
+                .Select(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!)
                 .Distinct()
                 .ToList();
 
-            return View(new GroupSelectionContainerViewModel(focusUniversityCollection, groupList, level));
+            return View(new GroupSelectionContainerViewModel(variabilityList, groupList, level));
         }
     }
 }

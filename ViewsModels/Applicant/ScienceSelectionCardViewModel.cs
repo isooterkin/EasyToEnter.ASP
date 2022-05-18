@@ -5,13 +5,13 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
     public class ScienceSelectionCardViewModel
     {
         public readonly ScienceModel Science;
-        public readonly int FocusUniversityCount;
+        public readonly int VariabilityCount;
         public readonly int LevelId;
 
         public ScienceSelectionCardViewModel(ScienceSelectionContainerViewModel scienceSelectionContainer, ScienceModel science)
         {
             Science = science;
-            FocusUniversityCount = scienceSelectionContainer.FocusUniversityCollection.Where(f => f.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceModel == science).Count();
+            VariabilityCount = scienceSelectionContainer.VariabilityList.Where(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceModel == science).Count();
             LevelId = scienceSelectionContainer.LevelId;
         }
     }

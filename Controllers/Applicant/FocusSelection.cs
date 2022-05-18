@@ -15,59 +15,68 @@ namespace EasyToEnter.ASP.Controllers.Applicant
         {
             if ((level <= 0 || direction <= 0) || (area != null && area <= 0)) return NotFound();
 
-            IEnumerable<FocusUniversityModel> focusUniversityCollection = _context.FocusUniversity
-                .Include(fu => fu.LevelFocusModel)
-                    .ThenInclude(lf => lf!.LevelModel)
-                .Include(fu => fu.LevelFocusModel)
-                    .ThenInclude(lf => lf!.FocusModel)
-                        .ThenInclude(f => f!.DirectionModel)
-                            .ThenInclude(d => d!.GroupModel)
-                .Include(fu => fu.LevelFocusModel)
-                    .ThenInclude(lf => lf!.FocusModel)
-                        .ThenInclude(f => f!.AreaFocuss)
-                            !.ThenInclude(f => f!.AreaModel)
-                .Where(fu => fu!.LevelFocusModel!.LevelId == level)
-                .Where(fu => fu!.LevelFocusModel!.FocusModel!.DirectionId == direction);
-
-            // Все возможные области
-            IEnumerable<AreaFocusModel> areaFocusCollection = focusUniversityCollection
-                .SelectMany(f => f.LevelFocusModel!.FocusModel!.AreaFocuss!);
-
-            // Если указан фильтр областей, фильтруем
-            if (area != null)
-            {
-                // Что выбрали
-                AreaFocusModel? selectAreaFocus = areaFocusCollection.FirstOrDefault(a => a.AreaModel!.Id == area);
-
-                if (selectAreaFocus == null) return NotFound();
-
-                focusUniversityCollection = focusUniversityCollection
-                    .Where(f => f.LevelFocusModel!.FocusModel!.AreaFocuss!.Select(af => af.AreaModel).Contains(selectAreaFocus.AreaModel));
-            }
-
-            // Все направленности
-            List<LevelFocusModel> levelFocusList = focusUniversityCollection
-                .Select(fu => fu.LevelFocusModel!)
-                .Distinct()
+            // Все "Вариативность"
+            List<VariabilityModel> variabilityList = _context.Variability
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.LevelFocusModel)
+                        .ThenInclude(lf => lf!.LevelModel)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.LevelFocusModel)
+                        .ThenInclude(lf => lf!.FocusModel)
+                            .ThenInclude(f => f!.DirectionModel)
+                                .ThenInclude(d => d!.GroupModel)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.LevelFocusModel)
+                        .ThenInclude(lf => lf!.FocusModel)
+                            .ThenInclude(f => f!.AreaFocuss)
+                                !.ThenInclude(f => f!.AreaModel)
+                .Where(v => v.FocusUniversityModel!.LevelFocusModel!.LevelId == level)
+                .Where(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionId == direction)
                 .ToList();
 
-            // Конвертация областей в фильтры
-            List<SelectListItem> areaFocusSelectList = areaFocusCollection
+            // Все "Область"
+            List<AreaModel> areaList = variabilityList
+                .SelectMany(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.AreaFocuss!)
                 .Select(af => af.AreaModel!)
                 .Distinct()
-                .Select(a => new SelectListItem($"{a.Name}", $"{a.Id}"))
                 .ToList();
 
-            // .Select(a => new SelectListItem($"{a.Name} ({focusUniversityCollection.Where(lf => lf.LevelFocusModel!.FocusModel!.AreaFocuss!.Contains(areaFocusCollection.Where(r => r.AreaModel!.Id == a.Id).First())).Count()})", a.Id.ToString()))
+            // Все "Уровень - Направленность" для фильтра по "Область"
+            List<LevelFocusModel> levelFocusList = variabilityList
+                .Select(v => v.FocusUniversityModel!.LevelFocusModel!)
+                .Distinct()
+                .ToList();
 
-            // Если выбран какой либо фильтр, устанавливаем его
+            // Область -> Фильтр
+            List<SelectListItem> areaSelectListItem = areaList
+                .Select(a => new SelectListItem
+                {
+                    Text = $"{a.Name} ({levelFocusList.Where(f => f.FocusModel!.AreaFocuss!.Select(af => af.AreaModel).Contains(a)).Count()})",
+                    Value = $"{a.Id}",
+                    Selected = a.Id == area
+                }).ToList();
+
+            // Фильтрация по "Область"
             if (area != null)
             {
-                if (areaFocusSelectList.Any(l => l.Value == area.ToString()))
-                    areaFocusSelectList.First(l => l.Value == area.ToString()).Selected = true;
+                // Выбранная "Область"
+                AreaModel? selectArea = areaList.FirstOrDefault(a => a.Id == area);
+
+                // Если "Область" не существует
+                if (selectArea == null) return NotFound();
+
+                // Фильтруем "Вариативность"
+                variabilityList = variabilityList
+                    .Where(f => f.FocusUniversityModel!.LevelFocusModel!.FocusModel!.AreaFocuss!.Select(af => af.AreaModel).Contains(selectArea))
+                    .ToList();
+
+                levelFocusList = variabilityList
+                    .Select(v => v.FocusUniversityModel!.LevelFocusModel!)
+                    .Distinct()
+                    .ToList();
             }
 
-            return View(new FocusSelectionContainerViewModel(levelFocusList, focusUniversityCollection, areaFocusSelectList, level, direction));
+            return View(new FocusSelectionContainerViewModel(variabilityList, levelFocusList, areaSelectListItem, level, direction));
         }
     }
 }

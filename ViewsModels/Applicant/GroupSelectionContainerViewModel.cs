@@ -4,13 +4,13 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     public class GroupSelectionContainerViewModel
     {
-        public readonly IEnumerable<FocusUniversityModel> FocusUniversityCollection;
+        public readonly List<VariabilityModel> VariabilityList;
         public readonly List<GroupModel> GroupList;
         public readonly int LevelId;
 
-        public GroupSelectionContainerViewModel(IEnumerable<FocusUniversityModel> focusUniversityCollection, List<GroupModel> groupList, int level)
+        public GroupSelectionContainerViewModel(List<VariabilityModel> variabilityList, List<GroupModel> groupList, int level)
         {
-            FocusUniversityCollection = focusUniversityCollection;
+            VariabilityList = variabilityList;
             GroupList = groupList;
             LevelId = level;
         }

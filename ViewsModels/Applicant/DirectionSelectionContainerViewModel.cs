@@ -4,13 +4,13 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     public class DirectionSelectionContainerViewModel
     {
-        public readonly IEnumerable<FocusUniversityModel> FocusUniversityCollection;
+        public readonly List<VariabilityModel> VariabilityList;
         public readonly List<DirectionModel> DirectionList;
         public readonly int LevelId;
 
-        public DirectionSelectionContainerViewModel(IEnumerable<FocusUniversityModel> focusUniversityCollection, List<DirectionModel> directionList, int level)
+        public DirectionSelectionContainerViewModel(List<VariabilityModel> variabilityList, List<DirectionModel> directionList, int level)
         {
-            FocusUniversityCollection = focusUniversityCollection;
+            VariabilityList = variabilityList;
             DirectionList = directionList;
             LevelId = level;
         }

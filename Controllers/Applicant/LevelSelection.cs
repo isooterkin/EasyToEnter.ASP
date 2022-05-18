@@ -9,16 +9,19 @@ namespace EasyToEnter.ASP.Controllers.Applicant
     {
         public IActionResult LevelSelection()
         {
-            IEnumerable<FocusUniversityModel> focusUniversityCollection = _context.FocusUniversity
-                .Include(fu => fu.LevelFocusModel)
-                    .ThenInclude(lf => lf!.LevelModel);
+            // Все "Вариативность"
+            List<VariabilityModel> variabilityList = _context.Variability
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.LevelFocusModel)
+                        .ThenInclude(lf => lf!.LevelModel)
+                .ToList();
 
-            List<LevelModel> levelList = focusUniversityCollection
-                .Select(fu => fu.LevelFocusModel!.LevelModel!)
+            List<LevelModel> levelList = variabilityList
+                .Select(v => v.FocusUniversityModel!.LevelFocusModel!.LevelModel!)
                 .Distinct()
                 .ToList();
 
-            return View(new LevelSelectionContainerViewModel(focusUniversityCollection, levelList));
+            return View(new LevelSelectionContainerViewModel(variabilityList, levelList));
         }
     }
 }

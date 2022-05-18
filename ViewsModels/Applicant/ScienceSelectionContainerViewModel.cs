@@ -4,13 +4,13 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     public class ScienceSelectionContainerViewModel
     {
-        public readonly IEnumerable<FocusUniversityModel> FocusUniversityCollection;
+        public readonly List<VariabilityModel> VariabilityList;
         public readonly List<ScienceModel> ScienceList;
         public readonly int LevelId;
 
-        public ScienceSelectionContainerViewModel(IEnumerable<FocusUniversityModel> focusUniversityCollection, List<ScienceModel> scienceList, int level)
+        public ScienceSelectionContainerViewModel(List<VariabilityModel> variabilityList, List<ScienceModel> scienceList, int level)
         {
-            FocusUniversityCollection = focusUniversityCollection;
+            VariabilityList = variabilityList;
             ScienceList = scienceList;
             LevelId = level;
         }

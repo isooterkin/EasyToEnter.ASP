@@ -16,7 +16,7 @@
             <input type="hidden" name="level" asp-for="Level"/>
             <input type="hidden" name="direction" asp-for="Direction"/>
             <!-- Область -->
-            <select name="area" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.AreaFocusSelectList">
+            <select name="area" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.AreaSelectListItem">
                 <option value=@null>Область обучения</option>
             </select>
         </div>
