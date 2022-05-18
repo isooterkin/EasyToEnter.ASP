@@ -9,6 +9,8 @@ namespace EasyToEnter.ASP.Controllers.Applicant
     {
         public IActionResult DirectionSelection([FromQuery(Name = "level")] int level, [FromQuery(Name = "group")] int group)
         {
+            if (level <= 0 || group <= 0) return NotFound();
+
             // Все "Вариативность"
             List<VariabilityModel> variabilityList = _context.Variability
                 .Include(v => v.FocusUniversityModel)
