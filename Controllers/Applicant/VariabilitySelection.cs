@@ -13,7 +13,8 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             [FromQuery(Name = "form")] int? form,
             [FromQuery(Name = "format")] int? format,
             [FromQuery(Name = "payment")] int? payment,
-            [FromQuery(Name = "entranceExams")] int? entranceExams
+            [FromQuery(Name = "entranceExams")] int? entranceExams,
+            [FromQuery(Name = "accreditation")] int? accreditation
             )
         {
             if ((levelFocus <= 0) || 
@@ -61,7 +62,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             List<SelectListItem> formSelectListItem = formList
                 .Select(f => new SelectListItem
                 {
-                    Text = $"{f.Name} ({variabilityList.Where(v => v.FormId == f.Id).Count()})",
+                    Text = $"Форма: {f.Name} ({variabilityList.Where(v => v.FormId == f.Id).Count()})",
                     Value = f.Id.ToString(),
                     Selected = f.Id == form
                 }).ToList();
@@ -76,7 +77,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             List<SelectListItem> formatSelectListItem = formatList
                 .Select(f => new SelectListItem
                 {
-                    Text = $"{f.Name} ({variabilityList.Where(v => v.FormatId == f.Id).Count()})",
+                    Text = $"Формат: {f.Name} ({variabilityList.Where(v => v.FormatId == f.Id).Count()})",
                     Value = f.Id.ToString(),
                     Selected = f.Id == format
                 }).ToList();
@@ -91,7 +92,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             List<SelectListItem> paymentSelectListItem = paymentList
                 .Select(p => new SelectListItem
                 {
-                    Text = $"{p.Name} ({variabilityList.Where(v => v.PaymentId == p.Id).Count()})",
+                    Text = $"Оплата: {p.Name} ({variabilityList.Where(v => v.PaymentId == p.Id).Count()})",
                     Value = p.Id.ToString(),
                     Selected = p.Id == payment
                 }).ToList();
@@ -106,10 +107,34 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             List<SelectListItem> entranceExamsSelectListItem = entranceExamsList
                 .Select(e => new SelectListItem
                 {
-                    Text = $"{(e == true ? "Да" : "Нет")} ({variabilityList.Where(v => v.EntranceExams == e).Count()})",
+                    Text = $"Экзамены: {(e == true ? "Да" : "Нет")} ({variabilityList.Where(v => v.EntranceExams == e).Count()})",
                     Value = $"{(e == true ? 1 : 0)}",
                     Selected = (e == true ? 1 : 0) == entranceExams
                 }).ToList();
+
+            // Все "Аккредитация"
+            List<AccreditationModel> accreditationList = variabilityList
+                .Select(v => v.FocusUniversityModel!.UniversityModel!.AccreditationModel!)
+                .Distinct()
+                .ToList();
+
+            // "Аккредитация" -> Фильтр
+            List<SelectListItem> accreditationSelectListItem = accreditationList
+                .Select(a => new SelectListItem
+                {
+                    Text = $"Аккредитация: {a.Name} ({variabilityList.Where(v => v.FocusUniversityModel!.UniversityModel!.AccreditationId == a.Id).Count()})",
+                    Value = a.Id.ToString(),
+                    Selected = a.Id == accreditation
+                }).ToList();
+
+            // militaryDepartment
+            // dormitory
+            // specializationUniversity
+            // region
+            // city
+
+            // tuition
+            // passingGrade
 
             // Фильтрация по "Форма"
             if (form != null) 
@@ -163,7 +188,22 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                     .Where(v => v.EntranceExams == (entranceExams == 1) )
                     .ToList();
 
-            return View(new VariabilitySelectionContainerViewModel(variabilityList, formSelectListItem, formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, levelFocus));
+            // Фильтрация по "Аккредитация"
+            if (accreditation != null)
+            {
+                // Выбранная "Аккредитация"
+                AccreditationModel? selectAccreditation = accreditationList.FirstOrDefault(a => a.Id == accreditation);
+
+                // Если "Аккредитация" не существует
+                if (selectAccreditation == null) return NotFound();
+
+                // Фильтруем "Вариативность"
+                variabilityList = variabilityList
+                    .Where(v => v.FocusUniversityModel!.UniversityModel!.AccreditationId == accreditation)
+                    .ToList();
+            }
+
+            return View(new VariabilitySelectionContainerViewModel(variabilityList, formSelectListItem, formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, accreditationSelectListItem, levelFocus));
         }
     }
 }

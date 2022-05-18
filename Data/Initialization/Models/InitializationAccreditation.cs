@@ -10,11 +10,11 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
             {
                 new Class // 1
                 {
-                    Name = "Государственные вузы"
+                    Name = "Государственный"
                 },
                 new Class // 2
                 {
-                    Name = "Негосударственные вузы"
+                    Name = "Негосударственный"
                 }
             });
 
