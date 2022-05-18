@@ -12,7 +12,8 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             [FromQuery(Name = "levelFocus")] int levelFocus,
             [FromQuery(Name = "form")] int? form,
             [FromQuery(Name = "format")] int? format,
-            [FromQuery(Name = "payment")] int? payment
+            [FromQuery(Name = "payment")] int? payment,
+            [FromQuery(Name = "entranceExams")] int? entranceExams
             )
         {
             if ((levelFocus <= 0) || 
@@ -21,6 +22,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 (payment != null && payment <= 0)) 
                 return NotFound();
 
+            // Все "Вариативность"
             List<VariabilityModel> variabilityList = _context.Variability
                 .Include(v => v.FormModel)
                 .Include(v => v.FormatModel)
@@ -49,51 +51,119 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .Where(v => v.FocusUniversityModel!.LevelFocusId == levelFocus)
                 .ToList();
 
-            // Список форм
+            // Все "Форма"
             List<FormModel> formList = variabilityList
                 .Select(v => v.FormModel!)
                 .Distinct()
                 .ToList();
 
-            // Список форматов
+            // "Форма" -> Фильтр
+            List<SelectListItem> formSelectListItem = formList
+                .Select(f => new SelectListItem
+                {
+                    Text = $"{f.Name} ({variabilityList.Where(v => v.FormId == f.Id).Count()})",
+                    Value = f.Id.ToString(),
+                    Selected = f.Id == form
+                }).ToList();
+
+            // Все "Формат"
             List<FormatModel> formatList = variabilityList
                 .Select(v => v.FormatModel!)
                 .Distinct()
                 .ToList();
 
-            // Список оплат
+            // "Формат" -> Фильтр
+            List<SelectListItem> formatSelectListItem = formatList
+                .Select(f => new SelectListItem
+                {
+                    Text = $"{f.Name} ({variabilityList.Where(v => v.FormatId == f.Id).Count()})",
+                    Value = f.Id.ToString(),
+                    Selected = f.Id == format
+                }).ToList();
+
+            // Все "Оплата"
             List<PaymentModel> paymentList = variabilityList
                 .Select(v => v.PaymentModel!)
                 .Distinct()
                 .ToList();
 
-            // Список вступительных экзаменов
-            List<string> entranceExamsList = variabilityList
-                .Select(v => v.EntranceExams == true ? "Да" : "Нет")
+            // "Оплата" -> Фильтр
+            List<SelectListItem> paymentSelectListItem = paymentList
+                .Select(p => new SelectListItem
+                {
+                    Text = $"{p.Name} ({variabilityList.Where(v => v.PaymentId == p.Id).Count()})",
+                    Value = p.Id.ToString(),
+                    Selected = p.Id == payment
+                }).ToList();
+
+            // Все "Вступительные экзамены" !!! Можно попроще!
+            List<bool> entranceExamsList = variabilityList
+                .Select(v => v.EntranceExams)
                 .Distinct()
                 .ToList();
 
-            // Конвертация форм в фильтры
-            List<SelectListItem> formSelectList = formList
-                .Select(f => new SelectListItem($"{f.Name}", $"{f.Id}"))
-                .ToList();
+            // "Вступительные экзамены" -> Фильтр
+            List<SelectListItem> entranceExamsSelectListItem = entranceExamsList
+                .Select(e => new SelectListItem
+                {
+                    Text = $"{(e == true ? "Да" : "Нет")} ({variabilityList.Where(v => v.EntranceExams == e).Count()})",
+                    Value = $"{(e == true ? 1 : 0)}",
+                    Selected = (e == true ? 1 : 0) == entranceExams
+                }).ToList();
 
-            // Конвертация форматов в фильтры
-            List<SelectListItem> formatSelectList = formatList
-                .Select(f => new SelectListItem($"{f.Name}", $"{f.Id}"))
-                .ToList();
+            // Фильтрация по "Форма"
+            if (form != null) 
+            {
+                // Выбранная "Форма"
+                FormModel? selectForm = formList.FirstOrDefault(f => f.Id == form);
 
-            // Конвертация форматов в фильтры
-            List<SelectListItem> paymentSelectList = paymentList
-                .Select(f => new SelectListItem($"{f.Name}", $"{f.Id}"))
-                .ToList();
+                // Если "Форма" не существует
+                if (selectForm == null) return NotFound();
 
-            // Конвертация форматов в фильтры
-            List<SelectListItem> entranceExamsSelectList = entranceExamsList
-                .Select(f => new SelectListItem($"{f}", $"{(f == "Да" ? 1 : 0)}"))
-                .ToList();
+                // Фильтруем "Вариативность"
+                variabilityList = variabilityList
+                    .Where(v => v.FormId == form)
+                    .ToList();
+            }
 
-            return View(new VariabilitySelectionContainerViewModel(variabilityList, formSelectList, formatSelectList, paymentSelectList, entranceExamsSelectList, levelFocus));
+            // Фильтрация по "Формат"
+            if (format != null) 
+            {
+                // Выбранный "Формат"
+                FormatModel? selectFormat = formatList.FirstOrDefault(f => f.Id == format);
+
+                // Если "Форма" не существует
+                if (selectFormat == null) return NotFound();
+
+                // Фильтруем "Вариативность"
+                variabilityList = variabilityList
+                    .Where(v => v.FormatId == format)
+                    .ToList();
+            }
+
+            // Фильтрация по "Оплата"
+            if (payment != null) 
+            {
+                // Выбранная "Оплата"
+                PaymentModel? selectPayment = paymentList.FirstOrDefault(p => p.Id == payment);
+
+                // Если "Форма" не существует
+                if (selectPayment == null) return NotFound();
+
+                // Фильтруем "Вариативность"
+                variabilityList = variabilityList
+                    .Where(v => v.PaymentId == payment)
+                    .ToList();
+            }
+
+            // Фильтрация по "Вступительные экзамены"
+            if (entranceExams != null) 
+                // Фильтруем "Вариативность"
+                variabilityList = variabilityList
+                    .Where(v => v.EntranceExams == (entranceExams == 1) )
+                    .ToList();
+
+            return View(new VariabilitySelectionContainerViewModel(variabilityList, formSelectListItem, formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, levelFocus));
         }
     }
 }
