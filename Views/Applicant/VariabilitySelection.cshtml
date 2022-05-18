@@ -18,15 +18,15 @@
             <h4>Поиск вариативности</h4>
             <!-- Вариативность -->
             <!-- Форма обучания -->
-            <select name="form" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.FormSelectList">
+            <select name="form" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.FormSelectListItem">
                 <option value=@null>Форма обучания</option>
             </select>
             <!-- Формат обучения -->
-            <select name="format" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.FormatSelectList">
+            <select name="format" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.FormatSelectListItem">
                 <option value=@null>Формат обучения</option>
             </select>
             <!-- Оплата обучения -->
-            <select name="payment" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.PaymentSelectList">
+            <select name="payment" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.PaymentSelectListItem">
                 <option value=@null>Оплата обучения</option>
             </select>
             <!-- Стоимость обучения -->
@@ -38,12 +38,12 @@
                 <option value=@null>Оплата обучения</option>
             </select>*@
             <!-- Вступительные экзамены -->
-            <select name="entranceExams" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.EntranceExamsSelectList">
+            <select name="entranceExams" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.EntranceExamsSelectListItem">
                 <option value=@null>Вступительные экзамены</option>
             </select>
 
             <!-- ВУЗ -->
-            @*<h4 class="mt-3">Поиск вуза</h4>*@
+            <h4 class="mt-3">Поиск вуза</h4>
             <!-- Аккредитация -->
             <select name="accreditation" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true">
                 <option value=@null>Аккредитация</option>
@@ -60,9 +60,6 @@
             <select name="specializationUniversity" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true">
                 <option value=@null>Специализация</option>
             </select>
-
-            <h4 class="mt-3"/>
-
             <!-- Район -->
             <select name="region" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true">
                 <option value=@null>Район</option>

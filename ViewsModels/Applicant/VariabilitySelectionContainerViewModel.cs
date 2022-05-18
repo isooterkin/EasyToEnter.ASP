@@ -6,19 +6,19 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
     public class VariabilitySelectionContainerViewModel
     {
         public readonly List<VariabilityModel> VariabilityList;
-        public readonly List<SelectListItem> FormSelectList;
-        public readonly List<SelectListItem> FormatSelectList;
-        public readonly List<SelectListItem> PaymentSelectList;
-        public readonly List<SelectListItem> EntranceExamsSelectList;
+        public readonly List<SelectListItem> FormSelectListItem;
+        public readonly List<SelectListItem> FormatSelectListItem;
+        public readonly List<SelectListItem> PaymentSelectListItem;
+        public readonly List<SelectListItem> EntranceExamsSelectListItem;
         public readonly int LevelFocusId;
 
-        public VariabilitySelectionContainerViewModel(List<VariabilityModel> variabilityList, List<SelectListItem> formSelectList, List<SelectListItem> formatSelectList, List<SelectListItem> paymentSelectList, List<SelectListItem> entranceExamsSelectList, int levelFocus)
+        public VariabilitySelectionContainerViewModel(List<VariabilityModel> variabilityList, List<SelectListItem> formSelectListItem, List<SelectListItem> formatSelectListItem, List<SelectListItem> paymentSelectListItem, List<SelectListItem> entranceExamsSelectListItem, int levelFocus)
         {
             VariabilityList = variabilityList;
-            FormSelectList = formSelectList;
-            FormatSelectList = formatSelectList;
-            PaymentSelectList = paymentSelectList;
-            EntranceExamsSelectList = entranceExamsSelectList;
+            FormSelectListItem = formSelectListItem;
+            FormatSelectListItem = formatSelectListItem;
+            PaymentSelectListItem = paymentSelectListItem;
+            EntranceExamsSelectListItem = entranceExamsSelectListItem;
             LevelFocusId = levelFocus;
         }
     }
