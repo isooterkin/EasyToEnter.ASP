@@ -7,7 +7,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 {
     public partial class ApplicantController
     {
-        public IActionResult DirectionSelection(int level, int group)
+        public IActionResult DirectionSelection([FromQuery(Name = "level")] int level, [FromQuery(Name = "group")] int group)
         {
             // Все "Вариативность"
             List<VariabilityModel> variabilityList = _context.Variability
