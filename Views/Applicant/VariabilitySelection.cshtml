@@ -1,4 +1,5 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.VariabilitySelectionContainerViewModel;
+@using EasyToEnter.ASP.ViewsModels.Components;
 
 @{
     ViewData["Title"] = "Вырианты обучения";
@@ -12,61 +13,23 @@
 <form method="get">
     <div class="container">
         <div class="row">
-            <!-- Предыдущие значения -->
             <input type="hidden" name="levelFocus" asp-for="LevelFocusId"/>
+            
             <h4>Поиск вариативности</h4>
-            <!-- Вариативность -->
-            <!-- Форма обучания -->
-            <select name="form" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.FormSelectListItem">
-                <option value=@null>Форма обучания</option>
-            </select>
-            <!-- Формат обучения -->
-            <select name="format" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.FormatSelectListItem">
-                <option value=@null>Формат обучения</option>
-            </select>
-            <!-- Оплата обучения -->
-            <select name="payment" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.PaymentSelectListItem">
-                <option value=@null>Оплата обучения</option>
-            </select>
-            <!-- Стоимость обучения -->
-@*            <select name="tuition" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true">
-                <option value=@null>Оплата обучения</option>
-            </select>*@
-            <!-- Проходной балл -->
-@*            <select name="passingGrade" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true">
-                <option value=@null>Оплата обучения</option>
-            </select>*@
-            <!-- Вступительные экзамены -->
-            <select name="entranceExams" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.EntranceExamsSelectListItem">
-                <option value=@null>Вступительные экзамены</option>
-            </select>
-
-            <!-- ВУЗ -->
+            <vc:select data='@new SelectViewModel("form", "Форма обучания", Model.FormSelectListItem)'/>
+            <vc:select data='@new SelectViewModel("format", "Формат обучания", Model.FormatSelectListItem)'/>
+            <vc:select data='@new SelectViewModel("payment", "Оплата обучания", Model.PaymentSelectListItem)'/>
+            @*<vc:select data='@new SelectViewModel("tuition", "Стоимость обучения", Model.PaymentSelectListItem)'/>*@
+            @*<vc:select data='@new SelectViewModel("passingGrade", "Проходной балл", Model.PaymentSelectListItem)'/>*@
+            <vc:select data='@new SelectViewModel("entranceExams", "Вступительные экзамены", Model.EntranceExamsSelectListItem)'/>
+            
             <h4 class="mt-3">Поиск вуза</h4>
-            <!-- Аккредитация -->
-            <select name="accreditation" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.AccreditationSelectListItem">
-                <option value=@null>Аккредитация</option>
-            </select>
-            <!-- Военная кафедра -->
-            <select name="militaryDepartment" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.MilitaryDepartmentSelectListItem">
-                <option value=@null>Военная кафедра</option>
-            </select>
-            <!-- Общежитие -->
-            <select name="dormitory" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true">
-                <option value=@null>Общежитие</option>
-            </select>
-            <!-- Специализация -->
-            <select name="specializationUniversity" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true">
-                <option value=@null>Специализация</option>
-            </select>
-            <!-- Район -->
-            <select name="region" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true">
-                <option value=@null>Район</option>
-            </select>
-            <!-- Город -->
-            <select name="city" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true">
-                <option value=@null>Город</option>
-            </select>
+            <vc:select data='@new SelectViewModel("accreditation", "Аккредитация", Model.AccreditationSelectListItem)'/>
+            <vc:select data='@new SelectViewModel("militaryDepartment", "Военная кафедра", Model.MilitaryDepartmentSelectListItem)'/>
+            @*<vc:select data='@new SelectViewModel("dormitory", "Общежитие", Model.MilitaryDepartmentSelectListItem)'/>*@
+            @*<vc:select data='@new SelectViewModel("specializationUniversity", "Специализация", Model.MilitaryDepartmentSelectListItem)'/>*@
+            @*<vc:select data='@new SelectViewModel("region", "Район", Model.MilitaryDepartmentSelectListItem)'/>*@
+            @*<vc:select data='@new SelectViewModel("city", "Город", Model.MilitaryDepartmentSelectListItem)'/>*@
         </div>
     </div>
 </form>

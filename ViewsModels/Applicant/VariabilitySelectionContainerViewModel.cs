@@ -1,20 +1,20 @@
 ﻿using EasyToEnter.ASP.Models.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using EasyToEnter.ASP.ViewsModels.Components;
 
 namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     public class VariabilitySelectionContainerViewModel
     {
         public readonly List<VariabilityModel> VariabilityList;
-        public readonly List<SelectListItem> FormSelectListItem;
-        public readonly List<SelectListItem> FormatSelectListItem;
-        public readonly List<SelectListItem> PaymentSelectListItem;
-        public readonly List<SelectListItem> EntranceExamsSelectListItem;
-        public readonly List<SelectListItem> AccreditationSelectListItem;
-        public readonly List<SelectListItem> MilitaryDepartmentSelectListItem;
+        public readonly List<SelectListItemSubtext> FormSelectListItem;
+        public readonly List<SelectListItemSubtext> FormatSelectListItem;
+        public readonly List<SelectListItemSubtext> PaymentSelectListItem;
+        public readonly List<SelectListItemSubtext> EntranceExamsSelectListItem;
+        public readonly List<SelectListItemSubtext> AccreditationSelectListItem;
+        public readonly List<SelectListItemSubtext> MilitaryDepartmentSelectListItem;
         public readonly int LevelFocusId;
 
-        public VariabilitySelectionContainerViewModel(List<VariabilityModel> variabilityList, List<SelectListItem> formSelectListItem, List<SelectListItem> formatSelectListItem, List<SelectListItem> paymentSelectListItem, List<SelectListItem> entranceExamsSelectListItem, List<SelectListItem> accreditationSelectListItem, List<SelectListItem> militaryDepartmentSelectListItem, int levelFocus)
+        public VariabilitySelectionContainerViewModel(List<VariabilityModel> variabilityList, List<SelectListItemSubtext> formSelectListItem, List<SelectListItemSubtext> formatSelectListItem, List<SelectListItemSubtext> paymentSelectListItem, List<SelectListItemSubtext> entranceExamsSelectListItem, List<SelectListItemSubtext> accreditationSelectListItem, List<SelectListItemSubtext> militaryDepartmentSelectListItem, int levelFocus)
         {
             VariabilityList = variabilityList;
             FormSelectListItem = formSelectListItem;

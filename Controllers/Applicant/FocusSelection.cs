@@ -1,5 +1,6 @@
 ﻿using EasyToEnter.ASP.Models.Models;
 using EasyToEnter.ASP.ViewsModels.Applicant;
+using EasyToEnter.ASP.ViewsModels.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -48,12 +49,13 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .ToList();
 
             // "Область" -> Фильтр
-            List<SelectListItem> areaSelectListItem = areaList
-                .Select(a => new SelectListItem
+            List<SelectListItemSubtext> areaSelectListItem = areaList
+                .Select(a => new SelectListItemSubtext
                 {
-                    Text = $"{a.Name} ({levelFocusList.Where(f => f.FocusModel!.AreaFocuss!.Select(af => af.AreaModel).Contains(a)).Count()})",
+                    Text = a.Name.ToString(),
                     Value = a.Id.ToString(),
-                    Selected = a.Id == area
+                    Selected = a.Id == area,
+                    Subtext = levelFocusList.Where(f => f.FocusModel!.AreaFocuss!.Select(af => af.AreaModel).Contains(a)).Count().ToString(),
                 }).ToList();
 
             // Фильтрация по "Область"

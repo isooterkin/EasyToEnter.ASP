@@ -1,5 +1,5 @@
 ﻿using EasyToEnter.ASP.Models.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using EasyToEnter.ASP.ViewsModels.Components;
 
 namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
@@ -7,11 +7,11 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
     {
         public readonly List<VariabilityModel> VariabilityList;
         public readonly List<LevelFocusModel> LevelFocusList;
-        public readonly List<SelectListItem> AreaSelectListItem;
+        public readonly List<SelectListItemSubtext> AreaSelectListItem;
         public readonly int Level;
         public readonly int Direction;
 
-        public FocusSelectionContainerViewModel(List<VariabilityModel> variabilityList, List<LevelFocusModel> levelFocusList, List<SelectListItem> areaSelectListItem, int level, int direction)
+        public FocusSelectionContainerViewModel(List<VariabilityModel> variabilityList, List<LevelFocusModel> levelFocusList, List<SelectListItemSubtext> areaSelectListItem, int level, int direction)
         {
             VariabilityList = variabilityList;
             LevelFocusList = levelFocusList;

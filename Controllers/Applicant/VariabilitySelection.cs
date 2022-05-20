@@ -1,5 +1,6 @@
 ﻿using EasyToEnter.ASP.Models.Models;
 using EasyToEnter.ASP.ViewsModels.Applicant;
+using EasyToEnter.ASP.ViewsModels.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -60,12 +61,13 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .ToList();
 
             // "Форма" -> Фильтр
-            List<SelectListItem> formSelectListItem = formList
-                .Select(f => new SelectListItem
+            List<SelectListItemSubtext> formSelectListItem = formList
+                .Select(f => new SelectListItemSubtext
                 {
-                    Text = $"{f.Name} ({variabilityList.Where(v => v.FormId == f.Id).Count()})",
+                    Text = f.Name.ToString(),
                     Value = f.Id.ToString(),
-                    Selected = f.Id == form
+                    Selected = f.Id == form,
+                    Subtext = variabilityList.Where(v => v.FormId == f.Id).Count().ToString()
                 }).ToList();
 
             // Все "Формат"
@@ -75,12 +77,13 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .ToList();
 
             // "Формат" -> Фильтр
-            List<SelectListItem> formatSelectListItem = formatList
-                .Select(f => new SelectListItem
+            List<SelectListItemSubtext> formatSelectListItem = formatList
+                .Select(f => new SelectListItemSubtext
                 {
-                    Text = $"{f.Name} ({variabilityList.Where(v => v.FormatId == f.Id).Count()})",
+                    Text = f.Name.ToString(),
                     Value = f.Id.ToString(),
-                    Selected = f.Id == format
+                    Selected = f.Id == format,
+                    Subtext = variabilityList.Where(v => v.FormatId == f.Id).Count().ToString()
                 }).ToList();
 
             // Все "Оплата"
@@ -90,12 +93,13 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .ToList();
 
             // "Оплата" -> Фильтр
-            List<SelectListItem> paymentSelectListItem = paymentList
-                .Select(p => new SelectListItem
+            List<SelectListItemSubtext> paymentSelectListItem = paymentList
+                .Select(p => new SelectListItemSubtext
                 {
-                    Text = $"{p.Name} ({variabilityList.Where(v => v.PaymentId == p.Id).Count()})",
+                    Text = p.Name.ToString(),
                     Value = p.Id.ToString(),
-                    Selected = p.Id == payment
+                    Selected = p.Id == payment,
+                    Subtext = variabilityList.Where(v => v.PaymentId == p.Id).Count().ToString()
                 }).ToList();
 
             // Все "Вступительные экзамены" !!! Можно попроще!
@@ -105,12 +109,13 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .ToList();
 
             // "Вступительные экзамены" -> Фильтр
-            List<SelectListItem> entranceExamsSelectListItem = entranceExamsList
-                .Select(e => new SelectListItem
+            List<SelectListItemSubtext> entranceExamsSelectListItem = entranceExamsList
+                .Select(e => new SelectListItemSubtext
                 {
-                    Text = $"{(e == true ? "Экзамен" : "Без экзамена")} ({variabilityList.Where(v => v.EntranceExams == e).Count()})",
-                    Value = $"{(e == true ? 1 : 0)}",
-                    Selected = (e == true ? 1 : 0) == entranceExams
+                    Text = e == true ? "Экзамен" : "Без экзамена",
+                    Value = e == true ? "1" : "0",
+                    Selected = (e == true ? 1 : 0) == entranceExams,
+                    Subtext = variabilityList.Where(v => v.EntranceExams == e).Count().ToString()
                 }).ToList();
 
             // Все "Аккредитация"
@@ -120,12 +125,13 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .ToList();
 
             // "Аккредитация" -> Фильтр
-            List<SelectListItem> accreditationSelectListItem = accreditationList
-                .Select(a => new SelectListItem
+            List<SelectListItemSubtext> accreditationSelectListItem = accreditationList
+                .Select(a => new SelectListItemSubtext
                 {
-                    Text = $"{a.Name} ({variabilityList.Where(v => v.FocusUniversityModel!.UniversityModel!.AccreditationId == a.Id).Count()})",
+                    Text = a.Name.ToString(),
                     Value = a.Id.ToString(),
-                    Selected = a.Id == accreditation
+                    Selected = a.Id == accreditation,
+                    Subtext = variabilityList.Where(v => v.FocusUniversityModel!.UniversityModel!.AccreditationId == a.Id).Count().ToString()
                 }).ToList();
 
             // Все "Военная кафедра" (militaryDepartment)
@@ -135,12 +141,13 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .ToList();
 
             // "Военная кафедра" -> Фильтр
-            List<SelectListItem> militaryDepartmentSelectListItem = militaryDepartmentList
-                .Select(m => new SelectListItem
+            List<SelectListItemSubtext> militaryDepartmentSelectListItem = militaryDepartmentList
+                .Select(m => new SelectListItemSubtext
                 {
-                    Text = $"{(m == true ? "С Военной кафедрой" : "Без Военной кафедры")} ({variabilityList.Where(v => v.FocusUniversityModel!.UniversityModel!.MilitaryDepartment == m).Count()})",
-                    Value = $"{(m == true ? 1 : 0)}",
-                    Selected = (m == true ? 1 : 0) == militaryDepartment
+                    Text = m == true ? "Есть военная кафедра" : "Нет военной кафедры",
+                    Value = m == true ? "1" : "0",
+                    Selected = (m == true ? 1 : 0) == militaryDepartment,
+                    Subtext = variabilityList.Where(v => v.FocusUniversityModel!.UniversityModel!.MilitaryDepartment == m).Count().ToString()
                 }).ToList();
 
             // Все "Общежитие" (dormitory)
