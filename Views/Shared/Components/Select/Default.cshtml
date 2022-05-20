@@ -6,18 +6,20 @@
         mobile="true" 
         data-show-subtext="true" 
         data-live-search="true" 
-        title="@Model.Title">
-    <option value=@null>Сбросить</option>
+        title="@Model.Title"
+        data-none-results-text="Совпадений с {0} не найдено"
+        data-live-search-normalize="true">
     @{
+        string background = "#fff";
+
+            <option style="background: @background; color: #000;" value=@null>Сбросить</option>
+
         if (Model.SelectListItem != null)
             for (var i = 0; i < Model.SelectListItem.Count; i++)
             {
-                string background = "#fff";
+                background = Model.SelectListItem[i].Selected ? "#f8f9fa" : "#fff";
 
-                if (Model.SelectListItem[i].Selected) background = "#f8f9fa";
-
-                <option value="@Model.SelectListItem[i].Value"
-                        liveSearchNormalize="true"
+                    <option value="@Model.SelectListItem[i].Value"
                         data-subtext="@Model.SelectListItem[i].Subtext"
                         selected="@Model.SelectListItem[i].Selected" 
                         style="background: @background; color: #000;">@Model.SelectListItem[i].Text</option>
