@@ -7,12 +7,12 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 {
     public partial class ApplicantController
     {
-        public IActionResult ScienceSelection([FromQuery(Name = "level")] int level)
+        public async Task<IActionResult> ScienceSelection([FromQuery(Name = "level")] int level)
         {
             if (level <= 0) return NotFound();
 
             // Все "Вариативность"
-            List<VariabilityModel> variabilityList = _context.Variability
+            List<VariabilityModel> variabilityList = await _context.Variability
                 .Include(v => v.FocusUniversityModel)
                     .ThenInclude(fu => fu!.LevelFocusModel)
                         .ThenInclude(lf => lf!.LevelModel)
@@ -23,7 +23,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                                 .ThenInclude(d => d!.GroupModel)
                                     .ThenInclude(g => g!.ScienceModel)
                 .Where(v => v.FocusUniversityModel!.LevelFocusModel!.LevelId == level)
-                .ToList();
+                .ToListAsync();
 
             List<ScienceModel> scienceList = variabilityList
                 .Select(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceModel!)
