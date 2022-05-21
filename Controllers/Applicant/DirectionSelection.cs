@@ -7,12 +7,12 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 {
     public partial class ApplicantController
     {
-        public IActionResult DirectionSelection([FromQuery(Name = "level")] int level, [FromQuery(Name = "group")] int group)
+        public async Task<IActionResult> DirectionSelection([FromQuery(Name = "level")] int level, [FromQuery(Name = "group")] int group)
         {
             if (level <= 0 || group <= 0) return NotFound();
 
             // Все "Вариативность"
-            List<VariabilityModel> variabilityList = _context.Variability
+            List<VariabilityModel> variabilityList = await _context.Variability
                 .Include(v => v.FocusUniversityModel)
                     .ThenInclude(fu => fu!.LevelFocusModel)
                         .ThenInclude(lf => lf!.LevelModel)
@@ -23,7 +23,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                                 .ThenInclude(d => d!.GroupModel)
                 .Where(v => v.FocusUniversityModel!.LevelFocusModel!.LevelId == level)
                 .Where(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupId == group)
-                .ToList();
+                .ToListAsync();
 
             // Все "Направление"
             List<DirectionModel> directionList = variabilityList
