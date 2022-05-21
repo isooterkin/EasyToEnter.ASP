@@ -7,14 +7,14 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 {
     public partial class ApplicantController
     {
-        public IActionResult LevelSelection()
+        public async Task<IActionResult> LevelSelection()
         {
             // Все "Вариативность"
-            List<VariabilityModel> variabilityList = _context.Variability
+            List<VariabilityModel> variabilityList = await _context.Variability
                 .Include(v => v.FocusUniversityModel)
                     .ThenInclude(fu => fu!.LevelFocusModel)
                         .ThenInclude(lf => lf!.LevelModel)
-                .ToList();
+                .ToListAsync();
 
             List<LevelModel> levelList = variabilityList
                 .Select(v => v.FocusUniversityModel!.LevelFocusModel!.LevelModel!)
