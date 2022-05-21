@@ -9,7 +9,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 {
     public partial class ApplicantController
     {
-        public IActionResult FocusSelection(
+        public async Task<IActionResult> FocusSelection(
             [FromQuery(Name = "level")] int level,
             [FromQuery(Name = "direction")] int direction,
             [FromQuery(Name = "area")] int? area)
@@ -17,7 +17,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             if ((level <= 0 || direction <= 0) || (area != null && area <= 0)) return NotFound();
 
             // Все "Вариативность"
-            List<VariabilityModel> variabilityList = _context.Variability
+            List<VariabilityModel> variabilityList = await _context.Variability
                 .Include(v => v.FocusUniversityModel)
                     .ThenInclude(fu => fu!.LevelFocusModel)
                         .ThenInclude(lf => lf!.LevelModel)
@@ -33,7 +33,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                                 !.ThenInclude(f => f!.AreaModel)
                 .Where(v => v.FocusUniversityModel!.LevelFocusModel!.LevelId == level)
                 .Where(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionId == direction)
-                .ToList();
+                .ToListAsync();
 
             // Все "Область"
             List<AreaModel> areaList = variabilityList
