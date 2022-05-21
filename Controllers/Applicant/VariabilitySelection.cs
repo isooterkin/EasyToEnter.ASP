@@ -2,7 +2,6 @@
 using EasyToEnter.ASP.ViewsModels.Applicant;
 using EasyToEnter.ASP.ViewsModels.Components;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace EasyToEnter.ASP.Controllers.Applicant
