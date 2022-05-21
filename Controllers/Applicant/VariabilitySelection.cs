@@ -9,7 +9,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 {
     public partial class ApplicantController
     {
-        public IActionResult VariabilitySelection(
+        public async Task<IActionResult> VariabilitySelection(
             [FromQuery(Name = "levelFocus")] int levelFocus,
             [FromQuery(Name = "form")] int? form,
             [FromQuery(Name = "format")] int? format,
@@ -26,7 +26,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 return NotFound();
 
             // Все "Вариативность"
-            List<VariabilityModel> variabilityList = _context.Variability
+            List<VariabilityModel> variabilityList = await _context.Variability
                 .Include(v => v.FormModel)
                 .Include(v => v.FormatModel)
                 .Include(v => v.PaymentModel)
@@ -52,7 +52,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                         .ThenInclude(u => u!.SpecializationUniversitys)
                             !.ThenInclude(su => su.SpecializationModel)
                 .Where(v => v.FocusUniversityModel!.LevelFocusId == levelFocus)
-                .ToList();
+                .ToListAsync();
 
             // Все "Форма"
             List<FormModel> formList = variabilityList
