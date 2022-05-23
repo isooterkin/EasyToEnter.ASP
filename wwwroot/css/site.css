@@ -23,3 +23,11 @@ body {
 * {
     font-family: 'Ubuntu';
 }
+
+@media (min-width: 1200px) {
+    .collapse.dont-collapse-sm {
+        display: block;
+        height: auto !important;
+        visibility: visible;
+    }
+}

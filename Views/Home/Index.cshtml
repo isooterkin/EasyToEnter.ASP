@@ -2,27 +2,74 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="icon-card mb-3 text-dark bg-light shadow rounded-3">
-    <div class="row g-0">
-        <div class="col position-relative">
-            <div class="card-body">
-                <div class="row px-3 mb-3">
-                    <p class="col m-0 p-0 align-self-start card-text text-truncate"><small class="text-muted">38.03.01 Экономика и управление</small></p>
-                    <a class="col-auto m-0 p-0 align-self-end" href="#">
-                        <i class="fs-5 bi bi-bookmark-plus"></i>
-                    </a>
-                </div>
-                <h5 class="card-title text-truncate">
-                    <a href="" class="text-decoration-none text-dark fw-bold">Экономика</a>
-                </h5>
-                <p class="card-text text-truncate">Эта специальность позволяет получить экономическое образование, специализацию по экономике в различных областях: производство и текст тупо пишу чтобы было</p>
-                <div class="row pl-3">
-                    <a class="col btn m-0 text-truncate btn-secondary text-decoration-none" href="#"><span class="fs-5 fw-bold">123</span> варианта обучения</a>
-                    <p class="col btn m-0">от <span class="fs-5 fw-bold">48</span> баллов</p>
-                    <p class="col btn m-0">до <span class="fs-5 fw-bold">48</span> мест</p>
-                    <p class="col btn m-0">от <span class="fs-5 fw-bold">150 000</span> руб./год</p>
-                </div>
-            </div>
+@*Путь начало*@
+<div class="container bg-light rounded-3 shadow mb-3">
+    <div class="row">
+        <div class="col px-3">
+            <p class="my-1">
+                <small class="text-muted">
+                    <a class="link-secondary" href="">Бакалавриат</a> / 
+                    <a class="link-secondary" href="">Изобразительное и прикладные виды искусства (54.03.00)</a> /
+                    <a class="link-secondary" href="">Специальность Дизайн (54.03.01)</a>
+                </small>
+            </p>
         </div>
     </div>
 </div>
+@*Путь конец*@
+
+@*Контейнер начало*@
+<div class="container p-0">
+    <div class="row">
+        <div class="col-xl-8 col-md-12 order-xl-first order-last">
+            @*ПРИМЕР начало*@
+            <div class="icon-card mb-3 text-dark bg-light shadow rounded-3">
+                <div class="row g-0">
+                    <div class="col position-relative">
+                        <div class="card-body p-3">
+                            <div class="row px-3 mb-3">
+                                <p class="col m-0 p-0 align-self-start card-text text-truncate"><small class="text-muted">38.03.01 Экономика и управление</small></p>
+                                <a class="col-auto m-0 p-0 align-self-end" href="#">
+                                    <i class="fs-5 bi bi-bookmark-plus text-muted"></i>
+                                </a>
+                            </div>
+                            <h5 class="card-title text-truncate">
+                                <a href="" class="text-decoration-none text-dark fw-bold">Экономика</a>
+                            </h5>
+                            <p class="card-text text-truncate">Эта специальность позволяет получить экономическое образование, специализацию по экономике в различных областях: производство и текст тупо пишу чтобы было</p>
+                            <div class="row px-3">
+                                <a class="col btn m-0 text-truncate btn-secondary text-decoration-none" href="#"><span class="fs-5 fw-bold">123</span> варианта обучения</a>
+                                <p class="col col-xl-2 btn m-0">от <span class="fs-5 fw-bold">48</span> баллов</p>
+                                <p class="col col-xl-2 btn m-0">до <span class="fs-5 fw-bold">48</span> мест</p>
+                                <p class="col col-xl-3 btn m-0">от <span class="fs-5 fw-bold">150 000</span> руб./год</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*ПРИМЕР конец*@
+        </div>
+        @*Фильтр начало*@
+        <div class="col-xl col-md-12 mb-3 order-xl-last order-first">
+            <div class="col rounded-3 bg-light shadow px-3">
+                <div class="col position-relative">
+                    <div class="row">
+                        <div class="col p-0 my-1">
+                            Фильтры
+                        </div>
+                        <a class="col-auto m-0 p-0 align-self-end d-block d-xl-none text-decoration-none" data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseExample">
+                            <i class="fs-5 bi bi-sliders text-muted"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="collapse dont-collapse-sm" id="collapseExample">
+                    <div class="well">
+                        (тут будут фильтры)
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Фильтр конец*@
+    </div>
+</div>
+@*Контейнер конец*@
