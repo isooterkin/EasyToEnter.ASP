@@ -4,17 +4,30 @@
     ViewData["Title"] = "Выбор направленности";
 }
 
-<div class="text-center m-3">
-    <h2>Выбор направленности</h2>
+@*Путь начало*@
+<div class="container bg-light rounded-3 shadow mb-3">
+    <div class="row">
+        <div class="col px-3">
+            <p class="my-1">
+                <small class="text-muted">
+                    <a class="link-secondary" href="/Applicant/LevelSelection">@Model.LevelName</a> / 
+                    <a class="link-secondary" href="/Applicant/ScienceSelection?level=@Model.LevelId">@Model.ScienceName</a> /
+                    <a class="link-secondary" href="/Applicant/GroupSelection?level=@Model.LevelId&science=@Model.ScienceId">@Model.GroupName</a> / 
+                    <a class="link-secondary" href="/Applicant/DirectionSelection?level=@Model.LevelId&group=@Model.GroupId">@Model.DirectionName</a> / ...
+                </small>
+            </p>
+        </div>
+    </div>
 </div>
+@*Путь конец*@
 
 <!-- Фильтры -->
 <form method="get">
     <div class="container">
         <div class="row">
             <!-- Предыдущие значения -->
-            <input type="hidden" name="level" asp-for="Level"/>
-            <input type="hidden" name="direction" asp-for="Direction"/>
+            <input type="hidden" name="level" asp-for="LevelId"/>
+            <input type="hidden" name="direction" asp-for="DirectionId"/>
             <!-- Область -->
             <select name="area" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.AreaSelectListItem">
                 <option value=@null>Область обучения</option>

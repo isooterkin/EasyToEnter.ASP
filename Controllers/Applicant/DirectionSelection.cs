@@ -21,6 +21,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                         .ThenInclude(lf => lf!.FocusModel)
                             .ThenInclude(f => f!.DirectionModel)
                                 .ThenInclude(d => d!.GroupModel)
+                                    .ThenInclude(g => g!.ScienceModel)
                 .Where(v => v.FocusUniversityModel!.LevelFocusModel!.LevelId == level)
                 .Where(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupId == group)
                 .ToListAsync();

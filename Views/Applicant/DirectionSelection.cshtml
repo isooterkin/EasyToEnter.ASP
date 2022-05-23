@@ -4,8 +4,20 @@
     ViewData["Title"] = "Выбор направления";
 }
 
-<div class="text-center m-3">
-    <h2>Выбор направления</h2>
+@*Путь начало*@
+<div class="container bg-light rounded-3 shadow mb-3">
+    <div class="row">
+        <div class="col px-3">
+            <p class="my-1">
+                <small class="text-muted">
+                    <a class="link-secondary" href="/Applicant/LevelSelection">@Model.LevelName</a> / 
+                    <a class="link-secondary" href="/Applicant/ScienceSelection?level=@Model.LevelId">@Model.ScienceName</a> /
+                    <a class="link-secondary" href="/Applicant/GroupSelection?level=@Model.LevelId&science=@Model.ScienceId">@Model.GroupName</a> / ...
+                </small>
+            </p>
+        </div>
+    </div>
 </div>
+@*Путь конец*@
 
 <vc:direction-container data="@Model"/>
