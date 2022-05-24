@@ -1,11 +1,7 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.VariabilitySelectionContainerViewModel;
 @using EasyToEnter.ASP.ViewsModels.Applicant;
 
-<div class="container mt-3">
-    <div class="row">
 @for(var i = 0; i < Model.VariabilityList.Count; i++)
 {
         <vc:variability-card data="@new VariabilitySelectionCardViewModel(@Model.VariabilityList[i]!)"/>
 }
-    </div>
-</div>

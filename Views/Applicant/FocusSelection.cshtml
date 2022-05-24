@@ -1,4 +1,5 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.FocusSelectionContainerViewModel;
+@using EasyToEnter.ASP.ViewsModels.Components;
 
 @{
     ViewData["Title"] = "Выбор направленности";
@@ -21,22 +22,46 @@
 </div>
 @*Путь конец*@
 
-<!-- Фильтры -->
-<form method="get">
-    <div class="container">
-        <div class="row">
-            <!-- Предыдущие значения -->
-            <input type="hidden" name="level" asp-for="LevelId"/>
-            <input type="hidden" name="direction" asp-for="DirectionId"/>
-            <!-- Область -->
-            <select name="area" class="col-sm-3 select_send_ajax selectpicker" data-show-subtext="true" data-live-search="true" asp-items="Model.AreaSelectListItem">
-                <option value=@null>Область обучения</option>
-            </select>
+@*Контейнер начало*@
+<div class="container p-0">
+    <div class="row">
+        <div class="col-xl-8 col-md-12 order-xl-first order-last">
+            <vc:focus-container data="@Model"/>
         </div>
+        @*Фильтр начало*@
+        <div class="col-xl col-md-12 mb-3 order-xl-last order-first">
+            <div class="col rounded-3 bg-light shadow px-3">
+                <div class="col position-relative">
+                    <div class="row">
+                        <div class="col p-0 my-1 text-center">
+                            Фильтры
+                        </div>
+                        <a class="col-auto m-0 p-0 align-self-end d-block d-xl-none text-decoration-none" data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseExample">
+                            <span class="fs-5 bi bi-sliders text-muted"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="collapse dont-collapse-sm" id="collapseExample">
+                    <div class="well">
+                        <!-- Фильтры -->
+                        <form method="get">
+                            <div class="container p-0">
+                                <div class="row">
+                                    <!-- Предыдущие значения -->
+                                    <input type="hidden" name="level" asp-for="LevelId"/>
+                                    <input type="hidden" name="direction" asp-for="DirectionId"/>
+                                    <vc:select data='@new SelectViewModel("area", "Область", Model.AreaSelectListItem)'/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Фильтр конец*@
     </div>
-</form>
-
-<vc:focus-container data="@Model"/>
+</div>
+@*Контейнер конец*@
 
 <!-- Отправка формы при клике на select-->
 @section Scripts 

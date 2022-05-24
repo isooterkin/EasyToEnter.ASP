@@ -1,29 +1,39 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Components.SelectViewModel;
 
 <!-- Select -->
-<select class="col-sm-3 select_send_ajax selectpicker" 
-        name="@Model.Name"
-        mobile="true" 
-        data-show-subtext="true" 
-        data-live-search="true" 
-        title="@Model.Title"
-        data-none-results-text="Совпадений с {0} не найдено"
-        data-live-search-normalize="true"
-        data-style="btn btn-light border-secondary">
-    @{
-        string background = "#fff";
+<div class="px-3">
+    <div class="mb-2">
+        <small>
+            @Model.Title
+        </small>
+    </div>
 
-                <option style="background: @background; color: #000;" value=@null>Сбросить</option>
+    <select class="col select_send_ajax selectpicker mb-2 form-control" 
+            name="@Model.Name"
+            mobile="true" style="height: 1000px;"
+            data-show-subtext="true"
+            data-live-search="true" 
+            title=@Model.Title
+            data-none-results-text="Совпадений с {0} не найдено"
+            data-live-search-normalize="true"
+            data-style="btn btn-light border-secondary rounded-3">
+        @{
+            string background = "#fff";
+            <option style="background: @background; color: #000;" value=@null>Все</option>
 
-        if (Model.SelectListItem != null)
-            for (var i = 0; i < Model.SelectListItem.Count; i++)
-            {
-                background = Model.SelectListItem[i].Selected ? "#f8f9fa" : "#fff";
+            if (Model.SelectListItem != null)
+                for (var i = 0; i < Model.SelectListItem.Count; i++)
+                {
+                    background = Model.SelectListItem[i].Selected ? "#f8f9fa" : "#fff";
 
-                        <option value="@Model.SelectListItem[i].Value"
-                        data-subtext="@Model.SelectListItem[i].Subtext"
-                        selected="@Model.SelectListItem[i].Selected" 
-                        style="background: @background; color: #000;">@Model.SelectListItem[i].Text</option>
-            }
-    }
-</select>
+                            <option value="@Model.SelectListItem[i].Value"
+                                    data-subtext="@Model.SelectListItem[i].Subtext"
+                                    selected="@Model.SelectListItem[i].Selected"
+                                    style="background: @background; color: #000;"
+                                    class="text-wrap">
+                                @Model.SelectListItem[i].Text
+                            </option>
+                }
+        }
+    </select>
+</div>

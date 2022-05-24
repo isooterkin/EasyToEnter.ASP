@@ -1,20 +1,38 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.FocusSelectionCardViewModel;
 
-<div class="card bg-dark text-white mb-3 rounded-3 shadow" style="background-color: #333;">
-    <div class="card-body">
-       <p class="card-text fst-italic">
-            @Model.LevelFocus.FullCodeName
-        </p>
-        <h3 class="card-title">
-            @Model.LevelFocus.FocusModel!.Name
-        </h3>
-        <p class="card-text">
-            @Model.LevelFocus.FocusModel!.Description
-        </p>
-        <div class="col p-0 ">
-            <a href="/Applicant/VariabilitySelection?levelFocus=@Model.LevelFocus.Id" class="btn btn-light">
-                @Model.VariabilityCount вариантов обучения
-            </a>
+@*ПРИМЕР начало*@
+<div class="mb-3 text-dark bg-light shadow rounded-3">
+    <div class="row g-0">
+        <div class="col position-relative">
+            <div class="card-body p-3">
+                <div class="row px-3 mb-3">
+                    <p class="col m-0 p-0 card-text text-truncate">
+                        <small class="text-muted">
+                            @Model.LevelFocus.FullCodeName
+                        </small>
+                    </p>
+                    <a class="col-auto m-0 p-0 align-self-end" href="#">
+                        <span class="fs-5 bi bi-bookmark-plus text-muted"/>
+                    </a>
+                </div>
+                <h5 class="card-title text-truncate">
+                    <a class="text-decoration-none text-dark fw-bold" href="/Applicant/VariabilitySelection?levelFocus=@Model.LevelFocus.Id">
+                        @Model.LevelFocus.FocusModel!.Name
+                    </a>
+                </h5>
+                <p class="card-text text-truncate">
+                    @Model.LevelFocus.FocusModel!.Description
+                </p>
+                <div class="row px-3">
+                    <a class="col-3 btn m-0 text-truncate btn-secondary text-decoration-none" href="/Applicant/VariabilitySelection?levelFocus=@Model.LevelFocus.Id">
+                        <span class="fs-5 fw-bold">
+                            @Model.VariabilityCount
+                        </span>
+                        варианта обучения
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+@*ПРИМЕР конец*@

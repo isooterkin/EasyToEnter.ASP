@@ -24,12 +24,25 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
             AreaSelectListItem = areaSelectListItem;
             LevelId = level;
             DirectionId = direction;
-            LevelName = variabilityList.Count > 0 ? variabilityList[0].FocusUniversityModel!.LevelFocusModel!.LevelModel!.Name : "???";
-            ScienceName = LevelFocusList.Count > 0 ? LevelFocusList[0].FocusModel!.DirectionModel!.GroupModel!.ScienceModel!.Name : "???";
-            ScienceId = LevelFocusList.Count > 0 ? LevelFocusList[0].FocusModel!.DirectionModel!.GroupModel!.ScienceId : 0;
-            GroupName = LevelFocusList.Count > 0 ? LevelFocusList[0].FocusModel!.DirectionModel!.GroupModel!.Name : "???";
-            GroupId = LevelFocusList.Count > 0 ? LevelFocusList[0].FocusModel!.DirectionModel!.GroupId : 0;
-            DirectionName = LevelFocusList.Count > 0 ? LevelFocusList[0].FocusModel!.DirectionModel!.Name : "???";
+
+            if (variabilityList.Any())
+            {
+                LevelName = variabilityList[0].FocusUniversityModel!.LevelFocusModel!.LevelModel!.Name;
+                ScienceName = LevelFocusList[0].FocusModel!.DirectionModel!.GroupModel!.ScienceModel!.Name;
+                GroupName = LevelFocusList[0].FocusModel!.DirectionModel!.GroupModel!.Name;
+                DirectionName = LevelFocusList[0].FocusModel!.DirectionModel!.Name;
+                ScienceId = LevelFocusList[0].FocusModel!.DirectionModel!.GroupModel!.ScienceId;
+                GroupId = LevelFocusList[0].FocusModel!.DirectionModel!.GroupId;
+            }
+            else
+            {
+                LevelName = "???";
+                ScienceName = "???";
+                GroupName = "???";
+                DirectionName = "???";
+                ScienceId = 0;
+                GroupId = 0;
+            }
         }
     }
 }

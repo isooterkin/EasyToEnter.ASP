@@ -1,11 +1,7 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.FocusSelectionContainerViewModel;
 @using EasyToEnter.ASP.ViewsModels.Applicant;
 
-<div class="container mt-3">
-    <div class="row">
 @for(var i = 0; i < Model.LevelFocusList.Count; i++)
 {
-        <vc:focus-card data="@new FocusSelectionCardViewModel(@Model, @Model.LevelFocusList[i]!)"/>
+    <vc:focus-card data="@new FocusSelectionCardViewModel(@Model, @Model.LevelFocusList[i]!)"/>
 }
-    </div>
-</div>
