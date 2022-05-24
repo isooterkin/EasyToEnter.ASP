@@ -33,9 +33,11 @@
                     @*Значек "Военная кафедра"*@
                     @if (Model.Variability.FocusUniversityModel.UniversityModel.MilitaryDepartment)
                     {
-                    <a class="col-auto m-0 p-0 ml-2 align-self-end" data-bs-toggle="tooltip" title="Наличие военной кафедры" href="#">
-                        <span class="fs-5 bi bi-shield text-info"/>
-                    </a>
+                    <div class="col-auto m-0 p-0 ml-2 align-self-end">
+                        <a class="align-top" data-bs-toggle="tooltip" title="Наличие военной кафедры" href="#">
+                            <span class="fs-5 bi bi-shield text-info align-top"/>
+                        </a>
+                    </div>
                     }
 
                     @*Значек "В избранное"*@
@@ -51,7 +53,6 @@
                         <span class="fs-5 bi bi-heart text-danger"/>
                     </a>
                     }
-
                 </div>
 
                 @*Значек "Тайтл"*@
@@ -62,10 +63,16 @@
                 </h5>
 
                 @*Значек "Описание"*@
-                <p class="card-text text-truncate">
-                    @Model.Variability.PaymentModel!.Name, @Model.Variability.FormatModel!.Name, @Model.Variability.FormModel!.Name
+                <p class="card-text text-truncate mb-2">
+                    Короткое описание о вузе или хуй пойми о чем?
                 </p>
 
+                @*Значек "Особенности"*@
+                <p class="card-text text-truncate">
+                    <kbd class="mr-1 rounded-3 bg-success">@Model.Variability.PaymentModel!.Name</kbd>
+                    <kbd class="mr-1 rounded-3 bg-warning">@Model.Variability.FormatModel!.Name</kbd>
+                    <kbd class="mr-1 rounded-3 bg-info">@Model.Variability.FormModel!.Name</kbd>
+                </p>
 
                 <div class="row px-3">
                     <div class="col-sm order-sm-first order-4 px-0">
@@ -73,19 +80,19 @@
                             Подробнее
                         </a>
                     </div>
-                    <div class="col-sm-auto order-1 order-xl-2">
+                    <div class="col-sm-auto order-1 order-xl-2 align-self-center">
                         <p class="text-center m-0">
                             от <span class="fs-6 fw-bold text-truncate">@Model.Variability.PassingGrade</span> баллов
                         </p>
                     </div>
-                    <div class="col-sm-auto order-2 order-xl-3">
+                    <div class="col-sm-auto order-2 order-xl-3 align-self-center">
                         <p class="text-center m-0">
                             до <span class="fs-6 fw-bold text-truncate">@Model.Variability.NumberSeats</span> мест
                         </p>
                     </div>
-                    <div class="col-sm-auto order-3 order-xl-4 mb-sm-0 mb-2">
+                    <div class="col-sm-auto order-3 order-xl-4 align-self-center mb-sm-0 mb-2">
                         <p class="text-center m-0">
-                            от <span class="fs-6 fw-bold text-truncate">@Model.Variability.Tuition</span> руб./год
+                            от <span class="fs-6 fw-bold text-truncate">@Model.Variability.TuitionString</span> руб.
                         </p>
                     </div>
                 </div>
