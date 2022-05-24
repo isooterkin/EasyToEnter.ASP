@@ -4,14 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Легко поступить!</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    @*Select*@
+    <link href="~/theme/assets/plugins/select2/css/select2.min.css" rel="stylesheet">
+    <link href="~/theme/assets/css/main.min.css" rel="stylesheet">
+
+    @*bootstrap*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+
+    @*Сайт*@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EasyToEnter.ASP.styles.css" asp-append-version="true" />
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" rel="stylesheet"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" rel="stylesheet"/>
-
+    
     @*Иконки*@
     <link rel="stylesheet" href="~/lib/bootstrap-icons-1.8.2/bootstrap-icons.css" asp-append-version="true"/>
 
@@ -56,6 +64,13 @@
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
+
+    @*Select*@
+    <script src="~/theme/assets/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/theme/assets/js/pages/select2.js"></script>
+    <script>$('select').select2();</script>
+
+
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
