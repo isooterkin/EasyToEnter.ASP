@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,700;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
 html {
   font-size: 14px;
@@ -21,9 +22,10 @@ body {
 
 /*Ўрифт*/
 * {
-    font-family: 'Ubuntu';
+    font-family: 'Roboto Condensed';
 }
 
+/*‘ильтры только на мобильном*/
 @media (min-width: 1200px) {
     .collapse.dont-collapse-sm {
         display: block;
