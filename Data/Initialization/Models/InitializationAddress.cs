@@ -1,4 +1,5 @@
-﻿using Class = EasyToEnter.ASP.Models.Models.AddressModel;
+﻿using EasyToEnter.ASP.Models.Auxiliary;
+using Class = EasyToEnter.ASP.Models.Models.AddressModel;
 
 namespace EasyToEnter.ASP.Data.Initialization.Models
 {
@@ -14,7 +15,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Московский проспект",
                     House = "24-26/49",
                     Housing = "49",
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 2
                 {
@@ -22,7 +24,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Кантемировская",
                     House = "3",
                     Housing = "1",
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 3
                 {
@@ -30,7 +33,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Политехническая",
                     House = "29",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 4
                 {
@@ -38,7 +42,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Калинина",
                     House = "8",
                     Housing = "2",
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 5
                 {
@@ -46,7 +51,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Фучика",
                     House = "15",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 6
                 {
@@ -54,7 +60,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Большая Морская",
                     House = "18",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 7
                 {
@@ -62,7 +69,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Моховая",
                     House = "40",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 8
                 {
@@ -70,7 +78,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Лифляндская",
                     House = "2-4",
                     Housing = null,
-                    Building = "Ц"
+                    Building = "Ц",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 9
                 {
@@ -78,7 +87,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Смолячкова",
                     House = "16",
                     Housing = null,
-                    Building = "С"
+                    Building = "С",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 10
                 {
@@ -86,7 +96,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Большевиков",
                     House = "22",
                     Housing = "1",
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 11
                 {
@@ -94,7 +105,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "1-я Красноармейская",
                     House = "1",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 12
                 {
@@ -102,7 +114,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Средний проспект Васильевского острова",
                     House = "57/43",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 13
                 {
@@ -110,7 +123,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Садовая",
                     House = "21",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 14
                 {
@@ -118,7 +132,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Университетская набережная",
                     House = "7-9",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 15
                 {
@@ -126,7 +141,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Якубовича",
                     House = "26",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 16
                 {
@@ -134,7 +150,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Профессора Попова",
                     House = "5",
                     Housing = "5",
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 17
                 {
@@ -142,7 +159,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Набережная реки Мойки",
                     House = "48",
                     Housing = "6",
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 18
                 {
@@ -150,7 +168,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Московский проспект",
                     House = "9",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 19
                 {
@@ -158,7 +177,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Моховая",
                     House = "33",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 20
                 {
@@ -166,7 +186,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Лермонтовский проспект",
                     House = "44",
                     Housing = null,
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 21
                 {
@@ -174,7 +195,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Александровский парк",
                     House = "5",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 22
                 {
@@ -182,7 +204,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Софийская",
                     House = "52",
                     Housing = null,
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 23
                 {
@@ -190,7 +213,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Петрозаводская",
                     House = "13",
                     Housing = null,
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 24
                 {
@@ -198,7 +222,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "набережная Лейтенанта Шмидта",
                     House = "49",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 25
                 {
@@ -206,7 +231,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Малоохтинский проспект",
                     House = "98",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 26
                 {
@@ -214,7 +240,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Петербургское шоссе",
                     House = "2",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 27
                 {
@@ -222,7 +249,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Волховский проспект",
                     House = "3",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 28
                 {
@@ -230,7 +258,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Ленинский проспект",
                     House = "101",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 29
                 {
@@ -238,7 +267,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Малая Садовая",
                     House = "6",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 30
                 {
@@ -246,7 +276,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Зодчего Росси",
                     House = "2",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 31
                 {
@@ -254,7 +285,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "10-я линия Васильевского острова",
                     House = "19",
                     Housing = null,
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 32
                 {
@@ -262,7 +294,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Сестрорецкая",
                     House = "6",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 33
                 {
@@ -270,7 +303,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Профессора Попова",
                     House = "14",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 34
                 {
@@ -278,7 +312,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Двинская",
                     House = "5/7",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 35
                 {
@@ -286,7 +321,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Институтский переулок",
                     House = "5",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 36
                 {
@@ -294,7 +330,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Университетская набережная",
                     House = "17",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 37
                 {
@@ -302,7 +339,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Театральная площадь",
                     House = "3",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 38
                 {
@@ -310,7 +348,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Хлопина",
                     House = "8",
                     Housing = "3",
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 39
                 {
@@ -318,7 +357,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "набережная реки Фонтанки",
                     House = "15",
                     Housing = null,
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 40
                 {
@@ -326,7 +366,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Пискаревский проспект",
                     House = "47",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 41
                 {
@@ -334,7 +375,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "12-я линия Васильевского острова",
                     House = "13",
                     Housing = null,
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 42
                 {
@@ -342,7 +384,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Московский проспект",
                     House = "149",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 43
                 {
@@ -350,7 +393,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Крапивный переулок",
                     House = "5",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 44
                 {
@@ -358,7 +402,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Сапёрная",
                     House = "34",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 45
                 {
@@ -366,7 +411,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Льва Толстого",
                     House = "6-8",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 46
                 {
@@ -374,7 +420,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Петербургское шоссе",
                     House = "10",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 47
                 {
@@ -382,7 +429,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Пилотов",
                     House = "38",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 48
                 {
@@ -390,7 +438,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Декабристов",
                     House = "35",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 49
                 {
@@ -398,7 +447,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Дворцовая набережная",
                     House = "2",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 50
                 {
@@ -406,7 +456,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "набережная канала Грибоедова",
                     House = "2",
                     Housing = null,
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 51
                 {
@@ -414,7 +465,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Соляной переулок",
                     House = "13",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 52
                 {
@@ -422,7 +474,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Съезжинская",
                     House = "15-17",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 53
                 {
@@ -430,7 +483,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Аккуратова",
                     House = "11А",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 54
                 {
@@ -438,7 +492,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Кондратьевский проспект",
                     House = "72",
                     Housing = null,
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 55
                 {
@@ -446,7 +501,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Гагаринская",
                     House = "6/1",
                     Housing = null,
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 56
                 {
@@ -454,7 +510,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Литовская",
                     House = "2",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 57
                 {
@@ -462,7 +519,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Кронверкский проспект",
                     House = "49",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 58
                 {
@@ -470,7 +528,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "2-я Красноармейская",
                     House = "4",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 59
                 {
@@ -478,7 +537,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Черниговская",
                     House = "5",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 60
                 {
@@ -486,7 +546,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Правды",
                     House = "13",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 61
                 {
@@ -494,7 +555,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Якорная",
                     House = "9",
                     Housing = null,
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 62
                 {
@@ -502,7 +564,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "проспект Стачек",
                     House = "72",
                     Housing = null,
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 63
                 {
@@ -510,7 +573,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "набережная реки Мойки",
                     House = "96",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 64
                 {
@@ -518,7 +582,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "проспект Обуховской Обороны",
                     House = "114",
                     Housing = null,
-                    Building = "А"
+                    Building = "А",
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 // Общежития СПБГТИ ТУ
                 new Class // 65
@@ -527,7 +592,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Здоровцева",
                     House = "14",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 66
                 {
@@ -535,7 +601,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Пионерстроя",
                     House = "14",
                     Housing = "3",
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 67
                 {
@@ -543,7 +610,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Здоровцева",
                     House = "12",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 68
                 {
@@ -551,7 +619,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Яковлевский переулок",
                     House = "8",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 69
                 {
@@ -559,7 +628,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Трефолева",
                     House = "1",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 70
                 {
@@ -567,7 +637,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Стойкости",
                     House = "21",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 // Общежития Политеха
                 new Class // 71
@@ -576,7 +647,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "проспект Лесной",
                     House = "65/1",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 72
                 {
@@ -584,7 +656,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "проспект Лесной",
                     House = "65/3",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 73
                 {
@@ -592,7 +665,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Парголовская",
                     House = "11/1",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 74
                 {
@@ -600,7 +674,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Парголовская",
                     House = "11/3",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 75
                 {
@@ -608,7 +683,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Парголовская",
                     House = "11/2",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 76
                 {
@@ -616,7 +692,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Харченко",
                     House = "16",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 77
                 {
@@ -624,7 +701,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "проспект Лесной",
                     House = "67/2",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 78
                 {
@@ -632,7 +710,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Кантемировская",
                     House = "24",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 79
                 {
@@ -640,7 +719,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Хлопина",
                     House = "9/2",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 80
                 {
@@ -648,7 +728,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Непокорённых",
                     House = "6/2",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 81
                 {
@@ -656,7 +737,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Хлопина",
                     House = "13/1",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 82
                 {
@@ -664,7 +746,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Непокорённых",
                     House = "8/2",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 83
                 {
@@ -672,7 +755,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Непокорённых",
                     House = "8/3",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 84
                 {
@@ -680,7 +764,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Непокорённых",
                     House = "8/4",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 85
                 {
@@ -688,7 +773,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Вавиловых",
                     House = "10/2",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 86
                 {
@@ -696,7 +782,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Вавиловых",
                     House = "10/3",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 87
                 {
@@ -704,7 +791,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Гражданский проспект",
                     House = "30",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 88
                 {
@@ -712,7 +800,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Гражданский проспект",
                     House = "28",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 89
                 {
@@ -720,7 +809,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Энгельса",
                     House = "129/4",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 90
                 {
@@ -728,7 +818,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Гастелло",
                     House = "20",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 },
                 new Class // 91
                 {
@@ -736,7 +827,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Street = "Малодетскосельский",
                     House = "27",
                     Housing = null,
-                    Building = null
+                    Building = null,
+                    Location = new LocationModel(12.0F, 43.3F)
                 }
             });
 

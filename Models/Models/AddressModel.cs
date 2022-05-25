@@ -1,8 +1,8 @@
-﻿using EasyToEnter.ASP.Models.Dependence;
+﻿using EasyToEnter.ASP.Models.Auxiliary;
+using EasyToEnter.ASP.Models.Dependence;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
 
 #pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
 
@@ -37,7 +37,7 @@ namespace EasyToEnter.ASP.Models.Models
 
         [Required(ErrorMessage = "Укажите локацию.")]
         [Display(Name = "Локация")]
-        public Point Location { get; set; }
+        public LocationModel Location { get; set; }
 
         [NotMapped]
         [Display(Name = "Полный адрес")]
