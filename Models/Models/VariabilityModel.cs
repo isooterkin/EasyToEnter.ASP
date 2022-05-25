@@ -62,9 +62,5 @@ namespace EasyToEnter.ASP.Models.Models
         [ForeignKey(nameof(FocusUniversityId))]
         [Display(Name = "Направленность ВУЗа")]
         public FocusUniversityModel? FocusUniversityModel { get; set; }
-
-        [NotMapped]
-        [Display(Name = "Наименование")]
-        public string TuitionString => Tuition > 0 ? Tuition.ToString("0,0") : "0";
     }
 }

@@ -1,4 +1,5 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.VariabilitySelectionCardViewModel;
+@using static EasyToEnter.ASP.Tools.StringConverting
 
 @*ПРИМЕР начало*@
 <div class="icon-card mb-3 text-dark bg-light shadow rounded-3">
@@ -82,17 +83,17 @@
                     </div>
                     <div class="col-sm-auto order-1 order-xl-2 align-self-center">
                         <p class="text-center m-0">
-                            от <span class="fs-6 fw-bold text-truncate">@Model.Variability.PassingGrade</span> баллов
+                            от <span class="fs-6 fw-bold text-truncate">@IntToString(@Model.Variability.PassingGrade)</span> баллов
                         </p>
                     </div>
                     <div class="col-sm-auto order-2 order-xl-3 align-self-center">
                         <p class="text-center m-0">
-                            до <span class="fs-6 fw-bold text-truncate">@Model.Variability.NumberSeats</span> мест
+                            <span class="fs-6 fw-bold text-truncate">@IntToString(@Model.Variability.NumberSeats)</span> мест
                         </p>
                     </div>
                     <div class="col-sm-auto order-3 order-xl-4 align-self-center mb-sm-0 mb-2">
                         <p class="text-center m-0">
-                            от <span class="fs-6 fw-bold text-truncate">@Model.Variability.TuitionString</span> руб.
+                            от <span class="fs-6 fw-bold text-truncate">@IntToString(Model.Variability.Tuition)</span> руб.
                         </p>
                     </div>
                 </div>
