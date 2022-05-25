@@ -10,6 +10,14 @@ namespace EasyToEnter.ASP.Data
         // Конструктор
         public EasyToEnterDbContext(DbContextOptions options) : base(options) { }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AddressModel>()
+                .HasMany(a => a.Dormitorys)
+                .WithOne(a => a.AddressModel)
+                .OnDelete(DeleteBehavior.ClientCascade);
+        }
+
         // Таблица "Уровень"
         public DbSet<LevelModel> Level { get; set; }
 

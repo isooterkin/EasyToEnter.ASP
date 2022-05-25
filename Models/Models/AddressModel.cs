@@ -54,5 +54,13 @@ namespace EasyToEnter.ASP.Models.Models
                 return result;
             }
         }
+
+        // Лист моделей "ВУЗ", принадлежащих модели "Адрес"
+        [Display(Name = "ВУЗы выбранного адреса")]
+        public List<UniversityModel>? Universitys { get; set; }
+
+        // Лист моделей "Общежитие", принадлежащих модели "Адрес"
+        [Display(Name = "Общежития выбранного адреса")]
+        public List<DormitoryModel>? Dormitorys { get; set; }
     }
 }
