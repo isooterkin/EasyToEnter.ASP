@@ -520,6 +520,7 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     Housing = null,
                     Building = "А"
                 },
+                // Общежития СПБГТИ ТУ
                 new Class // 65
                 {
                     CityId = 79,
@@ -565,6 +566,175 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     CityId = 79,
                     Street = "Стойкости",
                     House = "21",
+                    Housing = null,
+                    Building = null
+                },
+                // Общежития Политеха
+                new Class // 71
+                {
+                    CityId = 79,
+                    Street = "проспект Лесной",
+                    House = "65/1",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 72
+                {
+                    CityId = 79,
+                    Street = "проспект Лесной",
+                    House = "65/3",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 73
+                {
+                    CityId = 79,
+                    Street = "Парголовская",
+                    House = "11/1",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 74
+                {
+                    CityId = 79,
+                    Street = "Парголовская",
+                    House = "11/3",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 75
+                {
+                    CityId = 79,
+                    Street = "Парголовская",
+                    House = "11/2",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 76
+                {
+                    CityId = 79,
+                    Street = "Харченко",
+                    House = "16",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 77
+                {
+                    CityId = 79,
+                    Street = "проспект Лесной",
+                    House = "67/2",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 78
+                {
+                    CityId = 79,
+                    Street = "Кантемировская",
+                    House = "24",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 79
+                {
+                    CityId = 79,
+                    Street = "Хлопина",
+                    House = "9/2",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 80
+                {
+                    CityId = 79,
+                    Street = "Непокорённых",
+                    House = "6/2",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 81
+                {
+                    CityId = 79,
+                    Street = "Хлопина",
+                    House = "13/1",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 82
+                {
+                    CityId = 79,
+                    Street = "Непокорённых",
+                    House = "8/2",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 83
+                {
+                    CityId = 79,
+                    Street = "Непокорённых",
+                    House = "8/3",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 84
+                {
+                    CityId = 79,
+                    Street = "Непокорённых",
+                    House = "8/4",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 85
+                {
+                    CityId = 79,
+                    Street = "Вавиловых",
+                    House = "10/2",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 86
+                {
+                    CityId = 79,
+                    Street = "Вавиловых",
+                    House = "10/3",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 87
+                {
+                    CityId = 79,
+                    Street = "Гражданский проспект",
+                    House = "30",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 88
+                {
+                    CityId = 79,
+                    Street = "Гражданский проспект",
+                    House = "28",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 89
+                {
+                    CityId = 79,
+                    Street = "Энгельса",
+                    House = "129/4",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 90
+                {
+                    CityId = 79,
+                    Street = "Гастелло",
+                    House = "20",
+                    Housing = null,
+                    Building = null
+                },
+                new Class // 91
+                {
+                    CityId = 79,
+                    Street = "Малодетскосельский",
+                    House = "27",
                     Housing = null,
                     Building = null
                 }
