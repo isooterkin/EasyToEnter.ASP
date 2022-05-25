@@ -7,7 +7,7 @@ namespace EasyToEnter.ASP.Data.Initialization
         public static void Initialize(EasyToEnterDbContext context)
         {
             // Удаляем БД если она существует
-            context.Database.EnsureDeleted();
+            // context.Database.EnsureDeleted();
 
             // Создаем БД если она не существует
             context.Database.EnsureCreated();

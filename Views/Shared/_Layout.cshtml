@@ -1,12 +1,11 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Легко поступить!</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/EasyToEnter.ASP.styles.css" asp-append-version="true" />
 
     @*Select*@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" rel="stylesheet"/>
@@ -14,6 +13,12 @@
 
     @*Иконки*@
     <link rel="stylesheet" href="~/lib/bootstrap-icons-1.8.2/bootstrap-icons.css" asp-append-version="true"/>
+
+    @*Scrollbar*@
+    <link rel="stylesheet" href="~/css/custom-scrollbar.css" asp-append-version="true"/>
+
+    @*Collapse*@
+    <link rel="stylesheet" href="~/css/mobile-collapse.css" asp-append-version="true"/>
 
 </head>
 <body class="" style="background-color: #f1f5f9">
@@ -38,7 +43,7 @@
             </div>
         </nav>
     </header>
-    <div class="container ml-0 mr-0 mt-0 mx-auto">
+    <div class="container ml-0 mr-0 mt-0 mx-auto custom-scrollbar">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -46,17 +51,14 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js"></script>
 
     @*Select*@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
-    @*Подключение подсказок*@
-    <script>
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-    </script>
+    @*ToolTip*@
+    <script src="~/js/activate-tooltip.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
