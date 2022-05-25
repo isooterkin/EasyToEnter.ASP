@@ -5,19 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EasyToEnter.ASP.Models.Models
 {
-    // Модель "Общежитие"
-    [Display(Name = "Общежитие")]
-    [Index(nameof(AddressId), nameof(UniversityId), IsUnique = true)]
-    public class DormitoryModel: ModelWithIdName
+    // Модель "Контактный телефон"
+    [Display(Name = "Контактный телефон")]
+    [Index(nameof(UniversityId), nameof(PhoneNumber), IsUnique = true)]
+    public class PhoneNumberUniversityModel : ModelWithId
     {
-        // Внешний ключ модели "Адрес"
-        [Display(Name = "Адрес")]
-        [Required(ErrorMessage = "Укажите адрес.")]
-        public int AddressId { get; set; }
-        [ForeignKey(nameof(AddressId))]
-        [Display(Name = "Адрес")]
-        public AddressModel? AddressModel { get; set; }
-
         // Внешний ключ модели "ВУЗ"
         [Display(Name = "ВУЗ")]
         [Required(ErrorMessage = "Укажите ВУЗ.")]
@@ -26,11 +18,13 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "ВУЗ")]
         public UniversityModel? UniversityModel { get; set; }
 
+        [Required(ErrorMessage = "Укажите контактный телефон.")]
         [Display(Name = "Контактный телефон")]
         [Phone(ErrorMessage = "Неверный телефон.")]
-        public string? PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = string.Empty;
 
-        [Display(Name = "Размер платы")]
-        public int? Amount { get; set; }
+        [Required(ErrorMessage = "Укажите назначение.")]
+        [Display(Name = "Назначение")]
+        public string Appointment { get; set; } = "Для абитуриентов";
     }
 }

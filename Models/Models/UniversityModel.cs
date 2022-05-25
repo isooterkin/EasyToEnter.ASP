@@ -2,8 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
-
 namespace EasyToEnter.ASP.Models.Models
 {
     // Модель "ВУЗ"
@@ -12,16 +10,12 @@ namespace EasyToEnter.ASP.Models.Models
     {
         [Required(ErrorMessage = "Укажите aббревиатурe.")]
         [Display(Name = "Аббревиатура")]
-        public string Abbreviation { get; set; }
+        public string Abbreviation { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Укажите электронную почту.")]
         [Display(Name = "Электронная почта")]
         [EmailAddress(ErrorMessage = "Неверная электронная почта.")]
-        public string EmailAddress { get; set; }
-        
-        [Required(ErrorMessage = "Укажите адрес.")]
-        [Display(Name = "Адрес")]
-        public string Address { get; set; }
+        public string EmailAddress { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Укажите наличие военной кафедры.")]
         [Display(Name = "Военная кафедра")]
@@ -30,20 +24,15 @@ namespace EasyToEnter.ASP.Models.Models
         [Required(ErrorMessage = "Укажите сайт.")]
         [Display(Name = "Сайт")]
         [Url(ErrorMessage = "Неверная ссылка.")]
-        public string Website { get; set; }
+        public string Website { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Укажите контактный телефон.")]
-        [Display(Name = "Контактный телефон")]
-        [Phone(ErrorMessage = "Неверный телефон.")]
-        public string PhoneNumber { get; set; }
-
-        // Внешний ключ модели "Город"
-        [Display(Name = "Город")]
-        [Required(ErrorMessage = "Укажите город.")]
-        public int CityId { get; set; }
-        [ForeignKey(nameof(CityId))]
-        [Display(Name = "Город")]
-        public CityModel? CityModel { get; set; }
+        // Внешний ключ модели "Адрес"
+        [Display(Name = "Адрес")]
+        [Required(ErrorMessage = "Укажите адрес.")]
+        public int AddressId { get; set; }
+        [ForeignKey(nameof(AddressId))]
+        [Display(Name = "Адрес")]
+        public AddressModel? AddressModel { get; set; }
 
         // Внешний ключ модели "Аккредитация"
         [Display(Name = "Аккредитация")]
@@ -60,5 +49,9 @@ namespace EasyToEnter.ASP.Models.Models
         // Лист моделей "Общежитие", принадлежащих модели "ВУЗ"
         [Display(Name = "Общежития выбранного вуза")]
         public List<DormitoryModel>? Dormitorys { get; set; }
+
+        // Лист моделей "Контактный телефон", принадлежащих модели "ВУЗ"
+        [Display(Name = "Контактные телефоны выбранного вуза")]
+        public List<PhoneNumberUniversityModel>? PhoneNumbers { get; set; }
     }
 }

@@ -55,8 +55,14 @@ namespace EasyToEnter.ASP.Data
         // Таблица "Предмет"
         public DbSet<SubjectModel> Subject { get; set; }
 
+        // Таблица "Адресс"
+        public DbSet<AddressModel> Address { get; set; }
+
         // Таблица "ВУЗ"
         public DbSet<UniversityModel> University { get; set; }
+
+        // Таблица "Контактный номер"
+        public DbSet<PhoneNumberUniversityModel> PhoneNumberUniversity { get; set; }
 
         // Таблица "Общежитие"
         public DbSet<DormitoryModel> Dormitory { get; set; }

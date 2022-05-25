@@ -60,11 +60,17 @@ namespace EasyToEnter.ASP.Data.Initialization
             // Добавляем в базу данных "Уровень - Направленность"
             InitializationLevelFocus.Initialize(context);
 
+            // Добавляем в базу данных "Адрес"
+            InitializationAddress.Initialize(context);
+
             // Добавляем в базу данных "ВУЗ"
             InitializationUniversity.Initialize(context);
 
+            // Добавляем в базу данных "Контактный телефон"
+            InitializationPhoneNumberUniversity.Initialize(context);
+
             // Добавляем в базу данных "Общежитие"
-            // InitializationDormitory.Initialize(context);
+            InitializationDormitory.Initialize(context);
 
             // Добавляем в базу данных "Область - Направленность"
             // InitializationAreaFocus.Initialize(context);

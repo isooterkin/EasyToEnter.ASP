@@ -10,7 +10,7 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
             {
                 new Class // 1
                 {
-                    Name = "Адыгея"
+                    Name = "Республика Адыгея"
                 },
                 new Class // 2
                 {
@@ -18,35 +18,35 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                 },
                 new Class // 3
                 {
-                    Name = "Башкортостан"
+                    Name = "Республика Башкортостан"
                 },
                 new Class // 4
                 {
-                    Name = "Бурятия"
+                    Name = "Республика Бурятия"
                 },
                 new Class // 5
                 {
-                    Name = "Дагестан"
+                    Name = "Республика Дагестан"
                 },
                 new Class // 6
                 {
-                    Name = "Ингушетия"
+                    Name = "Республика Ингушетия"
                 },
                 new Class // 7
                 {
-                    Name = "Кабардино-Балкария"
+                    Name = "Республика Кабардино-Балкария"
                 },
                 new Class // 8
                 {
-                    Name = "Калмыкия"
+                    Name = "Республика Калмыкия"
                 },
                 new Class // 9
                 {
-                    Name = "Карачаево-Черкесия"
+                    Name = "Республика Карачаево-Черкесия"
                 },
                 new Class // 10
                 {
-                    Name = "Карелия"
+                    Name = "Республика Карелия"
                 },
                 new Class // 11
                 {
@@ -58,43 +58,43 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                 },
                 new Class // 13
                 {
-                    Name = "Марий Эл"
+                    Name = "Республика Марий Эл"
                 },
                 new Class // 14
                 {
-                    Name = "Мордовия"
+                    Name = "Республика Мордовия"
                 },
                 new Class // 15
                 {
-                    Name = "Якутия"
+                    Name = "Республика Якутия"
                 },
                 new Class // 16
                 {
-                    Name = "Северная Осетия"
+                    Name = "Республика Северная Осетия"
                 },
                 new Class // 17
                 {
-                    Name = "Татарстан"
+                    Name = "Республика Татарстан"
                 },
                 new Class // 18
                 {
-                    Name = "Тыва"
+                    Name = "Республика Тыва"
                 },
                 new Class // 19
                 {
-                    Name = "Удмуртия"
+                    Name = "Республика Удмуртия"
                 },
                 new Class // 20
                 {
-                    Name = "Хакасия"
+                    Name = "Республика Хакасия"
                 },
                 new Class // 21
                 {
-                    Name = "Чечня"
+                    Name = "Республика Чечня"
                 },
                 new Class // 22
                 {
-                    Name = "Чувашия"
+                    Name = "Республика Чувашия"
                 },
                 new Class // 23
                 {
