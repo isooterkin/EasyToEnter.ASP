@@ -1,5 +1,4 @@
-﻿using EasyToEnter.ASP.Models.Auxiliary;
-using Class = EasyToEnter.ASP.Models.Models.AddressModel;
+﻿using Class = EasyToEnter.ASP.Models.Models.AddressModel;
 
 namespace EasyToEnter.ASP.Data.Initialization.Models
 {
@@ -16,7 +15,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "24-26/49",
                     Housing = "49",
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0,
                 },
                 new Class // 2
                 {
@@ -25,7 +25,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "3",
                     Housing = "1",
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0,
                 },
                 new Class // 3
                 {
@@ -34,7 +35,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "29",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0,
                 },
                 new Class // 4
                 {
@@ -43,7 +45,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "8",
                     Housing = "2",
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 5
                 {
@@ -52,7 +55,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "15",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 6
                 {
@@ -61,7 +65,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "18",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 7
                 {
@@ -70,7 +75,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "40",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 8
                 {
@@ -79,7 +85,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "2-4",
                     Housing = null,
                     Building = "Ц",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 9
                 {
@@ -88,7 +95,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "16",
                     Housing = null,
                     Building = "С",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 10
                 {
@@ -97,7 +105,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "22",
                     Housing = "1",
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 11
                 {
@@ -106,7 +115,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "1",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 12
                 {
@@ -115,7 +125,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "57/43",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 13
                 {
@@ -124,7 +135,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "21",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 14
                 {
@@ -133,7 +145,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "7-9",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 15
                 {
@@ -142,7 +155,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "26",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 16
                 {
@@ -151,7 +165,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "5",
                     Housing = "5",
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 17
                 {
@@ -160,7 +175,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "48",
                     Housing = "6",
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 18
                 {
@@ -169,7 +185,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "9",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 19
                 {
@@ -178,7 +195,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "33",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 20
                 {
@@ -187,7 +205,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "44",
                     Housing = null,
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 21
                 {
@@ -196,7 +215,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "5",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 22
                 {
@@ -205,7 +225,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "52",
                     Housing = null,
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 23
                 {
@@ -214,7 +235,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "13",
                     Housing = null,
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 24
                 {
@@ -223,7 +245,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "49",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 25
                 {
@@ -232,7 +255,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "98",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 26
                 {
@@ -241,7 +265,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "2",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 27
                 {
@@ -250,7 +275,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "3",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 28
                 {
@@ -259,7 +285,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "101",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 29
                 {
@@ -268,7 +295,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "6",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 30
                 {
@@ -277,7 +305,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "2",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 31
                 {
@@ -286,7 +315,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "19",
                     Housing = null,
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 32
                 {
@@ -295,7 +325,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "6",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 33
                 {
@@ -304,7 +335,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "14",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 34
                 {
@@ -313,7 +345,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "5/7",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 35
                 {
@@ -322,7 +355,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "5",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 36
                 {
@@ -331,7 +365,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "17",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 37
                 {
@@ -340,7 +375,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "3",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 38
                 {
@@ -349,7 +385,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "8",
                     Housing = "3",
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 39
                 {
@@ -358,7 +395,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "15",
                     Housing = null,
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 40
                 {
@@ -367,7 +405,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "47",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 41
                 {
@@ -376,7 +415,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "13",
                     Housing = null,
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 42
                 {
@@ -385,7 +425,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "149",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 43
                 {
@@ -394,7 +435,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "5",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 44
                 {
@@ -403,7 +445,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "34",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 45
                 {
@@ -412,7 +455,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "6-8",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 46
                 {
@@ -421,7 +465,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "10",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 47
                 {
@@ -430,7 +475,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "38",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 48
                 {
@@ -439,7 +485,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "35",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 49
                 {
@@ -448,7 +495,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "2",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 50
                 {
@@ -457,7 +505,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "2",
                     Housing = null,
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 51
                 {
@@ -466,7 +515,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "13",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 52
                 {
@@ -475,7 +525,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "15-17",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 53
                 {
@@ -484,7 +535,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "11А",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 54
                 {
@@ -493,7 +545,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "72",
                     Housing = null,
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 55
                 {
@@ -502,7 +555,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "6/1",
                     Housing = null,
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 56
                 {
@@ -511,7 +565,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "2",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 57
                 {
@@ -520,7 +575,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "49",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 58
                 {
@@ -529,7 +585,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "4",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 59
                 {
@@ -538,7 +595,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "5",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 60
                 {
@@ -547,7 +605,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "13",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 61
                 {
@@ -556,7 +615,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "9",
                     Housing = null,
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 62
                 {
@@ -565,7 +625,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "72",
                     Housing = null,
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 63
                 {
@@ -574,7 +635,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "96",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 64
                 {
@@ -583,7 +645,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "114",
                     Housing = null,
                     Building = "А",
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 // Общежития СПБГТИ ТУ
                 new Class // 65
@@ -593,7 +656,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "14",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 66
                 {
@@ -602,7 +666,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "14",
                     Housing = "3",
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 67
                 {
@@ -611,7 +676,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "12",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 68
                 {
@@ -620,7 +686,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "8",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 69
                 {
@@ -629,7 +696,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "1",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 70
                 {
@@ -638,7 +706,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "21",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 // Общежития Политеха
                 new Class // 71
@@ -648,7 +717,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "65/1",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 72
                 {
@@ -657,7 +727,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "65/3",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 73
                 {
@@ -666,7 +737,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "11/1",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 74
                 {
@@ -675,7 +747,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "11/3",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 75
                 {
@@ -684,7 +757,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "11/2",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 76
                 {
@@ -693,7 +767,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "16",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 77
                 {
@@ -702,7 +777,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "67/2",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 78
                 {
@@ -711,7 +787,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "24",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 79
                 {
@@ -720,7 +797,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "9/2",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 80
                 {
@@ -729,7 +807,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "6/2",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 81
                 {
@@ -738,7 +817,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "13/1",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 82
                 {
@@ -747,7 +827,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "8/2",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 83
                 {
@@ -756,7 +837,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "8/3",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 84
                 {
@@ -765,7 +847,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "8/4",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 85
                 {
@@ -774,7 +857,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "10/2",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 86
                 {
@@ -783,7 +867,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "10/3",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 87
                 {
@@ -792,7 +877,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "30",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 88
                 {
@@ -801,7 +887,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "28",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 89
                 {
@@ -810,7 +897,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "129/4",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 90
                 {
@@ -819,7 +907,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "20",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 },
                 new Class // 91
                 {
@@ -828,7 +917,8 @@ namespace EasyToEnter.ASP.Data.Initialization.Models
                     House = "27",
                     Housing = null,
                     Building = null,
-                    Location = new LocationModel(12.0F, 43.3F)
+                    Latitude = 0,
+                    Longitude = 0
                 }
             });
 

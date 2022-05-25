@@ -43,7 +43,6 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                         .ThenInclude(u => u!.AccreditationModel)
                 .Include(v => v.FocusUniversityModel)
                     .ThenInclude(fu => fu!.UniversityModel)
-                        .ThenInclude(u => u!.CityModel)
                 .Include(v => v.FocusUniversityModel)
                     .ThenInclude(fu => fu!.UniversityModel)
                         .ThenInclude(u => u!.Dormitorys)

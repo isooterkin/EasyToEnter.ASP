@@ -1,5 +1,4 @@
-﻿using EasyToEnter.ASP.Models.Auxiliary;
-using EasyToEnter.ASP.Models.Dependence;
+﻿using EasyToEnter.ASP.Models.Dependence;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,7 +9,7 @@ namespace EasyToEnter.ASP.Models.Models
 {
     // Модель "Адрес"
     [Display(Name = "Адрес")]
-    [Index(nameof(CityId), nameof(Street), nameof(House), nameof(Housing), nameof(Building), nameof(Location), IsUnique = true)]
+    [Index(nameof(CityId), nameof(Street), nameof(House), nameof(Housing), nameof(Building), nameof(Latitude), nameof(Longitude), IsUnique = true)]
     public class AddressModel : ModelWithId
     {
         // Внешний ключ модели "Город"
@@ -35,9 +34,13 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Строение")]
         public string? Building { get; set; }
 
-        [Required(ErrorMessage = "Укажите локацию.")]
-        [Display(Name = "Локация")]
-        public LocationModel Location { get; set; }
+        [Required(ErrorMessage = "Укажите широту.")]
+        [Display(Name = "Широта")]
+        public float Latitude { get; set; }
+
+        [Required(ErrorMessage = "Укажите долготу.")]
+        [Display(Name = "Долгота")]
+        public float Longitude { get; set; }
 
         [NotMapped]
         [Display(Name = "Полный адрес")]
