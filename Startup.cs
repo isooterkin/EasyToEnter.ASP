@@ -56,14 +56,14 @@ namespace EasyToEnter.ASP
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "Applicant",
-                    pattern: "Applicant/{controller}/{action}/{id?}",
-                    defaults: new
-                    {
-                        controller = "Applicant",
-                        action = "LevelSelection"
-                    });
+                //endpoints.MapControllerRoute(
+                //    name: "Applicant",
+                //    pattern: "Applicant/{controller}/{action}/{id?}",
+                //    defaults: new
+                //    {
+                //        controller = "Applicant",
+                //        action = "LevelSelection"
+                //    });
 
                 // Формат маршрутизации
                 // [Controller]/[ActionName]/[Parameters]
