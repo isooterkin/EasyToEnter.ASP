@@ -30,6 +30,12 @@ namespace EasyToEnter.ASP.Data
         // Таблица "Направленность"
         public DbSet<FocusModel> Focus { get; set; }
 
+        // Таблица "Тип профессии"
+        public DbSet<TypeProfessionModel> TypeProfession { get; set; }
+
+        // Таблица "Профессия"
+        public DbSet<ProfessionModel> Profession { get; set; }
+
         // Таблица "Наука"
         public DbSet<ScienceModel> Science { get; set; }
 

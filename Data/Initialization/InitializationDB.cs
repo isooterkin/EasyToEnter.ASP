@@ -57,6 +57,12 @@ namespace EasyToEnter.ASP.Data.Initialization
             // Добавляем в базу данных "Направленность"
             InitializationFocus.Initialize(context);
 
+            // Добавляем в базу данных "Тип профессии"
+            InitializationTypeProfession.Initialize(context);
+
+            // Добавляем в базу данных "Профессия"
+            InitializationProfession.Initialize(context);
+
             // Добавляем в базу данных "Уровень - Направленность"
             InitializationLevelFocus.Initialize(context);
 
