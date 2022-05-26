@@ -36,6 +36,9 @@ namespace EasyToEnter.ASP.Data
         // Таблица "Профессия"
         public DbSet<ProfessionModel> Profession { get; set; }
 
+        // Таблица "Профессия - Направленность"
+        public DbSet<ProfessionFocusModel> ProfessionFocus { get; set; }
+
         // Таблица "Наука"
         public DbSet<ScienceModel> Science { get; set; }
 
