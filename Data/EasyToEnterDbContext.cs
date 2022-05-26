@@ -90,6 +90,12 @@ namespace EasyToEnter.ASP.Data
         // Таблица "Направленность ВУЗа"
         public DbSet<FocusUniversityModel> FocusUniversity { get; set; }
 
+        // Таблица "Дисциплина"
+        public DbSet<DisciplineModel> Discipline { get; set; }
+
+        // Таблица "Дисциплина направленности ВУЗа"
+        public DbSet<DisciplineFocusUniversityModel> DisciplineFocusUniversity { get; set; }
+
         // Таблица "Вариативность"
         public DbSet<VariabilityModel> Variability { get; set; }
     }
