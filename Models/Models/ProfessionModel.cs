@@ -8,13 +8,6 @@ namespace EasyToEnter.ASP.Models.Models
     [Display(Name = "Профессия")]
     public class ProfessionModel: ModelWithIdNameDescription
     {
-        // Внешний ключ модели "Направленность"
-        [Display(Name = "Направленность")]
-        public int? FocusId { get; set; }
-        [ForeignKey(nameof(FocusId))]
-        [Display(Name = "Направленность")]
-        public FocusModel? FocusModel { get; set; }
-
         // Внешний ключ модели "Тип профессии"
         [Display(Name = "Тип профессии")]
         [Required(ErrorMessage = "Укажите тип профессии.")]
