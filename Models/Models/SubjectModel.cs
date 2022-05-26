@@ -7,6 +7,8 @@ namespace EasyToEnter.ASP.Models.Models
     [Display(Name = "Предмет")]
     public class SubjectModel: ModelWithIdName
     {
-
+        // Лист моделей "Предмет на замену", принадлежащих модели "Предмет"
+        [Display(Name = "Предметы на замену выбранного предмета")]
+        public List<SubjectReplacementModel>? SubjectReplacements { get; set; }
     }
 }

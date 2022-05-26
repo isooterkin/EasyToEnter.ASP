@@ -16,6 +16,11 @@ namespace EasyToEnter.ASP.Data
                 .HasMany(a => a.Dormitorys)
                 .WithOne(a => a.AddressModel)
                 .OnDelete(DeleteBehavior.ClientCascade);
+
+            modelBuilder.Entity<SubjectModel>()
+                .HasMany(a => a.SubjectReplacements)
+                .WithOne(a => a.SubjectModel)
+                .OnDelete(DeleteBehavior.ClientCascade);
         }
 
         // Таблица "Уровень"
@@ -71,6 +76,12 @@ namespace EasyToEnter.ASP.Data
 
         // Таблица "Предмет"
         public DbSet<SubjectModel> Subject { get; set; }
+
+        // Таблица "Предмет направленности ВУЗа"
+        public DbSet<SubjectFocusUniversityModel> SubjectFocusUniversity { get; set; }
+
+        // Таблица "Предмет на замену"
+        public DbSet<SubjectReplacementModel> SubjectReplacement { get; set; }
 
         // Таблица "Адресс"
         public DbSet<AddressModel> Address { get; set; }

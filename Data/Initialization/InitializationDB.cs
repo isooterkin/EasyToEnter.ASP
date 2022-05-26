@@ -7,7 +7,7 @@ namespace EasyToEnter.ASP.Data.Initialization
         public static void Initialize(EasyToEnterDbContext context)
         {
             // Удаляем БД если она существует
-            // context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
 
             // Создаем БД если она не существует
             context.Database.EnsureCreated();
@@ -15,40 +15,40 @@ namespace EasyToEnter.ASP.Data.Initialization
             // Была ли ранее создана БД
             if (context.Science.Any()) return;
 
-            // Добавляем в базу данных "Специализация"
+            // Добавляем в базу данных "Специализация" +++
             InitializationSpecialization.Initialize(context);
 
-            // Добавляем в базу данных "Область"
+            // Добавляем в базу данных "Область" +++
             InitializationArea.Initialize(context);
 
-            // Добавляем в базу данных "Аккредитация"
+            // Добавляем в базу данных "Аккредитация" +++
             InitializationAccreditation.Initialize(context);
 
-            // Добавляем в базу данных "Формат"
+            // Добавляем в базу данных "Формат" +++
             InitializationFormat.Initialize(context);
 
-            // Добавляем в базу данных "Оплата"
+            // Добавляем в базу данных "Оплата" +++
             InitializationPayment.Initialize(context);
 
-            // Добавляем в базу данных "Форма"
+            // Добавляем в базу данных "Форма" +++
             InitializationForm.Initialize(context);
 
-            // Добавляем в базу данных "Предмет"
+            // Добавляем в базу данных "Предмет" +++
             InitializationSubject.Initialize(context);
 
-            // Добавляем в базу данных "Субъект"
+            // Добавляем в базу данных "Субъект" +++ (можно дополнить)
             InitializationRegion.Initialize(context);
 
-            // Добавляем в базу данных "Город"
+            // Добавляем в базу данных "Город" +++ (можно дополнить)
             InitializationCity.Initialize(context);
 
-            // Добавляем в базу данных "Наука"
+            // Добавляем в базу данных "Наука" +++
             InitializationScience.Initialize(context);
 
-            // Добавляем в базу данных "Уровень"
+            // Добавляем в базу данных "Уровень" +++
             InitializationLevel.Initialize(context);
 
-            // Добавляем в базу данных "Группа"
+            // Добавляем в базу данных "Группа" +++
             InitializationGroup.Initialize(context);
 
             // Добавляем в базу данных "Направление"
@@ -57,14 +57,14 @@ namespace EasyToEnter.ASP.Data.Initialization
             // Добавляем в базу данных "Направленность"
             InitializationFocus.Initialize(context);
 
-            // Добавляем в базу данных "Тип профессии"
+            // Добавляем в базу данных "Тип профессии" +++ (можно дополнить, но незнаю чем)
             InitializationTypeProfession.Initialize(context);
 
-            // Добавляем в базу данных "Профессия"
+            // Добавляем в базу данных "Профессия" +++ (можно дополнить, но незнаю чем)
             InitializationProfession.Initialize(context);
 
             // Добавляем в базу данных "Профессия - Направленность"
-            InitializationProfessionFocus.Initialize(context);
+            // InitializationProfessionFocus.Initialize(context);
 
             // Добавляем в базу данных "Уровень - Направленность"
             InitializationLevelFocus.Initialize(context);
@@ -72,13 +72,13 @@ namespace EasyToEnter.ASP.Data.Initialization
             // Добавляем в базу данных "Адрес"
             InitializationAddress.Initialize(context);
 
-            // Добавляем в базу данных "ВУЗ"
+            // Добавляем в базу данных "ВУЗ" +++ (можно дополнить)
             InitializationUniversity.Initialize(context);
 
             // Добавляем в базу данных "Контактный телефон"
             InitializationPhoneNumberUniversity.Initialize(context);
 
-            // Добавляем в базу данных "Общежитие"
+            // Добавляем в базу данных "Общежитие" +++ (можно дополнить)
             InitializationDormitory.Initialize(context);
 
             // Добавляем в базу данных "Область - Направленность"
@@ -89,6 +89,12 @@ namespace EasyToEnter.ASP.Data.Initialization
 
             // Добавляем в базу данных "Направленность ВУЗа"
             // InitializationFocusUniversity.Initialize(context);
+
+            // Добавляем в базу данных "Предмет направленности ВУЗа"
+            // InitializationSubjectFocusUniversity.Initialize(context);
+
+            // Добавляем в базу данных "Предмет на замену"
+            // InitializationSubjectReplacement.Initialize(context);
 
             // Добавляем в базу данных "Дисциплина"
             // InitializationDiscipline.Initialize(context);
