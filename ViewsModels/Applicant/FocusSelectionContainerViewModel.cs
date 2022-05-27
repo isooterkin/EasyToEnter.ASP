@@ -11,12 +11,12 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
         public readonly List<SelectListItemSubtext> ProfessionSelectListItem;
         public readonly int LevelId;
         public readonly int DirectionId;
-        public readonly string LevelName;
-        public readonly string ScienceName;
-        public readonly string GroupName;
-        public readonly string DirectionName;
-        public readonly int ScienceId;
-        public readonly int GroupId;
+        public readonly string LevelName = string.Empty;
+        public readonly string ScienceName = string.Empty;
+        public readonly string GroupName = string.Empty;
+        public readonly string DirectionName = string.Empty;
+        public readonly int ScienceId = 0;
+        public readonly int GroupId = 0;
 
         public FocusSelectionContainerViewModel(List<VariabilityModel> variabilityList, List<LevelFocusModel> levelFocusList, List<SelectListItemSubtext> areaSelectListItem, List<SelectListItemSubtext> professionSelectListItem, int level, int direction)
         {
@@ -27,24 +27,14 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
             LevelId = level;
             DirectionId = direction;
 
-            if (variabilityList.Any())
-            {
-                LevelName = variabilityList[0].FocusUniversityModel!.LevelFocusModel!.LevelModel!.Name;
-                ScienceName = LevelFocusList[0].FocusModel!.DirectionModel!.GroupModel!.ScienceModel!.Name;
-                GroupName = LevelFocusList[0].FocusModel!.DirectionModel!.GroupModel!.Name;
-                DirectionName = LevelFocusList[0].FocusModel!.DirectionModel!.Name;
-                ScienceId = LevelFocusList[0].FocusModel!.DirectionModel!.GroupModel!.ScienceId;
-                GroupId = LevelFocusList[0].FocusModel!.DirectionModel!.GroupId;
-            }
-            else
-            {
-                LevelName = "???";
-                ScienceName = "???";
-                GroupName = "???";
-                DirectionName = "???";
-                ScienceId = 0;
-                GroupId = 0;
-            }
+            if (!VariabilityList.Any()) return;
+
+            LevelName = variabilityList[0].FocusUniversityModel!.LevelFocusModel!.LevelModel!.Name;
+            ScienceName = LevelFocusList[0].FocusModel!.DirectionModel!.GroupModel!.ScienceModel!.Name;
+            GroupName = LevelFocusList[0].FocusModel!.DirectionModel!.GroupModel!.Name;
+            DirectionName = LevelFocusList[0].FocusModel!.DirectionModel!.Name;
+            ScienceId = LevelFocusList[0].FocusModel!.DirectionModel!.GroupModel!.ScienceId;
+            GroupId = LevelFocusList[0].FocusModel!.DirectionModel!.GroupId;
         }
     }
 }

@@ -16,13 +16,15 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             [FromQuery(Name = "entranceExams")] int? entranceExams,
             [FromQuery(Name = "accreditation")] int? accreditation,
             [FromQuery(Name = "militaryDepartment")] int? militaryDepartment,
-            [FromQuery(Name = "dormitory")] int? dormitory
+            [FromQuery(Name = "dormitory")] int? dormitory,
+            [FromQuery(Name = "specialization")] int? specialization
             )
         {
             if ((levelFocus <= 0) || 
                 (form != null && form <= 0) || 
                 (format != null && format <= 0) || 
-                (payment != null && payment <= 0)) 
+                (payment != null && payment <= 0) ||
+                (specialization != null && specialization <=0))
                 return NotFound();
 
             // Все "Вариативность"
@@ -167,11 +169,22 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                     Subtext = variabilityList.Where(v => v.FocusUniversityModel!.UniversityModel!.Dormitorys!.Any() == d).Count().ToString()
                 }).ToList();
 
-            // Все "Специализация" (specializationUniversity)
-
+            // Все "Специализация" (specialization)
+            List<SpecializationModel> specializationList = variabilityList
+                .SelectMany(v => v.FocusUniversityModel!.UniversityModel!.SpecializationUniversitys!)
+                .Select(su => su.SpecializationModel!)
+                .Distinct()
+                .ToList();
 
             // "Специализация" -> Фильтр
-
+            List<SelectListItemSubtext> specializationSelectListItem = specializationList
+                .Select(s => new SelectListItemSubtext
+                {
+                    Text = s.Name.ToString(),
+                    Value = s.Id.ToString(),
+                    Selected = s.Id == specialization,
+                    Subtext = variabilityList.Where(v => v .FocusUniversityModel!.UniversityModel!.SpecializationUniversitys!.Select(su => su.SpecializationModel).Contains(s)).Count().ToString(),
+                }).ToList();
 
             // Все "Субъект" (region)
 
@@ -266,7 +279,22 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                     .Where(v => v.FocusUniversityModel!.UniversityModel!.Dormitorys!.Any() == (dormitory == 1))
                     .ToList();
 
-            return View(new VariabilitySelectionContainerViewModel(variabilityList, formSelectListItem, formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, accreditationSelectListItem, militaryDepartmentSelectListItem, dormitorySelectListItem, levelFocus));
+            // Фильтрация по "Специализация"
+            if (specialization != null)
+            {
+                // Выбранная "Специализация"
+                SpecializationModel? selectSpecialization = specializationList.FirstOrDefault(s => s.Id == specialization);
+
+                // Если "Специализация" не существует
+                if (selectSpecialization == null) return NotFound();
+
+                // Фильтруем "Вариативность"
+                variabilityList = variabilityList
+                    .Where(v => v.FocusUniversityModel!.UniversityModel!.SpecializationUniversitys!.Select(su => su.SpecializationModel).Contains(selectSpecialization))
+                    .ToList();
+            }
+
+            return View(new VariabilitySelectionContainerViewModel(variabilityList, formSelectListItem, formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, accreditationSelectListItem, militaryDepartmentSelectListItem, dormitorySelectListItem, specializationSelectListItem, levelFocus));
         }
     }
 }
