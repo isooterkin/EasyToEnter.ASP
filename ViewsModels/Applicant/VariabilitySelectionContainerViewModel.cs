@@ -12,6 +12,7 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
         public readonly List<SelectListItemSubtext> EntranceExamsSelectListItem;
         public readonly List<SelectListItemSubtext> AccreditationSelectListItem;
         public readonly List<SelectListItemSubtext> MilitaryDepartmentSelectListItem;
+        public readonly List<SelectListItemSubtext> DormitoryDepartmentSelectListItem;
         public readonly int LevelFocusId;
         public readonly int LevelId;
         public readonly string LevelName;
@@ -23,7 +24,11 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
         public readonly int DirectionId;
         public readonly string FocusName;
 
-        public VariabilitySelectionContainerViewModel(List<VariabilityModel> variabilityList, List<SelectListItemSubtext> formSelectListItem, List<SelectListItemSubtext> formatSelectListItem, List<SelectListItemSubtext> paymentSelectListItem, List<SelectListItemSubtext> entranceExamsSelectListItem, List<SelectListItemSubtext> accreditationSelectListItem, List<SelectListItemSubtext> militaryDepartmentSelectListItem, int levelFocus)
+        public VariabilitySelectionContainerViewModel(List<VariabilityModel> variabilityList, List<SelectListItemSubtext> formSelectListItem, 
+            List<SelectListItemSubtext> formatSelectListItem, List<SelectListItemSubtext> paymentSelectListItem, 
+            List<SelectListItemSubtext> entranceExamsSelectListItem, List<SelectListItemSubtext> accreditationSelectListItem, 
+            List<SelectListItemSubtext> militaryDepartmentSelectListItem, List<SelectListItemSubtext> dormitoryDepartmentSelectListItem, 
+            int levelFocus)
         {
             VariabilityList = variabilityList;
             FormSelectListItem = formSelectListItem;
@@ -32,6 +37,7 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
             EntranceExamsSelectListItem = entranceExamsSelectListItem;
             AccreditationSelectListItem = accreditationSelectListItem;
             MilitaryDepartmentSelectListItem = militaryDepartmentSelectListItem;
+            DormitoryDepartmentSelectListItem = dormitoryDepartmentSelectListItem;
             LevelFocusId = levelFocus;
 
             if (VariabilityList.Count > 0)

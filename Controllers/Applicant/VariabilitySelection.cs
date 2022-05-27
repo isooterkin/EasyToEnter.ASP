@@ -15,7 +15,8 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             [FromQuery(Name = "payment")] int? payment,
             [FromQuery(Name = "entranceExams")] int? entranceExams,
             [FromQuery(Name = "accreditation")] int? accreditation,
-            [FromQuery(Name = "militaryDepartment")] int? militaryDepartment
+            [FromQuery(Name = "militaryDepartment")] int? militaryDepartment,
+            [FromQuery(Name = "dormitory")] int? dormitory
             )
         {
             if ((levelFocus <= 0) || 
@@ -151,10 +152,20 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 }).ToList();
 
             // Все "Общежитие" (dormitory)
-
+            List<bool> dormitoryList = variabilityList
+                .Select(v => v.FocusUniversityModel!.UniversityModel!.Dormitorys!.Any())
+                .Distinct()
+                .ToList();
 
             // "Общежитие" -> Фильтр
-
+            List<SelectListItemSubtext> dormitorySelectListItem = dormitoryList
+                .Select(d => new SelectListItemSubtext
+                {
+                    Text = d == true ? "Есть общежитие" : "Нет общежития",
+                    Value = d == true ? "1" : "0",
+                    Selected = (d == true ? 1 : 0) == dormitory,
+                    Subtext = variabilityList.Where(v => v.FocusUniversityModel!.UniversityModel!.Dormitorys!.Any() == d).Count().ToString()
+                }).ToList();
 
             // Все "Специализация" (specializationUniversity)
 
@@ -171,8 +182,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             // Все "Город" (city)
 
 
-            // "Субъект" -> Фильтр
-
+            // "Город" -> Фильтр
 
 
             // Фильтрация по "Форма"
@@ -249,7 +259,14 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                     .Where(v => v.FocusUniversityModel!.UniversityModel!.MilitaryDepartment == (militaryDepartment == 1))
                     .ToList();
 
-            return View(new VariabilitySelectionContainerViewModel(variabilityList, formSelectListItem, formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, accreditationSelectListItem, militaryDepartmentSelectListItem, levelFocus));
+            // Фильтрация по "Общежитие"
+            if (dormitory != null)
+                // Фильтруем "Вариативность"
+                variabilityList = variabilityList
+                    .Where(v => v.FocusUniversityModel!.UniversityModel!.Dormitorys!.Any() == (dormitory == 1))
+                    .ToList();
+
+            return View(new VariabilitySelectionContainerViewModel(variabilityList, formSelectListItem, formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, accreditationSelectListItem, militaryDepartmentSelectListItem, dormitorySelectListItem, levelFocus));
         }
     }
 }
