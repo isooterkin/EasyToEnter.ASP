@@ -1,25 +1,18 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.FocusSelectionContainerViewModel;
-@using EasyToEnter.ASP.ViewsModels.Components;
+@using EasyToEnter.ASP.ViewsModels.Components
+@using EasyToEnter.ASP.ViewsModels.Components.History;
 
 @{
     ViewData["Title"] = "Выбор направленности";
 }
 
 @*Путь начало*@
-<div class="container bg-light rounded-3 shadow mb-3">
-    <div class="row">
-        <div class="col px-3">
-            <p class="my-1">
-                <small class="text-muted">
-                    <a class="link-secondary" href="/Applicant/LevelSelection">@Model.LevelName</a> / 
-                    <a class="link-secondary" href="/Applicant/ScienceSelection?level=@Model.LevelId">@Model.ScienceName</a> /
-                    <a class="link-secondary" href="/Applicant/GroupSelection?level=@Model.LevelId&science=@Model.ScienceId">@Model.GroupName</a> / 
-                    <a class="link-secondary fw-bold" href="/Applicant/DirectionSelection?level=@Model.LevelId&group=@Model.GroupId">@Model.DirectionName</a>
-                </small>
-            </p>
-        </div>
-    </div>
-</div>
+<vc:history data="new HistoryContainerViewModel(
+    new LevelHistoryViewModel(Model.LevelName),
+    new ScienceHistoryViewModel(Model.ScienceName, Model.LevelId),
+    new GroupHistoryViewModel(Model.GroupName, Model.LevelId, Model.ScienceId),
+    new DirectionHistoryViewModel(Model.DirectionName, Model.LevelId, Model.GroupId)
+)"/>
 @*Путь конец*@
 
 @*Контейнер начало*@
@@ -51,6 +44,7 @@
                                     <input type="hidden" name="level" asp-for="LevelId"/>
                                     <input type="hidden" name="direction" asp-for="DirectionId"/>
                                     <vc:select data='@new SelectViewModel("area", "Область", Model.AreaSelectListItem)'/>
+                                    <vc:select data='@new SelectViewModel("profession", "Профессия", Model.ProfessionSelectListItem)'/>
                                 </div>
                             </div>
                         </form>

@@ -1,0 +1,56 @@
+﻿@model EasyToEnter.ASP.ViewsModels.Components.History.HistoryContainerViewModel;
+
+@*Путь начало*@
+<div class="container bg-light rounded-3 shadow mb-3">
+    <div class="row">
+        <div class="col px-3">
+            <p class="my-1">
+                <small class="text-muted">
+                    @if (Model.LevelHistory == null)
+                    {
+                        <span> </span>
+                    }
+                    else if (Model.ScienceHistory == null)
+                        {
+                            <a class="link-secondary fw-bold" href="@Model.LevelHistory.Href">@Model.LevelHistory.Name</a>
+                        }
+                        else
+                        {
+                            <a class="link-secondary" href="@Model.LevelHistory.Href">@Model.LevelHistory.Name</a> <span>/</span>
+
+                            if (Model.GroupHistory == null)
+                            {
+                                <a class="link-secondary fw-bold" href="@Model.ScienceHistory.Href">@Model.ScienceHistory.Name</a>
+                            }
+                            else
+                            {
+                                <a class="link-secondary" href="@Model.ScienceHistory.Href">@Model.ScienceHistory.Name</a> <span>/</span>
+
+                                if (Model.DirectionHistory == null)
+                                {
+                                    <a class="link-secondary fw-bold" href="@Model.GroupHistory.Href">@Model.GroupHistory.Name</a>
+                                }
+                                else
+                                {
+                                    <a class="link-secondary" href="@Model.GroupHistory.Href">@Model.GroupHistory.Name</a> <span>/</span>
+
+                                    if (Model.FocusHistory == null)
+                                    {
+                                        <a class="link-secondary fw-bold" href="@Model.DirectionHistory.Href">@Model.DirectionHistory.Name</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="link-secondary" href="@Model.DirectionHistory.Href">@Model.DirectionHistory.Name</a> <span>/</span>
+
+                                        // ...
+                                        <a class="link-secondary fw-bold" href="@Model.FocusHistory.Href">@Model.FocusHistory.Name</a>
+                                    }
+                                }
+                            }
+                        }
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
+@*Путь конец*@

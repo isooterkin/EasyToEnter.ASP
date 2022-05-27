@@ -23,5 +23,9 @@ namespace EasyToEnter.ASP.Models.Models
         // Лист моделей "Уровень - Направленность", принадлежащих модели "Направленность"
         [Display(Name = "Уровни - направленности выбранной направленности")]
         public List<LevelFocusModel>? LevelFocuss { get; set; }
+
+        // Лист моделей "Профессия - Направленность", принадлежащих модели "Направленность"
+        [Display(Name = "Профессии - направленности выбранной направленности")]
+        public List<ProfessionFocusModel>? ProfessionFocuss { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
         public readonly List<VariabilityModel> VariabilityList;
         public readonly List<LevelFocusModel> LevelFocusList;
         public readonly List<SelectListItemSubtext> AreaSelectListItem;
+        public readonly List<SelectListItemSubtext> ProfessionSelectListItem;
         public readonly int LevelId;
         public readonly int DirectionId;
         public readonly string LevelName;
@@ -17,11 +18,12 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
         public readonly int ScienceId;
         public readonly int GroupId;
 
-        public FocusSelectionContainerViewModel(List<VariabilityModel> variabilityList, List<LevelFocusModel> levelFocusList, List<SelectListItemSubtext> areaSelectListItem, int level, int direction)
+        public FocusSelectionContainerViewModel(List<VariabilityModel> variabilityList, List<LevelFocusModel> levelFocusList, List<SelectListItemSubtext> areaSelectListItem, List<SelectListItemSubtext> professionSelectListItem, int level, int direction)
         {
             VariabilityList = variabilityList;
             LevelFocusList = levelFocusList;
             AreaSelectListItem = areaSelectListItem;
+            ProfessionSelectListItem = professionSelectListItem;
             LevelId = level;
             DirectionId = direction;
 

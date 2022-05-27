@@ -1,21 +1,14 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.ScienceSelectionContainerViewModel;
+@using EasyToEnter.ASP.ViewsModels.Components.History;
 
 @{
     ViewData["Title"] = "Выбор науки";
 }
 
 @*Путь начало*@
-<div class="container bg-light rounded-3 shadow mb-3">
-    <div class="row">
-        <div class="col px-3">
-            <p class="my-1">
-                <small class="text-muted">
-                    <a class="link-secondary fw-bold" href="/Applicant/LevelSelection">@Model.LevelName</a>
-                </small>
-            </p>
-        </div>
-    </div>
-</div>
+<vc:history data="new HistoryContainerViewModel(
+    new LevelHistoryViewModel(Model.LevelName)
+)"/>
 @*Путь конец*@
 
 <vc:science-container data="@Model"/>
