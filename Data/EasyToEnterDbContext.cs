@@ -12,15 +12,7 @@ namespace EasyToEnter.ASP.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<AddressModel>()
-            //    .HasMany(a => a.Dormitorys)
-            //    .WithOne(a => a.AddressModel)
-            //    .OnDelete(DeleteBehavior.SetNull);
 
-            //modelBuilder.Entity<SubjectModel>()
-            //    .HasMany(a => a.SubjectReplacements)
-            //    .WithOne(a => a.SubjectModel)
-            //    .OnDelete(DeleteBehavior.ClientCascade);
         }
 
         // Таблица "Уровень"
