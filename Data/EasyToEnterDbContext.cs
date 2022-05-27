@@ -112,5 +112,8 @@ namespace EasyToEnter.ASP.Data
 
         // Таблица "Вариативность"
         public DbSet<VariabilityModel> Variability { get; set; }
+
+        // Таблица "История вариативности"
+        public DbSet<HistoryVariabilityModel> HistoryVariability { get; set; }
     }
 }

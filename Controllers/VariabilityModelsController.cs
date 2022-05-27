@@ -63,7 +63,7 @@ namespace EasyToEnter.ASP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PassingGrade,Tuition,NumberSeats,PeriodStudy,EntranceExams,FormId,PaymentId,FormatId,FocusUniversityId,Id")] VariabilityModel variabilityModel)
+        public async Task<IActionResult> Create([Bind("EntranceExams,FormId,PaymentId,FormatId,FocusUniversityId,Id")] VariabilityModel variabilityModel)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace EasyToEnter.ASP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PassingGrade,Tuition,NumberSeats,PeriodStudy,EntranceExams,FormId,PaymentId,FormatId,FocusUniversityId,Id")] VariabilityModel variabilityModel)
+        public async Task<IActionResult> Edit(int id, [Bind("EntranceExams,FormId,PaymentId,FormatId,FocusUniversityId,Id")] VariabilityModel variabilityModel)
         {
             if (id != variabilityModel.Id)
             {

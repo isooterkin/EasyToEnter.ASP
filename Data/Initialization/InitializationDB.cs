@@ -104,6 +104,9 @@ namespace EasyToEnter.ASP.Data.Initialization
 
             // Добавляем в базу данных "Вариативность"
             // InitializationVariability.Initialize(context);
+
+            // Добавляем в базу данных "История вариативности"
+            // InitializationHistoryVariability.Initialize(context);
         }
     }
 }

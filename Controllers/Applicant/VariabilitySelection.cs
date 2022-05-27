@@ -29,6 +29,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .Include(v => v.FormModel)
                 .Include(v => v.FormatModel)
                 .Include(v => v.PaymentModel)
+                .Include(v => v.HistoryVariabilitys)
                 .Include(v => v.FocusUniversityModel)
                     .ThenInclude(fu => fu!.LevelFocusModel)
                         .ThenInclude(lf => lf!.LevelModel)

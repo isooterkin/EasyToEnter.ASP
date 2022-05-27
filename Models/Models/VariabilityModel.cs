@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Globalization;
 
 namespace EasyToEnter.ASP.Models.Models
 {
@@ -11,22 +10,6 @@ namespace EasyToEnter.ASP.Models.Models
     [Index(nameof(FormId), nameof(FocusUniversityId), nameof(PaymentId), nameof(FormatId), IsUnique = true)]
     public class VariabilityModel: ModelWithId
     {
-        [Required(ErrorMessage = "Укажите проходной балл.")]
-        [Display(Name = "Проходной балл")]
-        public int PassingGrade { get; set; }
-
-        [Required(ErrorMessage = "Укажите стоимость обучения.")]
-        [Display(Name = "Стоимость обучения")]
-        public int Tuition { get; set; } = 0;
-
-        [Required(ErrorMessage = "Укажите количество мест.")]
-        [Display(Name = "Количество мест")]
-        public int NumberSeats { get; set; }
-
-        [Required(ErrorMessage = "Укажите период обучения.")]
-        [Display(Name = "Период обучения")]
-        public int PeriodStudy { get; set; }
-
         [Required(ErrorMessage = "Укажите наличие вступительных экзаменов.")]
         [Display(Name = "Вступительные экзамены")]
         public bool EntranceExams { get; set; } = false;
@@ -62,5 +45,13 @@ namespace EasyToEnter.ASP.Models.Models
         [ForeignKey(nameof(FocusUniversityId))]
         [Display(Name = "Направленность ВУЗа")]
         public FocusUniversityModel? FocusUniversityModel { get; set; }
+
+        // Лист моделей "История вариативности", принадлежащих модели "Вариативность"
+        [Display(Name = "Истории вариативности выбранной вариативности")]
+        public List<HistoryVariabilityModel>? HistoryVariabilitys { get; set; }
+
+        [NotMapped]
+        [Display(Name = "История за текущий год")]
+        public HistoryVariabilityModel? YearHistoryVariability => HistoryVariabilitys?.Any() == true ? HistoryVariabilitys.OrderBy(x => x.Year).First() : null;
     }
 }

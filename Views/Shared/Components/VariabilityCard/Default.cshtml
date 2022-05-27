@@ -83,17 +83,17 @@
                     </div>
                     <div class="col-sm-auto order-1 order-xl-2 align-self-center">
                         <p class="text-center m-0">
-                            от <span class="fs-6 fw-bold text-truncate">@IntToString(@Model.Variability.PassingGrade)</span> баллов
+                            от <span class="fs-6 fw-bold text-truncate">@IntToString(@Model.Variability.YearHistoryVariability?.PassingGrade)</span> баллов
                         </p>
                     </div>
                     <div class="col-sm-auto order-2 order-xl-3 align-self-center">
                         <p class="text-center m-0">
-                            <span class="fs-6 fw-bold text-truncate">@IntToString(@Model.Variability.NumberSeats)</span> мест
+                            <span class="fs-6 fw-bold text-truncate">@IntToString(@Model.Variability.YearHistoryVariability?.NumberSeats)</span> мест
                         </p>
                     </div>
                     <div class="col-sm-auto order-3 order-xl-4 align-self-center mb-sm-0 mb-2">
                         <p class="text-center m-0">
-                            от <span class="fs-6 fw-bold text-truncate">@IntToString(Model.Variability.Tuition)</span> руб.
+                            от <span class="fs-6 fw-bold text-truncate">@IntToString(Model.Variability.YearHistoryVariability?.Tuition)</span> руб.
                         </p>
                     </div>
                 </div>
