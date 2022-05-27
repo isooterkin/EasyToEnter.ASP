@@ -1,4 +1,5 @@
 ﻿using EasyToEnter.ASP.Data.Initialization.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EasyToEnter.ASP.Data.Initialization
 {
@@ -9,8 +10,11 @@ namespace EasyToEnter.ASP.Data.Initialization
             // Удаляем БД если она существует
             // context.Database.EnsureDeleted();
 
+            // Миграция
+            context.Database.Migrate();
+
             // Создаем БД если она не существует
-            context.Database.EnsureCreated();
+            // context.Database.EnsureCreated();
 
             // Была ли ранее создана БД
             if (context.Science.Any()) return;
