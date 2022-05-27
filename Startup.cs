@@ -18,8 +18,9 @@ namespace EasyToEnter.ASP
             void configureDbContext(DbContextOptionsBuilder o)
             {
                 // Строка подключения к БД
-                o.UseSqlServer(Configuration.GetConnectionString("MSSQL"));
-                // o.UseMySQL(Configuration.GetConnectionString("MYSQL"));
+                //o.UseSqlServer(Configuration.GetConnectionString("MSSQL"));
+                //o.UseMySQL(Configuration.GetConnectionString("MYSQL"));
+                o.UseNpgsql(Configuration.GetConnectionString("PGSQL"));
 
                 // Убрать предупреждение о большом количестве Include
                 o.ConfigureWarnings(x => x.Ignore(RelationalEventId.MultipleCollectionIncludeWarning));
