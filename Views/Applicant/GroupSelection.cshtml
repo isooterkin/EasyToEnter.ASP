@@ -6,10 +6,7 @@
 }
 
 @*Путь начало*@
-<vc:history data="new HistoryContainerViewModel(
-    new LevelHistoryViewModel(Model.LevelName),
-    new ScienceHistoryViewModel(Model.ScienceName, Model.LevelId)
-)"/>
+<vc:history data="new HistoryContainerViewModel(Model)"/>
 @*Путь конец*@
 
 <vc:group-container data="@Model"/>

@@ -7,12 +7,7 @@
 }
 
 @*Путь начало*@
-<vc:history data="new HistoryContainerViewModel(
-    new LevelHistoryViewModel(Model.LevelName),
-    new ScienceHistoryViewModel(Model.ScienceName, Model.LevelId),
-    new GroupHistoryViewModel(Model.GroupName, Model.LevelId, Model.ScienceId),
-    new DirectionHistoryViewModel(Model.DirectionName, Model.LevelId, Model.GroupId)
-)"/>
+<vc:history data="new HistoryContainerViewModel(Model)"/>
 @*Путь конец*@
 
 @*Контейнер начало*@
