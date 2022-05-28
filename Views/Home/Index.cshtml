@@ -1,4 +1,6 @@
-﻿@{
+﻿@using EasyToEnter.ASP.ViewsModels.Components.Maps;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -57,7 +59,7 @@
         </div>
         @*Фильтр начало*@
         <div class="col-xl col-md-12 mb-3 order-xl-last order-first">
-            <div class="col rounded-3 bg-light shadow px-3">
+            <div class="col rounded-3 bg-light shadow px-3 mb-3">
                 <div class="col position-relative">
                     <div class="row">
                         <div class="col p-0 my-1">
@@ -73,6 +75,9 @@
                         (тут будут фильтры)
                     </div>
                 </div>
+            </div>
+            <div class="col rounded-3 bg-light shadow px-0">
+                <vc:map-card data="@new MapCardViewModel()"></vc:map-card>
             </div>
         </div>
         @*Фильтр конец*@

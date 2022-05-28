@@ -1,0 +1,41 @@
+﻿@model EasyToEnter.ASP.ViewsModels.Components.Maps.MapCardViewModel;
+
+<div class="px-0 mt-3">
+    <div id="map" style="height: 100px; resize: vertical" class="rounded-3 overflow-hidden w-auto bg-light"/>
+</div>
+
+@*@{
+    string asdfa = "var a = 0;";
+}*@
+
+<script type="text/javascript">
+
+    ymaps.ready(init);
+ 
+    function init() {
+        var myMap = new ymaps.Map("map", {
+            center: [55.76, 37.64],
+            zoom: 12,
+            controls: [
+                'fullscreenControl', // Полноэкранный режим
+            ]
+        },{
+            autoFitToViewport: 'always',
+            searchControlProvider: 'yandex#search'
+        });
+        
+        var myPlacemark = new ymaps.Placemark([55.76, 37.64], {
+            hintContent: 'Содержимое всплывающей подсказки',
+            balloonContent: 'Содержимое балуна'
+        });
+ 
+        myMap.geoObjects.add(myPlacemark);
+        myMap.container.fitToViewport();
+    }
+</script>
+
+<style>
+    [class*="copyrights-pane"] {
+        display: none !important;
+    }
+</style>
