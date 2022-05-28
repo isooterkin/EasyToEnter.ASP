@@ -1,5 +1,6 @@
 using EasyToEnter.ASP.Data;
-using EasyToEnter.ASP.Data.Initialization;
+using static EasyToEnter.ASP.Data.Initialization.Initialization;
+using EasyToEnter.ASP.HostBuilders;
 
 namespace EasyToEnter.ASP
 {
@@ -10,30 +11,17 @@ namespace EasyToEnter.ASP
             IHost Host = CreateHostBuilder(arguments).Build();
 
             // Создание базы данных
-            CreateDB(Host);
+            Initialize(Host);
 
             Host.Run();
         }
 
-        private static void CreateDB(IHost Host)
+        public static IHostBuilder CreateHostBuilder(string[] arguments)
         {
-            using IServiceScope ServiceScope = Host.Services.CreateScope();
-            IServiceProvider ServiceProvider = ServiceScope.ServiceProvider;
-            try
-            {
-                // Создание Context
-                EasyToEnterDbContext Context = ServiceProvider.GetRequiredService<EasyToEnterDbContext>();
-
-                // Инициализация базы данных
-                InitializationDB.Initialize(Context);
-            }
-            catch (Exception Exception)
-            {
-                ILogger Logger = ServiceProvider.GetRequiredService<ILogger<Program>>();
-                Logger.LogError(Exception, "Произошла ошибка при создании базы данных.");
-            }
+            return Host
+                .CreateDefaultBuilder(arguments)
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
+                .ConfigureDB();
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] arguments) => Host.CreateDefaultBuilder(arguments).ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
 }
