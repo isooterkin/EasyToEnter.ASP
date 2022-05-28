@@ -48,6 +48,7 @@ namespace EasyToEnter.ASP.ViewsModels.Components.History
                     break;
                 case var value when value == typeof(LevelSelectionContainerViewModel):
                     break;
+                default: break;
             }
         }
 
