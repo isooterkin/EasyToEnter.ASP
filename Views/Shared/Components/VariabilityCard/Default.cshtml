@@ -24,7 +24,7 @@
                     }
 
                     @*Значек "Наличие общежития"*@
-                    @if (Model.Variability.FocusUniversityModel.UniversityModel.MilitaryDepartment)
+                    @if (Model.Variability.FocusUniversityModel.UniversityModel.Dormitorys!.Any())
                     {
                     <a class="col-auto m-0 p-0 ml-2 align-self-end" data-bs-toggle="tooltip" title="Наличие общежития" href="#">
                         <span class="fs-5 bi bi-building text-warning"/>

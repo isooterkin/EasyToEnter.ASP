@@ -52,6 +52,6 @@ namespace EasyToEnter.ASP.Models.Models
 
         [NotMapped]
         [Display(Name = "История за текущий год")]
-        public HistoryVariabilityModel? YearHistoryVariability => HistoryVariabilitys?.Any() == true ? HistoryVariabilitys.OrderBy(x => x.Year).First() : null;
+        public HistoryVariabilityModel? YearHistoryVariability => HistoryVariabilitys?.Any() == true ? HistoryVariabilitys.OrderBy(x => x.Year).Last() : null;
     }
 }
