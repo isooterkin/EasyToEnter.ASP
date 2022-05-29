@@ -1,18 +1,14 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Components.Maps.MapCardViewModel;
-@using EasyToEnter.ASP.ViewsModels.Components.History;
-@using Newtonsoft.Json;
-
+@using EasyToEnter.ASP.ViewsModels.Components.Maps;
 
 <div class="px-0 mt-3">
     <div id="map" style="height: 100px; resize: vertical" class="rounded-3 overflow-hidden w-auto bg-light"/>
 </div>
 
 <script>
-
     ymaps.ready(init);
         
     function init() {
-
         var myMap = new ymaps.Map("map", {
             center: [55.76, 37.64],
             zoom: 2,
@@ -25,21 +21,14 @@
         @for(var i = 0; i < Model.UniversityModelList.Count; i++)
         {
             @:myMap.geoObjects.add(new ymaps.Placemark([@Model.UniversityModelList[i]!.AddressModel!.Latitude, @Model.UniversityModelList[i]!.AddressModel!.Longitude], {
-                @:hintContent: `@{<vc:history data="new HistoryContainerViewModel(null)"></vc:history>}`,
-                @:balloonContent: `@{<vc:history data="new HistoryContainerViewModel(null)"></vc:history>}`
+                @:hintContent: `@{<vc:university-hint data="new UniversityViewModel(Model.UniversityModelList[i])"/>}`,
+                @:balloonContent: `@{<vc:university-balloon data="new UniversityViewModel(Model.UniversityModelList[i])"/>}`
             @:}));
         }
 
         myMap.container.fitToViewport();
-
     }
-
 </script>
-
-@*        var myPlacemark = new ymaps.Placemark([55.76, 37.64], {
-            hintContent: `@{<vc:history data="new HistoryContainerViewModel(null)"></vc:history>}`,
-            balloonContent: `@{<vc:history data="new HistoryContainerViewModel(null)"></vc:history>}`,
-        });*@
 
 <style>
     [class*="copyrights-pane"] {
