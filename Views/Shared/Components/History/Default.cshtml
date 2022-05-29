@@ -6,11 +6,15 @@
         <div class="col px-3">
             <p class="my-1">
                 <small class="text-muted">
-                    @if (Model.LevelHistory == null)
+                    @if (Model.CorrectLink == false)
                     {
-                        <span> </span>
+                        <span>Некоректная ссылка</span>
                     }
-                    else if (Model.ScienceHistory == null)
+                    else if (Model.LevelHistory == null)
+                        {
+                            <span>Выберите уровень подготовки</span>
+                        }
+                        else if (Model.ScienceHistory == null)
                         {
                             <a class="link-secondary fw-bold" href="@Model.LevelHistory.Href">@Model.LevelHistory.Name</a>
                         }
