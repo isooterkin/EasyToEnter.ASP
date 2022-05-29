@@ -36,10 +36,14 @@ namespace EasyToEnter.ASP.Models.Models
 
         [Required(ErrorMessage = "Укажите широту.")]
         [Display(Name = "Широта")]
+        [Range(typeof(float), "-90.0", "90.0", ErrorMessage = "Диапазон широты от -90,0 до 90,00")]
+        [DisplayFormat(DataFormatString = @"{0:0.00}", ApplyFormatInEditMode = true)]
         public float Latitude { get; set; }
 
         [Required(ErrorMessage = "Укажите долготу.")]
         [Display(Name = "Долгота")]
+        [Range(typeof(float), "-90.0", "90.0", ErrorMessage = "Диапазон долготы от -180,0 до 180,00")]
+        [DisplayFormat(DataFormatString = @"{0:0.00}", ApplyFormatInEditMode = true)]
         public float Longitude { get; set; }
 
         [NotMapped]

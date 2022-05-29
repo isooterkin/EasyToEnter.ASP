@@ -4,8 +4,10 @@ namespace EasyToEnter.ASP.ViewsModels.Components.History
 {
     public class HistoryContainerViewModel
     {
-        public HistoryContainerViewModel(object viewModel)
+        public HistoryContainerViewModel(object? viewModel)
         {
+            if (viewModel == null) return;
+            
             switch (viewModel.GetType())
             {
                 case var value when value == typeof(VariabilitySelectionContainerViewModel):

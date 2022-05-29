@@ -1,4 +1,7 @@
-﻿namespace EasyToEnter.ASP
+﻿using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+
+namespace EasyToEnter.ASP
 {
     public class Startup
     {
@@ -16,6 +19,13 @@
             }
             app.UseHttpsRedirection();
 
+            app.UseRequestLocalization(options => options
+                .AddSupportedCultures(new string[] { "en-GB", "en-US" })
+                .AddSupportedUICultures(new string[] { "en-GB", "en-US" })
+                .SetDefaultCulture("en-GB")
+                .RequestCultureProviders
+                .Insert(0, new CustomRequestCultureProvider(context => Task.FromResult(new ProviderCultureResult("en-GB"))!)));
+
             // добавляем поддержку статических файлов
             app.UseStaticFiles();
 
@@ -26,15 +36,6 @@
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllerRoute(
-                //    name: "Applicant",
-                //    pattern: "Applicant/{controller}/{action}/{id?}",
-                //    defaults: new
-                //    {
-                //        controller = "Applicant",
-                //        action = "LevelSelection"
-                //    });
-
                 // Формат маршрутизации
                 // [Controller]/[ActionName]/[Parameters]
                 endpoints.MapControllerRoute(

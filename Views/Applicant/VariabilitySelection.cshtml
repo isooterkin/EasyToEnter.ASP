@@ -2,6 +2,8 @@
 @using EasyToEnter.ASP.ViewsModels.Components;
 @using EasyToEnter.ASP.ViewsModels.Components.History;
 @using EasyToEnter.ASP.ViewsModels.Components.Maps;
+@using System.Text.Json;
+@using System.Text.Json.Serialization;
 
 @{
     ViewData["Title"] = "Вырианты обучения";
@@ -12,7 +14,7 @@
 @*Путь конец*@
 
 @*Карта начало*@
-<vc:map-card data="@new MapCardViewModel()"/>
+<vc:map-card data="@new MapCardViewModel(Model.VariabilityList.Select(v => v.FocusUniversityModel!.UniversityModel!).ToList())"/>
 @*Карта конец*@
 
 <div class="container p-0 mt-3">

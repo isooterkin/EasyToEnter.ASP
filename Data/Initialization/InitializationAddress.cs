@@ -15,8 +15,8 @@ namespace EasyToEnter.ASP.Data.Initialization
                     House = "24-26/49",
                     Housing = "49",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0,
+                    Latitude = 59.917485f,
+                    Longitude = 30.318783f,
                 },
                 new Class // 2
                 {

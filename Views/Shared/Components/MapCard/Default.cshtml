@@ -1,38 +1,45 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Components.Maps.MapCardViewModel;
+@using EasyToEnter.ASP.ViewsModels.Components.History;
+@using Newtonsoft.Json;
+
 
 <div class="px-0 mt-3">
     <div id="map" style="height: 100px; resize: vertical" class="rounded-3 overflow-hidden w-auto bg-light"/>
 </div>
 
-@*@{
-    string asdfa = "var a = 0;";
-}*@
-
-<script type="text/javascript">
+<script>
 
     ymaps.ready(init);
- 
+        
     function init() {
+
         var myMap = new ymaps.Map("map", {
             center: [55.76, 37.64],
-            zoom: 12,
-            controls: [
-                'fullscreenControl', // Полноэкранный режим
-            ]
+            zoom: 2,
+            controls: ['fullscreenControl']
         },{
             autoFitToViewport: 'always',
             searchControlProvider: 'yandex#search'
         });
         
-        var myPlacemark = new ymaps.Placemark([55.76, 37.64], {
-            hintContent: 'Содержимое всплывающей подсказки',
-            balloonContent: 'Содержимое балуна'
-        });
- 
-        myMap.geoObjects.add(myPlacemark);
+        @for(var i = 0; i < Model.UniversityModelList.Count; i++)
+        {
+            @:myMap.geoObjects.add(new ymaps.Placemark([@Model.UniversityModelList[i]!.AddressModel!.Latitude, @Model.UniversityModelList[i]!.AddressModel!.Longitude], {
+                @:hintContent: `@{<vc:history data="new HistoryContainerViewModel(null)"></vc:history>}`,
+                @:balloonContent: `@{<vc:history data="new HistoryContainerViewModel(null)"></vc:history>}`
+            @:}));
+        }
+
         myMap.container.fitToViewport();
+
     }
+
 </script>
+
+@*        var myPlacemark = new ymaps.Placemark([55.76, 37.64], {
+            hintContent: `@{<vc:history data="new HistoryContainerViewModel(null)"></vc:history>}`,
+            balloonContent: `@{<vc:history data="new HistoryContainerViewModel(null)"></vc:history>}`,
+        });*@
 
 <style>
     [class*="copyrights-pane"] {
