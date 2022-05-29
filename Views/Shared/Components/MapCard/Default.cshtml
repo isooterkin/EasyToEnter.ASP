@@ -10,19 +10,27 @@
         
     function init() {
         var myMap = new ymaps.Map("map", {
-            center: [55.76, 37.64],
-            zoom: 2,
+            center: [59.913752, 30.341754],
+            zoom: 8,
             controls: ['fullscreenControl']
         },{
             autoFitToViewport: 'always',
             searchControlProvider: 'yandex#search'
         });
         
+        // var myIcon = ymaps.templateLayoutFactory.createClass('<div class="container"><div class="row"><div class="col"><i class="bi bi-bank"></i></div>' + '<div class="col">{{ properties.iconCaption }}' + '</div></div></div>');
+
         @for(var i = 0; i < Model.UniversityModelList.Count; i++)
         {
             @:myMap.geoObjects.add(new ymaps.Placemark([@Model.UniversityModelList[i]!.AddressModel!.Latitude, @Model.UniversityModelList[i]!.AddressModel!.Longitude], {
+                @:iconCaption: '@Model.UniversityModelList[i].Name',
                 @:hintContent: `@{<vc:university-hint data="new UniversityViewModel(Model.UniversityModelList[i])"/>}`,
                 @:balloonContent: `@{<vc:university-balloon data="new UniversityViewModel(Model.UniversityModelList[i])"/>}`
+            @:}, {
+                @:iconLayout: 'default#image',
+                @:iconImageHref: '..\\image\\university.svg',
+                @:iconImageSize: [50, 50],
+                @:iconImageOffset: [-25, -25]
             @:}));
         }
 
