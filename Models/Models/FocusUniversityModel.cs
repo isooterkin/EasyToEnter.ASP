@@ -30,5 +30,9 @@ namespace EasyToEnter.ASP.Models.Models
         // Лист моделей "Вариативность", принадлежащих модели "Направление ВУЗа"
         [Display(Name = "Вариативности выбранного направления ВУЗа")]
         public List<VariabilityModel>? Variabilitys { get; set; }
+
+        // Лист моделей "Дисциплина направленности ВУЗа", принадлежащих модели "Направленность ВУЗа"
+        [Display(Name = "Общежития выбранного адреса")]
+        public List<DisciplineFocusUniversityModel>? DisciplineFocusUniversitys { get; set; }
     }
 }
