@@ -14,7 +14,7 @@
 
     @*История начало*@
     <div class="row">
-        <vc:discipline-container data="Model.FocusUniversityModel!.DisciplineFocusUniversitys"/>
+        <vc:history-container data="Model.HistoryVariabilitys?.OrderByDescending(hv => hv.Year).ToList()"/>
     </div>
     @*История конец*@
 

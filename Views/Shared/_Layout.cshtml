@@ -27,8 +27,12 @@
     @*Collapse*@
     <link rel="stylesheet" href="~/css/mobile-collapse.css" asp-append-version="true"/>
 
+    @*Carousel*@
+    <link rel="stylesheet" href="~/css/custom-carousel.css" asp-append-version="true"/>
+
 </head>
 <body class="pt-5" style="background-color: #f1f5f9">
+
     <header>
         <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow rounded-3">
             <div class="container-fluid">
@@ -52,6 +56,7 @@
             </div>
         </nav>
     </header>
+
     <div class="container mt-0 mx-auto mt-4">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -73,6 +78,9 @@
 
     @*ToolTip*@
     <script src="~/js/activate-tooltip.js"></script>
+
+    @*Carousel*@
+    <script src="~/js/custom-carousel.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
