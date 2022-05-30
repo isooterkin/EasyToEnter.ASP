@@ -29,7 +29,7 @@ namespace EasyToEnter.ASP.ViewsModels.Components.Path
                         GroupHistory = new GroupPathViewModel(levelFocusModel.GroupFullName, variability.FocusUniversityModel!.LevelFocusModel!.LevelId, levelFocusModel.FocusModel!.DirectionModel!.GroupModel!.ScienceId);
                         DirectionHistory = new DirectionPathViewModel(levelFocusModel.DirectionFullName, variability.FocusUniversityModel!.LevelFocusModel!.LevelId, levelFocusModel.FocusModel!.DirectionModel!.GroupId);
                         FocusHistory = new FocusPathViewModel(levelFocusModel.FocusFullName, variability.FocusUniversityModel!.LevelFocusModel!.LevelId, levelFocusModel.FocusModel!.DirectionId);
-                        VariabilityHistory = new VariabilityPathViewModel(variability.FocusUniversityModel!.UniversityModel!.Name, variability.FocusUniversityModel.LevelFocusId);
+                        VariabilityHistory = new VariabilityPathViewModel(variability.FocusUniversityModel!.UniversityModel!.Name, variability.FocusUniversityModel.LevelFocusId, variability.FocusUniversityModel.UniversityModel.Id);
                         CorrectLink = true;
                     }
                     break;

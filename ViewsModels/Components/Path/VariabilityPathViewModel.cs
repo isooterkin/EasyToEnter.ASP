@@ -2,10 +2,13 @@
 {
     public class VariabilityPathViewModel : PathViewModel
     {
-        public VariabilityPathViewModel(string variabilityName, int levelFocusId)
+        public readonly int UniversityId;
+
+        public VariabilityPathViewModel(string variabilityName, int levelFocusId, int universityId)
         {
             Name = variabilityName;
             Href = $"/Applicant/VariabilitySelection?levelFocus={levelFocusId}";
+            UniversityId = universityId;
         }
     }
 }

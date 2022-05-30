@@ -162,8 +162,10 @@
     else
     {
         <div class="row px-3 py-1">
-            <small class="text-center fw-bold text-muted">
-                @Model.VariabilityHistory.Name
+            <small class="text-center fw-bold">
+                <a class="text-decoration-none text-muted" href="/Applicant/University?university=@Model.VariabilityHistory.UniversityId">
+                    @Model.VariabilityHistory.Name
+                </a>
             </small>
         </div>
     }
