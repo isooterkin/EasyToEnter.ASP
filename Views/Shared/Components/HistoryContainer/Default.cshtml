@@ -2,7 +2,7 @@
 @using EasyToEnter.ASP.Models.Models;
 @using static EasyToEnter.ASP.Tools.PredictorHistory;
 
-<div id="carouselExampleControls" class="carousel px-3 m-0" data-bs-ride="carousel">
+<div id="carouselExampleControls" class="carousel m-0" data-bs-ride="carousel">
     <div class="carousel-inner">
         <vc:history-card data="Predict(Model)"/>
         @for (var i = 0; i < Model.Count; i++)

@@ -1,10 +1,12 @@
 ﻿@model EasyToEnter.ASP.Models.Models.DisciplineFocusUniversityModel;
 
-<div class="row">
-    <div class="col">
-        @Model.DisciplineModel!.Name
-    </div>
-    <div class="col">
-        @Model.DisciplineCredit
+<div class="icon-card rounded-3 shadow-sm bg-light mb-2">
+    <div class="row p-2">
+        <div class="col text-start text-truncate">
+            @Model.DisciplineModel!.Name
+        </div>
+        <div class="col-auto text-end">
+            @Model.DisciplineCredit <small class="text-muted">з.е.</small>
+        </div>
     </div>
 </div>
