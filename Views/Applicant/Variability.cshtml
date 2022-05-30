@@ -9,8 +9,6 @@
 <vc:path data="new PathContainerViewModel(Model)"/>
 @*Путь конец*@
 
-@*Вариативность начало*@
-
 @*История начало*@
 <div class="container p-0 mt-3">
     <vc:history-container data="Model.HistoryVariabilitys?.OrderByDescending(hv => hv.Year).ToList()"/>
@@ -22,7 +20,7 @@
     <div class="icon-card rounded-3 shadow-sm bg-light">
         <div class="text-center py-2">
             <a class="text-decoration-none text-dark" data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseExample">
-                Дисциплины
+                Дисциплины <small class="text-muted">(@Model.FocusUniversityModel!.DisciplineFocusUniversitys!.Count)</small>
             </a>
         </div>
     </div>
@@ -35,5 +33,3 @@
     </div>
 </div>
 @*Дисциплины конец*@
-
-@*Вариативность начало*@
