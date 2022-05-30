@@ -14,5 +14,18 @@ namespace EasyToEnter.ASP.Tools
                 PassingGrade = (int) (historyVariabilityList.Average(hv => hv.PassingGrade) * 1.1)
             };
         }
+
+        public static HistoryVariabilityModel DePredict(List<HistoryVariabilityModel> historyVariabilityList, int i)
+        {
+            var counthistoryVariabilityList = historyVariabilityList.Count - 1;
+
+            return new HistoryVariabilityModel
+            {
+                Year = historyVariabilityList[counthistoryVariabilityList].Year - (counthistoryVariabilityList + i),
+                Tuition = (int) (historyVariabilityList.Average(hv => hv.Tuition) * (1 - i * 0.1)),
+                NumberSeats = (int) (historyVariabilityList.Average(hv => hv.NumberSeats) * (1 - i * 0.1)),
+                PassingGrade = (int) (historyVariabilityList.Average(hv => hv.PassingGrade) * (1 - i * 0.1))
+            };
+        }
     }
 }

@@ -11,7 +11,7 @@
         }
         @for (var i = Model.Count; i < 2; i++)
         {
-            <vc:history-card data="new HistoryVariabilityModel()"/>
+            <vc:history-card data="DePredict(Model, i)"/>
         }
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
