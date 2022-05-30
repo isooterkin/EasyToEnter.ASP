@@ -10,7 +10,17 @@
 @*Путь конец*@
 
 <div class="container p-0 mt-3">
-    <div class="row">
 
+    @*История начало*@
+    <div class="row">
+        <vc:discipline-container data="Model.FocusUniversityModel!.DisciplineFocusUniversitys"/>
     </div>
+    @*История конец*@
+
+    @*Дисциплины начало*@
+    <div class="row">
+        <vc:discipline-container data="Model.FocusUniversityModel!.DisciplineFocusUniversitys"/>
+    </div>
+    @*Дисциплины конец*@
+
 </div>

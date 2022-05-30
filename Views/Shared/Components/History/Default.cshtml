@@ -46,8 +46,16 @@
                                     {
                                         <a class="link-secondary" href="@Model.DirectionHistory.Href">@Model.DirectionHistory.Name</a> <span>/</span>
 
-                                        // ...
-                                        <a class="link-secondary fw-bold" href="@Model.FocusHistory.Href">@Model.FocusHistory.Name</a>
+                                        if (Model.VariabilityHistory == null)
+                                        {
+                                            <a class="link-secondary fw-bold" href="@Model.FocusHistory.Href">@Model.FocusHistory.Name</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="link-secondary" href="@Model.FocusHistory.Href">@Model.FocusHistory.Name</a> <span>/</span>
+
+                                            <a class="link-secondary fw-bold" href="@Model.VariabilityHistory.Href">@Model.VariabilityHistory.Name</a>
+                                        }
                                     }
                                 }
                             }

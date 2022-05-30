@@ -12,7 +12,6 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 
             // "Вариативность"
             VariabilityModel? variabilityModel = _context.Variability
-                .Where(v => v.Id == variability)
                 .Include(v => v.FormatModel)
                 .Include(v => v.FormModel)
                 .Include(v => v.PaymentModel)
@@ -29,7 +28,9 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                             .ThenInclude(f => f!.DirectionModel)
                                 .ThenInclude(d => d!.GroupModel)
                                     .ThenInclude(g => g!.ScienceModel)
-                .First();
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.UniversityModel)
+                .FirstOrDefault(v => v.Id == variability);
 
             return View(variabilityModel);
         }

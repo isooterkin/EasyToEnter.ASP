@@ -1,4 +1,5 @@
-﻿using EasyToEnter.ASP.ViewsModels.Applicant;
+﻿using EasyToEnter.ASP.Models.Models;
+using EasyToEnter.ASP.ViewsModels.Applicant;
 
 namespace EasyToEnter.ASP.ViewsModels.Components.History
 {
@@ -10,6 +11,7 @@ namespace EasyToEnter.ASP.ViewsModels.Components.History
         public readonly GroupHistoryViewModel? GroupHistory;
         public readonly DirectionHistoryViewModel? DirectionHistory;
         public readonly FocusHistoryViewModel? FocusHistory;
+        public readonly VariabilityHistoryViewModel? VariabilityHistory;
 
         public HistoryContainerViewModel(object? viewModel)
         {
@@ -17,6 +19,18 @@ namespace EasyToEnter.ASP.ViewsModels.Components.History
 
             switch (viewModel.GetType())
             {
+                case var value when value == typeof(VariabilityModel):
+                    if (viewModel is VariabilityModel variability)
+                    {
+                        LevelHistory = new LevelHistoryViewModel(variability.FocusUniversityModel!.LevelFocusModel!.LevelModel!.Name);
+                        ScienceHistory = new ScienceHistoryViewModel(variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceModel!.Name, variability.FocusUniversityModel!.LevelFocusModel!.LevelId);
+                        GroupHistory = new GroupHistoryViewModel(variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.Name, variability.FocusUniversityModel!.LevelFocusModel!.LevelId, variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceId);
+                        DirectionHistory = new DirectionHistoryViewModel(variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.Name, variability.FocusUniversityModel!.LevelFocusModel!.LevelId, variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupId);
+                        FocusHistory = new FocusHistoryViewModel(variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name, variability.FocusUniversityModel!.LevelFocusModel!.LevelId, variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionId);
+                        VariabilityHistory = new VariabilityHistoryViewModel(variability.FocusUniversityModel!.UniversityModel!.Name, variability.FocusUniversityModel.LevelFocusId);
+                        CorrectLink = true;
+                    }
+                    break;
                 case var value when value == typeof(VariabilitySelectionContainerViewModel):
                     if (viewModel is VariabilitySelectionContainerViewModel variabilityModel)
                         if (variabilityModel.VariabilityList.Any())

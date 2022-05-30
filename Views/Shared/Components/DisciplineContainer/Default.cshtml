@@ -1,0 +1,9 @@
+﻿@model List<EasyToEnter.ASP.Models.Models.DisciplineFocusUniversityModel>;
+@using EasyToEnter.ASP.Models.Models;
+
+<div class="container">
+    @foreach (DisciplineFocusUniversityModel disciplineFocus in Model)
+    {
+        <vc:discipline-card data="disciplineFocus"/>
+    }
+</div>
