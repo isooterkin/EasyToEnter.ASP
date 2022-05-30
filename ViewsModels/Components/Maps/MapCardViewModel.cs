@@ -1,5 +1,4 @@
 ﻿using EasyToEnter.ASP.Models.Models;
-using Newtonsoft.Json;
 
 namespace EasyToEnter.ASP.ViewsModels.Components.Maps
 {
