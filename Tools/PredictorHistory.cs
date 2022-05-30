@@ -6,6 +6,11 @@ namespace EasyToEnter.ASP.Tools
     {
         public static HistoryVariabilityModel Predict(List<HistoryVariabilityModel> historyVariabilityList)
         {
+            if (!historyVariabilityList.Any()) return new HistoryVariabilityModel 
+            {
+                Year = DateTime.Now.Year + 1
+            };
+
             return new HistoryVariabilityModel 
             {
                 Year = DateTime.Now.Year + 1,
@@ -17,6 +22,8 @@ namespace EasyToEnter.ASP.Tools
 
         public static HistoryVariabilityModel DePredict(List<HistoryVariabilityModel> historyVariabilityList, int i)
         {
+            if (!historyVariabilityList.Any()) return new HistoryVariabilityModel();
+
             var counthistoryVariabilityList = historyVariabilityList.Count - 1;
 
             return new HistoryVariabilityModel
