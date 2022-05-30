@@ -37,5 +37,17 @@ namespace EasyToEnter.ASP.Models.Models
         [NotMapped]
         [Display(Name = "Наименование")]
         public string CodeName => $"{FullCode} {FocusModel?.Name}";
+
+        [NotMapped]
+        [Display(Name = "Наименование группы")]
+        public string GroupFullName => $"{FocusModel?.DirectionModel?.GroupModel?.Code}.{LevelModel?.Code}.00 {FocusModel?.DirectionModel?.GroupModel?.Name}";
+
+        [NotMapped]
+        [Display(Name = "Наименование направления")]
+        public string DirectionFullName => $"{FocusModel?.DirectionModel?.GroupModel?.Code}.{LevelModel?.Code}.{FocusModel?.DirectionModel?.Code} {FocusModel?.DirectionModel?.Name}";
+
+        [NotMapped]
+        [Display(Name = "Наименование направленности")]
+        public string FocusFullName => $"{FocusModel?.DirectionModel?.GroupModel?.Code}.{LevelModel?.Code}.{FocusModel?.DirectionModel?.Code} {FocusModel?.Name}";
     }
 }

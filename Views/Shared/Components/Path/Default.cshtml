@@ -3,66 +3,227 @@
 @*Путь начало*@
 <div class="container bg-light rounded-3 shadow mb-3">
     <div class="row">
-        <div class="col px-3">
-            <p class="my-1">
-                <small class="text-muted">
-                    @if (Model.CorrectLink == false)
+        <div class="col">
+            @if (Model.CorrectLink == false)
+            {
+                <span class="row py-1">
+                    <small class="text-muted">
+                        Некоректная ссылка
+                    </small>
+                </span>
+            }
+            else if (Model.LevelHistory == null)
+            {
+
+            }
+            else if (Model.ScienceHistory == null)
+            {
+                <a class="link-secondary" href="@Model.LevelHistory.Href">
+                    <small class="text-muted pt-1 fw-bold">
+                        Изменить уровень
+                    </small>
+                </a>
+            }
+            else if (Model.GroupHistory == null)
+            {
+                <a class="link-secondary" href="@Model.ScienceHistory.Href">
+                    <small class="text-muted pt-1 fw-bold">
+                        @Model.LevelHistory.Name
+                    </small>
+                </a>
+            }
+            else
+            {
+                <a class="link-secondary" href="@Model.ScienceHistory.Href">
+                    <small class="text-muted pt-1">
+                        @Model.LevelHistory.Name
+                    </small>
+                </a>
+                <small>
+                    /
+                </small>
+
+                if (Model.DirectionHistory == null)
+                {
+                    <a class="link-secondary" href="@Model.GroupHistory.Href">
+                        <small class="text-muted pt-1 fw-bold">
+                            @Model.ScienceHistory.Name
+                        </small>
+                    </a>
+                }
+                else
+                {
+                    <a class="link-secondary" href="@Model.GroupHistory.Href">
+                        <small class="text-muted pt-1">
+                            @Model.ScienceHistory.Name
+                        </small>
+                    </a>
+                    <small>
+                        /
+                    </small>
+
+
+                    if (Model.FocusHistory == null)
                     {
-                        <span>Некоректная ссылка</span>
+                        <a class="link-secondary" href="@Model.DirectionHistory.Href">
+                            <small class="text-muted pt-1 fw-bold">
+                                @Model.GroupHistory.Name
+                            </small>
+                        </a>
                     }
-                    else if (Model.LevelHistory == null)
+                    else
+                    {
+                        <a class="link-secondary" href="@Model.DirectionHistory.Href">
+                            <small class="text-muted pt-1">
+                                @Model.GroupHistory.Name
+                            </small>
+                        </a>
+                        <small>
+                            /
+                        </small>
+
+                        if (Model.VariabilityHistory == null)
                         {
-                            <span>Выберите уровень подготовки</span>
-                        }
-                        else if (Model.ScienceHistory == null)
-                        {
-                            <a class="link-secondary fw-bold" href="@Model.LevelHistory.Href">@Model.LevelHistory.Name</a>
+                            <a class="link-secondary" href="@Model.FocusHistory.Href">
+                                <small class="text-muted pt-1 fw-bold">
+                                    @Model.DirectionHistory.Name
+                                </small>
+                            </a>
                         }
                         else
                         {
-                            <a class="link-secondary" href="@Model.LevelHistory.Href">@Model.LevelHistory.Name</a> <span>/</span>
-
-                            if (Model.GroupHistory == null)
-                            {
-                                <a class="link-secondary fw-bold" href="@Model.ScienceHistory.Href">@Model.ScienceHistory.Name</a>
-                            }
-                            else
-                            {
-                                <a class="link-secondary" href="@Model.ScienceHistory.Href">@Model.ScienceHistory.Name</a> <span>/</span>
-
-                                if (Model.DirectionHistory == null)
-                                {
-                                    <a class="link-secondary fw-bold" href="@Model.GroupHistory.Href">@Model.GroupHistory.Name</a>
-                                }
-                                else
-                                {
-                                    <a class="link-secondary" href="@Model.GroupHistory.Href">@Model.GroupHistory.Name</a> <span>/</span>
-
-                                    if (Model.FocusHistory == null)
-                                    {
-                                        <a class="link-secondary fw-bold" href="@Model.DirectionHistory.Href">@Model.DirectionHistory.Name</a>
-                                    }
-                                    else
-                                    {
-                                        <a class="link-secondary" href="@Model.DirectionHistory.Href">@Model.DirectionHistory.Name</a> <span>/</span>
-
-                                        if (Model.VariabilityHistory == null)
-                                        {
-                                            <a class="link-secondary fw-bold" href="@Model.FocusHistory.Href">@Model.FocusHistory.Name</a>
-                                        }
-                                        else
-                                        {
-                                            <a class="link-secondary" href="@Model.FocusHistory.Href">@Model.FocusHistory.Name</a> <span>/</span>
-
-                                            <a class="link-secondary fw-bold" href="@Model.VariabilityHistory.Href">@Model.VariabilityHistory.Name</a>
-                                        }
-                                    }
-                                }
-                            }
+                            <a class="link-secondary" href="@Model.FocusHistory.Href">
+                                <small class="text-muted pt-1">
+                                    @Model.DirectionHistory.Name
+                                </small>
+                            </a>
+                            <small>
+                                /
+                            </small>
+                            <a class="link-secondary" href="@Model.VariabilityHistory.Href">
+                                <small class="text-muted pt-1 fw-bold">
+                                    @Model.FocusHistory.Name
+                                </small>
+                            </a>
                         }
-                </small>
-            </p>
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @if (Model.CorrectLink == false)
+            {
+
+            }
+            else if (Model.LevelHistory == null)
+            {
+                <div class="row py-1 pl-3">
+                    <small class="text-muted p-0">
+                        Выберите уровень подготовки
+                    </small>
+                </div>
+            }
+            else if (Model.ScienceHistory == null)
+            {
+                <div class="row py-1 pl-3">
+                    <small class="text-muted p-0">
+                        Выберите науку
+                    </small>
+                </div>
+            }
+            else if (Model.GroupHistory == null)
+            {
+                <div class="row py-1 pl-3">
+                    <small class="text-muted p-0">
+                        Выберите укрупнённую группу
+                    </small>
+                </div>
+            }
+            else if (Model.DirectionHistory == null)
+            {
+                <div class="row py-1 pl-3">
+                    <small class="text-muted p-0">
+                        Выберите направление
+                    </small>
+                </div>
+            }
+            else if (Model.FocusHistory == null)
+            {
+                <div class="row py-1 pl-3">
+                    <small class="text-muted p-0">
+                        Выберите направленность
+                    </small>
+                </div>
+            }
+            else if (Model.VariabilityHistory == null)
+            {
+                <div class="row py-1 pl-3">
+                    <small class="text-muted p-0">
+                        Выберите вариант обучения
+                    </small>
+                </div>
+            }
         </div>
     </div>
 </div>
+
+<div class="container bg-light rounded-3 shadow mb-3">
+
+    @if (Model.LevelHistory == null)
+    {
+        
+    }
+    else if (Model.ScienceHistory == null)
+    {
+        <div class="row px-3 py-1">
+            <small class="text-center fw-bold text-muted">
+                @Model.LevelHistory.Name
+            </small>
+        </div>
+    }
+    else if (Model.GroupHistory == null)
+    {
+        <div class="row px-3 py-1">
+            <small class="text-center fw-bold text-muted">
+                @Model.ScienceHistory.Name
+            </small>
+        </div>
+    }
+    else if (Model.DirectionHistory == null)
+    {
+        <div class="row px-3 py-1">
+            <small class="text-center fw-bold text-muted">
+                @Model.GroupHistory.Name
+            </small>
+        </div>
+    }
+    else if (Model.FocusHistory == null)
+    {
+        <div class="row px-3 py-1">
+            <small class="text-center fw-bold text-muted">
+                @Model.DirectionHistory.Name
+            </small>
+        </div>
+    }
+    else if (Model.VariabilityHistory == null)
+    {
+        <div class="row px-3 py-1">
+            <small class="text-center fw-bold text-muted">
+                @Model.FocusHistory.Name
+            </small>
+        </div>
+    }
+    else
+    {
+        <div class="row px-3 py-1">
+            <small class="text-center fw-bold text-muted">
+                @Model.VariabilityHistory.Name
+            </small>
+        </div>
+    }
+
+</div>
+
 @*Путь конец*@

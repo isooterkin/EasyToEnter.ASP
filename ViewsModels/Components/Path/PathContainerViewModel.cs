@@ -22,11 +22,13 @@ namespace EasyToEnter.ASP.ViewsModels.Components.Path
                 case var value when value == typeof(VariabilityModel):
                     if (viewModel is VariabilityModel variability)
                     {
-                        LevelHistory = new LevelPathViewModel(variability.FocusUniversityModel!.LevelFocusModel!.LevelModel!.Name);
-                        ScienceHistory = new SciencePathViewModel(variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceModel!.Name, variability.FocusUniversityModel!.LevelFocusModel!.LevelId);
-                        GroupHistory = new GroupPathViewModel(variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.Name, variability.FocusUniversityModel!.LevelFocusModel!.LevelId, variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceId);
-                        DirectionHistory = new DirectionPathViewModel(variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.Name, variability.FocusUniversityModel!.LevelFocusModel!.LevelId, variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupId);
-                        FocusHistory = new FocusPathViewModel(variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name, variability.FocusUniversityModel!.LevelFocusModel!.LevelId, variability.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionId);
+                        LevelFocusModel levelFocusModel = variability.FocusUniversityModel!.LevelFocusModel!;
+
+                        LevelHistory = new LevelPathViewModel(levelFocusModel.LevelModel!.Name);
+                        ScienceHistory = new SciencePathViewModel(levelFocusModel.FocusModel!.DirectionModel!.GroupModel!.ScienceModel!.Name, levelFocusModel.LevelId);
+                        GroupHistory = new GroupPathViewModel(levelFocusModel.GroupFullName, variability.FocusUniversityModel!.LevelFocusModel!.LevelId, levelFocusModel.FocusModel!.DirectionModel!.GroupModel!.ScienceId);
+                        DirectionHistory = new DirectionPathViewModel(levelFocusModel.DirectionFullName, variability.FocusUniversityModel!.LevelFocusModel!.LevelId, levelFocusModel.FocusModel!.DirectionModel!.GroupId);
+                        FocusHistory = new FocusPathViewModel(levelFocusModel.FocusFullName, variability.FocusUniversityModel!.LevelFocusModel!.LevelId, levelFocusModel.FocusModel!.DirectionId);
                         VariabilityHistory = new VariabilityPathViewModel(variability.FocusUniversityModel!.UniversityModel!.Name, variability.FocusUniversityModel.LevelFocusId);
                         CorrectLink = true;
                     }
@@ -35,11 +37,13 @@ namespace EasyToEnter.ASP.ViewsModels.Components.Path
                     if (viewModel is VariabilitySelectionContainerViewModel variabilityModel)
                         if (variabilityModel.VariabilityList.Any())
                         {
+                            LevelFocusModel levelFocusModel = variabilityModel.VariabilityList[0]!.FocusUniversityModel!.LevelFocusModel!;
+
                             LevelHistory = new LevelPathViewModel(variabilityModel.LevelName);
                             ScienceHistory = new SciencePathViewModel(variabilityModel.ScienceName, variabilityModel.LevelId);
-                            GroupHistory = new GroupPathViewModel(variabilityModel.GroupName, variabilityModel.LevelId, variabilityModel.ScienceId);
-                            DirectionHistory = new DirectionPathViewModel(variabilityModel.DirectionName, variabilityModel.LevelId, variabilityModel.GroupId);
-                            FocusHistory = new FocusPathViewModel(variabilityModel.FocusName, variabilityModel.LevelId, variabilityModel.DirectionId);
+                            GroupHistory = new GroupPathViewModel(levelFocusModel.GroupFullName, variabilityModel.LevelId, variabilityModel.ScienceId);
+                            DirectionHistory = new DirectionPathViewModel(levelFocusModel.DirectionFullName, variabilityModel.LevelId, variabilityModel.GroupId);
+                            FocusHistory = new FocusPathViewModel(levelFocusModel.FocusFullName, variabilityModel.LevelId, variabilityModel.DirectionId);
                             CorrectLink = true;
                         }
                     break;
@@ -47,10 +51,12 @@ namespace EasyToEnter.ASP.ViewsModels.Components.Path
                     if (viewModel is FocusSelectionContainerViewModel focusModel)
                         if (focusModel.LevelFocusList.Any())
                         {
+                            LevelFocusModel levelFocusModel = focusModel.LevelFocusList[0];
+
                             LevelHistory = new LevelPathViewModel(focusModel.LevelName);
                             ScienceHistory = new SciencePathViewModel(focusModel.ScienceName, focusModel.LevelId);
-                            GroupHistory = new GroupPathViewModel(focusModel.GroupName, focusModel.LevelId, focusModel.ScienceId);
-                            DirectionHistory = new DirectionPathViewModel(focusModel.DirectionName, focusModel.LevelId, focusModel.GroupId);
+                            GroupHistory = new GroupPathViewModel(levelFocusModel.GroupFullName, focusModel.LevelId, focusModel.ScienceId);
+                            DirectionHistory = new DirectionPathViewModel(levelFocusModel.DirectionFullName, focusModel.LevelId, focusModel.GroupId);
                             CorrectLink = true;
                         }
                     break;
@@ -58,9 +64,11 @@ namespace EasyToEnter.ASP.ViewsModels.Components.Path
                     if (viewModel is DirectionSelectionContainerViewModel directionModel)
                         if (directionModel.DirectionList.Any())
                         {
+                            LevelFocusModel levelFocusModel = directionModel.VariabilityList[0]!.FocusUniversityModel!.LevelFocusModel!;
+
                             LevelHistory = new LevelPathViewModel(directionModel.LevelName);
                             ScienceHistory = new SciencePathViewModel(directionModel.ScienceName, directionModel.LevelId);
-                            GroupHistory = new GroupPathViewModel(directionModel.GroupName, directionModel.LevelId, directionModel.ScienceId);
+                            GroupHistory = new GroupPathViewModel(levelFocusModel.GroupFullName, directionModel.LevelId, directionModel.ScienceId);
                             CorrectLink = true;
                         }
                     break;
