@@ -9,23 +9,58 @@
 <vc:path data="new PathContainerViewModel(Model)"/>
 @*Путь конец*@
 
-@*История начало*@
-<div class="container p-0 mt-3">
-    <vc:history-container data="Model.HistoryVariabilitys?.OrderByDescending(hv => hv.Year).ToList()"/>
+@*Детали начало*@
+<div class="container p-2 mt-3 bg-light rounded-3 shadow">
+    <div class="col">
+        <div class="row">
+            <div class="fw-bold">
+                Описание
+            </div>
+            <div>
+                @Model.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Description
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+
+            </div>
+        </div>
+
+    </div>
 </div>
+@*Детали конец*@
+
+@*Вакансии и Профессии начало*@
+<div class="container mt-3">
+    <div class="row">
+
+        <a class="col-12 col-sm mr-sm-1 btn btn-light shadow-sm mb-sm-0 mb-2" href="#">
+            <div class="fw-bold text-center">
+                Вакансии <small class="text-muted">(21)</small>
+            </div>
+        </a>
+
+        <a class="col-12 col-sm mr-sm-1 btn btn-light shadow-sm" href="#">
+            <div class="fw-bold text-center">
+                Профессии <small class="text-muted">(15)</small>
+            </div>
+        </a>
+
+    </div>
+</div>
+@*Детали конец*@
+
+@*История начало*@
+<vc:history-container data="Model.HistoryVariabilitys?.OrderByDescending(hv => hv.Year).ToList()"/>
 @*История конец*@
 
 @*Дисциплины начало*@
-<div class="container p-2 mt-3 bg-light rounded-3 shadow">
-    <div class="text-center">
-        <a class="text-decoration-none text-dark" data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseExample">
-            Дисциплины <small class="text-muted">(@Model.FocusUniversityModel!.DisciplineFocusUniversitys!.Count)</small>
-        </a>
-    </div>
-    <div class="collapse" id="collapseExample">
-        <div class="row mt-2">
-            <vc:discipline-container data="Model.FocusUniversityModel!.DisciplineFocusUniversitys"/>
-        </div>
-    </div>
-</div>
+<vc:discipline-container data="Model.FocusUniversityModel!.DisciplineFocusUniversitys"/>
 @*Дисциплины конец*@

@@ -1,9 +1,22 @@
 ﻿@model List<EasyToEnter.ASP.Models.Models.DisciplineFocusUniversityModel>;
 @using EasyToEnter.ASP.Models.Models;
 
-<div class="container">
-    @foreach (DisciplineFocusUniversityModel disciplineFocus in Model)
-    {
-        <vc:discipline-card data="disciplineFocus"/>
-    }
+<div class="container p-2 mt-3 bg-light rounded-3 shadow">
+    <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseExample">
+        <div class="col btn">
+            <div class="text-center">
+                Дисциплины <small class="text-muted">(@Model.Count)</small>
+            </div>
+        </div>
+    </a>
+    <div class="collapse" id="collapseExample">
+        <div class="row mt-2">
+            <div class="container">
+                @foreach (DisciplineFocusUniversityModel disciplineFocus in Model)
+                {
+                    <vc:discipline-card data="disciplineFocus"/>
+                }
+            </div>
+        </div>
+    </div>
 </div>
