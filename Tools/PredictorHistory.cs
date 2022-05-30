@@ -22,7 +22,10 @@ namespace EasyToEnter.ASP.Tools
 
         public static HistoryVariabilityModel DePredict(List<HistoryVariabilityModel> historyVariabilityList, int i)
         {
-            if (!historyVariabilityList.Any()) return new HistoryVariabilityModel();
+            if (!historyVariabilityList.Any()) return new HistoryVariabilityModel
+            {
+                Year = DateTime.Now.Year - i
+            };
 
             var counthistoryVariabilityList = historyVariabilityList.Count - 1;
 
