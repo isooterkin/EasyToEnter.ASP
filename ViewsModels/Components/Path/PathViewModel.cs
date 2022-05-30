@@ -1,6 +1,6 @@
-﻿namespace EasyToEnter.ASP.ViewsModels.Components.History
+﻿namespace EasyToEnter.ASP.ViewsModels.Components.Path
 {
-    public class HistoryViewModel
+    public class PathViewModel
     {
         public string Href = string.Empty;
         public string Name = string.Empty;

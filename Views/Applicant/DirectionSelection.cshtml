@@ -1,12 +1,14 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.DirectionSelectionContainerViewModel;
-@using EasyToEnter.ASP.ViewsModels.Components.History;
+@using EasyToEnter.ASP.ViewsModels.Components.Path;
 
 @{
     ViewData["Title"] = "Выбор направления";
 }
 
 @*Путь начало*@
-<vc:history data="new HistoryContainerViewModel(Model)"/>
+<vc:path data="new PathContainerViewModel(Model)"/>
 @*Путь конец*@
 
+@*Направления начало*@
 <vc:direction-container data="@Model"/>
+@*Направления конец*@

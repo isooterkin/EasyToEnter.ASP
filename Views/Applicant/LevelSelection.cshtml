@@ -1,12 +1,14 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.LevelSelectionContainerViewModel;
-@using EasyToEnter.ASP.ViewsModels.Components.History;
+@using EasyToEnter.ASP.ViewsModels.Components.Path;
 
 @{
     ViewData["Title"] = "Выбор уровня";
 }
 
 @*Путь начало*@
-<vc:history data="new HistoryContainerViewModel(Model)"/>
+<vc:path data="new PathContainerViewModel(Model)"/>
 @*Путь конец*@
 
+@*Уровни начало*@
 <vc:level-container data="@Model"/>
+@*Уровни конец*@

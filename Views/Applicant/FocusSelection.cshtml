@@ -1,13 +1,13 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.FocusSelectionContainerViewModel;
-@using EasyToEnter.ASP.ViewsModels.Components
-@using EasyToEnter.ASP.ViewsModels.Components.History;
+@using EasyToEnter.ASP.ViewsModels.Components;
+@using EasyToEnter.ASP.ViewsModels.Components.Path;
 
 @{
     ViewData["Title"] = "Выбор направленности";
 }
 
 @*Путь начало*@
-<vc:history data="new HistoryContainerViewModel(Model)"/>
+<vc:path data="new PathContainerViewModel(Model)"/>
 @*Путь конец*@
 
 @*Контейнер начало*@

@@ -1,14 +1,15 @@
 ﻿@model EasyToEnter.ASP.Models.Models.VariabilityModel;
-@using EasyToEnter.ASP.ViewsModels.Components.History;
+@using EasyToEnter.ASP.ViewsModels.Components.Path;
 
 @{
     ViewData["Title"] = "Вариативность";
 }
 
 @*Путь начало*@
-<vc:history data="new HistoryContainerViewModel(Model)"/>
+<vc:path data="new PathContainerViewModel(Model)"/>
 @*Путь конец*@
 
+@*Вариативность начало*@
 <div class="container p-0 mt-3">
 
     @*История начало*@
@@ -24,3 +25,4 @@
     @*Дисциплины конец*@
 
 </div>
+@*Вариативность начало*@

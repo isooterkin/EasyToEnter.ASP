@@ -1,12 +1,14 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.ScienceSelectionContainerViewModel;
-@using EasyToEnter.ASP.ViewsModels.Components.History;
+@using EasyToEnter.ASP.ViewsModels.Components.Path;
 
 @{
     ViewData["Title"] = "Выбор науки";
 }
 
 @*Путь начало*@
-<vc:history data="new HistoryContainerViewModel(Model)"/>
+<vc:path data="new PathContainerViewModel(Model)"/>
 @*Путь конец*@
 
+@*Науки начало*@
 <vc:science-container data="@Model"/>
+@*Науки конец*@
