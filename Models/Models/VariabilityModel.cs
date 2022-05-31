@@ -10,6 +10,10 @@ namespace EasyToEnter.ASP.Models.Models
     [Index(nameof(FormId), nameof(FocusUniversityId), nameof(PaymentId), nameof(FormatId), IsUnique = true)]
     public class VariabilityModel: ModelWithId
     {
+        [Required(ErrorMessage = "Укажите период обучения.")]
+        [Display(Name = "Период обучения")]
+        public int TrainingPeriod { get; set; }
+
         [Required(ErrorMessage = "Укажите наличие вступительных экзаменов.")]
         [Display(Name = "Вступительные экзамены")]
         public bool EntranceExams { get; set; } = false;

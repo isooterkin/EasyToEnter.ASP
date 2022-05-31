@@ -1,0 +1,31 @@
+﻿@model EasyToEnter.ASP.Models.Models.SubjectFocusUniversityModel;
+
+<div class="col rounded-3 shadow-sm bg-white mb-2 px-2 pb-2">
+    <a class="row text-decoration-none pt-2" data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#@Model.Id">
+        <div class="text-dark col text-start text-truncate">
+            @Model.SubjectModel!.Name 
+            @if (Model.SubjectReplacements!.Any())
+            {
+                <small class="text-muted">(или @Model.SubjectReplacements!.Count на замену)</small>
+            }
+        </div>
+        <div class="text-dark col-auto text-end">
+            <small class="text-muted">от</small> @Model.PassingGrade <small class="text-muted">баллов</small>
+        </div>
+    </a>
+    <div class="row collapse" id="@Model.Id">
+        @for (var i = 0; i < Model.SubjectReplacements!.Count; i++)
+        {
+            <div class="col-12">
+                <div class="row">
+                    <div class="text-dark col text-start text-truncate">
+                        <small class="text-muted">или</small> @Model.SubjectReplacements[i]!.SubjectModel!.Name
+                    </div>
+                    <div class="text-dark col-auto text-end">
+                        <small class="text-muted">от</small> @Model.SubjectReplacements[i]!.PassingGrade <small class="text-muted">баллов</small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -29,5 +29,9 @@ namespace EasyToEnter.ASP.Models.Models
         [Required(ErrorMessage = "Укажите проходной балл.")]
         [Display(Name = "Проходной балл")]
         public int PassingGrade { get; set; }
+
+        // Лист моделей "Предмет замена", принадлежащих модели "Предмет направленности ВУЗа"
+        [Display(Name = "Предметы на замену выбранного предмета направленности вуза")]
+        public List<SubjectReplacementModel>? SubjectReplacements { get; set; }
     }
 }

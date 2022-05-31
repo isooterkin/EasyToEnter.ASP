@@ -30,7 +30,16 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                                     .ThenInclude(g => g!.ScienceModel)
                 .Include(v => v.FocusUniversityModel)
                     .ThenInclude(fu => fu!.UniversityModel)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.SubjectFocusUniversitys)
+                        !.ThenInclude(sfu => sfu!.SubjectModel)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.SubjectFocusUniversitys)
+                        !.ThenInclude(sfu => sfu!.SubjectReplacements)
+                            !.ThenInclude(sr => sr!.SubjectModel)
                 .FirstOrDefault(v => v.Id == variability);
+
+            if (variabilityModel == null) return NotFound();
 
             return View(variabilityModel);
         }

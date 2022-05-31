@@ -27,12 +27,16 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Уровень - Направленность")]
         public LevelFocusModel? LevelFocusModel { get; set; }
 
-        // Лист моделей "Вариативность", принадлежащих модели "Направление ВУЗа"
-        [Display(Name = "Вариативности выбранного направления ВУЗа")]
+        // Лист моделей "Вариативность", принадлежащих модели "Направленность ВУЗа"
+        [Display(Name = "Вариативности выбранной направленности ВУЗа")]
         public List<VariabilityModel>? Variabilitys { get; set; }
 
         // Лист моделей "Дисциплина направленности ВУЗа", принадлежащих модели "Направленность ВУЗа"
-        [Display(Name = "Общежития выбранного адреса")]
+        [Display(Name = "Дисциплины выбранной направленности ВУЗа")]
         public List<DisciplineFocusUniversityModel>? DisciplineFocusUniversitys { get; set; }
+
+        // Лист моделей "Предмет направленности ВУЗа", принадлежащих модели "Направленность ВУЗа"
+        [Display(Name = "Предметы выбранной направленности ВУЗа")]
+        public List<SubjectFocusUniversityModel>? SubjectFocusUniversitys { get; set; }
     }
 }

@@ -1,0 +1,22 @@
+﻿@model List<EasyToEnter.ASP.Models.Models.SubjectFocusUniversityModel>;
+@using EasyToEnter.ASP.Models.Models;
+
+<div class="container p-2 mt-3 bg-light rounded-3 shadow">
+    <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseSubject">
+        <div class="col btn">
+            <div class="text-center">
+                Предметы ЕГЭ
+            </div>
+        </div>
+    </a>
+    <div class="collapse" id="collapseSubject">
+        <div class="row mt-2">
+            <div class="container">
+                @foreach (SubjectFocusUniversityModel subjectFocusUniversity in Model)
+                {
+                    <vc:subject-card data="subjectFocusUniversity"/>
+                }
+            </div>
+        </div>
+    </div>
+</div>

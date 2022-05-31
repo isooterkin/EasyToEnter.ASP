@@ -26,7 +26,7 @@
             }
             else if (Model.GroupHistory == null)
             {
-                <a class="link-secondary" href="@Model.ScienceHistory.Href">
+                <a class="link-secondary" href="@Model.ScienceHistory.Href" data-bs-toggle="tooltip" title="Уровень подготовки">
                     <small class="text-muted pt-1 fw-bold">
                         @Model.LevelHistory.Name
                     </small>
@@ -34,7 +34,7 @@
             }
             else
             {
-                <a class="link-secondary" href="@Model.ScienceHistory.Href">
+                <a class="link-secondary" href="@Model.ScienceHistory.Href" data-bs-toggle="tooltip" title="Уровень подготовки">
                     <small class="text-muted pt-1">
                         @Model.LevelHistory.Name
                     </small>
@@ -45,7 +45,7 @@
 
                 if (Model.DirectionHistory == null)
                 {
-                    <a class="link-secondary" href="@Model.GroupHistory.Href">
+                    <a class="link-secondary" href="@Model.GroupHistory.Href" data-bs-toggle="tooltip" title="Наука">
                         <small class="text-muted pt-1 fw-bold">
                             @Model.ScienceHistory.Name
                         </small>
@@ -53,7 +53,7 @@
                 }
                 else
                 {
-                    <a class="link-secondary" href="@Model.GroupHistory.Href">
+                    <a class="link-secondary" href="@Model.GroupHistory.Href" data-bs-toggle="tooltip" title="Наука">
                         <small class="text-muted pt-1">
                             @Model.ScienceHistory.Name
                         </small>
@@ -65,7 +65,7 @@
 
                     if (Model.FocusHistory == null)
                     {
-                        <a class="link-secondary" href="@Model.DirectionHistory.Href">
+                        <a class="link-secondary" href="@Model.DirectionHistory.Href" data-bs-toggle="tooltip" title="Укрупнённая группа">
                             <small class="text-muted pt-1 fw-bold">
                                 @Model.GroupHistory.Name
                             </small>
@@ -73,7 +73,7 @@
                     }
                     else
                     {
-                        <a class="link-secondary" href="@Model.DirectionHistory.Href">
+                        <a class="link-secondary" href="@Model.DirectionHistory.Href" data-bs-toggle="tooltip" title="Укрупнённая группа">
                             <small class="text-muted pt-1">
                                 @Model.GroupHistory.Name
                             </small>
@@ -84,7 +84,7 @@
 
                         if (Model.VariabilityHistory == null)
                         {
-                            <a class="link-secondary" href="@Model.FocusHistory.Href">
+                            <a class="link-secondary" href="@Model.FocusHistory.Href" data-bs-toggle="tooltip" title="Направление подготовки">
                                 <small class="text-muted pt-1 fw-bold">
                                     @Model.DirectionHistory.Name
                                 </small>
@@ -92,7 +92,7 @@
                         }
                         else
                         {
-                            <a class="link-secondary" href="@Model.FocusHistory.Href">
+                            <a class="link-secondary" href="@Model.FocusHistory.Href" data-bs-toggle="tooltip" title="Направление подготовки">
                                 <small class="text-muted pt-1">
                                     @Model.DirectionHistory.Name
                                 </small>
@@ -100,7 +100,7 @@
                             <small>
                                 /
                             </small>
-                            <a class="link-secondary" href="@Model.VariabilityHistory.Href">
+                            <a class="link-secondary" href="@Model.VariabilityHistory.Href" data-bs-toggle="tooltip" title="Направленность подготовки">
                                 <small class="text-muted pt-1 fw-bold">
                                     @Model.FocusHistory.Name
                                 </small>
@@ -162,11 +162,16 @@
     else
     {
         <div class="row px-3 py-1">
-            <small class="text-center fw-bold">
-                <a class="text-decoration-none text-muted" href="/Applicant/University?university=@Model.VariabilityHistory.UniversityId">
-                    @Model.VariabilityHistory.Name
-                </a>
-            </small>
+            <a class="text-decoration-none text-muted text-center" href="/Applicant/University?university=@Model.VariabilityHistory.UniversityId">
+                <div>
+                    <small class="fw-bold">
+                    @Model.VariabilityHistory.Name 
+                    </small>
+                </div>
+                <small>
+                    (подробнее)
+                </small>
+            </a>
         </div>
     }
 

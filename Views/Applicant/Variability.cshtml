@@ -1,5 +1,6 @@
 ﻿@model EasyToEnter.ASP.Models.Models.VariabilityModel;
 @using EasyToEnter.ASP.ViewsModels.Components.Path;
+@using static EasyToEnter.ASP.Tools.StringConverting;
 
 @{
     ViewData["Title"] = "Вариативность";
@@ -9,7 +10,58 @@
 <vc:path data="new PathContainerViewModel(Model)"/>
 @*Путь конец*@
 
-@*Детали начало*@
+@*Краткая информация начало*@
+<div class="container py-1 mt-3 bg-light rounded-3 shadow">
+    <div class="row">
+
+        <div class="col">
+            <div class="row">
+                <div class="text-center fw-bold">
+                    от @IntToString(Model.YearHistoryVariability?.Tuition)
+                </div>
+            </div>
+            <div class="row">
+                <small class="text-center text-muted">
+                    рублей в год
+                </small>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="row">
+                <div class="text-center fw-bold">
+                    @Model.YearHistoryVariability?.NumberSeats
+                </div>
+            </div>
+            <div class="row">
+                <small class="text-center text-muted">
+                    мест (@Model.PaymentModel!.Name.ToLower())
+                </small>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="row">
+                <div class="text-center fw-bold">
+                    @Model.TrainingPeriod года
+                </div>
+            </div>
+            <div class="row">
+                <small class="text-center text-muted">
+                    обучения (@Model.FormatModel!.Name.ToLower(), @Model.FormModel!.Name.ToLower())
+                </small>
+            </div>
+        </div>
+
+    </div>
+</div>
+@*Краткая информация начало*@
+
+@*Предметы начало*@
+<vc:subject-container data="Model.FocusUniversityModel!.SubjectFocusUniversitys"/>
+@*Предметы конец*@
+
+@*Описание начало*@
 <div class="container p-2 mt-3 bg-light rounded-3 shadow">
     <div class="col">
         <div class="row">
@@ -20,22 +72,9 @@
                 @Model.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Description
             </div>
         </div>
-
-        <div class="row">
-            <div>
-
-            </div>
-        </div>
-
-        <div class="row">
-            <div>
-
-            </div>
-        </div>
-
     </div>
 </div>
-@*Детали конец*@
+@*Описание конец*@
 
 @*Вакансии и Профессии начало*@
 <div class="container mt-3">

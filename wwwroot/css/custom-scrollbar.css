@@ -1,4 +1,8 @@
-﻿/*Основные настройки*/
+﻿html {
+    overflow-y: scroll;
+}
+
+/*Основные настройки*/
 ::-webkit-scrollbar {
     width: 16px;
 }
