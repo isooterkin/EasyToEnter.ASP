@@ -1,10 +1,11 @@
-﻿@model EasyToEnter.ASP.ViewsModels.Components.Maps.MapCardViewModel;
+﻿@model List<EasyToEnter.ASP.Models.Models.UniversityModel>;
 @using EasyToEnter.ASP.ViewsModels.Components.Maps;
 
-<div class="px-0 mt-3">
-    @if (Model.UniversityModelList.Any())
+<div class="px-0 mb-3">
+    @if (Model.Any())
     {
-        <div id="map" style="height: 100px; resize: vertical" class="rounded-3 overflow-hidden w-auto bg-light"/>
+        <div id="map" style="height: 100px; resize: vertical" class="rounded-3 overflow-hidden w-auto bg-light">
+        </div>
     
         <script>
             ymaps.ready(init);
@@ -21,12 +22,14 @@
         
                 // var myIcon = ymaps.templateLayoutFactory.createClass('<div class="container"><div class="row"><div class="col"><i class="bi bi-bank"></i></div>' + '<div class="col">{{ properties.iconCaption }}' + '</div></div></div>');
 
-                @for(var i = 0; i < Model.UniversityModelList.Count; i++)
+                @for(var i = 0; i < Model.Count; i++)
                 {
-                    @:myMap.geoObjects.add(new ymaps.Placemark([@Model.UniversityModelList[i]!.AddressModel!.Latitude, @Model.UniversityModelList[i]!.AddressModel!.Longitude], {
-                        @:iconCaption: '@Model.UniversityModelList[i].Name',
-                        @:hintContent: `@{<vc:university-hint data="new UniversityViewModel(Model.UniversityModelList[i])"/>}`,
-                        @:balloonContent: `@{<vc:university-balloon data="new UniversityViewModel(Model.UniversityModelList[i])"/>}`
+                    var university = Model[i];
+
+                    @:myMap.geoObjects.add(new ymaps.Placemark([@university.AddressModel!.Latitude, @university.AddressModel!.Longitude], {
+                        @:iconCaption: '@university.Name',
+                        @:hintContent: `@{<vc:university-hint data="university"/>}`,
+                        @:balloonContent: `@{<vc:university-balloon data="university"/>}`
                     @:}, {
                         @:iconLayout: 'default#image',
                         @:iconImageHref: '..\\image\\university.svg',

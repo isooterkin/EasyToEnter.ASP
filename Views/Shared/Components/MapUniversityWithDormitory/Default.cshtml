@@ -1,0 +1,64 @@
+﻿@model EasyToEnter.ASP.Models.Models.UniversityModel;
+@using EasyToEnter.ASP.Models.Models;
+
+<div class="px-0 mb-3">
+    <div id="map" style="height: 100px; resize: vertical" class="rounded-3 overflow-hidden w-auto bg-light">
+    </div>
+    <script>
+        ymaps.ready(init);
+        
+        function init() {
+            var myMap = new ymaps.Map("map", {
+                center: [59.913752, 30.341754],
+                zoom: 8,
+                controls: ['fullscreenControl']
+            },{
+                autoFitToViewport: 'always',
+                searchControlProvider: 'yandex#search'
+            });
+        
+            myMap.geoObjects.add(new ymaps.Placemark([@Model.AddressModel!.Latitude, @Model.AddressModel!.Longitude], {
+                iconCaption: '@Model.Name',
+                hintContent: `@{<vc:university-hint data="@Model"/>}`,
+                balloonContent: `@{<vc:university-balloon data="@Model"/>}`
+            }, {
+                iconLayout: 'default#image',
+                iconImageHref: '..\\image\\university.svg',
+                iconImageSize: [50, 50],
+                iconImageOffset: [-25, -25]
+            }));
+
+            @if (Model.Dormitorys != null)
+            {
+                var dormitoryList = Model.Dormitorys;
+
+                for(var i = 0; i < dormitoryList.Count; i++)
+                {
+                    var dormitory = Model.Dormitorys[i];
+
+                    if (dormitory.AddressModel != null)
+                    {
+                        @:myMap.geoObjects.add(new ymaps.Placemark([@dormitory.AddressModel.Latitude, @dormitory.AddressModel.Longitude], {
+                            @:iconCaption: '@dormitory.Name',
+                            @:hintContent: `@{<vc:dormitory-hint data="dormitory"/>}`,
+                            @:balloonContent: `@{<vc:dormitory-balloon data="dormitory"/>}`
+                        @:}, {
+                            @:iconLayout: 'default#image',
+                            @:iconImageHref: '..\\image\\dormitory.svg',
+                            @:iconImageSize: [30, 30],
+                            @:iconImageOffset: [-15, -15]
+                        @:}));
+                    }
+                }
+            }
+
+            myMap.container.fitToViewport();
+        }
+    </script>
+
+    <style>
+        [class*="copyrights-pane"] {
+            display: none !important;
+        }
+    </style>
+</div>

@@ -11,6 +11,16 @@ namespace EasyToEnter.ASP.Tools
 
         public static string StringArrayToString(string[] stringArray, string separator) => string.Join(separator, stringArray);
 
-        public static string StringPhoneNumberToString(string phoneNumber) => string.Format("{0:+# (###) ###-##-##}", Convert.ToInt64(phoneNumber));
+        public static string StringPhoneNumberToString(string phoneNumber)
+        {
+            try
+            {
+                return string.Format("{0:+# (###) ###-##-##}", Convert.ToInt64(phoneNumber));
+            }
+            catch
+            {
+                return phoneNumber;
+            }
+        }
     }
 }

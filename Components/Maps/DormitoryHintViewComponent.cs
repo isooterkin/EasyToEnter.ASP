@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace EasyToEnter.ASP.Components.Maps
 {
     [ViewComponent]
-    public class UniversityHintViewComponent : ViewComponent
+    public class DormitoryHintViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(UniversityModel data) => View(data);
+        public IViewComponentResult Invoke(DormitoryModel data) => View(data);
     }
 }

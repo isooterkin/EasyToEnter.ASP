@@ -6,9 +6,9 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
     {
         public readonly int FocusUniversityCount; // количество программ
 
-        public readonly int MinTuition; // стоимость обучения от ...
+        public readonly int MinTuition = 0; // стоимость обучения от ...
 
-        public readonly int SumNumberSeats; // количество мест
+        public readonly int SumNumberSeats = 0; // количество мест
 
         public readonly UniversityModel University; // ВУЗ
 
@@ -16,9 +16,22 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
         {
             FocusUniversityCount = variabilityList.Select(v => v.FocusUniversityModel).Count();
 
-            MinTuition = variabilityList.SelectMany(v => v.HistoryVariabilitys!).Min(hv => hv.Tuition);
+            if (variabilityList.Any())
+            {
+                VariabilityModel variability = variabilityList.First();
 
-            SumNumberSeats = variabilityList.SelectMany(v => v.HistoryVariabilitys!).Sum(hv => hv.NumberSeats);
+                if (variability.HistoryVariabilitys != null)
+                {
+                    List<HistoryVariabilityModel> historyVariabilityList = variability.HistoryVariabilitys;
+
+                    if (historyVariabilityList.Any())
+                    {
+                        MinTuition = variabilityList.SelectMany(v => v.HistoryVariabilitys!).Min(hv => hv.Tuition);
+
+                        SumNumberSeats = variabilityList.SelectMany(v => v.HistoryVariabilitys!).Sum(hv => hv.NumberSeats);
+                    }
+                }
+            }
 
             University = variabilityList.Select(v => v.FocusUniversityModel!.UniversityModel).First()!;
         }
