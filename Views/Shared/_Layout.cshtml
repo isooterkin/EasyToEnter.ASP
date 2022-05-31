@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Легко поступить!</title>
+    <title>@ViewData["Title"]</title>
 
     @*Yandex map api*@
     <script src="https://api-maps.yandex.ru/2.1/?lang=RU&amp;apikey=af8e31d9-17e3-49ed-b3f7-2ff1d17947f9"></script>
@@ -27,8 +27,11 @@
     @*Collapse*@
     <link rel="stylesheet" href="~/css/mobile-collapse.css" asp-append-version="true"/>
 
-    @*Carousel*@
-    <link rel="stylesheet" href="~/css/custom-carousel.css" asp-append-version="true"/>
+    @*Jquery*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    @*Bootstrap*@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 <body class="pt-5" style="background-color: #f1f5f9">
@@ -63,12 +66,6 @@
         </main>
     </div>
 
-    @*Jquery*@
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-
-    @*Bootstrap*@
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
     @*Site*@
     <script src="~/js/site.js"></script>
 
@@ -78,9 +75,6 @@
 
     @*ToolTip*@
     <script src="~/js/activate-tooltip.js"></script>
-
-    @*Carousel*@
-    <script src="~/js/custom-carousel.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -1,4 +1,5 @@
 ﻿using EasyToEnter.ASP.Models.Models;
+using EasyToEnter.ASP.ViewsModels.Applicant;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,37 +12,29 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             if (university <= 0) return NotFound();
 
             // "Вариативность"
-            VariabilityModel? variabilityModel = _context.Variability
-                .Include(v => v.FormatModel)
-                .Include(v => v.FormModel)
-                .Include(v => v.PaymentModel)
-                .Include(v => v.HistoryVariabilitys)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.DisciplineFocusUniversitys)
-                        !.ThenInclude(dfu => dfu!.DisciplineModel)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.LevelFocusModel)
-                        .ThenInclude(lf => lf!.LevelModel)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.LevelFocusModel)
-                        .ThenInclude(lf => lf!.FocusModel)
-                            .ThenInclude(f => f!.DirectionModel)
-                                .ThenInclude(d => d!.GroupModel)
-                                    .ThenInclude(g => g!.ScienceModel)
+            List<VariabilityModel> variabilityList = _context.Variability
+                .Include(v => v.HistoryVariabilitys) // Возможно историю выведу!
                 .Include(v => v.FocusUniversityModel)
                     .ThenInclude(fu => fu!.UniversityModel)
+                        .ThenInclude(u => u!.AccreditationModel)
                 .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.SubjectFocusUniversitys)
-                        !.ThenInclude(sfu => sfu!.SubjectModel)
+                    .ThenInclude(fu => fu!.UniversityModel)
+                        .ThenInclude(u => u!.AddressModel)
+                            .ThenInclude(a => a!.CityModel)
+                                .ThenInclude(c => c!.RegionModel)
                 .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.SubjectFocusUniversitys)
-                        !.ThenInclude(sfu => sfu!.SubjectReplacements)
-                            !.ThenInclude(sr => sr!.SubjectModel)
-                .FirstOrDefault(v => v.Id == university);
+                    .ThenInclude(fu => fu!.UniversityModel)
+                        .ThenInclude(u => u!.Dormitorys)
+                            !.ThenInclude(d => d!.AddressModel)
+                .Include(v => v.FocusUniversityModel)
+                    .ThenInclude(fu => fu!.UniversityModel)
+                        .ThenInclude(u => u!.PhoneNumbers)
+                .Where(v => v.FocusUniversityModel!.UniversityId == university)
+                .ToList();
 
-            if (variabilityModel == null) return NotFound();
+            if (!variabilityList.Any()) return NotFound();
 
-            return View(variabilityModel);
+            return View(new UniversityViewModel(variabilityList));
         }
     }
 }

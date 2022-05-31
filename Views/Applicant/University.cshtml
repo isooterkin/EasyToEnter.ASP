@@ -1,7 +1,123 @@
-﻿@model EasyToEnter.ASP.Models.Models.VariabilityModel;
-@using EasyToEnter.ASP.ViewsModels.Components.Path;
+﻿@model EasyToEnter.ASP.ViewsModels.Applicant.UniversityViewModel;
 @using static EasyToEnter.ASP.Tools.StringConverting;
+@using EasyToEnter.ASP.Models.Models;
 
 @{
-    ViewData["Title"] = "Университет";
+    ViewData["Title"] = Model.University.Abbreviation;
 }
+
+@*Название ВУЗа начало*@
+<div class="container bg-light rounded-3 shadow mb-3">
+    <div class="row px-3 py-1">
+        <small class="text-muted text-center fw-bold">
+            @Model.University.Name 
+        </small>
+    </div>
+</div>
+@*Название ВУЗа начало*@
+
+@*Краткая информация начало*@
+<div class="container py-1 mb-3 bg-light rounded-3 shadow">
+    <div class="row">
+
+        <div class="col">
+            <div class="row">
+                <div class="text-center fw-bold">
+                    @IntToString(Model.FocusUniversityCount)
+                </div>
+            </div>
+            <div class="row">
+                <small class="text-center text-muted">
+                    программы
+                </small>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="row">
+                <div class="text-center fw-bold">
+                    от @IntToString(Model.MinTuition)
+                </div>
+            </div>
+            <div class="row">
+                <small class="text-center text-muted">
+                    рублей в год
+                </small>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="row">
+                <div class="text-center fw-bold">
+                    @IntToString(Model.SumNumberSeats)
+                </div>
+            </div>
+            <div class="row">
+                <small class="text-center text-muted">
+                    мест
+                </small>
+            </div>
+        </div>
+
+    </div>
+</div>
+@*Краткая информация конец*@
+
+@*Контакты начало*@
+<div class="bg-light rounded-3 shadow mb-3 p-2">
+    <div class="col">
+
+        <div class="row fw-bold my-1">
+            Контакты
+        </div>
+
+        <div class="row">
+            <div class="col-auto text-start px-0 align-self-center">
+                <i class="bi bi-calendar3-range text-muted fs-4"></i>
+            </div>
+            <a class="col text-muted text-start align-self-center" href="@Model.University.Website">
+                @Model.University.Website
+            </a>
+        </div>
+
+        @{var mailto = $"mailto:{Model.University.EmailAddress}";}
+        <div class="row">
+            <div class="col-auto text-start px-0 align-self-center">
+                <i class="bi bi-envelope text-muted fs-4"></i>
+            </div>
+            <a class="col text-muted text-start align-self-center" href="@Model.University.EmailAddress">
+                @Model.University.EmailAddress
+            </a>
+        </div>
+
+        <div class="row">
+            <div class="col-auto text-start px-0 align-self-center">
+                <i class="bi bi-telephone text-muted fs-4"></i>
+            </div>
+            <div class="col text-start align-self-center">
+                @foreach (PhoneNumberUniversityModel phoneNumber in Model.University!.PhoneNumbers!)
+                {
+                    <div>
+                        <span>
+                            @StringPhoneNumberToString(phoneNumber.PhoneNumber.ToLower())
+                        </span>
+                        <small class="text-muted">
+                            (@phoneNumber.Appointment.ToLower())
+                        </small>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-auto text-start px-0 align-self-center">
+                <i class="bi bi-geo-alt text-muted fs-4"></i>
+            </div>
+            <div class="col text-start align-self-center">
+                @Model.University.AddressModel!.FullAddress
+            </div>
+        </div>
+
+    </div>
+</div>
+@*Контакты конец*@
