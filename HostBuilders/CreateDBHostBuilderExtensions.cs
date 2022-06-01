@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using EasyToEnter.ASP.Services.Discipline;
 using System.Net.Http.Headers;
+using System.Net;
 
 namespace EasyToEnter.ASP.HostBuilders
 {
@@ -18,11 +19,11 @@ namespace EasyToEnter.ASP.HostBuilders
 
                 services.AddServerSideBlazor();
 
-                services.AddScoped<HttpClient>(client =>
+                services.AddScoped(client =>
                 {
                     HttpClient httpClient = new()
                     {
-                        BaseAddress = new Uri(@"https://localhost:7255/")
+                        BaseAddress = new Uri(context.Configuration["HostName"])
                     };
 
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
