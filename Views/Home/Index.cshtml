@@ -1,8 +1,11 @@
-﻿@using EasyToEnter.ASP.ViewsModels.Components.Maps;
+﻿@using EasyToEnter.ASP.Components.VariabilityCard;
+@using EasyToEnter.ASP.ViewsModels.Components.Maps;
 
 @{
     ViewData["Title"] = "Home Page";
 }
+
+<component type="typeof(TestComponent)" render-mode="ServerPrerendered"/>
 
 @*Путь начало*@
 <div class="container bg-light rounded-3 shadow mb-3">

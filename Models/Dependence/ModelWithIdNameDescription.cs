@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EasyToEnter.ASP.Models.Dependence
 {
@@ -6,6 +7,7 @@ namespace EasyToEnter.ASP.Models.Dependence
     {
         // Описание
         [Display(Name = "Описание")]
+        [JsonPropertyName("Description")]
         public string? Description { set; get; }
     }
 }

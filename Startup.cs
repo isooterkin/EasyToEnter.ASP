@@ -46,6 +46,8 @@ namespace EasyToEnter.ASP
                         controller = "Home",
                         action = "Index"
                     });
+
+                endpoints.MapBlazorHub();
             });
         }
     }

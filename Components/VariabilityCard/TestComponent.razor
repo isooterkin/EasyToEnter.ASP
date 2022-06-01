@@ -1,0 +1,31 @@
+﻿@inject EasyToEnter.ASP.Services.Discipline.IDisciplineService DisciplineService
+@using EasyToEnter.ASP.Services.Discipline;
+
+<h3>TestComponent</h3>
+
+
+<a class="col-auto m-0 p-0 ml-4 align-self-end" data-bs-toggle="tooltip" title="Убрать из избранного" href="#" @onclick="Change">
+    <span class="fs-5 bi @click text-danger"/>
+    @{
+        if (DisciplineList.Any()) 
+        { 
+            <span>@DisciplineList[0].Name</span>
+        }
+    }
+</a>
+
+@code {
+
+    public List<DisciplineModel> DisciplineList = new();
+
+    public string click = "bi-heart";
+
+    private async Task Change()
+    {
+        DisciplineList = await DisciplineService.GetDisciplineList();
+
+        if (click == "bi-heart") click = "bi-heart-fill";
+        else click = "bi-heart";
+    }
+
+}

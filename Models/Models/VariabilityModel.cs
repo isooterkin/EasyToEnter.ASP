@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace EasyToEnter.ASP.Models.Models
 {
@@ -12,13 +13,18 @@ namespace EasyToEnter.ASP.Models.Models
     {
         [Required(ErrorMessage = "Укажите период обучения.")]
         [Display(Name = "Период обучения")]
+        [JsonPropertyName("TrainingPeriod")]
         public int TrainingPeriod { get; set; }
+
+
 
         [Required(ErrorMessage = "Укажите наличие вступительных экзаменов.")]
         [Display(Name = "Вступительные экзамены")]
+        [JsonPropertyName("EntranceExams")]
         public bool EntranceExams { get; set; } = false;
 
-        // Внешний ключ модели "Форма"
+
+
         [Display(Name = "Форма")]
         [Required(ErrorMessage = "Укажите форму.")]
         public int FormId { get; set; }
@@ -26,7 +32,8 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Форма")]
         public FormModel? FormModel { get; set; }
 
-        // Внешний ключ модели "Оплата"
+
+
         [Display(Name = "Оплата")]
         [Required(ErrorMessage = "Укажите оплату.")]
         public int PaymentId { get; set; }
@@ -34,7 +41,8 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Оплата")]
         public PaymentModel? PaymentModel { get; set; }
 
-        // Внешний ключ модели "Формат"
+
+
         [Display(Name = "Формат")]
         [Required(ErrorMessage = "Укажите формат.")]
         public int FormatId { get; set; }
@@ -42,7 +50,8 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Формат")]
         public FormatModel? FormatModel { get; set; }
 
-        // Внешний ключ модели "Направленность ВУЗа"
+
+
         [Display(Name = "Направленность ВУЗа")]
         [Required(ErrorMessage = "Укажите направленность ВУЗа.")]
         public int FocusUniversityId { get; set; }
@@ -50,9 +59,12 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Направленность ВУЗа")]
         public FocusUniversityModel? FocusUniversityModel { get; set; }
 
-        // Лист моделей "История вариативности", принадлежащих модели "Вариативность"
+
+
         [Display(Name = "Истории вариативности выбранной вариативности")]
         public List<HistoryVariabilityModel>? HistoryVariabilitys { get; set; }
+
+
 
         [NotMapped]
         [Display(Name = "История за текущий год")]
