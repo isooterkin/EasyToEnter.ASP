@@ -3,36 +3,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using EasyToEnter.ASP.Services.Discipline;
 using System.Net.Http.Headers;
-using System.Net;
 
 namespace EasyToEnter.ASP.HostBuilders
 {
-    public static class CreateDBHostBuilderExtensions
+    public static class AddConfigureDBHostBuilderExtensions
     {
         private static readonly string DBName = "PGSQL"; // MYSQL MSSQL PGSQL
 
-        public static IHostBuilder ConfigureDB(this IHostBuilder host)
+        public static IHostBuilder AddConfigureDB(this IHostBuilder host)
         {
             host.ConfigureServices((context, services) =>
             {
-                services.AddControllersWithViews();
-
-                services.AddServerSideBlazor();
-
-                services.AddScoped(client =>
-                {
-                    HttpClient httpClient = new()
-                    {
-                        BaseAddress = new Uri(context.Configuration["HostName"])
-                    };
-
-                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                    return httpClient;
-                });
-
-                services.AddScoped<IDisciplineService, DisciplineService>();
-
                 // Конфигурация БД
                 string connectionString = context.Configuration.GetConnectionString(DBName);
 

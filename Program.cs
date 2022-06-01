@@ -7,7 +7,8 @@ namespace EasyToEnter.ASP
         public static void Main(string[] arguments) => Host
             .CreateDefaultBuilder(arguments)
             .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
-            .ConfigureDB()
+            .AddServices()
+            .AddConfigureDB()
             .Build()
             .InitializationDB()
             .Run();
