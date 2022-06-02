@@ -23,7 +23,7 @@
                     @*Значек "Государственный вуз"*@
                     @if (Model.FocusUniversityModel.UniversityModel.AccreditationId == 1)
                     {
-                    <a class="col-auto m-0 p-0 ml-2 align-self-end" data-bs-toggle="tooltip" title="Государственный" href="#">
+                    <a class="col-auto m-0 p-0 ml-2 align-self-end" data-bs-placement="top" data-bs-toggle="tooltip" title="Государственный" href="#">
                         <span class="fs-5 bi bi-hospital text-success"/>
                     </a>
                     }
@@ -31,7 +31,7 @@
                     @*Значек "Наличие общежития"*@
                     @if (Model.FocusUniversityModel.UniversityModel.Dormitorys!.Any())
                     {
-                    <a class="col-auto m-0 p-0 ml-2 align-self-end" data-bs-toggle="tooltip" title="Наличие общежития" href="#">
+                    <a class="col-auto m-0 p-0 ml-2 align-self-end" data-bs-placement="top" data-bs-toggle="tooltip" title="Наличие общежития" href="#">
                         <span class="fs-5 bi bi-building text-warning"/>
                     </a>
                     }
@@ -40,14 +40,14 @@
                     @if (Model.FocusUniversityModel.UniversityModel.MilitaryDepartment)
                     {
                     <div class="col-auto m-0 p-0 ml-2 align-self-end">
-                        <a class="align-top" data-bs-toggle="tooltip" title="Наличие военной кафедры" href="#">
+                        <a class="align-top" data-bs-toggle="tooltip" data-bs-placement="top" title="Наличие военной кафедры" href="#">
                             <span class="fs-5 bi bi-shield text-info align-top"/>
                         </a>
                     </div>
                     }
 
                     @*Значек "В избранное"*@
-                    <a class="col-auto m-0 p-0 ml-4 align-self-end" data-bs-toggle="tooltip" title="Убрать из избранного" href="" @onclick:preventDefault @onclick="ChangeStatusFavorites">
+                    <a class="col-auto m-0 p-0 ml-4 align-self-end" data-bs-placement="top" data-bs-toggle="tooltip" title="Убрать из избранного" href="" @onclick:preventDefault @onclick="ChangeStatusFavorites">
                         <span class="fs-5 bi @StatusFavorites text-danger"/>
                     </a>
                 </div>
@@ -66,9 +66,9 @@
 
                 @*Значек "Особенности"*@
                 <p class="card-text text-truncate">
-                    <kbd class="mr-1 rounded-3 bg-success">@Model.PaymentModel!.Name</kbd>
-                    <kbd class="mr-1 rounded-3 bg-warning">@Model.FormatModel!.Name</kbd>
-                    <kbd class="mr-1 rounded-3 bg-info">@Model.FormModel!.Name</kbd>
+                    <kbd class="mr-1 rounded-3 fw-semibold bg-success">@Model.PaymentModel!.Name</kbd>
+                    <kbd class="mr-1 rounded-3 fw-semibold bg-warning">@Model.FormatModel!.Name</kbd>
+                    <kbd class="mr-1 rounded-3 fw-semibold bg-info">@Model.FormModel!.Name</kbd>
                 </p>
 
                 <div class="row px-3">
@@ -100,9 +100,8 @@
 </div>  
 
 @code {
-
     [Parameter]
-    public VariabilityModel? Model { get; set; }
+    public VariabilityModel Model { get; set; } = new VariabilityModel();
 
     public string StatusFavorites = "bi-heart";
 
