@@ -1,9 +1,12 @@
 ﻿using EasyToEnter.ASP.Services.Discipline;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace EasyToEnter.ASP.HostBuilders
@@ -51,19 +54,7 @@ namespace EasyToEnter.ASP.HostBuilders
                         configureOptions.ExpireTimeSpan = TimeSpan.FromSeconds(1110);
                     });
 
-                services.AddControllersWithViews()
-                    .AddJsonOptions(options =>
-                    {
-                        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-                        options.JsonSerializerOptions.MaxDepth = 1;
-                    });
-
-                services.AddControllers()
-                    .AddJsonOptions(options =>
-                    {
-                        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-                        options.JsonSerializerOptions.MaxDepth = 1;
-                    });
+                services.AddControllersWithViews();
 
                 services.AddServerSideBlazor();
 
