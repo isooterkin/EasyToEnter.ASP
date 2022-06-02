@@ -1,31 +1,38 @@
 ﻿using EasyToEnter.ASP.Models.Dependence;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace EasyToEnter.ASP.Models.Models
 {
-    // Модель "Направленность"
     [Display(Name = "Направленность")]
     public class FocusModel : ModelWithIdNameDescription
     {
-        // Внешний ключ модели "Направление"
         [Display(Name = "Направление")]
         [Required(ErrorMessage = "Укажите направление.")]
+        [JsonPropertyName("DirectionId")]
         public int DirectionId { get; set; }
         [ForeignKey(nameof(DirectionId))]
         [Display(Name = "Направление")]
+        [JsonPropertyName("DirectionModel")]
         public DirectionModel? DirectionModel { get; set; }
 
-        // Лист моделей "Область - Направленность", принадлежащих модели "Направленность"
+
+
         [Display(Name = "Области - направленности выбранной направленности")]
+        [JsonPropertyName("AreaFocuss")]
         public List<AreaFocusModel>? AreaFocuss { get; set; }
 
-        // Лист моделей "Уровень - Направленность", принадлежащих модели "Направленность"
+        
+
         [Display(Name = "Уровни - направленности выбранной направленности")]
+        [JsonPropertyName("LevelFocuss")]
         public List<LevelFocusModel>? LevelFocuss { get; set; }
 
-        // Лист моделей "Профессия - Направленность", принадлежащих модели "Направленность"
+
+
         [Display(Name = "Профессии - направленности выбранной направленности")]
+        [JsonPropertyName("ProfessionFocuss")]
         public List<ProfessionFocusModel>? ProfessionFocuss { get; set; }
     }
 }

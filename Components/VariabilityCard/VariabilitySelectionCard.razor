@@ -2,6 +2,7 @@
 @using static EasyToEnter.ASP.Tools.StringConverting
 @using EasyToEnter.ASP.Services.Discipline;
 @using EasyToEnter.ASP.ViewsModels.Applicant;
+@using System.Text.Json;
 
 @*Api*@
 @inject EasyToEnter.ASP.Services.Discipline.IDisciplineService DisciplineService
@@ -15,12 +16,12 @@
                     @*Хедер*@
                     <p class="col m-0 p-0 card-text text-truncate">
                         <small class="text-muted">
-                            @Model.Variability!.FocusUniversityModel!.UniversityModel!.Name
+                            @Model.FocusUniversityModel!.UniversityModel!.Name
                         </small>
                     </p>
 
                     @*Значек "Государственный вуз"*@
-                    @if (Model.Variability.FocusUniversityModel.UniversityModel.AccreditationId == 1)
+                    @if (Model.FocusUniversityModel.UniversityModel.AccreditationId == 1)
                     {
                     <a class="col-auto m-0 p-0 ml-2 align-self-end" data-bs-toggle="tooltip" title="Государственный" href="#">
                         <span class="fs-5 bi bi-hospital text-success"/>
@@ -28,7 +29,7 @@
                     }
 
                     @*Значек "Наличие общежития"*@
-                    @if (Model.Variability.FocusUniversityModel.UniversityModel.Dormitorys!.Any())
+                    @if (Model.FocusUniversityModel.UniversityModel.Dormitorys!.Any())
                     {
                     <a class="col-auto m-0 p-0 ml-2 align-self-end" data-bs-toggle="tooltip" title="Наличие общежития" href="#">
                         <span class="fs-5 bi bi-building text-warning"/>
@@ -36,7 +37,7 @@
                     }
 
                     @*Значек "Военная кафедра"*@
-                    @if (Model.Variability.FocusUniversityModel.UniversityModel.MilitaryDepartment)
+                    @if (Model.FocusUniversityModel.UniversityModel.MilitaryDepartment)
                     {
                     <div class="col-auto m-0 p-0 ml-2 align-self-end">
                         <a class="align-top" data-bs-toggle="tooltip" title="Наличие военной кафедры" href="#">
@@ -46,7 +47,7 @@
                     }
 
                     @*Значек "В избранное"*@
-                    <a class="col-auto m-0 p-0 ml-4 align-self-end" data-bs-toggle="tooltip" title="Убрать из избранного" href="#">
+                    <a class="col-auto m-0 p-0 ml-4 align-self-end" data-bs-toggle="tooltip" title="Убрать из избранного" href="" @onclick:preventDefault @onclick="ChangeStatusFavorites">
                         <span class="fs-5 bi @StatusFavorites text-danger"/>
                     </a>
                 </div>
@@ -54,7 +55,7 @@
                 @*Значек "Тайтл"*@
                 <h5 class="card-title text-truncate">
                     <a href="" class="text-decoration-none text-dark fw-bold">
-                        @Model.Variability!.FocusUniversityModel!.UniversityModel!.Abbreviation
+                        @Model.FocusUniversityModel!.UniversityModel!.Abbreviation
                     </a>
                 </h5>
 
@@ -65,30 +66,30 @@
 
                 @*Значек "Особенности"*@
                 <p class="card-text text-truncate">
-                    <kbd class="mr-1 rounded-3 bg-success">@Model.Variability.PaymentModel!.Name</kbd>
-                    <kbd class="mr-1 rounded-3 bg-warning">@Model.Variability.FormatModel!.Name</kbd>
-                    <kbd class="mr-1 rounded-3 bg-info">@Model.Variability.FormModel!.Name</kbd>
+                    <kbd class="mr-1 rounded-3 bg-success">@Model.PaymentModel!.Name</kbd>
+                    <kbd class="mr-1 rounded-3 bg-warning">@Model.FormatModel!.Name</kbd>
+                    <kbd class="mr-1 rounded-3 bg-info">@Model.FormModel!.Name</kbd>
                 </p>
 
                 <div class="row px-3">
                     <div class="col-sm order-sm-first order-4 px-0">
-                        <a class="btn text-truncate btn-secondary text-decoration-none col col-sm-auto" href="/Applicant/Variability?variability=@Model.Variability.Id">
+                        <a class="btn text-truncate btn-secondary text-decoration-none col col-sm-auto" href="/Applicant/Variability?variability=@Model.Id">
                             Подробнее
                         </a>
                     </div>
                     <div class="col-sm-auto order-1 order-xl-2 align-self-center">
                         <p class="text-center m-0">
-                            от <span class="fs-6 fw-bold text-truncate">@IntToString(@Model.Variability.YearHistoryVariability?.PassingGrade)</span> баллов
+                            от <span class="fs-6 fw-bold text-truncate">@IntToString(@Model.YearHistoryVariability?.PassingGrade)</span> баллов
                         </p>
                     </div>
                     <div class="col-sm-auto order-2 order-xl-3 align-self-center">
                         <p class="text-center m-0">
-                            <span class="fs-6 fw-bold text-truncate">@IntToString(@Model.Variability.YearHistoryVariability?.NumberSeats)</span> мест
+                            <span class="fs-6 fw-bold text-truncate">@IntToString(@Model.YearHistoryVariability?.NumberSeats)</span> мест
                         </p>
                     </div>
                     <div class="col-sm-auto order-3 order-xl-4 align-self-center mb-sm-0 mb-2">
                         <p class="text-center m-0">
-                            от <span class="fs-6 fw-bold text-truncate">@IntToString(Model.Variability.YearHistoryVariability?.Tuition)</span> руб.
+                            от <span class="fs-6 fw-bold text-truncate">@IntToString(Model.YearHistoryVariability?.Tuition)</span> руб.
                         </p>
                     </div>
                 </div>
@@ -96,19 +97,14 @@
             </div>
         </div>
     </div>
-</div>
+</div>  
 
 @code {
 
     [Parameter]
-    public VariabilitySelectionCardViewModel Model { get; set; }
+    public VariabilityModel? Model { get; set; }
 
     public string StatusFavorites = "bi-heart";
-
-    public VariabilitySelectionCard(VariabilitySelectionCardViewModel variabilitySelectionCardViewModel)
-    {
-        Model = variabilitySelectionCardViewModel;
-    }
 
     private void ChangeStatusFavorites()
     {

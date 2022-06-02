@@ -1,13 +1,6 @@
 ﻿using EasyToEnter.ASP.Services.Discipline;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace EasyToEnter.ASP.HostBuilders
 {
@@ -35,7 +28,7 @@ namespace EasyToEnter.ASP.HostBuilders
                 services.Configure<CookiePolicyOptions>(cookiePolicyOptions =>
                 {
                     cookiePolicyOptions.CheckConsentNeeded = context => true;
-                    cookiePolicyOptions.MinimumSameSitePolicy = SameSiteMode.None;
+                    cookiePolicyOptions.MinimumSameSitePolicy = SameSiteMode.Lax;
                 });
 
                 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -71,6 +64,12 @@ namespace EasyToEnter.ASP.HostBuilders
                 });
 
                 services.AddScoped<IDisciplineService, DisciplineService>();
+
+
+                // Problem: https://stackoverflow.com/questions/60311852/error-connection-disconnected-with-error-error-server-returned-an-error-on-cl
+                services.AddSignalR(e => {
+                    e.MaximumReceiveMessageSize = 102400000;
+                });
             });
 
             return host;

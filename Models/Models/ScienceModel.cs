@@ -1,14 +1,14 @@
 ﻿using EasyToEnter.ASP.Models.Dependence;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EasyToEnter.ASP.Models.Models
 {
-    // Модель "Наука"
     [Display(Name = "Наука")]
     public class ScienceModel : ModelWithIdNameDescription
     {
-        // Лист моделей "Группа", принадлежащих модели "Наука"
         [Display(Name = "Группы выбранной науки")]
+        [JsonPropertyName("Groups")]
         public List<GroupModel>? Groups { get; set; }
     }
 }
