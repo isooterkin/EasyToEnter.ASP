@@ -75,7 +75,7 @@ namespace EasyToEnter.ASP.Controllers
 
             PersonModel? person = await _context.Person.Include(p => p.RoleModel).SingleOrDefaultAsync(p => p.Login == login);
 
-            if (person == null || Verify(password, person.PasswordHash)) return View();
+            if (person == null || Verify(password, person.PasswordHash) == false) return View();
 
             await Authenticate(person);
 
@@ -103,7 +103,7 @@ namespace EasyToEnter.ASP.Controllers
                 PasswordHash = HashPassword(password),
                 EmailAddress = "",
                 PhoneNumber = "89121858950",
-                RoleId = 1
+                RoleId = 2
             };
 
             await Authenticate(person);
