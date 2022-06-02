@@ -2,18 +2,15 @@
 
 @*Библиотеки*@
 @using EasyToEnter.ASP.ViewsModels.Applicant;
-@using EasyToEnter.ASP.Components.VariabilityCard;
+@using EasyToEnter.ASP.Components;
 @using Newtonsoft.Json;
 @using EasyToEnter.ASP.Models.Models;
 
 @for(var i = 0; i < Model.VariabilityList.Count; i++)
 {
-    var ModelJson = JsonConvert.SerializeObject(Model.VariabilityList[i], Formatting.None, new JsonSerializerSettings()
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
+    var ModelJson = Model.VariabilityList[i].Json();
 
     var ModelNotJson = System.Text.Json.JsonSerializer.Deserialize<VariabilityModel>(ModelJson);
 
-    <component type="typeof(VariabilitySelectionCard)" render-mode="ServerPrerendered" param-Model="ModelNotJson"/>
+    <component type="typeof(VariabilitySelectionCard)" render-mode="ServerPrerendered" param-Model="Model.VariabilityList[i]"/>
 }
