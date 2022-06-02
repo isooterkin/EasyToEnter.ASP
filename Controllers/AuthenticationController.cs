@@ -28,6 +28,8 @@ namespace EasyToEnter.ASP.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout() 
         {
+            var a = HttpContext.Session.Id;
+
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
@@ -66,6 +68,7 @@ namespace EasyToEnter.ASP.Controllers
 
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
+            // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
 
             return RedirectToAction("Index", "Home");

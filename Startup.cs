@@ -33,6 +33,8 @@ namespace EasyToEnter.ASP
 
             app.UseCookiePolicy();
 
+            app.UseSession();
+
             // 
             app.UseAuthentication();
 

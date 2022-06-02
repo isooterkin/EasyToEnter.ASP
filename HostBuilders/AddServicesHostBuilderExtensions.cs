@@ -36,12 +36,12 @@ namespace EasyToEnter.ASP.HostBuilders
                     cookiePolicyOptions.MinimumSameSitePolicy = SameSiteMode.Lax;
                 });
 
-                JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented,
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
+                //JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+                //{
+                //    Formatting = Formatting.Indented,
+                //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                //    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                //};
 
                 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(configureOptions =>
@@ -58,6 +58,8 @@ namespace EasyToEnter.ASP.HostBuilders
                         // сколько времени билет проверки подлинности, хранящийся в файле cookie
                         configureOptions.ExpireTimeSpan = TimeSpan.FromSeconds(1110);
                     });
+
+                services.AddSession();
 
                 services.AddControllersWithViews();
 
