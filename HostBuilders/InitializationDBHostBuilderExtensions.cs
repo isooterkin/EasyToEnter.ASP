@@ -112,6 +112,9 @@ namespace EasyToEnter.ASP.HostBuilders
 
                 // Добавляем в базу данных "История вариативности"
                 // InitializationHistoryVariability.Initialize(context);
+
+                // Добавляем в базу данных "Роль"
+                // InitializationRole.Initialize(context);
             }
             catch (Exception Exception)
             {
