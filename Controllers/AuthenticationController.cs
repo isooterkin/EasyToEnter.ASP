@@ -1,5 +1,6 @@
 ﻿using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models;
+using EasyToEnter.ASP.Models.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -7,20 +8,44 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Claims;
+using static BCrypt.Net.BCrypt;
+
 
 namespace EasyToEnter.ASP.Controllers
 {
-    public class AuthenticationController : Controller
+    public class AuthenticationController : MyController
     {
-        [AllowAnonymous]
-        [HttpGet]
-        public IActionResult Login() => User != null && User.Identity != null && User.Identity.IsAuthenticated == true ? RedirectToAction("Index", "Home") : View();
+        public AuthenticationController(EasyToEnterDbContext context): base(context) {}
+
+
+
+        private async Task Authenticate(PersonModel person)
+        {
+            ClaimsIdentity claimsIdentity = new(new[]
+                {
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.Login),
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType, person.RoleId.ToString()),
+                    new Claim(ClaimTypes.MobilePhone, person.PhoneNumber),
+                    new Claim(ClaimTypes.Name, person.FirstName),
+                    new Claim(ClaimTypes.Email, person.EmailAddress)
+                }, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            ClaimsPrincipal claimsPrincipal = new(claimsIdentity);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
+        }
 
 
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Register() => User != null && User.Identity != null && User.Identity.IsAuthenticated == true ? RedirectToAction("Index", "Home") : View();
+        public IActionResult Login() => CheckIdentity() ? RedirectToAction("Index", "Home") : View();
+
+
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult Register() => CheckIdentity() ? RedirectToAction("Index", "Home") : View();
 
 
 
@@ -28,8 +53,6 @@ namespace EasyToEnter.ASP.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout() 
         {
-            var a = HttpContext.Session.Id;
-
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
@@ -46,38 +69,47 @@ namespace EasyToEnter.ASP.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromForm(Name = "login")] string login, [FromForm(Name = "password")] string password)
         {
+            if (CheckIdentity()) return RedirectToAction("Index", "Home");
+
             if (login == null || password == null) return RedirectToAction("Login");
 
-            ClaimsIdentity? claimsIdentity = null;
+            PersonModel? person = await _context.Person.Include(p => p.RoleModel).SingleOrDefaultAsync(p => p.Login == login);
 
-            if (login == "admin" && password == "12345")
-                claimsIdentity = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, login),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, "Admin")
-                }, CookieAuthenticationDefaults.AuthenticationScheme);
+            if (person == null || Verify(password, person.PasswordHash)) return View();
 
-            if (login == "applicant" && password == "12345")
-                claimsIdentity = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, login),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, "Applicant")
-                }, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            if (claimsIdentity == null) return View();
-
-            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-            // установка аутентификационных куки
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
+            await Authenticate(person);
 
             return RedirectToAction("Index", "Home");
         }
 
 
-        public IActionResult Aaa()
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Register([FromForm(Name = "login")] string login, [FromForm(Name = "password")] string password)
         {
-            var a = User.GetHashCode();
+            if (CheckIdentity()) return RedirectToAction("Index", "Home");
+
+            if (login == null || password == null) return RedirectToAction("Register");
+
+            if (await _context.Person.SingleOrDefaultAsync(p => p.Login == login) != null) return View();
+
+            PersonModel person = new () 
+            { 
+                FirstName = "Иван",
+                LastName = "Иванов",
+                MiddleName = "",
+                Login = login,
+                PasswordHash = HashPassword(password),
+                EmailAddress = "",
+                PhoneNumber = "89121858950",
+                RoleId = 1
+            };
+
+            await Authenticate(person);
+
+            await _context.AddAsync(person);
+            await _context.SaveChangesAsync();
 
             return RedirectToAction("Index", "Home");
         }

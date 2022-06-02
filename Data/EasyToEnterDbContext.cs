@@ -107,5 +107,11 @@ namespace EasyToEnter.ASP.Data
 
         // Таблица "История вариативности"
         public DbSet<HistoryVariabilityModel> HistoryVariability { get; set; }
+
+        // Таблица "Роль"
+        public DbSet<RoleModel> Role { get; set; }
+
+        // Таблица "Пользователь"
+        public DbSet<PersonModel> Person { get; set; }
     }
 }
