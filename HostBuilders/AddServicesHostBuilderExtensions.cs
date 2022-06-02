@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace EasyToEnter.ASP.HostBuilders
 {
@@ -50,7 +51,19 @@ namespace EasyToEnter.ASP.HostBuilders
                         configureOptions.ExpireTimeSpan = TimeSpan.FromSeconds(1110);
                     });
 
-                services.AddControllersWithViews();
+                services.AddControllersWithViews()
+                    .AddJsonOptions(options =>
+                    {
+                        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                        options.JsonSerializerOptions.MaxDepth = 1;
+                    });
+
+                services.AddControllers()
+                    .AddJsonOptions(options =>
+                    {
+                        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                        options.JsonSerializerOptions.MaxDepth = 1;
+                    });
 
                 services.AddServerSideBlazor();
 

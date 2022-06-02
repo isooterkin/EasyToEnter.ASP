@@ -1,7 +1,10 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.VariabilitySelectionContainerViewModel;
+
+@*Библиотеки*@
 @using EasyToEnter.ASP.ViewsModels.Applicant;
+@using EasyToEnter.ASP.Components.VariabilityCard;
 
 @for(var i = 0; i < Model.VariabilityList.Count; i++)
 {
-        <vc:variability-card data="@new VariabilitySelectionCardViewModel(@Model.VariabilityList[i]!)"/>
+    <component type="typeof(VariabilitySelectionCard)" render-mode="ServerPrerendered" param-Model="Model.VariabilityList[i]"/>
 }
