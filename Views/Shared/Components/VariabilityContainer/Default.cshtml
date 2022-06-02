@@ -8,6 +8,8 @@
 
 @for(var i = 0; i < Model.VariabilityList.Count; i++)
 {
+    string a = JsonConvert.SerializeObject(Model.VariabilityList[i], Formatting.None);
+
     var ModelJson = Model.VariabilityList[i].Json();
 
     var ModelNotJson = System.Text.Json.JsonSerializer.Deserialize<VariabilityModel>(ModelJson);

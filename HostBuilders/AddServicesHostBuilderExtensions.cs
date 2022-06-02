@@ -1,6 +1,8 @@
 ﻿using EasyToEnter.ASP.Services.Discipline;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -33,6 +35,13 @@ namespace EasyToEnter.ASP.HostBuilders
                     cookiePolicyOptions.CheckConsentNeeded = context => true;
                     cookiePolicyOptions.MinimumSameSitePolicy = SameSiteMode.Lax;
                 });
+
+                JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                };
 
                 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(configureOptions =>
