@@ -40,13 +40,9 @@ namespace EasyToEnter.ASP
                 // [Controller]/[ActionName]/[Parameters]
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action}/{id?}",
-                    defaults: new
-                    {
-                        controller = "Home",
-                        action = "Index"
-                    });
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
 
+                // endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
             });
         }

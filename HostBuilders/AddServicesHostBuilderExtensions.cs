@@ -9,9 +9,10 @@ namespace EasyToEnter.ASP.HostBuilders
         {
             host.ConfigureServices((context, services) =>
             {
+                services.AddServerSideBlazor();
                 services.AddControllersWithViews();
 
-                services.AddServerSideBlazor();
+                // services.AddRazorPages();
 
                 services.AddScoped(client =>
                 {

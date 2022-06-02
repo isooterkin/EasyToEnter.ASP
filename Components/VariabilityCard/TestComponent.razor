@@ -4,7 +4,7 @@
 <h3>TestComponent</h3>
 
 
-<a class="col-auto m-0 p-0 ml-4 align-self-end" data-bs-toggle="tooltip" title="Убрать из избранного" href="#" @onclick="Change">
+<a class="col-auto m-0 p-0 ml-4 align-self-end" data-bs-toggle="tooltip" title="Убрать из избранного" href="" @onclick:preventDefault @onclick="Change">
     <span class="fs-5 bi @click text-danger"/>
     @{
         if (DisciplineList.Any()) 
