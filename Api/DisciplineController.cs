@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EasyToEnter.ASP.Api
 {

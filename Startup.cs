@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Localization;
-using System.Globalization;
 
 namespace EasyToEnter.ASP
 {
@@ -32,7 +31,14 @@ namespace EasyToEnter.ASP
             // добавляем возможности маршрутизации
             app.UseRouting();
 
+            app.UseCookiePolicy();
+
+            // 
+            app.UseAuthentication();
+
+            // 
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -43,8 +49,8 @@ namespace EasyToEnter.ASP
                     pattern: "{controller}/{action}/{id?}",
                     defaults: new
                     {
-                        controller = "Home",
-                        action = "Index"
+                        controller = "Authentication",
+                        action = "Login"
                     });
 
                 endpoints.MapBlazorHub();
