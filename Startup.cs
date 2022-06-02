@@ -42,6 +42,8 @@ namespace EasyToEnter.ASP
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapBlazorHub();
+
                 // Формат маршрутизации
                 // [Controller]/[ActionName]/[Parameters]
                 endpoints.MapControllerRoute(
@@ -52,8 +54,6 @@ namespace EasyToEnter.ASP
                         controller = "Authentication",
                         action = "Login"
                     });
-
-                endpoints.MapBlazorHub();
             });
         }
     }
