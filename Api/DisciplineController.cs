@@ -13,6 +13,7 @@ namespace EasyToEnter.ASP.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class DisciplineController : ControllerBase
     {
         private readonly EasyToEnterDbContext _context;
@@ -24,6 +25,7 @@ namespace EasyToEnter.ASP.Api
 
         // GET: api/Discipline
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<DisciplineModel>>> GetDiscipline()
         {
           if (_context.Discipline == null)
@@ -35,6 +37,7 @@ namespace EasyToEnter.ASP.Api
 
         // GET: api/Discipline/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<DisciplineModel>> GetDisciplineModel(int id)
         {
           if (_context.Discipline == null)
@@ -54,6 +57,7 @@ namespace EasyToEnter.ASP.Api
         // PUT: api/Discipline/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> PutDisciplineModel(int id, DisciplineModel disciplineModel)
         {
             if (id != disciplineModel.Id)
@@ -85,6 +89,7 @@ namespace EasyToEnter.ASP.Api
         // POST: api/Discipline
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<DisciplineModel>> PostDisciplineModel(DisciplineModel disciplineModel)
         {
           if (_context.Discipline == null)
@@ -99,6 +104,7 @@ namespace EasyToEnter.ASP.Api
 
         // DELETE: api/Discipline/5
         [HttpDelete("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> DeleteDisciplineModel(int id)
         {
             if (_context.Discipline == null)
