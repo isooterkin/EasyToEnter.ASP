@@ -9,25 +9,24 @@ using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
 
-namespace EasyToEnter.ASP.Controllers
+namespace EasyToEnter.ASP.Controllers.Administrator
 {
-    public class DirectionModelsController : Controller
+    public class ScienceModelsController : Controller
     {
         private readonly EasyToEnterDbContext _context;
 
-        public DirectionModelsController(EasyToEnterDbContext context)
+        public ScienceModelsController(EasyToEnterDbContext context)
         {
             _context = context;
         }
 
-        // GET: DirectionModels
+        // GET: ScienceModels
         public async Task<IActionResult> Index()
         {
-            var easyToEnterDbContext = _context.Direction.Include(d => d.GroupModel);
-            return View(await easyToEnterDbContext.ToListAsync());
+            return View(await _context.Science.ToListAsync());
         }
 
-        // GET: DirectionModels/Details/5
+        // GET: ScienceModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,42 +34,39 @@ namespace EasyToEnter.ASP.Controllers
                 return NotFound();
             }
 
-            var directionModel = await _context.Direction
-                .Include(d => d.GroupModel)
+            var scienceModel = await _context.Science
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (directionModel == null)
+            if (scienceModel == null)
             {
                 return NotFound();
             }
 
-            return View(directionModel);
+            return View(scienceModel);
         }
 
-        // GET: DirectionModels/Create
+        // GET: ScienceModels/Create
         public IActionResult Create()
         {
-            ViewData["GroupId"] = new SelectList(_context.Group, "Id", "Name");
             return View();
         }
 
-        // POST: DirectionModels/Create
+        // POST: ScienceModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GroupId,Code,Name,Description,Id")] DirectionModel directionModel)
+        public async Task<IActionResult> Create([Bind("Name,Description,Id")] ScienceModel scienceModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(directionModel);
+                _context.Add(scienceModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GroupId"] = new SelectList(_context.Group, "Id", "Name", directionModel.GroupId);
-            return View(directionModel);
+            return View(scienceModel);
         }
 
-        // GET: DirectionModels/Edit/5
+        // GET: ScienceModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,23 +74,22 @@ namespace EasyToEnter.ASP.Controllers
                 return NotFound();
             }
 
-            var directionModel = await _context.Direction.FindAsync(id);
-            if (directionModel == null)
+            var scienceModel = await _context.Science.FindAsync(id);
+            if (scienceModel == null)
             {
                 return NotFound();
             }
-            ViewData["GroupId"] = new SelectList(_context.Group, "Id", "Name", directionModel.GroupId);
-            return View(directionModel);
+            return View(scienceModel);
         }
 
-        // POST: DirectionModels/Edit/5
+        // POST: ScienceModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GroupId,Code,Name,Description,Id")] DirectionModel directionModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Description,Id")] ScienceModel scienceModel)
         {
-            if (id != directionModel.Id)
+            if (id != scienceModel.Id)
             {
                 return NotFound();
             }
@@ -103,12 +98,12 @@ namespace EasyToEnter.ASP.Controllers
             {
                 try
                 {
-                    _context.Update(directionModel);
+                    _context.Update(scienceModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DirectionModelExists(directionModel.Id))
+                    if (!ScienceModelExists(scienceModel.Id))
                     {
                         return NotFound();
                     }
@@ -119,11 +114,10 @@ namespace EasyToEnter.ASP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GroupId"] = new SelectList(_context.Group, "Id", "Name", directionModel.GroupId);
-            return View(directionModel);
+            return View(scienceModel);
         }
 
-        // GET: DirectionModels/Delete/5
+        // GET: ScienceModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,31 +125,30 @@ namespace EasyToEnter.ASP.Controllers
                 return NotFound();
             }
 
-            var directionModel = await _context.Direction
-                .Include(d => d.GroupModel)
+            var scienceModel = await _context.Science
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (directionModel == null)
+            if (scienceModel == null)
             {
                 return NotFound();
             }
 
-            return View(directionModel);
+            return View(scienceModel);
         }
 
-        // POST: DirectionModels/Delete/5
+        // POST: ScienceModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var directionModel = await _context.Direction.FindAsync(id);
-            _context.Direction.Remove(directionModel);
+            var scienceModel = await _context.Science.FindAsync(id);
+            _context.Science.Remove(scienceModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DirectionModelExists(int id)
+        private bool ScienceModelExists(int id)
         {
-            return _context.Direction.Any(e => e.Id == id);
+            return _context.Science.Any(e => e.Id == id);
         }
     }
 }

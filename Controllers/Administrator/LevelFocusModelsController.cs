@@ -5,7 +5,7 @@ using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
 using static EasyToEnter.ASP.Tools.DBSqlException;
 
-namespace EasyToEnter.ASP.Controllers
+namespace EasyToEnter.ASP.Controllers.Administrator
 {
     public class LevelFocusModelsController : Controller
     {
@@ -28,7 +28,7 @@ namespace EasyToEnter.ASP.Controllers
                 .Include(l => l.FocusModel)
                 .Include(l => l.LevelModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            
+
             if (levelFocusModel == null) return NotFound();
 
             return View(levelFocusModel);
@@ -70,7 +70,7 @@ namespace EasyToEnter.ASP.Controllers
             if (id == null) return NotFound();
 
             var levelFocusModel = await _context.LevelFocus.FindAsync(id);
-            
+
             if (levelFocusModel == null) return NotFound();
 
             ViewData["FocusId"] = new SelectList(_context.Focus, "Id", "Name", levelFocusModel.FocusId);
@@ -113,7 +113,7 @@ namespace EasyToEnter.ASP.Controllers
                 .Include(l => l.FocusModel)
                 .Include(l => l.LevelModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            
+
             if (levelFocusModel == null) return NotFound();
 
             return View(levelFocusModel);

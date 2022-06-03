@@ -36,6 +36,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Employee\" />
+    <Folder Include="Controllers\EmployeeUniversity\" />
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\theme\metronic8\assets\plugins\global\" />
   </ItemGroup>

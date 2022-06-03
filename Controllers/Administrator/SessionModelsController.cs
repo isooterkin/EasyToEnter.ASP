@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
 
-namespace EasyToEnter.ASP.Controllers
+namespace EasyToEnter.ASP.Controllers.Administrator
 {
     public class SessionModelsController : Controller
     {
@@ -156,14 +156,14 @@ namespace EasyToEnter.ASP.Controllers
             {
                 _context.Session.Remove(sessionModel);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SessionModelExists(Guid id)
         {
-          return (_context.Session?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Session?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

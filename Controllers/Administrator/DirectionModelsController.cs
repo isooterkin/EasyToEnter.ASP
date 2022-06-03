@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,92 +9,92 @@ using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
 
-namespace EasyToEnter.ASP.Controllers
+namespace EasyToEnter.ASP.Controllers.Administrator
 {
-    public class PersonModelsController : Controller
+    public class DirectionModelsController : Controller
     {
         private readonly EasyToEnterDbContext _context;
 
-        public PersonModelsController(EasyToEnterDbContext context)
+        public DirectionModelsController(EasyToEnterDbContext context)
         {
             _context = context;
         }
 
-        // GET: PersonModels
+        // GET: DirectionModels
         public async Task<IActionResult> Index()
         {
-            var easyToEnterDbContext = _context.Person.Include(p => p.RoleModel);
+            var easyToEnterDbContext = _context.Direction.Include(d => d.GroupModel);
             return View(await easyToEnterDbContext.ToListAsync());
         }
 
-        // GET: PersonModels/Details/5
+        // GET: DirectionModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Person == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var personModel = await _context.Person
-                .Include(p => p.RoleModel)
+            var directionModel = await _context.Direction
+                .Include(d => d.GroupModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (personModel == null)
+            if (directionModel == null)
             {
                 return NotFound();
             }
 
-            return View(personModel);
+            return View(directionModel);
         }
 
-        // GET: PersonModels/Create
+        // GET: DirectionModels/Create
         public IActionResult Create()
         {
-            ViewData["RoleId"] = new SelectList(_context.Role, "Id", "Name");
+            ViewData["GroupId"] = new SelectList(_context.Group, "Id", "Name");
             return View();
         }
 
-        // POST: PersonModels/Create
+        // POST: DirectionModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LastName,FirstName,MiddleName,DateOfBirth,PhoneNumber,EmailAddress,Login,PasswordHash,RoleId,Id")] PersonModel personModel)
+        public async Task<IActionResult> Create([Bind("GroupId,Code,Name,Description,Id")] DirectionModel directionModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(personModel);
+                _context.Add(directionModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoleId"] = new SelectList(_context.Role, "Id", "Name", personModel.RoleId);
-            return View(personModel);
+            ViewData["GroupId"] = new SelectList(_context.Group, "Id", "Name", directionModel.GroupId);
+            return View(directionModel);
         }
 
-        // GET: PersonModels/Edit/5
+        // GET: DirectionModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Person == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var personModel = await _context.Person.FindAsync(id);
-            if (personModel == null)
+            var directionModel = await _context.Direction.FindAsync(id);
+            if (directionModel == null)
             {
                 return NotFound();
             }
-            ViewData["RoleId"] = new SelectList(_context.Role, "Id", "Name", personModel.RoleId);
-            return View(personModel);
+            ViewData["GroupId"] = new SelectList(_context.Group, "Id", "Name", directionModel.GroupId);
+            return View(directionModel);
         }
 
-        // POST: PersonModels/Edit/5
+        // POST: DirectionModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LastName,FirstName,MiddleName,DateOfBirth,PhoneNumber,EmailAddress,Login,PasswordHash,RoleId,Id")] PersonModel personModel)
+        public async Task<IActionResult> Edit(int id, [Bind("GroupId,Code,Name,Description,Id")] DirectionModel directionModel)
         {
-            if (id != personModel.Id)
+            if (id != directionModel.Id)
             {
                 return NotFound();
             }
@@ -102,12 +103,12 @@ namespace EasyToEnter.ASP.Controllers
             {
                 try
                 {
-                    _context.Update(personModel);
+                    _context.Update(directionModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonModelExists(personModel.Id))
+                    if (!DirectionModelExists(directionModel.Id))
                     {
                         return NotFound();
                     }
@@ -118,51 +119,43 @@ namespace EasyToEnter.ASP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoleId"] = new SelectList(_context.Role, "Id", "Name", personModel.RoleId);
-            return View(personModel);
+            ViewData["GroupId"] = new SelectList(_context.Group, "Id", "Name", directionModel.GroupId);
+            return View(directionModel);
         }
 
-        // GET: PersonModels/Delete/5
+        // GET: DirectionModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Person == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var personModel = await _context.Person
-                .Include(p => p.RoleModel)
+            var directionModel = await _context.Direction
+                .Include(d => d.GroupModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (personModel == null)
+            if (directionModel == null)
             {
                 return NotFound();
             }
 
-            return View(personModel);
+            return View(directionModel);
         }
 
-        // POST: PersonModels/Delete/5
+        // POST: DirectionModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Person == null)
-            {
-                return Problem("Entity set 'EasyToEnterDbContext.Person'  is null.");
-            }
-            var personModel = await _context.Person.FindAsync(id);
-            if (personModel != null)
-            {
-                _context.Person.Remove(personModel);
-            }
-            
+            var directionModel = await _context.Direction.FindAsync(id);
+            _context.Direction.Remove(directionModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PersonModelExists(int id)
+        private bool DirectionModelExists(int id)
         {
-          return (_context.Person?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _context.Direction.Any(e => e.Id == id);
         }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
 
-namespace EasyToEnter.ASP.Controllers
+namespace EasyToEnter.ASP.Controllers.Administrator
 {
     public class UniversityModelsController : Controller
     {
@@ -161,14 +161,14 @@ namespace EasyToEnter.ASP.Controllers
             {
                 _context.University.Remove(universityModel);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UniversityModelExists(int id)
         {
-          return (_context.University?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.University?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

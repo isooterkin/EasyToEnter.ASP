@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,87 +8,92 @@ using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
 
-namespace EasyToEnter.ASP.Controllers
+namespace EasyToEnter.ASP.Controllers.Administrator
 {
-    public class LevelModelsController : Controller
+    public class PersonModelsController : Controller
     {
         private readonly EasyToEnterDbContext _context;
 
-        public LevelModelsController(EasyToEnterDbContext context)
+        public PersonModelsController(EasyToEnterDbContext context)
         {
             _context = context;
         }
 
-        // GET: LevelModels
+        // GET: PersonModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Level.ToListAsync());
+            var easyToEnterDbContext = _context.Person.Include(p => p.RoleModel);
+            return View(await easyToEnterDbContext.ToListAsync());
         }
 
-        // GET: LevelModels/Details/5
+        // GET: PersonModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Person == null)
             {
                 return NotFound();
             }
 
-            var levelModel = await _context.Level
+            var personModel = await _context.Person
+                .Include(p => p.RoleModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (levelModel == null)
+            if (personModel == null)
             {
                 return NotFound();
             }
 
-            return View(levelModel);
+            return View(personModel);
         }
 
-        // GET: LevelModels/Create
+        // GET: PersonModels/Create
         public IActionResult Create()
         {
+            ViewData["RoleId"] = new SelectList(_context.Role, "Id", "Name");
             return View();
         }
 
-        // POST: LevelModels/Create
+        // POST: PersonModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Code,Name,Description,Id")] LevelModel levelModel)
+        public async Task<IActionResult> Create([Bind("LastName,FirstName,MiddleName,DateOfBirth,PhoneNumber,EmailAddress,Login,PasswordHash,RoleId,Id")] PersonModel personModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(levelModel);
+                _context.Add(personModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(levelModel);
+            ViewData["RoleId"] = new SelectList(_context.Role, "Id", "Name", personModel.RoleId);
+            return View(personModel);
         }
 
-        // GET: LevelModels/Edit/5
+        // GET: PersonModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Person == null)
             {
                 return NotFound();
             }
 
-            var levelModel = await _context.Level.FindAsync(id);
-            if (levelModel == null)
+            var personModel = await _context.Person.FindAsync(id);
+            if (personModel == null)
             {
                 return NotFound();
             }
-            return View(levelModel);
+            ViewData["RoleId"] = new SelectList(_context.Role, "Id", "Name", personModel.RoleId);
+            return View(personModel);
         }
 
-        // POST: LevelModels/Edit/5
+        // POST: PersonModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Code,Name,Description,Id")] LevelModel levelModel)
+        public async Task<IActionResult> Edit(int id, [Bind("LastName,FirstName,MiddleName,DateOfBirth,PhoneNumber,EmailAddress,Login,PasswordHash,RoleId,Id")] PersonModel personModel)
         {
-            if (id != levelModel.Id)
+            if (id != personModel.Id)
             {
                 return NotFound();
             }
@@ -98,12 +102,12 @@ namespace EasyToEnter.ASP.Controllers
             {
                 try
                 {
-                    _context.Update(levelModel);
+                    _context.Update(personModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LevelModelExists(levelModel.Id))
+                    if (!PersonModelExists(personModel.Id))
                     {
                         return NotFound();
                     }
@@ -114,41 +118,51 @@ namespace EasyToEnter.ASP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(levelModel);
+            ViewData["RoleId"] = new SelectList(_context.Role, "Id", "Name", personModel.RoleId);
+            return View(personModel);
         }
 
-        // GET: LevelModels/Delete/5
+        // GET: PersonModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Person == null)
             {
                 return NotFound();
             }
 
-            var levelModel = await _context.Level
+            var personModel = await _context.Person
+                .Include(p => p.RoleModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (levelModel == null)
+            if (personModel == null)
             {
                 return NotFound();
             }
 
-            return View(levelModel);
+            return View(personModel);
         }
 
-        // POST: LevelModels/Delete/5
+        // POST: PersonModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var levelModel = await _context.Level.FindAsync(id);
-            _context.Level.Remove(levelModel);
+            if (_context.Person == null)
+            {
+                return Problem("Entity set 'EasyToEnterDbContext.Person'  is null.");
+            }
+            var personModel = await _context.Person.FindAsync(id);
+            if (personModel != null)
+            {
+                _context.Person.Remove(personModel);
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LevelModelExists(int id)
+        private bool PersonModelExists(int id)
         {
-            return _context.Level.Any(e => e.Id == id);
+            return (_context.Person?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,91 +1,101 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿#nullable disable
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
 
-namespace EasyToEnter.ASP.Controllers
+namespace EasyToEnter.ASP.Controllers.Administrator
 {
-    public class RoleModelsController : Controller
+    public class FocusModelsController : Controller
     {
         private readonly EasyToEnterDbContext _context;
 
-        public RoleModelsController(EasyToEnterDbContext context)
+        public FocusModelsController(EasyToEnterDbContext context)
         {
             _context = context;
         }
 
-        // GET: RoleModels
+        // GET: FocusModels
         public async Task<IActionResult> Index()
         {
-              return _context.Role != null ? 
-                          View(await _context.Role.ToListAsync()) :
-                          Problem("Entity set 'EasyToEnterDbContext.Role'  is null.");
+            var easyToEnterDbContext = _context.Focus.Include(f => f.DirectionModel);
+            return View(await easyToEnterDbContext.ToListAsync());
         }
 
-        // GET: RoleModels/Details/5
+        // GET: FocusModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Role == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var roleModel = await _context.Role
+            var focusModel = await _context.Focus
+                .Include(f => f.DirectionModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (roleModel == null)
+
+            if (focusModel == null)
             {
                 return NotFound();
             }
 
-            return View(roleModel);
+            return View(focusModel);
         }
 
-        // GET: RoleModels/Create
+        // GET: FocusModels/Create
         public IActionResult Create()
         {
+            ViewData["DirectionId"] = new SelectList(_context.Direction, "Id", "Name");
             return View();
         }
 
-        // POST: RoleModels/Create
+        // POST: FocusModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Description,Name,Id")] RoleModel roleModel)
+        public async Task<IActionResult> Create([Bind("DirectionId,Name,Description,Id")] FocusModel focusModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(roleModel);
+                _context.Add(focusModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(roleModel);
+            ViewData["DirectionId"] = new SelectList(_context.Direction, "Id", "Name", focusModel.DirectionId);
+            return View(focusModel);
         }
 
-        // GET: RoleModels/Edit/5
+        // GET: FocusModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Role == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var roleModel = await _context.Role.FindAsync(id);
-            if (roleModel == null)
+            var focusModel = await _context.Focus.FindAsync(id);
+            if (focusModel == null)
             {
                 return NotFound();
             }
-            return View(roleModel);
+            ViewData["DirectionId"] = new SelectList(_context.Direction, "Id", "Name", focusModel.DirectionId);
+            return View(focusModel);
         }
 
-        // POST: RoleModels/Edit/5
+        // POST: FocusModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Description,Name,Id")] RoleModel roleModel)
+        public async Task<IActionResult> Edit(int id, [Bind("DirectionId,Name,Description,Id")] FocusModel focusModel)
         {
-            if (id != roleModel.Id)
+            if (id != focusModel.Id)
             {
                 return NotFound();
             }
@@ -94,12 +104,12 @@ namespace EasyToEnter.ASP.Controllers
             {
                 try
                 {
-                    _context.Update(roleModel);
+                    _context.Update(focusModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RoleModelExists(roleModel.Id))
+                    if (!FocusModelExists(focusModel.Id))
                     {
                         return NotFound();
                     }
@@ -110,49 +120,43 @@ namespace EasyToEnter.ASP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(roleModel);
+            ViewData["DirectionId"] = new SelectList(_context.Direction, "Id", "Name", focusModel.DirectionId);
+            return View(focusModel);
         }
 
-        // GET: RoleModels/Delete/5
+        // GET: FocusModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Role == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var roleModel = await _context.Role
+            var focusModel = await _context.Focus
+                .Include(f => f.DirectionModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (roleModel == null)
+            if (focusModel == null)
             {
                 return NotFound();
             }
 
-            return View(roleModel);
+            return View(focusModel);
         }
 
-        // POST: RoleModels/Delete/5
+        // POST: FocusModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Role == null)
-            {
-                return Problem("Entity set 'EasyToEnterDbContext.Role'  is null.");
-            }
-            var roleModel = await _context.Role.FindAsync(id);
-            if (roleModel != null)
-            {
-                _context.Role.Remove(roleModel);
-            }
-            
+            var focusModel = await _context.Focus.FindAsync(id);
+            _context.Focus.Remove(focusModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RoleModelExists(int id)
+        private bool FocusModelExists(int id)
         {
-          return (_context.Role?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _context.Focus.Any(e => e.Id == id);
         }
     }
 }

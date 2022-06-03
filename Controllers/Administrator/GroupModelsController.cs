@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,89 +9,89 @@ using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
 
-namespace EasyToEnter.ASP.Controllers
+namespace EasyToEnter.ASP.Controllers.Administrator
 {
-    public class DisciplineModelsController : Controller
+    public class GroupModelsController : Controller
     {
         private readonly EasyToEnterDbContext _context;
 
-        public DisciplineModelsController(EasyToEnterDbContext context)
+        public GroupModelsController(EasyToEnterDbContext context)
         {
             _context = context;
         }
 
-        // GET: DisciplineModels
+        // GET: GroupModels
         public async Task<IActionResult> Index()
         {
-              return _context.Discipline != null ? 
-                          View(await _context.Discipline.ToListAsync()) :
-                          Problem("Entity set 'EasyToEnterDbContext.Discipline'  is null.");
+            var easyToEnterDbContext = _context.Group.Include(g => g.ScienceModel);
+            return View(await easyToEnterDbContext.ToListAsync());
         }
 
-        // GET: DisciplineModels/Details/5
+        // GET: GroupModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Discipline == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var disciplineModel = await _context.Discipline
+            var groupModel = await _context.Group
+                .Include(g => g.ScienceModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (disciplineModel == null)
+            if (groupModel == null)
             {
                 return NotFound();
             }
 
-            return View(disciplineModel);
+            return View(groupModel);
         }
 
-        // GET: DisciplineModels/Create
+        // GET: GroupModels/Create
         public IActionResult Create()
         {
+            ViewData["ScienceId"] = new SelectList(_context.Science, "Id", "Name");
             return View();
         }
 
-        // POST: DisciplineModels/Create
+        // POST: GroupModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Description,Name,Id")] DisciplineModel disciplineModel)
+        public async Task<IActionResult> Create([Bind("ScienceId,Code,Name,Description,Id")] GroupModel groupModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(disciplineModel);
+                _context.Add(groupModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(disciplineModel);
+            ViewData["ScienceId"] = new SelectList(_context.Science, "Id", "Name", groupModel.ScienceId);
+            return View(groupModel);
         }
 
-        // GET: DisciplineModels/Edit/5
+        // GET: GroupModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Discipline == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var disciplineModel = await _context.Discipline.FindAsync(id);
-            if (disciplineModel == null)
+            var groupModel = await _context.Group.FindAsync(id);
+            if (groupModel == null)
             {
                 return NotFound();
             }
-            return View(disciplineModel);
+            ViewData["ScienceId"] = new SelectList(_context.Science, "Id", "Name", groupModel.ScienceId);
+            return View(groupModel);
         }
 
-        // POST: DisciplineModels/Edit/5
+        // POST: GroupModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Description,Name,Id")] DisciplineModel disciplineModel)
+        public async Task<IActionResult> Edit(int id, [Bind("ScienceId,Code,Name,Description,Id")] GroupModel groupModel)
         {
-            if (id != disciplineModel.Id)
+            if (id != groupModel.Id)
             {
                 return NotFound();
             }
@@ -99,12 +100,12 @@ namespace EasyToEnter.ASP.Controllers
             {
                 try
                 {
-                    _context.Update(disciplineModel);
+                    _context.Update(groupModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DisciplineModelExists(disciplineModel.Id))
+                    if (!GroupModelExists(groupModel.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +116,43 @@ namespace EasyToEnter.ASP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(disciplineModel);
+            ViewData["ScienceId"] = new SelectList(_context.Science, "Id", "Name", groupModel.ScienceId);
+            return View(groupModel);
         }
 
-        // GET: DisciplineModels/Delete/5
+        // GET: GroupModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Discipline == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var disciplineModel = await _context.Discipline
+            var groupModel = await _context.Group
+                .Include(g => g.ScienceModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (disciplineModel == null)
+            if (groupModel == null)
             {
                 return NotFound();
             }
 
-            return View(disciplineModel);
+            return View(groupModel);
         }
 
-        // POST: DisciplineModels/Delete/5
+        // POST: GroupModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Discipline == null)
-            {
-                return Problem("Entity set 'EasyToEnterDbContext.Discipline'  is null.");
-            }
-            var disciplineModel = await _context.Discipline.FindAsync(id);
-            if (disciplineModel != null)
-            {
-                _context.Discipline.Remove(disciplineModel);
-            }
-            
+            var groupModel = await _context.Group.FindAsync(id);
+            _context.Group.Remove(groupModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DisciplineModelExists(int id)
+        private bool GroupModelExists(int id)
         {
-          return (_context.Discipline?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _context.Group.Any(e => e.Id == id);
         }
     }
 }

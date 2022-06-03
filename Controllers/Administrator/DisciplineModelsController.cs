@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,93 +8,89 @@ using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
 
-namespace EasyToEnter.ASP.Controllers
+namespace EasyToEnter.ASP.Controllers.Administrator
 {
-    public class FocusModelsController : Controller
+    public class DisciplineModelsController : Controller
     {
         private readonly EasyToEnterDbContext _context;
 
-        public FocusModelsController(EasyToEnterDbContext context)
+        public DisciplineModelsController(EasyToEnterDbContext context)
         {
             _context = context;
         }
 
-        // GET: FocusModels
+        // GET: DisciplineModels
         public async Task<IActionResult> Index()
         {
-            var easyToEnterDbContext = _context.Focus.Include(f => f.DirectionModel);
-            return View(await easyToEnterDbContext.ToListAsync());
+            return _context.Discipline != null ?
+                        View(await _context.Discipline.ToListAsync()) :
+                        Problem("Entity set 'EasyToEnterDbContext.Discipline'  is null.");
         }
 
-        // GET: FocusModels/Details/5
+        // GET: DisciplineModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Discipline == null)
             {
                 return NotFound();
             }
 
-            var focusModel = await _context.Focus
-                .Include(f => f.DirectionModel)
+            var disciplineModel = await _context.Discipline
                 .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (focusModel == null)
+            if (disciplineModel == null)
             {
                 return NotFound();
             }
 
-            return View(focusModel);
+            return View(disciplineModel);
         }
 
-        // GET: FocusModels/Create
+        // GET: DisciplineModels/Create
         public IActionResult Create()
         {
-            ViewData["DirectionId"] = new SelectList(_context.Direction, "Id", "Name");
             return View();
         }
 
-        // POST: FocusModels/Create
+        // POST: DisciplineModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DirectionId,Name,Description,Id")] FocusModel focusModel)
+        public async Task<IActionResult> Create([Bind("Description,Name,Id")] DisciplineModel disciplineModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(focusModel);
+                _context.Add(disciplineModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DirectionId"] = new SelectList(_context.Direction, "Id", "Name", focusModel.DirectionId);
-            return View(focusModel);
+            return View(disciplineModel);
         }
 
-        // GET: FocusModels/Edit/5
+        // GET: DisciplineModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Discipline == null)
             {
                 return NotFound();
             }
 
-            var focusModel = await _context.Focus.FindAsync(id);
-            if (focusModel == null)
+            var disciplineModel = await _context.Discipline.FindAsync(id);
+            if (disciplineModel == null)
             {
                 return NotFound();
             }
-            ViewData["DirectionId"] = new SelectList(_context.Direction, "Id", "Name", focusModel.DirectionId);
-            return View(focusModel);
+            return View(disciplineModel);
         }
 
-        // POST: FocusModels/Edit/5
+        // POST: DisciplineModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DirectionId,Name,Description,Id")] FocusModel focusModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Description,Name,Id")] DisciplineModel disciplineModel)
         {
-            if (id != focusModel.Id)
+            if (id != disciplineModel.Id)
             {
                 return NotFound();
             }
@@ -104,12 +99,12 @@ namespace EasyToEnter.ASP.Controllers
             {
                 try
                 {
-                    _context.Update(focusModel);
+                    _context.Update(disciplineModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FocusModelExists(focusModel.Id))
+                    if (!DisciplineModelExists(disciplineModel.Id))
                     {
                         return NotFound();
                     }
@@ -120,43 +115,49 @@ namespace EasyToEnter.ASP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DirectionId"] = new SelectList(_context.Direction, "Id", "Name", focusModel.DirectionId);
-            return View(focusModel);
+            return View(disciplineModel);
         }
 
-        // GET: FocusModels/Delete/5
+        // GET: DisciplineModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Discipline == null)
             {
                 return NotFound();
             }
 
-            var focusModel = await _context.Focus
-                .Include(f => f.DirectionModel)
+            var disciplineModel = await _context.Discipline
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (focusModel == null)
+            if (disciplineModel == null)
             {
                 return NotFound();
             }
 
-            return View(focusModel);
+            return View(disciplineModel);
         }
 
-        // POST: FocusModels/Delete/5
+        // POST: DisciplineModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var focusModel = await _context.Focus.FindAsync(id);
-            _context.Focus.Remove(focusModel);
+            if (_context.Discipline == null)
+            {
+                return Problem("Entity set 'EasyToEnterDbContext.Discipline'  is null.");
+            }
+            var disciplineModel = await _context.Discipline.FindAsync(id);
+            if (disciplineModel != null)
+            {
+                _context.Discipline.Remove(disciplineModel);
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FocusModelExists(int id)
+        private bool DisciplineModelExists(int id)
         {
-            return _context.Focus.Any(e => e.Id == id);
+            return (_context.Discipline?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

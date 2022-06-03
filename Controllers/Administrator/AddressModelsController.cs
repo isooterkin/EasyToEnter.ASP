@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,87 +8,92 @@ using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
 
-namespace EasyToEnter.ASP.Controllers
+namespace EasyToEnter.ASP.Controllers.Administrator
 {
-    public class ScienceModelsController : Controller
+    public class AddressModelsController : Controller
     {
         private readonly EasyToEnterDbContext _context;
 
-        public ScienceModelsController(EasyToEnterDbContext context)
+        public AddressModelsController(EasyToEnterDbContext context)
         {
             _context = context;
         }
 
-        // GET: ScienceModels
+        // GET: AddressModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Science.ToListAsync());
+            var easyToEnterDbContext = _context.Address.Include(a => a.CityModel);
+            return View(await easyToEnterDbContext.ToListAsync());
         }
 
-        // GET: ScienceModels/Details/5
+        // GET: AddressModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Address == null)
             {
                 return NotFound();
             }
 
-            var scienceModel = await _context.Science
+            var addressModel = await _context.Address
+                .Include(a => a.CityModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (scienceModel == null)
+            if (addressModel == null)
             {
                 return NotFound();
             }
 
-            return View(scienceModel);
+            return View(addressModel);
         }
 
-        // GET: ScienceModels/Create
+        // GET: AddressModels/Create
         public IActionResult Create()
         {
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "Name");
             return View();
         }
 
-        // POST: ScienceModels/Create
+        // POST: AddressModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Description,Id")] ScienceModel scienceModel)
+        public async Task<IActionResult> Create([Bind("CityId,Street,House,Housing,Building,Latitude,Longitude,Id")] AddressModel addressModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(scienceModel);
+                _context.Add(addressModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(scienceModel);
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "Name", addressModel.CityId);
+            return View(addressModel);
         }
 
-        // GET: ScienceModels/Edit/5
+        // GET: AddressModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Address == null)
             {
                 return NotFound();
             }
 
-            var scienceModel = await _context.Science.FindAsync(id);
-            if (scienceModel == null)
+            var addressModel = await _context.Address.FindAsync(id);
+            if (addressModel == null)
             {
                 return NotFound();
             }
-            return View(scienceModel);
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "Name", addressModel.CityId);
+            return View(addressModel);
         }
 
-        // POST: ScienceModels/Edit/5
+        // POST: AddressModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Description,Id")] ScienceModel scienceModel)
+        public async Task<IActionResult> Edit(int id, [Bind("CityId,Street,House,Housing,Building,Latitude,Longitude,Id")] AddressModel addressModel)
         {
-            if (id != scienceModel.Id)
+            if (id != addressModel.Id)
             {
                 return NotFound();
             }
@@ -98,12 +102,12 @@ namespace EasyToEnter.ASP.Controllers
             {
                 try
                 {
-                    _context.Update(scienceModel);
+                    _context.Update(addressModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ScienceModelExists(scienceModel.Id))
+                    if (!AddressModelExists(addressModel.Id))
                     {
                         return NotFound();
                     }
@@ -114,41 +118,51 @@ namespace EasyToEnter.ASP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(scienceModel);
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "Name", addressModel.CityId);
+            return View(addressModel);
         }
 
-        // GET: ScienceModels/Delete/5
+        // GET: AddressModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Address == null)
             {
                 return NotFound();
             }
 
-            var scienceModel = await _context.Science
+            var addressModel = await _context.Address
+                .Include(a => a.CityModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (scienceModel == null)
+            if (addressModel == null)
             {
                 return NotFound();
             }
 
-            return View(scienceModel);
+            return View(addressModel);
         }
 
-        // POST: ScienceModels/Delete/5
+        // POST: AddressModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var scienceModel = await _context.Science.FindAsync(id);
-            _context.Science.Remove(scienceModel);
+            if (_context.Address == null)
+            {
+                return Problem("Entity set 'EasyToEnterDbContext.Address'  is null.");
+            }
+            var addressModel = await _context.Address.FindAsync(id);
+            if (addressModel != null)
+            {
+                _context.Address.Remove(addressModel);
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ScienceModelExists(int id)
+        private bool AddressModelExists(int id)
         {
-            return _context.Science.Any(e => e.Id == id);
+            return (_context.Address?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

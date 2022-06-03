@@ -15,10 +15,7 @@ namespace EasyToEnter.ASP.Controllers.Authorization
     public class AuthenticationController : Controller
     {
         private readonly EasyToEnterDbContext _context;
-        public AuthenticationController(EasyToEnterDbContext context)
-        {
-            _context = context;
-        }
+        public AuthenticationController(EasyToEnterDbContext context) => _context = context;
 
 
 

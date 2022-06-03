@@ -1,97 +1,91 @@
-﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
 
-namespace EasyToEnter.ASP.Controllers
+namespace EasyToEnter.ASP.Controllers.Administrator
 {
-    public class GroupModelsController : Controller
+    public class RoleModelsController : Controller
     {
         private readonly EasyToEnterDbContext _context;
 
-        public GroupModelsController(EasyToEnterDbContext context)
+        public RoleModelsController(EasyToEnterDbContext context)
         {
             _context = context;
         }
 
-        // GET: GroupModels
+        // GET: RoleModels
         public async Task<IActionResult> Index()
         {
-            var easyToEnterDbContext = _context.Group.Include(g => g.ScienceModel);
-            return View(await easyToEnterDbContext.ToListAsync());
+            return _context.Role != null ?
+                        View(await _context.Role.ToListAsync()) :
+                        Problem("Entity set 'EasyToEnterDbContext.Role'  is null.");
         }
 
-        // GET: GroupModels/Details/5
+        // GET: RoleModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null) return NotFound();
-
-            var groupModel = await _context.Group
-                .Include(g => g.ScienceModel)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (groupModel == null)
+            if (id == null || _context.Role == null)
             {
                 return NotFound();
             }
 
-            return View(groupModel);
+            var roleModel = await _context.Role
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (roleModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(roleModel);
         }
 
-        // GET: GroupModels/Create
+        // GET: RoleModels/Create
         public IActionResult Create()
         {
-            ViewData["ScienceId"] = new SelectList(_context.Science, "Id", "Name");
             return View();
         }
 
-        // POST: GroupModels/Create
+        // POST: RoleModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ScienceId,Code,Name,Description,Id")] GroupModel groupModel)
+        public async Task<IActionResult> Create([Bind("Description,Name,Id")] RoleModel roleModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(groupModel);
+                _context.Add(roleModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ScienceId"] = new SelectList(_context.Science, "Id", "Name", groupModel.ScienceId);
-            return View(groupModel);
+            return View(roleModel);
         }
 
-        // GET: GroupModels/Edit/5
+        // GET: RoleModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Role == null)
             {
                 return NotFound();
             }
 
-            var groupModel = await _context.Group.FindAsync(id);
-            if (groupModel == null)
+            var roleModel = await _context.Role.FindAsync(id);
+            if (roleModel == null)
             {
                 return NotFound();
             }
-            ViewData["ScienceId"] = new SelectList(_context.Science, "Id", "Name", groupModel.ScienceId);
-            return View(groupModel);
+            return View(roleModel);
         }
 
-        // POST: GroupModels/Edit/5
+        // POST: RoleModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ScienceId,Code,Name,Description,Id")] GroupModel groupModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Description,Name,Id")] RoleModel roleModel)
         {
-            if (id != groupModel.Id)
+            if (id != roleModel.Id)
             {
                 return NotFound();
             }
@@ -100,12 +94,12 @@ namespace EasyToEnter.ASP.Controllers
             {
                 try
                 {
-                    _context.Update(groupModel);
+                    _context.Update(roleModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GroupModelExists(groupModel.Id))
+                    if (!RoleModelExists(roleModel.Id))
                     {
                         return NotFound();
                     }
@@ -116,43 +110,49 @@ namespace EasyToEnter.ASP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ScienceId"] = new SelectList(_context.Science, "Id", "Name", groupModel.ScienceId);
-            return View(groupModel);
+            return View(roleModel);
         }
 
-        // GET: GroupModels/Delete/5
+        // GET: RoleModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Role == null)
             {
                 return NotFound();
             }
 
-            var groupModel = await _context.Group
-                .Include(g => g.ScienceModel)
+            var roleModel = await _context.Role
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (groupModel == null)
+            if (roleModel == null)
             {
                 return NotFound();
             }
 
-            return View(groupModel);
+            return View(roleModel);
         }
 
-        // POST: GroupModels/Delete/5
+        // POST: RoleModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var groupModel = await _context.Group.FindAsync(id);
-            _context.Group.Remove(groupModel);
+            if (_context.Role == null)
+            {
+                return Problem("Entity set 'EasyToEnterDbContext.Role'  is null.");
+            }
+            var roleModel = await _context.Role.FindAsync(id);
+            if (roleModel != null)
+            {
+                _context.Role.Remove(roleModel);
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GroupModelExists(int id)
+        private bool RoleModelExists(int id)
         {
-            return _context.Group.Any(e => e.Id == id);
+            return (_context.Role?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
