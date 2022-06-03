@@ -10,16 +10,19 @@ using System.Diagnostics;
 using System.Security.Claims;
 using static BCrypt.Net.BCrypt;
 
-
 namespace EasyToEnter.ASP.Controllers.Authorization
 {
-    public class AuthenticationController : MyController
+    public class AuthenticationController : Controller
     {
-        public AuthenticationController(EasyToEnterDbContext context) : base(context) { }
+        private readonly EasyToEnterDbContext _context;
+        public AuthenticationController(EasyToEnterDbContext context)
+        {
+            _context = context;
+        }
 
 
 
-        private readonly int LifeSpan = 31556926;
+        private readonly int LifeSpan = 10;
 
 
 
@@ -52,22 +55,21 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
 
 
-        [AllowAnonymous]
-        [SessionCheck]
+        [NotAuthorized]
         [HttpGet]
-        public async Task<IActionResult> Index() => await CheckSession() ? RedirectToAction("Index", "Home") : RedirectToAction("Login");
+        public IActionResult Index() => RedirectToAction("Login");
 
 
 
-        [AllowAnonymous]
+        [NotAuthorized]
         [HttpGet]
-        public async Task<IActionResult> Login() => await CheckSession() ? RedirectToAction("Index", "Home") : View();
+        public IActionResult Login() => View();
 
 
 
-        [AllowAnonymous]
+        [NotAuthorized]
         [HttpGet]
-        public async Task<IActionResult> Register() => await CheckSession() ? RedirectToAction("Index", "Home") : View();
+        public IActionResult Register() => View();
 
 
 
@@ -75,24 +77,23 @@ namespace EasyToEnter.ASP.Controllers.Authorization
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            await LogoutSession();
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
 
 
 
         [AllowAnonymous]
+        [SessionCheck]
         [HttpGet]
         public IActionResult AccessDenied() => View();
 
 
 
-        [AllowAnonymous]
+        [NotAuthorized]
         [HttpPost]
         public async Task<IActionResult> Login([FromForm(Name = "login")] string login, [FromForm(Name = "password")] string password)
         {
-            if (await CheckSession()) return RedirectToAction("Index", "Home");
-
             if (login == null || password == null) return RedirectToAction("Login");
 
             PersonModel? person = await _context.Person.Include(p => p.RoleModel).SingleOrDefaultAsync(p => p.Login == login);
@@ -106,12 +107,10 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
 
 
-        [AllowAnonymous]
+        [NotAuthorized]
         [HttpPost]
         public async Task<IActionResult> Register([FromForm(Name = "login")] string login, [FromForm(Name = "password")] string password)
         {
-            if (await CheckSession()) return RedirectToAction("Index", "Home");
-
             if (login == null || password == null) return RedirectToAction("Register");
 
             if (await _context.Person.SingleOrDefaultAsync(p => p.Login == login) != null) return View();
@@ -136,7 +135,6 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
             return RedirectToAction("Index", "Home");
         }
-
 
 
 

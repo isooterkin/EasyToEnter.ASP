@@ -1,4 +1,4 @@
-﻿using EasyToEnter.ASP.Data;
+﻿using EasyToEnter.ASP.Controllers.Authorization;
 using EasyToEnter.ASP.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,13 +6,10 @@ using System.Diagnostics;
 
 namespace EasyToEnter.ASP.Controllers
 {
-    public class HomeController : MyController
+    public class HomeController : Controller
     {
-        public HomeController(EasyToEnterDbContext context) : base(context) {}
-
-
-
         [AllowAnonymous]
+        [SessionCheck]
         public IActionResult Index() => View();
 
 
