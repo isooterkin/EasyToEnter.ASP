@@ -1,6 +1,7 @@
 ﻿using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models;
 using EasyToEnter.ASP.Models.Models;
+using EasyToEnter.ASP.ViewsModels.Authentication;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -37,12 +38,8 @@ namespace EasyToEnter.ASP.Controllers.Authorization
             ClaimsIdentity claimsIdentity = new(new[]
                 {
                     new Claim("SessionId", session.Id.ToString()),
-                    new Claim("Login", person.Login),
                     new Claim(ClaimsIdentity.DefaultRoleClaimType, person.RoleModel!.Name),
-                    new Claim("PhoneNumber", person.PhoneNumber),
-                    new Claim("LastName", person.LastName),
-                    new Claim("FirstName", person.FirstName),
-                    new Claim("EmailAddress", person.EmailAddress)
+                    new Claim("Login", person.Login)
                 }, CookieAuthenticationDefaults.AuthenticationScheme);
 
             ClaimsPrincipal claimsPrincipal = new(claimsIdentity);
@@ -60,13 +57,13 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
         [NotAuthorized]
         [HttpGet]
-        public IActionResult Login() => View();
+        public IActionResult Login() => View(new SingInViewModel());
 
 
 
         [NotAuthorized]
         [HttpGet]
-        public IActionResult Register() => View();
+        public IActionResult Register() => View(new SingUpViewModel());
 
 
 
@@ -74,6 +71,21 @@ namespace EasyToEnter.ASP.Controllers.Authorization
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
+            string? sessionIdString = User.FindFirst(x => x.Type == "SessionId")?.Value;
+
+            if (sessionIdString != null)
+            {
+                Guid sessionId = new(sessionIdString);
+
+                SessionModel? session = await _context.Session.SingleOrDefaultAsync(s => s.Id == sessionId);
+
+                if (session != null)
+                {
+                    _context.Remove(session);
+                    await _context.SaveChangesAsync();
+                }
+            }
+
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
@@ -89,48 +101,72 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
         [NotAuthorized]
         [HttpPost]
-        public async Task<IActionResult> Login([FromForm(Name = "login")] string login, [FromForm(Name = "password")] string password)
+        public async Task<IActionResult> Login([Bind("Login,Password")] SingInViewModel personLogin)
         {
-            if (login == null || password == null) return RedirectToAction("Login");
+            if (ModelState.IsValid)
+            {
+                PersonModel? person = await _context.Person.Include(p => p.RoleModel).SingleOrDefaultAsync(p => p.Login == personLogin.Login);
 
-            PersonModel? person = await _context.Person.Include(p => p.RoleModel).SingleOrDefaultAsync(p => p.Login == login);
+                if (person == null)
+                {
+                    ModelState.AddModelError(nameof(personLogin.Login), "Пользователь не найден.");
+                    return View(personLogin);
+                }
+                else 
+                { 
+                    if (Verify(personLogin.Password, person.PasswordHash) == false)
+                    {
+                        ModelState.AddModelError(nameof(personLogin.Password), "Неверный пароль.");
+                        return View(personLogin);
+                    }
 
-            if (person == null || Verify(password, person.PasswordHash) == false) return View();
+                    await Authenticate(person);
 
-            await Authenticate(person);
-
-            return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            else return View(personLogin);
         }
 
 
 
         [NotAuthorized]
         [HttpPost]
-        public async Task<IActionResult> Register([FromForm(Name = "login")] string login, [FromForm(Name = "password")] string password)
+        public async Task<IActionResult> Register([Bind("Login,Password,PasswordRepeat,EmailAddress")] SingUpViewModel personRegister)
         {
-            if (login == null || password == null) return RedirectToAction("Register");
-
-            if (await _context.Person.SingleOrDefaultAsync(p => p.Login == login) != null) return View();
-
-            PersonModel person = new()
+            if (ModelState.IsValid)
             {
-                FirstName = "Иван",
-                LastName = "Иванов",
-                MiddleName = "Иванович",
-                Login = login,
-                PasswordHash = HashPassword(password),
-                EmailAddress = "isooterkin@gmail.com",
-                PhoneNumber = "89121858950",
-                RoleId = 2,
-                RoleModel = new RoleModel() { Id = 2, Name = "User" }
-            };
+                if (personRegister.PasswordRepeat != personRegister.Password)
+                {
+                    ModelState.AddModelError(nameof(personRegister.Password), "Пароли не совпадают.");
+                    ModelState.AddModelError(nameof(personRegister.PasswordRepeat), "Пароли не совпадают.");
+                    return View(personRegister);
+                }
 
-            await _context.AddAsync(person);
-            await _context.SaveChangesAsync();
+                if (await _context.Person.SingleOrDefaultAsync(p => p.Login == personRegister.Login) != null)
+                {
+                    ModelState.AddModelError(nameof(personRegister.Login), "Пользователь уже существует.");
+                    return View(personRegister); 
+                }
 
-            await Authenticate(person);
+                PersonModel person = new()
+                {
+                    Login = personRegister.Login,
+                    PasswordHash = HashPassword(personRegister.Password),
+                    EmailAddress = personRegister.EmailAddress,
+                    RoleId = 2
+                };
 
-            return RedirectToAction("Index", "Home");
+                await _context.AddAsync(person);
+                await _context.SaveChangesAsync();
+
+                person.RoleModel = new RoleModel() { Id = 2, Name = "Абитуриент" };
+
+                await Authenticate(person);
+
+                return RedirectToAction("Index", "Home");
+            }
+            else return View(personRegister);
         }
 
 

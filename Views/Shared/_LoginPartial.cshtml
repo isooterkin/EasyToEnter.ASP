@@ -9,7 +9,7 @@
 @if (User != null && User.Identity != null && User.Identity.IsAuthenticated == true)
 {
     <li class="nav-item">
-        <a  class="nav-link text-dark" asp-controller="Account" asp-action="Index">@IdentityAssistant.FirstName(User) @IdentityAssistant.LastName(User)</a>
+        <a  class="nav-link text-dark" asp-controller="Account" asp-action="Index">@IdentityAssistant.Login(User)</a>
     </li>
     <li class="nav-item">
         <form class="form-inline" asp-controller="Authentication" asp-action="Logout" method="post">

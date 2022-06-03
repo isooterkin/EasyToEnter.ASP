@@ -1,4 +1,5 @@
 ﻿using EasyToEnter.ASP.Models.Dependence;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
@@ -8,26 +9,24 @@ using System.Text.Json.Serialization;
 namespace EasyToEnter.ASP.Models.Models
 {
     [Display(Name = "Пользователь")]
+    [Index(nameof(Login), IsUnique = true)]
     public class PersonModel: ModelWithId
     {
-        [Required(ErrorMessage = "Укажите фамилию.")]
         [Display(Name = "Фамилия")]
         [JsonPropertyName(nameof(LastName))]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
 
 
-        [Required(ErrorMessage = "Укажите имя.")]
         [Display(Name = "Имя")]
         [JsonPropertyName(nameof(FirstName))]
-        public string FirstName  { get; set; }
+        public string? FirstName  { get; set; }
 
 
 
-        [Required(ErrorMessage = "кажите отчество.")]
         [Display(Name = "Отчество")]
         [JsonPropertyName(nameof(MiddleName))]
-        public string MiddleName { get; set; }
+        public string? MiddleName { get; set; }
 
 
 
@@ -37,19 +36,17 @@ namespace EasyToEnter.ASP.Models.Models
 
 
 
-        [Required(ErrorMessage = "Укажите контактный телефон.")]
         [Display(Name = "Контактный телефон")]
         [Phone(ErrorMessage = "Неверный телефон.")]
         [JsonPropertyName(nameof(PhoneNumber))]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
 
 
-        [Required(ErrorMessage = "Укажите электронную почту.")]
         [Display(Name = "Электронная почта")]
         [EmailAddress(ErrorMessage = "Неверная электронная почта.")]
         [JsonPropertyName(nameof(EmailAddress))]
-        public string EmailAddress { get; set; }
+        public string? EmailAddress { get; set; }
 
 
 

@@ -528,15 +528,12 @@ namespace EasyToEnter.ASP.Migrations
                         .HasColumnType("date");
 
                     b.Property<string>("EmailAddress")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Login")
@@ -544,7 +541,6 @@ namespace EasyToEnter.ASP.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("MiddleName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
@@ -552,13 +548,15 @@ namespace EasyToEnter.ASP.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Login")
+                        .IsUnique();
 
                     b.HasIndex("RoleId");
 

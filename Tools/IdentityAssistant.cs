@@ -17,6 +17,10 @@ namespace EasyToEnter.ASP.Tools
 
 
 
+        public static string Login(ClaimsPrincipal p) => p.FindFirst(x => x.Type == "Login")?.Value ?? string.Empty;
+
+        
+
         public static Guid? SessionId(ClaimsPrincipal p) 
         {
             if (p == null) return null;
