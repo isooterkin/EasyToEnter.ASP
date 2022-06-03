@@ -34,7 +34,7 @@ namespace EasyToEnter.ASP.Controllers
                 {
                     new Claim("SessionId", session.Id.ToString()),
                     new Claim("Login", person.Login),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, person.RoleId.ToString()),
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType, person.RoleModel!.Name),
                     new Claim("PhoneNumber", person.PhoneNumber),
                     new Claim("LastName", person.LastName),
                     new Claim("FirstName", person.FirstName),
@@ -120,7 +120,8 @@ namespace EasyToEnter.ASP.Controllers
                 PasswordHash = HashPassword(password),
                 EmailAddress = "isooterkin@gmail.com",
                 PhoneNumber = "89121858950",
-                RoleId = 2
+                RoleId = 2,
+                RoleModel = new RoleModel() { Id = 2, Name = "User"}
             };
 
             await _context.AddAsync(person);
