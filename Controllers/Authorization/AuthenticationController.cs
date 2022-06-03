@@ -11,11 +11,11 @@ using System.Security.Claims;
 using static BCrypt.Net.BCrypt;
 
 
-namespace EasyToEnter.ASP.Controllers
+namespace EasyToEnter.ASP.Controllers.Authorization
 {
     public class AuthenticationController : MyController
     {
-        public AuthenticationController(EasyToEnterDbContext context): base(context) {}
+        public AuthenticationController(EasyToEnterDbContext context) : base(context) { }
 
 
 
@@ -25,9 +25,9 @@ namespace EasyToEnter.ASP.Controllers
 
         private async Task Authenticate(PersonModel person)
         {
-            SessionModel session = new() 
-            { 
-                PersonId = person.Id, 
+            SessionModel session = new()
+            {
+                PersonId = person.Id,
                 LifeSpan = (int)((DateTimeOffset)DateTime.Now.AddSeconds(LifeSpan)).ToUnixTimeSeconds()
             };
 
@@ -53,6 +53,7 @@ namespace EasyToEnter.ASP.Controllers
 
 
         [AllowAnonymous]
+        [SessionCheck]
         [HttpGet]
         public async Task<IActionResult> Index() => await CheckSession() ? RedirectToAction("Index", "Home") : RedirectToAction("Login");
 
@@ -115,8 +116,8 @@ namespace EasyToEnter.ASP.Controllers
 
             if (await _context.Person.SingleOrDefaultAsync(p => p.Login == login) != null) return View();
 
-            PersonModel person = new () 
-            { 
+            PersonModel person = new()
+            {
                 FirstName = "Иван",
                 LastName = "Иванов",
                 MiddleName = "Иванович",
@@ -125,7 +126,7 @@ namespace EasyToEnter.ASP.Controllers
                 EmailAddress = "isooterkin@gmail.com",
                 PhoneNumber = "89121858950",
                 RoleId = 2,
-                RoleModel = new RoleModel() { Id = 2, Name = "User"}
+                RoleModel = new RoleModel() { Id = 2, Name = "User" }
             };
 
             await _context.AddAsync(person);
