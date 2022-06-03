@@ -19,12 +19,16 @@ namespace EasyToEnter.ASP.Controllers
 
 
 
+        private readonly int LifeSpan = 31556926;
+
+
+
         private async Task Authenticate(PersonModel person)
         {
             SessionModel session = new() 
             { 
                 PersonId = person.Id, 
-                LifeSpan = (int)((DateTimeOffset)DateTime.Now.AddSeconds(10)).ToUnixTimeSeconds()
+                LifeSpan = (int)((DateTimeOffset)DateTime.Now.AddSeconds(LifeSpan)).ToUnixTimeSeconds()
             };
 
             await _context.AddAsync(session);
