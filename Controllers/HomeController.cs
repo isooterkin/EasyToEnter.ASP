@@ -1,14 +1,19 @@
-﻿using EasyToEnter.ASP.Models;
+﻿using EasyToEnter.ASP.Data;
+using EasyToEnter.ASP.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace EasyToEnter.ASP.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : MyController
     {
+        public HomeController(EasyToEnterDbContext context) : base(context) {}
+
+
+
         [AllowAnonymous]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }

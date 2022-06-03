@@ -21,7 +21,11 @@ namespace EasyToEnter.ASP.Controllers
 
         private async Task Authenticate(PersonModel person)
         {
-            SessionModel session = new() { PersonId = person.Id };
+            SessionModel session = new() 
+            { 
+                PersonId = person.Id, 
+                LifeSpan = (int)((DateTimeOffset)DateTime.Now.AddSeconds(10)).ToUnixTimeSeconds()
+            };
 
             await _context.AddAsync(session);
             await _context.SaveChangesAsync();
@@ -46,19 +50,25 @@ namespace EasyToEnter.ASP.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Login() => CheckIdentity() ? RedirectToAction("Index", "Home") : View();
+        public async Task<IActionResult> Index() => await CheckSession() ? RedirectToAction("Index", "Home") : RedirectToAction("Login");
 
 
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Register() => CheckIdentity() ? RedirectToAction("Index", "Home") : View();
+        public async Task<IActionResult> Login() => await CheckSession() ? RedirectToAction("Index", "Home") : View();
+
+
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Register() => await CheckSession() ? RedirectToAction("Index", "Home") : View();
 
 
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Logout() 
+        public async Task<IActionResult> Logout()
         {
             await LogoutSession();
             return RedirectToAction("Login");
@@ -76,7 +86,7 @@ namespace EasyToEnter.ASP.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromForm(Name = "login")] string login, [FromForm(Name = "password")] string password)
         {
-            if (CheckIdentity()) return RedirectToAction("Index", "Home");
+            if (await CheckSession()) return RedirectToAction("Index", "Home");
 
             if (login == null || password == null) return RedirectToAction("Login");
 
@@ -95,7 +105,7 @@ namespace EasyToEnter.ASP.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromForm(Name = "login")] string login, [FromForm(Name = "password")] string password)
         {
-            if (CheckIdentity()) return RedirectToAction("Index", "Home");
+            if (await CheckSession()) return RedirectToAction("Index", "Home");
 
             if (login == null || password == null) return RedirectToAction("Register");
 
@@ -120,6 +130,7 @@ namespace EasyToEnter.ASP.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
 
 
 
