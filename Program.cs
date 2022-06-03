@@ -13,7 +13,7 @@ namespace EasyToEnter.ASP
             .AddWebApiServices()
             .AddOthersServices()
             .Build()
-            .InitializationDatabase()
+            .AddDatabaseInitialization()
             .Run();
     }
 }

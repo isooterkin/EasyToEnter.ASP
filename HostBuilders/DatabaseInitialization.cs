@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyToEnter.ASP.HostBuilders
 {
-    public static class InitializationDatabaseHostBuilderExtensions
+    public static class DatabaseInitialization
     {
-        public static IHost InitializationDatabase(this IHost host)
+        public static IHost AddDatabaseInitialization(this IHost host)
         {
             using IServiceScope ServiceScope = host.Services.CreateScope();
             EasyToEnterDbContextFactory contextFactory = ServiceScope.ServiceProvider.GetRequiredService<EasyToEnterDbContextFactory>();
@@ -114,7 +114,10 @@ namespace EasyToEnter.ASP.HostBuilders
                 // InitializationHistoryVariability.Initialize(context);
 
                 // Добавляем в базу данных "Роль"
-                // InitializationRole.Initialize(context);
+                InitializationRole.Initialize(context);
+
+                // Добавляем в базу данных "Пользователей"
+                InitializationPerson.Initialize(context);
             }
             catch (Exception Exception)
             {

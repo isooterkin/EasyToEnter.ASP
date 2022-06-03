@@ -12,9 +12,11 @@ namespace EasyToEnter.ASP.HostBuilders
 
                 services.AddScoped(client =>
                 {
-                    HttpClient httpClient = new();
+                    HttpClient httpClient = new()
+                    {
+                        BaseAddress = new Uri(context.Configuration["HostName"])
+                    };
 
-                    httpClient.BaseAddress = new Uri(context.Configuration["HostName"]);
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                     return httpClient;
