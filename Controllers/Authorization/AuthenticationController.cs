@@ -19,7 +19,7 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
 
 
-        private readonly int LifeSpan = 10;
+        private readonly int LifeSpan = 200;
 
 
 
