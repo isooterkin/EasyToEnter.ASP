@@ -53,8 +53,8 @@ namespace EasyToEnter.ASP
                     pattern: "{controller}/{action}/{id?}",
                     defaults: new
                     {
-                        controller = "Authentication",
-                        action = "Login"
+                        controller = "Home",
+                        action = "Index"
                     });
             });
         }

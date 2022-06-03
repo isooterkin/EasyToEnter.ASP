@@ -23,11 +23,13 @@ namespace EasyToEnter.ASP.Controllers
         {
             ClaimsIdentity claimsIdentity = new(new[]
                 {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.Login),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, person.RoleId.ToString()),
-                    new Claim(ClaimTypes.MobilePhone, person.PhoneNumber),
-                    new Claim(ClaimTypes.Name, person.FirstName),
-                    new Claim(ClaimTypes.Email, person.EmailAddress)
+                    new Claim("Id", person.Id.ToString()),
+                    new Claim("Login", person.Login),
+                    new Claim("RoleId", person.RoleId.ToString()),
+                    new Claim("PhoneNumber", person.PhoneNumber),
+                    new Claim("LastName", person.LastName),
+                    new Claim("FirstName", person.FirstName),
+                    new Claim("EmailAddress", person.EmailAddress)
                 }, CookieAuthenticationDefaults.AuthenticationScheme);
 
             ClaimsPrincipal claimsPrincipal = new(claimsIdentity);
@@ -50,7 +52,7 @@ namespace EasyToEnter.ASP.Controllers
 
 
         [Authorize]
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Logout() 
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -98,18 +100,18 @@ namespace EasyToEnter.ASP.Controllers
             { 
                 FirstName = "Иван",
                 LastName = "Иванов",
-                MiddleName = "",
+                MiddleName = "Иванович",
                 Login = login,
                 PasswordHash = HashPassword(password),
-                EmailAddress = "",
+                EmailAddress = "isooterkin@gmail.com",
                 PhoneNumber = "89121858950",
                 RoleId = 2
             };
 
-            await Authenticate(person);
-
             await _context.AddAsync(person);
             await _context.SaveChangesAsync();
+
+            await Authenticate(person);
 
             return RedirectToAction("Index", "Home");
         }

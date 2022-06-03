@@ -30,12 +30,6 @@ namespace EasyToEnter.ASP.HostBuilders
                 //        };
                 //    });
 
-                services.Configure<CookiePolicyOptions>(cookiePolicyOptions =>
-                {
-                    cookiePolicyOptions.CheckConsentNeeded = context => true;
-                    cookiePolicyOptions.MinimumSameSitePolicy = SameSiteMode.Lax;
-                });
-
                 //JsonConvert.DefaultSettings = () => new JsonSerializerSettings
                 //{
                 //    Formatting = Formatting.Indented,
@@ -43,6 +37,13 @@ namespace EasyToEnter.ASP.HostBuilders
                 //    ContractResolver = new CamelCasePropertyNamesContractResolver()
                 //};
 
+                services.Configure<CookiePolicyOptions>(cookiePolicyOptions =>
+                {
+                    cookiePolicyOptions.CheckConsentNeeded = context => true;
+                    cookiePolicyOptions.MinimumSameSitePolicy = SameSiteMode.None;
+                });
+                services.AddDistributedMemoryCache();
+                services.AddSession();
                 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(configureOptions =>
                     {
@@ -58,11 +59,9 @@ namespace EasyToEnter.ASP.HostBuilders
                         // сколько времени билет проверки подлинности, хранящийся в файле cookie
                         configureOptions.ExpireTimeSpan = TimeSpan.FromSeconds(1110);
                     });
-
-                services.AddSession();
+                services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
                 services.AddControllersWithViews();
-
                 services.AddServerSideBlazor();
 
                 services.AddScoped(client =>
@@ -78,7 +77,6 @@ namespace EasyToEnter.ASP.HostBuilders
                 });
 
                 services.AddScoped<IDisciplineService, DisciplineService>();
-
 
                 // Problem: https://stackoverflow.com/questions/60311852/error-connection-disconnected-with-error-error-server-returned-an-error-on-cl
                 services.AddSignalR(e => {
