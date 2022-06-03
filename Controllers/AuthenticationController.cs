@@ -30,7 +30,7 @@ namespace EasyToEnter.ASP.Controllers
                 {
                     new Claim("SessionId", session.Id.ToString()),
                     new Claim("Login", person.Login),
-                    new Claim("RoleId", person.RoleId.ToString()),
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType, person.RoleId.ToString()),
                     new Claim("PhoneNumber", person.PhoneNumber),
                     new Claim("LastName", person.LastName),
                     new Claim("FirstName", person.FirstName),

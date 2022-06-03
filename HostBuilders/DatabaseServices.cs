@@ -1,18 +1,16 @@
 ﻿using EasyToEnter.ASP.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using EasyToEnter.ASP.Services.Discipline;
-using System.Net.Http.Headers;
 
 namespace EasyToEnter.ASP.HostBuilders
 {
-    public static class AddConfigureDBHostBuilderExtensions
+    public static class DatabaseServices
     {
         private static readonly string DBName = "PGSQL"; // MYSQL MSSQL PGSQL
 
-        public static IHostBuilder AddConfigureDB(this IHostBuilder host)
+        public static IHostBuilder AddDatabaseServices(this IHostBuilder host)
         {
-            host.ConfigureServices((context, services) =>
+            return host.ConfigureServices((context, services) =>
             {
                 // Конфигурация БД
                 string connectionString = context.Configuration.GetConnectionString(DBName);
@@ -46,8 +44,6 @@ namespace EasyToEnter.ASP.HostBuilders
                 // Регистрация завода контекста БД
                 services.AddSingleton(new EasyToEnterDbContextFactory(configureDbContext));
             });
-
-            return host;
         }
     }
 }

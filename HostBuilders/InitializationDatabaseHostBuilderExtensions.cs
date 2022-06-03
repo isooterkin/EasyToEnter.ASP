@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyToEnter.ASP.HostBuilders
 {
-    public static class InitializationDBHostBuilderExtensions
+    public static class InitializationDatabaseHostBuilderExtensions
     {
-        public static IHost InitializationDB(this IHost host)
+        public static IHost InitializationDatabase(this IHost host)
         {
             using IServiceScope ServiceScope = host.Services.CreateScope();
             EasyToEnterDbContextFactory contextFactory = ServiceScope.ServiceProvider.GetRequiredService<EasyToEnterDbContextFactory>();
