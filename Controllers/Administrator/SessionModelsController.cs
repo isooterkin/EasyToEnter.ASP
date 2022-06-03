@@ -48,7 +48,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
         // GET: SessionModels/Create
         public IActionResult Create()
         {
-            ViewData["PersonId"] = new SelectList(_context.Person, "Id", "EmailAddress");
+            ViewData["PersonId"] = new SelectList(_context.Person, "Id", "Login");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PersonId")] SessionModel sessionModel)
+        public async Task<IActionResult> Create([Bind("Id,LifeSpan,PersonId")] SessionModel sessionModel)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PersonId"] = new SelectList(_context.Person, "Id", "EmailAddress", sessionModel.PersonId);
+            ViewData["PersonId"] = new SelectList(_context.Person, "Id", "Login", sessionModel.PersonId);
             return View(sessionModel);
         }
 
@@ -83,7 +83,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
             {
                 return NotFound();
             }
-            ViewData["PersonId"] = new SelectList(_context.Person, "Id", "EmailAddress", sessionModel.PersonId);
+            ViewData["PersonId"] = new SelectList(_context.Person, "Id", "Login", sessionModel.PersonId);
             return View(sessionModel);
         }
 
@@ -92,7 +92,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,PersonId")] SessionModel sessionModel)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,LifeSpan,PersonId")] SessionModel sessionModel)
         {
             if (id != sessionModel.Id)
             {
@@ -119,7 +119,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PersonId"] = new SelectList(_context.Person, "Id", "EmailAddress", sessionModel.PersonId);
+            ViewData["PersonId"] = new SelectList(_context.Person, "Id", "Login", sessionModel.PersonId);
             return View(sessionModel);
         }
 
@@ -156,14 +156,14 @@ namespace EasyToEnter.ASP.Controllers.Administrator
             {
                 _context.Session.Remove(sessionModel);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SessionModelExists(Guid id)
         {
-            return (_context.Session?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Session?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

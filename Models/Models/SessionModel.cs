@@ -17,7 +17,6 @@ namespace EasyToEnter.ASP.Models.Models
 
         [Required(ErrorMessage = "Укажите срок жизни.")]
         [Display(Name = "Срок жизни")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [JsonPropertyName(nameof(LifeSpan))]
         public int LifeSpan { get; set; }
         
