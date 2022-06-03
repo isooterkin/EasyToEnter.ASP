@@ -3,6 +3,7 @@ using System;
 using EasyToEnter.ASP.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EasyToEnter.ASP.Migrations
 {
     [DbContext(typeof(EasyToEnterDbContext))]
-    partial class EasyToEnterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220603105241_Npgsql-1.0.3")]
+    partial class Npgsql103
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

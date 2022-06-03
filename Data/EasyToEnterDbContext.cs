@@ -113,5 +113,8 @@ namespace EasyToEnter.ASP.Data
 
         // Таблица "Пользователь"
         public DbSet<PersonModel> Person { get; set; }
+
+        // Таблица "Сессия"
+        public DbSet<SessionModel> Session { get; set; }
     }
 }

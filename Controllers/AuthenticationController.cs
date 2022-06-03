@@ -21,9 +21,14 @@ namespace EasyToEnter.ASP.Controllers
 
         private async Task Authenticate(PersonModel person)
         {
+            SessionModel session = new() { PersonId = person.Id };
+
+            await _context.AddAsync(session);
+            await _context.SaveChangesAsync();
+
             ClaimsIdentity claimsIdentity = new(new[]
                 {
-                    new Claim("Id", person.Id.ToString()),
+                    new Claim("SessionId", session.Id.ToString()),
                     new Claim("Login", person.Login),
                     new Claim("RoleId", person.RoleId.ToString()),
                     new Claim("PhoneNumber", person.PhoneNumber),
@@ -55,7 +60,7 @@ namespace EasyToEnter.ASP.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout() 
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await LogoutSession();
             return RedirectToAction("Login");
         }
 

@@ -1,9 +1,11 @@
 ﻿using EasyToEnter.ASP.Services.Discipline;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -15,21 +17,6 @@ namespace EasyToEnter.ASP.HostBuilders
         {
             host.ConfigureServices((context, services) =>
             {
-                //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                //    .AddJwtBearer(configureOptions =>
-                //    {
-                //        configureOptions.TokenValidationParameters = new TokenValidationParameters
-                //        {
-                //            ValidateIssuer = true,
-                //            ValidateAudience = true,
-                //            ValidateLifetime = true,
-                //            ValidateIssuerSigningKey = true,
-                //            ValidIssuer = context.Configuration["JWT:Issuer"],
-                //            ValidAudience = context.Configuration["JWT:Audience"],
-                //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(context.Configuration["JWT:Key"]))
-                //        };
-                //    });
-
                 //JsonConvert.DefaultSettings = () => new JsonSerializerSettings
                 //{
                 //    Formatting = Formatting.Indented,
@@ -59,6 +46,27 @@ namespace EasyToEnter.ASP.HostBuilders
                         // сколько времени билет проверки подлинности, хранящийся в файле cookie
                         configureOptions.ExpireTimeSpan = TimeSpan.FromSeconds(1110);
                     });
+                    //.AddJwtBearer(configureOptions =>
+                    //{
+                    //    configureOptions.TokenValidationParameters = new TokenValidationParameters
+                    //    {
+                    //        // укзывает, будет ли валидироваться издатель при валидации токена
+                    //        ValidateIssuer = true,
+                    //        ValidIssuer = context.Configuration["JWT:Issuer"],
+
+                    //        // будет ли валидироваться потребитель токена
+                    //        ValidateAudience = true,
+                    //        ValidAudience = context.Configuration["JWT:Audience"],
+
+                    //        // валидация ключа безопасности
+                    //        ValidateIssuerSigningKey = true,
+                    //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(context.Configuration["JWT:Key"])),
+                            
+                    //        // будет ли валидироваться время существования
+                    //        ValidateLifetime = true
+                    //    };
+                    //});
+
                 services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
                 services.AddControllersWithViews();
