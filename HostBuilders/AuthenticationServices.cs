@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using EasyToEnter.ASP.Controllers.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace EasyToEnter.ASP.HostBuilders
 {
@@ -32,6 +33,9 @@ namespace EasyToEnter.ASP.HostBuilders
                         // Срок жизни cookie
                         configureOptions.Cookie.MaxAge = TimeSpan.MaxValue;
                     });
+
+                // Получает и проверяет сессию пользователя,
+                services.AddScoped<SessionPerson>();
             });
         }
     }

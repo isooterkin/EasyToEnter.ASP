@@ -16,12 +16,12 @@ namespace EasyToEnter.ASP.Services.FocusUniversityFavorites
 
 
 
-        public FocusUniversityFavoritesService(IHttpContextAccessor httpContextAccessor, EasyToEnterDbContext context)
+        public FocusUniversityFavoritesService(EasyToEnterDbContext context, SessionPerson sessionPerson)
         {
             Context = context;
-            SessionPerson = new SessionPerson(context, httpContextAccessor.HttpContext);
+            SessionPerson = sessionPerson;
         }
-
+        
 
         //[Authorize]
         public async Task<bool> AddFavorites(int focusUniversityId)

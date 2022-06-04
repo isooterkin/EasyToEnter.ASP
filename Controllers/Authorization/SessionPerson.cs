@@ -12,15 +12,16 @@ namespace EasyToEnter.ASP.Controllers.Authorization
         public readonly PersonModel? Person;
         public readonly bool IsAuthenticated = false;
 
-        public SessionPerson(EasyToEnterDbContext context, HttpContext? httpContext)
+        public SessionPerson(EasyToEnterDbContext context, IHttpContextAccessor httpContextAccessor)
         {
-            if (httpContext == null)
+            if (httpContextAccessor.HttpContext == null)
             {
                 IsAuthenticated = false;
                 return;
             }
 
-            string? sessionId = httpContext.User.FindFirst(x => x.Type == "SessionId")?.Value;
+            string? sessionId = httpContextAccessor.HttpContext.User
+                .FindFirst(x => x.Type == "SessionId")?.Value;
 
             if (sessionId == null) IsAuthenticated = false;
             else
@@ -31,7 +32,8 @@ namespace EasyToEnter.ASP.Controllers.Authorization
                 {
                     IsAuthenticated = false;
 
-                    httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                    httpContextAccessor.HttpContext
+                        .SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
                 }
                 else
                 {
@@ -42,7 +44,8 @@ namespace EasyToEnter.ASP.Controllers.Authorization
                         context.Remove(Session);
                         context.SaveChanges();
 
-                        httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                        httpContextAccessor.HttpContext
+                            .SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
                     }
                     else
                     {

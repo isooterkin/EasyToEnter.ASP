@@ -1,5 +1,4 @@
-﻿using EasyToEnter.ASP.Data;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 
 // https://stackoverflow.com/questions/31464359/how-do-you-create-a-custom-authorizeattribute-in-asp-net-core
 // https://stackoverflow.com/questions/60943115/net-core-how-to-di-dbcontext-to-authrozationfilter
@@ -7,14 +6,13 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace EasyToEnter.ASP.Controllers.Authorization
 {
-    [AttributeUsage(AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
     public class SessionCheckAttribute : Attribute, IAuthorizationFilter
     {
-        public void OnAuthorization(AuthorizationFilterContext authorizationFilterContext)
-        {
-            EasyToEnterDbContext context = authorizationFilterContext.HttpContext.RequestServices.GetRequiredService<EasyToEnterDbContext>();
+        public SessionPerson? SessionPerson;
 
-            _ = new SessionPerson(context, authorizationFilterContext.HttpContext);
-        }
+        public void OnAuthorization(AuthorizationFilterContext authorizationFilterContext) 
+            => SessionPerson = authorizationFilterContext.HttpContext.RequestServices
+            .GetRequiredService<SessionPerson>();
     }
 }

@@ -20,7 +20,7 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
 
 
-        private readonly int LifeSpan = 200;
+        private readonly int LifeSpan = 999999;
 
 
 
@@ -49,43 +49,28 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
 
 
-        [NotAuthorized]
         [HttpGet]
+        [NotAuthorized]
         public IActionResult Index() => RedirectToAction("Login");
 
 
 
-        [NotAuthorized]
         [HttpGet]
+        [NotAuthorized]
         public IActionResult Login() => View(new SingInViewModel());
 
 
 
-        [NotAuthorized]
         [HttpGet]
+        [NotAuthorized]
         public IActionResult Register() => View(new SingUpViewModel());
 
 
 
-        [Authorize]
         [HttpPost]
+        [Authorized]
         public async Task<IActionResult> Logout()
         {
-            string? sessionIdString = User.FindFirst(x => x.Type == "SessionId")?.Value;
-
-            if (sessionIdString != null)
-            {
-                Guid sessionId = new(sessionIdString);
-
-                SessionModel? session = await _context.Session.SingleOrDefaultAsync(s => s.Id == sessionId);
-
-                if (session != null)
-                {
-                    _context.Remove(session);
-                    await _context.SaveChangesAsync();
-                }
-            }
-
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
@@ -99,8 +84,8 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
 
 
-        [NotAuthorized]
         [HttpPost]
+        [NotAuthorized]
         public async Task<IActionResult> Login([Bind("Login,Password")] SingInViewModel personLogin)
         {
             if (ModelState.IsValid)
@@ -130,8 +115,8 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
 
 
-        [NotAuthorized]
         [HttpPost]
+        [NotAuthorized]
         public async Task<IActionResult> Register([Bind("Login,Password,PasswordRepeat,EmailAddress")] SingUpViewModel personRegister)
         {
             if (ModelState.IsValid)
