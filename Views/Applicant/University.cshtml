@@ -7,7 +7,7 @@
 }
 
 @*Название ВУЗа начало*@
-<div class="container bg-light rounded-3 shadow mb-3">
+<div class="container bg-white rounded-20 shadow mb-3 py-1">
     <div class="row px-3 py-1">
         <small class="text-muted text-center fw-bold">
             @Model.University.Name 
@@ -21,7 +21,7 @@
 @*Карта ВУЗ начало*@
 
 @*Краткая информация начало*@
-<div class="container py-1 mb-3 bg-light rounded-3 shadow">
+<div class="container py-1 mb-3 bg-white rounded-20 shadow">
     <div class="row">
 
         <div class="col">
@@ -68,7 +68,7 @@
 @*Краткая информация конец*@
 
 @*О ВУЗе начало*@
-<div class="bg-light rounded-3 shadow mb-3 p-3">
+<div class="bg-white rounded-20 shadow mb-3 p-3">
     <div class="col">
         <div class="row fw-bold my-1">
             Описание
@@ -81,7 +81,7 @@
 @*О ВУЗе конец*@
 
 @*Контакты начало*@
-<div class="bg-light rounded-3 shadow mb-3 p-3">
+<div class="bg-white rounded-20 shadow mb-3 p-3">
     <div class="col">
 
         <div class="row fw-bold my-1">
@@ -140,7 +140,7 @@
 @*Контакты конец*@
 
 @*Общежития начало*@
-<div class="p-2 mb-3 bg-light rounded-3 shadow">
+<div class="p-2 mb-3 bg-white rounded-20 shadow">
     <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseDormitory">
         <div class="col btn">
             @if (Model.University.Dormitorys!.Any())
@@ -164,7 +164,7 @@
                 <div class="container">
                     @foreach (DormitoryModel dormitory in Model.University!.Dormitorys!)
                     {
-                        <div class="col rounded-3 shadow-sm bg-white mb-2 px-2 pb-2">
+                        <div class="col rounded-20 shadow-sm bg-white mb-2 px-2 pb-2" style="border: 1px solid #e6e6e6;">
                             <a class="row text-decoration-none pt-2" data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#@dormitory.Id">
                                 <div class="text-dark col text-start text-truncate">
                                     @dormitory.Name

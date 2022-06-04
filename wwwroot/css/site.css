@@ -26,3 +26,37 @@ body {
 * {
     font-family: 'Nunito', sans-serif;
 }
+
+
+.bootstrap-select .no-results {
+    background: #fff;
+}
+
+.rounded-10 {
+    border-radius: 10px;
+}
+
+.rounded-20 {
+    border-radius: 20px;
+}
+
+.rounded-15 {
+    border-radius: 15px;
+}
+
+/*Select*/
+.custom-select {
+    border-radius: 100px;
+    padding: 6px 15px 1px 13px;
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+}
+
+.custom-select:focus {
+    border: 1px solid #6f42c1;
+    outline: none
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
