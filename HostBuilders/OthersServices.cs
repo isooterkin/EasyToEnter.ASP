@@ -9,8 +9,7 @@ namespace EasyToEnter.ASP.HostBuilders
         {
             return host.ConfigureServices((context, services) =>
             {
-                services.AddControllersWithViews(option => option.EnableEndpointRouting = false)
-                    .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+                services.AddControllersWithViews();
                 services.AddServerSideBlazor();
 
                 // Problem: https://stackoverflow.com/questions/60311852/error-connection-disconnected-with-error-error-server-returned-an-error-on-cl

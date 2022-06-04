@@ -5,50 +5,34 @@ using EasyToEnter.ASP.Data;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using EasyToEnter.ASP.Controllers.Authorization;
 
 namespace EasyToEnter.ASP.Services.FocusUniversityFavorites
 {
     public class FocusUniversityFavoritesService: IFocusUniversityFavoritesService
     {
+        private readonly SessionPerson SessionPerson;
         private readonly EasyToEnterDbContext Context;
-        private readonly HttpContext? HttpContext;
-        private readonly SessionModel? Session;
+
+
 
         public FocusUniversityFavoritesService(IHttpContextAccessor httpContextAccessor, EasyToEnterDbContext context)
         {
             Context = context;
-            HttpContext = httpContextAccessor.HttpContext;
-            Session = CheackSession();
+            SessionPerson = new SessionPerson(context, httpContextAccessor.HttpContext);
         }
 
 
-
-        private SessionModel? CheackSession()
-        {
-            if (HttpContext == null) return null;
-
-            ClaimsPrincipal user = HttpContext.User;
-
-            string? sessionIdString = user.FindFirst(x => x.Type == "SessionId")?.Value;
-
-            if (sessionIdString == null) return null;
-
-            Guid sessionId = new(sessionIdString);
-
-            return Context.Session.SingleOrDefault(s => s.Id == sessionId);
-        }
-
-
-
+        //[Authorize]
         public async Task<bool> AddFavorites(int focusUniversityId)
         {
-            if (Session == null) return false;
+            if (SessionPerson.IsAuthenticated == false) return false;
 
             try
             {
                 Context.FocusUniversityFavorites.Add(new FocusUniversityFavoritesModel()
                 {
-                    PersonId = Session.PersonId,
+                    PersonId = SessionPerson.Person!.Id,
                     FocusUniversityId = focusUniversityId
                 });
 
@@ -63,13 +47,13 @@ namespace EasyToEnter.ASP.Services.FocusUniversityFavorites
 
         public async Task<bool> DeleteFavorites(int focusUniversityId)
         {
-            if (Session == null) return false;
+            if (SessionPerson.IsAuthenticated == false) return false;
 
             try
             {
                 FocusUniversityFavoritesModel? FocusUniversityFavorites = Context
                     .FocusUniversityFavorites
-                    .SingleOrDefault(fuf => fuf.FocusUniversityId == focusUniversityId && fuf.PersonId == Session.PersonId);
+                    .SingleOrDefault(fuf => fuf.FocusUniversityId == focusUniversityId && fuf.PersonId == SessionPerson.Person!.Id);
 
                 if (FocusUniversityFavorites == null) return true;
 
