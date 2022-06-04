@@ -9,7 +9,6 @@ namespace EasyToEnter.ASP.Controllers
     public class HomeController : Controller
     {
         [AllowAnonymous]
-        [SessionCheck]
         public IActionResult Index() => View();
 
 

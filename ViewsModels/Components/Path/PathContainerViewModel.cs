@@ -35,9 +35,9 @@ namespace EasyToEnter.ASP.ViewsModels.Components.Path
                     break;
                 case var value when value == typeof(VariabilitySelectionContainerViewModel):
                     if (viewModel is VariabilitySelectionContainerViewModel variabilityModel)
-                        if (variabilityModel.VariabilityList.Any())
+                        if (variabilityModel.VariabilityViewModelList.Any())
                         {
-                            LevelFocusModel levelFocusModel = variabilityModel.VariabilityList[0]!.FocusUniversityModel!.LevelFocusModel!;
+                            LevelFocusModel levelFocusModel = variabilityModel.VariabilityViewModelList[0]!.FocusUniversityModel!.LevelFocusModel!;
 
                             LevelHistory = new LevelPathViewModel(variabilityModel.LevelName);
                             ScienceHistory = new SciencePathViewModel(variabilityModel.ScienceName, variabilityModel.LevelId);

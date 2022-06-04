@@ -5,7 +5,7 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     public class VariabilitySelectionContainerViewModel
     {
-        public readonly List<VariabilityModel> VariabilityList;
+        public readonly List<VariabilityViewModel> VariabilityViewModelList;
         public readonly List<SelectListItemSubtext> FormSelectListItem;
         public readonly List<SelectListItemSubtext> FormatSelectListItem;
         public readonly List<SelectListItemSubtext> PaymentSelectListItem;
@@ -25,13 +25,13 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
         public readonly int DirectionId = 0;
         public readonly string FocusName = string.Empty;
 
-        public VariabilitySelectionContainerViewModel(List<VariabilityModel> variabilityList, List<SelectListItemSubtext> formSelectListItem, 
+        public VariabilitySelectionContainerViewModel(List<VariabilityViewModel> variabilityViewModelList, List<SelectListItemSubtext> formSelectListItem, 
             List<SelectListItemSubtext> formatSelectListItem, List<SelectListItemSubtext> paymentSelectListItem, 
             List<SelectListItemSubtext> entranceExamsSelectListItem, List<SelectListItemSubtext> accreditationSelectListItem, 
             List<SelectListItemSubtext> militaryDepartmentSelectListItem, List<SelectListItemSubtext> dormitoryDepartmentSelectListItem,
             List<SelectListItemSubtext> specializationSelectListItem, int levelFocus)
         {
-            VariabilityList = variabilityList;
+            VariabilityViewModelList = variabilityViewModelList;
             FormSelectListItem = formSelectListItem;
             FormatSelectListItem = formatSelectListItem;
             PaymentSelectListItem = paymentSelectListItem;
@@ -42,17 +42,17 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
             SpecializationSelectListItem = specializationSelectListItem;
             LevelFocusId = levelFocus;
 
-            if (!VariabilityList.Any()) return;
+            if (!VariabilityViewModelList.Any()) return;
 
-            ScienceId = VariabilityList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceId;
-            GroupId = VariabilityList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupId;
-            DirectionId = VariabilityList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionId;
-            LevelId = VariabilityList[0].FocusUniversityModel!.LevelFocusModel!.LevelId;
-            LevelName = VariabilityList[0].FocusUniversityModel!.LevelFocusModel!.LevelModel!.Name;
-            GroupName = VariabilityList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.Name;
-            ScienceName = VariabilityList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceModel!.Name;
-            DirectionName = VariabilityList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.Name;
-            FocusName = VariabilityList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name;
+            ScienceId = VariabilityViewModelList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceId;
+            GroupId = VariabilityViewModelList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupId;
+            DirectionId = VariabilityViewModelList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionId;
+            LevelId = VariabilityViewModelList[0].FocusUniversityModel!.LevelFocusModel!.LevelId;
+            LevelName = VariabilityViewModelList[0].FocusUniversityModel!.LevelFocusModel!.LevelModel!.Name;
+            GroupName = VariabilityViewModelList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.Name;
+            ScienceName = VariabilityViewModelList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceModel!.Name;
+            DirectionName = VariabilityViewModelList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.Name;
+            FocusName = VariabilityViewModelList[0].FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name;
         }
     }
 }

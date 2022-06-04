@@ -3,9 +3,11 @@
 @using EasyToEnter.ASP.Services.Discipline;
 @using EasyToEnter.ASP.ViewsModels.Applicant;
 @using System.Text.Json;
+@using Microsoft.AspNetCore.Http
 
 @*Api*@
-@inject EasyToEnter.ASP.Services.Discipline.IDisciplineService DisciplineService
+@inject EasyToEnter.ASP.Services.FocusUniversityFavorites.IFocusUniversityFavoritesService FocusUniversityFavoritesService
+@*@inject IHttpContextAccessor httpContextAccessor*@
 
 <div class="icon-card mb-3 text-dark bg-white shadow rounded-20">
     <div class="row g-0">
@@ -47,8 +49,15 @@
                     }
 
                     @*Значек "В избранное"*@
-                    <a class="col-auto m-0 p-0 ml-4 align-self-end" data-bs-placement="top" data-bs-toggle="tooltip" title="Убрать из избранного" href="" @onclick:preventDefault @onclick="ChangeStatusFavorites">
-                        <span class="fs-5 bi @StatusFavorites text-danger"/>
+                    <a class="col-auto m-0 p-0 ml-4 align-self-end" data-bs-placement="top" data-bs-toggle="tooltip" href="" @onclick:preventDefault @onclick="ChangeStatusFavorites">
+                        @if (Model.Favorites)
+                        {
+                            <span class="fs-5 bi bi-heart-fill text-danger"/>
+                        }
+                        else
+                        {
+                            <span class="fs-5 bi bi-heart text-danger"/>
+                        }
                     </a>
                 </div>
 
@@ -101,13 +110,21 @@
 
 @code {
     [Parameter]
-    public VariabilityModel Model { get; set; } = new VariabilityModel();
+    public VariabilityViewModel Model { get; set; } = new VariabilityViewModel();
 
-    public string StatusFavorites = "bi-heart";
-
-    private void ChangeStatusFavorites()
+    private async Task ChangeStatusFavorites()
     {
-        if (StatusFavorites == "bi-heart") StatusFavorites = "bi-heart-fill";
-        else StatusFavorites = "bi-heart";
+        if (Model.Favorites)
+        {
+            var resultDelete = await FocusUniversityFavoritesService.DeleteFavorites(Model.FocusUniversityId);
+
+            if (resultDelete == true) Model.Favorites = false;
+        }
+        else 
+        {
+            var resultAdd = await FocusUniversityFavoritesService.AddFavorites(Model.FocusUniversityId);
+
+            if (resultAdd == true) Model.Favorites = true;
+        }
     }
 }

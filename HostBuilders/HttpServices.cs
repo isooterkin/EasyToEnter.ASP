@@ -8,13 +8,15 @@ namespace EasyToEnter.ASP.HostBuilders
         {
             return host.ConfigureServices((context, services) =>
             {
+                services.AddHttpContextAccessor();
+
                 services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
                 services.AddScoped(client =>
                 {
                     HttpClient httpClient = new()
                     {
-                        BaseAddress = new Uri(context.Configuration["HostName"])
+                        BaseAddress = new Uri(context.Configuration["LocalHostName"])
                     };
 
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

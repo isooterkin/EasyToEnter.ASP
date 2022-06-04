@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
+#pragma warning disable CS8618
+
 namespace EasyToEnter.ASP.Models.Models
 {
     [Display(Name = "Контактный телефон")]
@@ -25,13 +27,13 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Контактный телефон")]
         [Phone(ErrorMessage = "Неверный телефон.")]
         [JsonPropertyName("PhoneNumber")]
-        public string PhoneNumber { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; }
 
 
 
         [Required(ErrorMessage = "Укажите назначение.")]
         [Display(Name = "Назначение")]
         [JsonPropertyName("Appointment")]
-        public string Appointment { get; set; } = "Для абитуриентов";
+        public string Appointment { get; set; }
     }
 }

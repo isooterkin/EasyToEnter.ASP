@@ -47,5 +47,11 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Предметы выбранной направленности ВУЗа")]
         [JsonPropertyName("SubjectFocusUniversitys")]
         public List<SubjectFocusUniversityModel>? SubjectFocusUniversitys { get; set; }
+
+
+
+        [Display(Name = "Избранные направленности ВУЗа")]
+        [JsonPropertyName(nameof(FocusUniversityFavoritess))]
+        public List<FocusUniversityFavoritesModel>? FocusUniversityFavoritess { get; set; }
     }
 }

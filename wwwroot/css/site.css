@@ -50,13 +50,17 @@ body {
     padding: 6px 15px 1px 13px;
     border: 1px solid #e6e6e6;
     background-color: #fff;
+    outline: none;
 }
 
 .custom-select:focus {
     border: 1px solid #6f42c1;
-    outline: none
 }
 
 .dropdown-toggle::after {
     display: none;
+}
+
+.bootstrap-select .dropdown-toggle:focus {
+    outline: none;
 }

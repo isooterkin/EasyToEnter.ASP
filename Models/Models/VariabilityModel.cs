@@ -1,4 +1,5 @@
 ﻿using EasyToEnter.ASP.Models.Dependence;
+using EasyToEnter.ASP.ViewsModels.Applicant;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
