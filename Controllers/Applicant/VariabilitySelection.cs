@@ -323,11 +323,9 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                     HistoryVariabilitys = variabilityList[i].HistoryVariabilitys
                 });
 
-            Guid? sessionId = IdentityAssistant.SessionId(User);
-
-            if (sessionId != null)
+            if (User.Id != null)
             {
-                PersonModel person = _context.Session.Include(s => s.PersonModel).Single(s => s.Id == sessionId).PersonModel!;
+                PersonModel person = _context.Session.Include(s => s.PersonModel).Single(s => s.Id == User.SessionId()).PersonModel!;
 
                 for (var i = 0; i < variabilityList.Count; i++)
                     variabilityViewModelList[i].Favorites = variabilityList[i].FocusUniversityModel!

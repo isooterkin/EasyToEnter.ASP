@@ -1,15 +1,10 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using System.Security.Claims;
-@using EasyToEnter.ASP.Tools;
-@using Microsoft.AspNetCore.Authentication.Cookies;
-@inject EasyToEnter.ASP.Data.EasyToEnterDbContext _context
-
+﻿@using EasyToEnter.ASP.Tools;
 
 <ul class="navbar-nav">
 @if (User != null && User.Identity != null && User.Identity.IsAuthenticated == true)
 {
     <li class="nav-item">
-        <a  class="nav-link text-dark" asp-controller="Account" asp-action="Index">@IdentityAssistant.Login(User)</a>
+        <a  class="nav-link text-dark" asp-controller="Account" asp-action="Index">@User.Login()</a>
     </li>
     <li class="nav-item">
         <form class="form-inline" asp-controller="Authentication" asp-action="Logout" method="post">
@@ -20,10 +15,10 @@
 else
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Authentication" asp-action="Register">Регистрация</a>
+        <a class="nav-link text-dark" asp-controller="Authentication" asp-action="Login">Войти</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Authentication" asp-action="Login">Авторизация</a>
+        <a class="nav-link text-dark" asp-controller="Authentication" asp-action="Register">Регистрация</a>
     </li>
 }
 </ul>

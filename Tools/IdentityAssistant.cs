@@ -1,32 +1,25 @@
-﻿using EasyToEnter.ASP.Data;
-using EasyToEnter.ASP.Models.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
-
+﻿using System.Security.Claims;
 
 namespace EasyToEnter.ASP.Tools
 {
     public static class IdentityAssistant
     {
-        public static string LastName(ClaimsPrincipal p) => p.FindFirst(x => x.Type == "LastName")?.Value?? string.Empty;
-
-
-
-        public static string FirstName(ClaimsPrincipal p) => p.FindFirst(x => x.Type == "FirstName")?.Value ?? string.Empty;
-
-
-
-        public static string Login(ClaimsPrincipal p) => p.FindFirst(x => x.Type == "Login")?.Value ?? string.Empty;
-
-
-
-        public static Guid? SessionId(ClaimsPrincipal p)
+        public static int? Id(this ClaimsPrincipal user)
         {
-            if (p == null) return null;
+            string? stringId = user.FindFirst(x => x.Type == "Id")?.Value;
+            return stringId == null ? null : int.Parse(stringId);
+        }
 
-            string? sessionId = p.FindFirst(x => x.Type == "SessionId")?.Value;
 
+
+        public static string? Login(this ClaimsPrincipal user)
+            => user.FindFirst(x => x.Type == "Login")?.Value ?? string.Empty;
+
+
+
+        public static Guid? SessionId(this ClaimsPrincipal user)
+        {
+            string? sessionId = user.FindFirst(x => x.Type == "SessionId")?.Value;
             return sessionId == null ? null : new Guid(sessionId);
         }
     }

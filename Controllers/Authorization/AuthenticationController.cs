@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Claims;
 using static BCrypt.Net.BCrypt;
+using static EasyToEnter.ASP.Tools.IdentityAssistant;
 
 namespace EasyToEnter.ASP.Controllers.Authorization
 {
@@ -39,7 +40,8 @@ namespace EasyToEnter.ASP.Controllers.Authorization
                 {
                     new Claim("SessionId", session.Id.ToString()),
                     new Claim(ClaimsIdentity.DefaultRoleClaimType, person.RoleModel!.Name),
-                    new Claim("Login", person.Login)
+                    new Claim("Login", person.Login),
+                    new Claim("Id", person.Id.ToString())
                 }, CookieAuthenticationDefaults.AuthenticationScheme);
 
             ClaimsPrincipal claimsPrincipal = new(claimsIdentity);
@@ -69,9 +71,28 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
         [HttpPost]
         [Authorized]
-        public async Task<IActionResult> Logout() // Сделать удаление ссесии!
+        public async Task<IActionResult> Logout()
         {
+            try
+            {
+                Guid? sessionId = User.SessionId();
+
+                if (sessionId != null)
+                {
+                    SessionModel? session = _context.Session
+                        .SingleOrDefault(s => s.Id == sessionId);
+
+                    if (session != null)
+                    {
+                        _context.Session.Remove(session);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+            }
+            catch { }
+
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
             return RedirectToAction("Login");
         }
 
