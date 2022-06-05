@@ -4,6 +4,7 @@ using EasyToEnter.ASP.ViewsModels.Applicant;
 using EasyToEnter.ASP.ViewsModels.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using EasyToEnter.ASP.Tools;
 
 namespace EasyToEnter.ASP.Controllers.Applicant
 {
@@ -304,25 +305,35 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 
             List<VariabilityViewModel> variabilityViewModelList = new();
 
-            int user = 2;
 
-            for (var i = 0; i < variabilityList.Count; i++)
-                variabilityViewModelList.Add(new VariabilityViewModel()
+            if (User != null)
+            {
+                Guid? sessionId = IdentityAssistant.SessionId(User);
+
+                if (sessionId != null)
                 {
-                    Id = variabilityList[i].Id,
-                    EntranceExams = variabilityList[i].EntranceExams,
-                    FocusUniversityId = variabilityList[i].FocusUniversityId,
-                    FormatId = variabilityList[i].FormatId,
-                    FormId = variabilityList[i].FormId,
-                    PaymentId = variabilityList[i].PaymentId,
-                    TrainingPeriod = variabilityList[i].TrainingPeriod,
-                    FocusUniversityModel = variabilityList[i].FocusUniversityModel,
-                    FormatModel = variabilityList[i].FormatModel,
-                    FormModel = variabilityList[i].FormModel,
-                    PaymentModel = variabilityList[i].PaymentModel,
-                    HistoryVariabilitys = variabilityList[i].HistoryVariabilitys,
-                    Favorites = variabilityList[i].FocusUniversityModel!.FocusUniversityFavoritess!.Any(fuf => fuf.PersonId == user)
-                });
+
+                    PersonModel person = _context.Session.Include(s => s.PersonModel).Single(s => s.Id == sessionId).PersonModel!;
+
+                    for (var i = 0; i < variabilityList.Count; i++)
+                        variabilityViewModelList.Add(new VariabilityViewModel()
+                        {
+                            Id = variabilityList[i].Id,
+                            EntranceExams = variabilityList[i].EntranceExams,
+                            FocusUniversityId = variabilityList[i].FocusUniversityId,
+                            FormatId = variabilityList[i].FormatId,
+                            FormId = variabilityList[i].FormId,
+                            PaymentId = variabilityList[i].PaymentId,
+                            TrainingPeriod = variabilityList[i].TrainingPeriod,
+                            FocusUniversityModel = variabilityList[i].FocusUniversityModel,
+                            FormatModel = variabilityList[i].FormatModel,
+                            FormModel = variabilityList[i].FormModel,
+                            PaymentModel = variabilityList[i].PaymentModel,
+                            HistoryVariabilitys = variabilityList[i].HistoryVariabilitys,
+                            Favorites = variabilityList[i].FocusUniversityModel!.FocusUniversityFavoritess!.Any(fuf => fuf.PersonId == person.Id)
+                        });
+                }
+            }
 
             return View(new VariabilitySelectionContainerViewModel(variabilityViewModelList, formSelectListItem, formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, accreditationSelectListItem, militaryDepartmentSelectListItem, dormitorySelectListItem, specializationSelectListItem, levelFocus));
         }

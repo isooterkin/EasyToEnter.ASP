@@ -69,7 +69,7 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
         [HttpPost]
         [Authorized]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout() // Сделать удаление ссесии!
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");

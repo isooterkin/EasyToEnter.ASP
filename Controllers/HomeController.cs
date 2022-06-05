@@ -14,7 +14,7 @@ namespace EasyToEnter.ASP.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            //SessionCheckAttribute sessionCheckAttribute = (SessionCheckAttribute) MethodBase.GetCurrentMethod()?
+            //SessionCheckAttribute sessionCheckAttribute = (SessionCheckAttribute)MethodBase.GetCurrentMethod()?
             //    .GetCustomAttribute(typeof(SessionCheckAttribute), true)!;
 
             return View(); 
