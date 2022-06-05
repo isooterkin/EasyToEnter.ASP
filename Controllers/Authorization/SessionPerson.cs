@@ -12,6 +12,8 @@ namespace EasyToEnter.ASP.Controllers.Authorization
         public readonly PersonModel? Person;
         public readonly bool IsAuthenticated = false;
 
+
+
         public SessionPerson(EasyToEnterDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             if (httpContextAccessor.HttpContext == null)

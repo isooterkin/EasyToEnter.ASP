@@ -10,6 +10,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 {
     public partial class ApplicantController
     {
+        [SessionCheck]
         public async Task<IActionResult> VariabilitySelection(
             [FromQuery(Name = "levelFocus")] int levelFocus,
             [FromQuery(Name = "form")] int? form,

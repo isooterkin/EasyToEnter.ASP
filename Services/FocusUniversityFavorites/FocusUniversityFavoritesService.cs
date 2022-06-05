@@ -1,31 +1,28 @@
 ﻿using EasyToEnter.ASP.Models.Models;
-using System.Text.Json;
-using Microsoft.AspNetCore.Http;
 using EasyToEnter.ASP.Data;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
-using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Controllers.Authorization;
 
 namespace EasyToEnter.ASP.Services.FocusUniversityFavorites
 {
     public class FocusUniversityFavoritesService: IFocusUniversityFavoritesService
     {
-        private readonly SessionPerson SessionPerson;
         private readonly EasyToEnterDbContext Context;
+        private readonly IHttpContextAccessor HttpContextAccessor;
 
 
 
-        public FocusUniversityFavoritesService(EasyToEnterDbContext context, SessionPerson sessionPerson)
+        public FocusUniversityFavoritesService(EasyToEnterDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             Context = context;
-            SessionPerson = sessionPerson;
+            HttpContextAccessor = httpContextAccessor;
         }
-        
 
-        //[Authorize]
+
+
         public async Task<bool> AddFavorites(int focusUniversityId)
         {
+            SessionPerson SessionPerson = new (Context, HttpContextAccessor);
+            
             if (SessionPerson.IsAuthenticated == false) return false;
 
             try
@@ -47,6 +44,8 @@ namespace EasyToEnter.ASP.Services.FocusUniversityFavorites
 
         public async Task<bool> DeleteFavorites(int focusUniversityId)
         {
+            SessionPerson SessionPerson = new(Context, HttpContextAccessor);
+
             if (SessionPerson.IsAuthenticated == false) return false;
 
             try
