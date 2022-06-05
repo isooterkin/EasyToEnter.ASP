@@ -305,6 +305,23 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 
             List<VariabilityViewModel> variabilityViewModelList = new();
 
+            for (var i = 0; i < variabilityList.Count; i++)
+                variabilityViewModelList.Add(new VariabilityViewModel()
+                {
+                    Id = variabilityList[i].Id,
+                    EntranceExams = variabilityList[i].EntranceExams,
+                    FocusUniversityId = variabilityList[i].FocusUniversityId,
+                    FormatId = variabilityList[i].FormatId,
+                    FormId = variabilityList[i].FormId,
+                    PaymentId = variabilityList[i].PaymentId,
+                    TrainingPeriod = variabilityList[i].TrainingPeriod,
+                    FocusUniversityModel = variabilityList[i].FocusUniversityModel,
+                    FormatModel = variabilityList[i].FormatModel,
+                    FormModel = variabilityList[i].FormModel,
+                    PaymentModel = variabilityList[i].PaymentModel,
+                    HistoryVariabilitys = variabilityList[i].HistoryVariabilitys
+                });
+
 
             if (User != null)
             {
@@ -312,45 +329,13 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 
                 if (sessionId != null)
                 {
-
                     PersonModel person = _context.Session.Include(s => s.PersonModel).Single(s => s.Id == sessionId).PersonModel!;
 
                     for (var i = 0; i < variabilityList.Count; i++)
-                        variabilityViewModelList.Add(new VariabilityViewModel()
-                        {
-                            Id = variabilityList[i].Id,
-                            EntranceExams = variabilityList[i].EntranceExams,
-                            FocusUniversityId = variabilityList[i].FocusUniversityId,
-                            FormatId = variabilityList[i].FormatId,
-                            FormId = variabilityList[i].FormId,
-                            PaymentId = variabilityList[i].PaymentId,
-                            TrainingPeriod = variabilityList[i].TrainingPeriod,
-                            FocusUniversityModel = variabilityList[i].FocusUniversityModel,
-                            FormatModel = variabilityList[i].FormatModel,
-                            FormModel = variabilityList[i].FormModel,
-                            PaymentModel = variabilityList[i].PaymentModel,
-                            HistoryVariabilitys = variabilityList[i].HistoryVariabilitys,
-                            Favorites = variabilityList[i].FocusUniversityModel!.FocusUniversityFavoritess!.Any(fuf => fuf.PersonId == person.Id)
-                        });
+                        variabilityViewModelList[i].Favorites = variabilityList[i].FocusUniversityModel!
+                            .FocusUniversityFavoritess!.Any(fuf => fuf.PersonId == person.Id);
                 }
             }
-            else
-                for (var i = 0; i < variabilityList.Count; i++)
-                    variabilityViewModelList.Add(new VariabilityViewModel()
-                    {
-                        Id = variabilityList[i].Id,
-                        EntranceExams = variabilityList[i].EntranceExams,
-                        FocusUniversityId = variabilityList[i].FocusUniversityId,
-                        FormatId = variabilityList[i].FormatId,
-                        FormId = variabilityList[i].FormId,
-                        PaymentId = variabilityList[i].PaymentId,
-                        TrainingPeriod = variabilityList[i].TrainingPeriod,
-                        FocusUniversityModel = variabilityList[i].FocusUniversityModel,
-                        FormatModel = variabilityList[i].FormatModel,
-                        FormModel = variabilityList[i].FormModel,
-                        PaymentModel = variabilityList[i].PaymentModel,
-                        HistoryVariabilitys = variabilityList[i].HistoryVariabilitys
-                    });
 
             return View(new VariabilitySelectionContainerViewModel(variabilityViewModelList, formSelectListItem, formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, accreditationSelectListItem, militaryDepartmentSelectListItem, dormitorySelectListItem, specializationSelectListItem, levelFocus));
         }
