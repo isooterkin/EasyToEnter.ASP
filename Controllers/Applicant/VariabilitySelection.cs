@@ -323,6 +323,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                     HistoryVariabilitys = variabilityList[i].HistoryVariabilitys
                 });
 
+            var a = User;
 
             if (User != null)
             {
@@ -330,11 +331,12 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 
                 if (sessionId != null)
                 {
-                    PersonModel person = _context.Session.Include(s => s.PersonModel).Single(s => s.Id == sessionId).PersonModel!;
+                    SessionModel? session = _context.Session.Include(s => s.PersonModel).SingleOrDefault(s => s.Id == sessionId);
 
-                    for (var i = 0; i < variabilityList.Count; i++)
-                        variabilityViewModelList[i].Favorites = variabilityList[i].FocusUniversityModel!
-                            .FocusUniversityFavoritess!.Any(fuf => fuf.PersonId == person.Id);
+                    if (session != null)
+                        for (var i = 0; i < variabilityList.Count; i++)
+                            variabilityViewModelList[i].Favorites = variabilityList[i].FocusUniversityModel!
+                                .FocusUniversityFavoritess!.Any(fuf => fuf.PersonId == session.PersonId);
                 }
             }
 
