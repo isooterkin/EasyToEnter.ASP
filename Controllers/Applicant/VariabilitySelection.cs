@@ -323,7 +323,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                     HistoryVariabilitys = variabilityList[i].HistoryVariabilitys
                 });
 
-            if (User.Id != null)
+            if (User.Id() != null)
             {
                 PersonModel person = _context.Session.Include(s => s.PersonModel).Single(s => s.Id == User.SessionId()).PersonModel!;
 
