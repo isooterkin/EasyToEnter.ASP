@@ -47,7 +47,11 @@
                     }
 
                     @*Значек "В избранное"*@
-                    <a class="col-auto m-0 p-0 ml-4 align-self-end" data-bs-placement="top" data-bs-toggle="tooltip" href="" @onclick:preventDefault @onclick="ChangeStatusFavorites">
+                    <a class="col-auto m-0 p-0 ml-4 align-self-end" 
+                        data-bs-placement="top" 
+                        data-bs-toggle="tooltip" 
+                        href="" @onclick:preventDefault @onclick="ChangeStatusFavorites">
+
                         @if (Model.Favorites)
                         {
                             <span class="fs-5 bi bi-heart-fill text-danger"/>
