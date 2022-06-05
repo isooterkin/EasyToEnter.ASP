@@ -2,6 +2,10 @@
 @using EasyToEnter.ASP.ViewsModels.Components;
 @using EasyToEnter.ASP.ViewsModels.Components.Maps;
 @using EasyToEnter.ASP.ViewsModels.Components.Path;
+@using EasyToEnter.ASP.ViewsModels.Applicant;
+@using System.Text.Json.Serialization;
+@using Newtonsoft.Json;
+
 
 @{
     ViewData["Title"] = "Вырианты обучения";
@@ -21,7 +25,13 @@
 
         @*Контейнер начало*@
         <div class="col-xl-8 col-md-12 order-xl-1 order-3">
-            <vc:variability-container data="@Model"/>
+            
+            @{
+                string ModelJson = JsonConvert.SerializeObject(Model.VariabilityViewModelList, Formatting.None, new JsonSerializerSettings(){ ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
+                List<VariabilityViewModel>? ModelNotJson = System.Text.Json.JsonSerializer.Deserialize<List<VariabilityViewModel>>(ModelJson);
+            }
+
+            <component type="typeof(VariabilitySelectionContainer)" render-mode="ServerPrerendered" param-Model="ModelNotJson"/>
         </div>
         @*Контейнер конец*@
 
