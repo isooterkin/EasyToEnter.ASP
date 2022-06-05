@@ -334,6 +334,23 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                         });
                 }
             }
+            else
+                for (var i = 0; i < variabilityList.Count; i++)
+                    variabilityViewModelList.Add(new VariabilityViewModel()
+                    {
+                        Id = variabilityList[i].Id,
+                        EntranceExams = variabilityList[i].EntranceExams,
+                        FocusUniversityId = variabilityList[i].FocusUniversityId,
+                        FormatId = variabilityList[i].FormatId,
+                        FormId = variabilityList[i].FormId,
+                        PaymentId = variabilityList[i].PaymentId,
+                        TrainingPeriod = variabilityList[i].TrainingPeriod,
+                        FocusUniversityModel = variabilityList[i].FocusUniversityModel,
+                        FormatModel = variabilityList[i].FormatModel,
+                        FormModel = variabilityList[i].FormModel,
+                        PaymentModel = variabilityList[i].PaymentModel,
+                        HistoryVariabilitys = variabilityList[i].HistoryVariabilitys
+                    });
 
             return View(new VariabilitySelectionContainerViewModel(variabilityViewModelList, formSelectListItem, formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, accreditationSelectListItem, militaryDepartmentSelectListItem, dormitorySelectListItem, specializationSelectListItem, levelFocus));
         }
