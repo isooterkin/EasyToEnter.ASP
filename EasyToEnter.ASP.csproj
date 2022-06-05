@@ -39,7 +39,6 @@
     <Folder Include="Controllers\Employee\" />
     <Folder Include="Controllers\EmployeeUniversity\" />
     <Folder Include="Migrations\" />
-    <Folder Include="wwwroot\theme\metronic8\assets\plugins\global\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
