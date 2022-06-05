@@ -323,21 +323,15 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                     HistoryVariabilitys = variabilityList[i].HistoryVariabilitys
                 });
 
-            var a = User;
+            Guid? sessionId = IdentityAssistant.SessionId(User);
 
-            if (User != null)
+            if (sessionId != null)
             {
-                Guid? sessionId = IdentityAssistant.SessionId(User);
+                PersonModel person = _context.Session.Include(s => s.PersonModel).Single(s => s.Id == sessionId).PersonModel!;
 
-                if (sessionId != null)
-                {
-                    SessionModel? session = _context.Session.Include(s => s.PersonModel).SingleOrDefault(s => s.Id == sessionId);
-
-                    if (session != null)
-                        for (var i = 0; i < variabilityList.Count; i++)
-                            variabilityViewModelList[i].Favorites = variabilityList[i].FocusUniversityModel!
-                                .FocusUniversityFavoritess!.Any(fuf => fuf.PersonId == session.PersonId);
-                }
+                for (var i = 0; i < variabilityList.Count; i++)
+                    variabilityViewModelList[i].Favorites = variabilityList[i].FocusUniversityModel!
+                        .FocusUniversityFavoritess!.Any(fuf => fuf.PersonId == person.Id);
             }
 
             return View(new VariabilitySelectionContainerViewModel(variabilityViewModelList, formSelectListItem, formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, accreditationSelectListItem, militaryDepartmentSelectListItem, dormitorySelectListItem, specializationSelectListItem, levelFocus));

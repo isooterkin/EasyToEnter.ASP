@@ -11,6 +11,7 @@ namespace EasyToEnter.ASP.Controllers.Authorization
         public readonly SessionModel? Session;
         public readonly PersonModel? Person;
         public readonly bool IsAuthenticated = false;
+        public readonly bool Error = false;
 
 
 
@@ -36,6 +37,8 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
                     httpContextAccessor.HttpContext
                         .SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                    Error = true;
                 }
                 else
                 {
@@ -48,6 +51,8 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
                         httpContextAccessor.HttpContext
                             .SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                        Error = true;
                     }
                     else
                     {

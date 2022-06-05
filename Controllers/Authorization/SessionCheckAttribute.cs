@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 // https://stackoverflow.com/questions/31464359/how-do-you-create-a-custom-authorizeattribute-in-asp-net-core
 // https://stackoverflow.com/questions/60943115/net-core-how-to-di-dbcontext-to-authrozationfilter
@@ -11,8 +13,13 @@ namespace EasyToEnter.ASP.Controllers.Authorization
     {
         public SessionPerson? SessionPerson;
 
-        public void OnAuthorization(AuthorizationFilterContext authorizationFilterContext) 
-            => SessionPerson = authorizationFilterContext.HttpContext.RequestServices
-            .GetRequiredService<SessionPerson>();
+        public void OnAuthorization(AuthorizationFilterContext authorizationFilterContext)
+        {
+            SessionPerson = authorizationFilterContext.HttpContext.RequestServices
+                .GetRequiredService<SessionPerson>();
+
+            if (SessionPerson.Error == true)
+                authorizationFilterContext.Result = new ChallengeResult(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
     }
 }
