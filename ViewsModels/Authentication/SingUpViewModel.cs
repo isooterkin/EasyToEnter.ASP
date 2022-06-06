@@ -12,12 +12,14 @@ namespace EasyToEnter.ASP.ViewsModels.Authentication
         [Required(ErrorMessage = "Укажите пароль.")]
         [Display(Name = "Пароль")]
         [JsonPropertyName(nameof(Password))]
+        [StringLength(int.MaxValue, MinimumLength = 8, ErrorMessage = "Длина пароля должна быть от 8 символов.")]
         public string Password { get; set; }
 
 
 
         [Required(ErrorMessage = "Укажите пароль.")]
         [Display(Name = "Пароль")]
+        [StringLength(int.MaxValue, MinimumLength = 8, ErrorMessage = "Длина пароля должна быть от 8 символов.")]
         [JsonPropertyName(nameof(PasswordRepeat))]
         public string PasswordRepeat { get; set; }
 

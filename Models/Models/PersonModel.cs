@@ -59,7 +59,6 @@ namespace EasyToEnter.ASP.Models.Models
 
 
         [Required(ErrorMessage = "Укажите пароль.")]
-        [StringLength(int.MaxValue, MinimumLength = 8, ErrorMessage = "Длина пароля должна быть от 8 символов.")]
         [Display(Name = "Пароль")]
         [JsonPropertyName(nameof(PasswordHash))]
         public string PasswordHash { get; set; }
