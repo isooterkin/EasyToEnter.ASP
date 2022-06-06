@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace EasyToEnter.ASP.Tools
+namespace EasyToEnter.ASP.Tools.Authorization
 {
     public static class IdentityAssistant
     {

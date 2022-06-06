@@ -1,4 +1,4 @@
-﻿using EasyToEnter.ASP.Controllers.Authorization;
+﻿using EasyToEnter.ASP.Tools.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace EasyToEnter.ASP.HostBuilders

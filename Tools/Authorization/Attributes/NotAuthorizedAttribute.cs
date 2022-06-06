@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace EasyToEnter.ASP.Controllers.Authorization
+namespace EasyToEnter.ASP.Tools.Authorization.Attributes
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
     public class NotAuthorizedAttribute : SessionCheckAttribute, IAuthorizationFilter
@@ -11,7 +11,7 @@ namespace EasyToEnter.ASP.Controllers.Authorization
             SessionPerson = authorizationFilterContext.HttpContext.RequestServices
                 .GetRequiredService<SessionPerson>();
 
-            if (SessionPerson.IsAuthenticated) 
+            if (SessionPerson.IsAuthenticated)
                 authorizationFilterContext.Result = new RedirectResult("/Home/Index");
         }
     }

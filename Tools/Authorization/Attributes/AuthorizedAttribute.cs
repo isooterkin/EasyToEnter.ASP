@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace EasyToEnter.ASP.Controllers.Authorization
+namespace EasyToEnter.ASP.Tools.Authorization.Attributes
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
     public class AuthorizedAttribute : SessionCheckAttribute, IAuthorizationFilter

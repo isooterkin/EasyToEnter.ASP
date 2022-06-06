@@ -1,6 +1,7 @@
 ﻿using EasyToEnter.ASP.Controllers.Authorization;
 using EasyToEnter.ASP.Models;
 using EasyToEnter.ASP.Tools;
+using EasyToEnter.ASP.Tools.Authorization.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ namespace EasyToEnter.ASP.Controllers
 {
     public class HomeController : Controller
     {
-        [SessionCheck()]
+        [SessionCheck]
         [AllowAnonymous]
         public IActionResult Index()
         {

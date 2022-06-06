@@ -4,7 +4,8 @@ using EasyToEnter.ASP.ViewsModels.Applicant;
 using EasyToEnter.ASP.ViewsModels.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using EasyToEnter.ASP.Tools;
+using EasyToEnter.ASP.Tools.Authorization;
+using EasyToEnter.ASP.Tools.Authorization.Attributes;
 
 namespace EasyToEnter.ASP.Controllers.Applicant
 {

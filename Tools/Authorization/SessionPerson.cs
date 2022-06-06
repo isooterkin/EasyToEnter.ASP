@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
-namespace EasyToEnter.ASP.Controllers.Authorization
+namespace EasyToEnter.ASP.Tools.Authorization
 {
     public class SessionPerson
     {

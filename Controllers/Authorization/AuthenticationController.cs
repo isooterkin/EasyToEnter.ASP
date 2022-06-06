@@ -1,6 +1,8 @@
 ﻿using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models;
 using EasyToEnter.ASP.Models.Models;
+using EasyToEnter.ASP.Tools.Authorization;
+using EasyToEnter.ASP.Tools.Authorization.Attributes;
 using EasyToEnter.ASP.ViewsModels.Authentication;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -10,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Claims;
 using static BCrypt.Net.BCrypt;
-using static EasyToEnter.ASP.Tools.IdentityAssistant;
 
 namespace EasyToEnter.ASP.Controllers.Authorization
 {

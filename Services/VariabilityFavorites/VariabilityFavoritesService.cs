@@ -1,6 +1,6 @@
 ﻿using EasyToEnter.ASP.Models.Models;
 using EasyToEnter.ASP.Data;
-using EasyToEnter.ASP.Controllers.Authorization;
+using EasyToEnter.ASP.Tools.Authorization;
 
 namespace EasyToEnter.ASP.Services.VariabilityFavorites
 {
