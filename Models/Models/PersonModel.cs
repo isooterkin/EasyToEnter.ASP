@@ -51,6 +51,7 @@ namespace EasyToEnter.ASP.Models.Models
 
 
         [Required(ErrorMessage = "Укажите логин.")]
+        [StringLength(50, MinimumLength = 4, ErrorMessage = "Длина логина должна быть от 4 до 50 символов.")]
         [Display(Name = "Логин")]
         [JsonPropertyName(nameof(Login))]
         public string Login { get; set; }
@@ -58,6 +59,7 @@ namespace EasyToEnter.ASP.Models.Models
 
 
         [Required(ErrorMessage = "Укажите пароль.")]
+        [StringLength(int.MaxValue, MinimumLength = 8, ErrorMessage = "Длина пароля должна быть от 8 символов.")]
         [Display(Name = "Пароль")]
         [JsonPropertyName(nameof(PasswordHash))]
         public string PasswordHash { get; set; }

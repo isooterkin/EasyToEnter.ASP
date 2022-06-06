@@ -14,7 +14,7 @@ namespace EasyToEnter.ASP.Tools
             return new HistoryVariabilityModel 
             {
                 Year = DateTime.Now.Year + 1,
-                Tuition = (int) (historyVariabilityList.Average(hv => hv.Tuition) * 1.1),
+                Tuition = (int) (historyVariabilityList.Average(hv => hv.Tuition) * 0.8),
                 NumberSeats = (int) (historyVariabilityList.Average(hv => hv.NumberSeats) * 1.1),
                 PassingGrade = (int) (historyVariabilityList.Average(hv => hv.PassingGrade) * 1.1)
             };
