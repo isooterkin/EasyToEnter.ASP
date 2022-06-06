@@ -7,25 +7,12 @@ using System.Text.Json.Serialization;
 namespace EasyToEnter.ASP.ViewsModels.Authentication
 {
     [Display(Name = "Форма регистрации")]
-    public class SingUpViewModel: PersonModel
+    public class SingUpViewModel: SingInViewModel
     {
-        [Required(ErrorMessage = "Укажите пароль.")]
-        [Display(Name = "Пароль")]
-        [JsonPropertyName(nameof(Password))]
-        [StringLength(int.MaxValue, MinimumLength = 8, ErrorMessage = "Длина пароля должна быть от 8 символов.")]
-        public string Password { get; set; }
-
-
-
         [Required(ErrorMessage = "Укажите пароль.")]
         [Display(Name = "Пароль")]
         [StringLength(int.MaxValue, MinimumLength = 8, ErrorMessage = "Длина пароля должна быть от 8 символов.")]
         [JsonPropertyName(nameof(PasswordRepeat))]
         public string PasswordRepeat { get; set; }
-
-
-
-        public new int? Id { get; set; }
-        public new int? PasswordHash { get; set; }
     }
 }
