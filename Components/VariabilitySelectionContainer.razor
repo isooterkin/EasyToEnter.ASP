@@ -1,11 +1,10 @@
 ﻿@*Библиотеки*@
 @using static EasyToEnter.ASP.Tools.StringConverting
-@using EasyToEnter.ASP.Services.Discipline;
 @using EasyToEnter.ASP.ViewsModels.Applicant;
 @using Microsoft.AspNetCore.Http
 
 @*Api*@
-@inject EasyToEnter.ASP.Services.FocusUniversityFavorites.IFocusUniversityFavoritesService FocusUniversityFavoritesService
+@inject EasyToEnter.ASP.Services.VariabilityFavorites.IVariabilityFavoritesService VariabilityFavoritesService;
 
 @for(var i = 0; i < Model.Count; i++)
 {
@@ -124,13 +123,13 @@
     {
         if (variability.Favorites)
         {
-            var resultDelete = await FocusUniversityFavoritesService.DeleteFavorites(variability.FocusUniversityId);
+            var resultDelete = await VariabilityFavoritesService.DeleteFavorites(variability.FocusUniversityId);
 
             if (resultDelete == true) variability.Favorites = false;
         }
         else 
         {
-            var resultAdd = await FocusUniversityFavoritesService.AddFavorites(variability.FocusUniversityId);
+            var resultAdd = await VariabilityFavoritesService.AddFavorites(variability.FocusUniversityId);
 
             if (resultAdd == true) variability.Favorites = true;
         }

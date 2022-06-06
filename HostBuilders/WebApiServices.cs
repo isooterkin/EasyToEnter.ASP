@@ -1,5 +1,5 @@
 ﻿using EasyToEnter.ASP.Services.Discipline;
-using EasyToEnter.ASP.Services.FocusUniversityFavorites;
+using EasyToEnter.ASP.Services.VariabilityFavorites;
 
 namespace EasyToEnter.ASP.HostBuilders
 {
@@ -10,7 +10,7 @@ namespace EasyToEnter.ASP.HostBuilders
             return host.ConfigureServices((context, services) =>
             {
                 services.AddScoped<IDisciplineService, DisciplineService>();
-                services.AddScoped<IFocusUniversityFavoritesService, FocusUniversityFavoritesService>();
+                services.AddScoped<IVariabilityFavoritesService, VariabilityFavoritesService>();
             });
         }
     }

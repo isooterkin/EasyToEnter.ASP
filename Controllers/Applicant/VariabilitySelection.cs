@@ -36,8 +36,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                 .Include(v => v.FormatModel)
                 .Include(v => v.PaymentModel)
                 .Include(v => v.HistoryVariabilitys)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.FocusUniversityFavoritess)
+                .Include(v => v.VariabilityFavoritess)
                 .Include(v => v.FocusUniversityModel)
                     .ThenInclude(fu => fu!.LevelFocusModel)
                         .ThenInclude(lf => lf!.LevelModel)
@@ -325,11 +324,13 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 
             if (User.Id() != null)
             {
-                PersonModel person = _context.Session.Include(s => s.PersonModel).Single(s => s.Id == User.SessionId()).PersonModel!;
+                PersonModel person = _context.Session
+                    .Include(s => s.PersonModel)
+                    .Single(s => s.Id == User.SessionId()).PersonModel!;
 
                 for (var i = 0; i < variabilityList.Count; i++)
-                    variabilityViewModelList[i].Favorites = variabilityList[i].FocusUniversityModel!
-                        .FocusUniversityFavoritess!.Any(fuf => fuf.PersonId == person.Id);
+                    variabilityViewModelList[i].Favorites = variabilityList[i].VariabilityFavoritess!
+                        .Any(fuf => fuf.PersonId == person.Id);
             }
 
             return View(new VariabilitySelectionContainerViewModel(variabilityViewModelList, formSelectListItem, formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, accreditationSelectListItem, militaryDepartmentSelectListItem, dormitorySelectListItem, specializationSelectListItem, levelFocus));

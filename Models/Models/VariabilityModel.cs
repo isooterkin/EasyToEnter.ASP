@@ -76,6 +76,12 @@ namespace EasyToEnter.ASP.Models.Models
 
 
 
+        [Display(Name = "Избранные вариативности")]
+        [JsonPropertyName(nameof(VariabilityFavoritess))]
+        public List<VariabilityFavoritesModel>? VariabilityFavoritess { get; set; }
+
+
+
         [NotMapped]
         [Display(Name = "История за текущий год")]
         [JsonPropertyName("YearHistoryVariability")]

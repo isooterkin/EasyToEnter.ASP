@@ -117,7 +117,7 @@ namespace EasyToEnter.ASP.Data
         // Таблица "Сессия"
         public DbSet<SessionModel> Session { get; set; }
 
-        // Таблица "Направленность ВУЗа - Избранная"
-        public DbSet<FocusUniversityFavoritesModel> FocusUniversityFavorites { get; set; }
+        // Таблица "Избранная вариативность"
+        public DbSet<VariabilityFavoritesModel> VariabilityFavorites { get; set; }
     }
 }

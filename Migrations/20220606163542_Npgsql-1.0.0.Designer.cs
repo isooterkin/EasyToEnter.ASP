@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EasyToEnter.ASP.Migrations
 {
     [DbContext(typeof(EasyToEnterDbContext))]
-    [Migration("20220603132657_Npgsql-1.0.4")]
-    partial class Npgsql104
+    [Migration("20220606163542_Npgsql-1.0.0")]
+    partial class Npgsql100
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -530,23 +530,20 @@ namespace EasyToEnter.ASP.Migrations
                         .HasColumnType("date");
 
                     b.Property<string>("EmailAddress")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Login")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("MiddleName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
@@ -554,13 +551,15 @@ namespace EasyToEnter.ASP.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Login")
+                        .IsUnique();
 
                     b.HasIndex("RoleId");
 
@@ -719,10 +718,7 @@ namespace EasyToEnter.ASP.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<int>("LifeSpan")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("LifeSpan"));
 
                     b.Property<int>("PersonId")
                         .HasColumnType("integer");
@@ -924,6 +920,30 @@ namespace EasyToEnter.ASP.Migrations
                         .IsUnique();
 
                     b.ToTable("University");
+                });
+
+            modelBuilder.Entity("EasyToEnter.ASP.Models.Models.VariabilityFavoritesModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("VariabilityId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("VariabilityId", "PersonId")
+                        .IsUnique();
+
+                    b.ToTable("VariabilityFavorites");
                 });
 
             modelBuilder.Entity("EasyToEnter.ASP.Models.Models.VariabilityModel", b =>
@@ -1266,6 +1286,25 @@ namespace EasyToEnter.ASP.Migrations
                     b.Navigation("AddressModel");
                 });
 
+            modelBuilder.Entity("EasyToEnter.ASP.Models.Models.VariabilityFavoritesModel", b =>
+                {
+                    b.HasOne("EasyToEnter.ASP.Models.Models.PersonModel", "PersonModel")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EasyToEnter.ASP.Models.Models.VariabilityModel", "VariabilityModel")
+                        .WithMany("VariabilityFavoritess")
+                        .HasForeignKey("VariabilityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonModel");
+
+                    b.Navigation("VariabilityModel");
+                });
+
             modelBuilder.Entity("EasyToEnter.ASP.Models.Models.VariabilityModel", b =>
                 {
                     b.HasOne("EasyToEnter.ASP.Models.Models.FocusUniversityModel", "FocusUniversityModel")
@@ -1373,6 +1412,8 @@ namespace EasyToEnter.ASP.Migrations
             modelBuilder.Entity("EasyToEnter.ASP.Models.Models.VariabilityModel", b =>
                 {
                     b.Navigation("HistoryVariabilitys");
+
+                    b.Navigation("VariabilityFavoritess");
                 });
 #pragma warning restore 612, 618
         }

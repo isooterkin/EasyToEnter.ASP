@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -122,6 +123,20 @@ namespace EasyToEnter.ASP.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Role",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Role", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Science",
                 columns: table => new
                 {
@@ -197,6 +212,33 @@ namespace EasyToEnter.ASP.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Person",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    LastName = table.Column<string>(type: "text", nullable: true),
+                    FirstName = table.Column<string>(type: "text", nullable: true),
+                    MiddleName = table.Column<string>(type: "text", nullable: true),
+                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    EmailAddress = table.Column<string>(type: "text", nullable: true),
+                    Login = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: false),
+                    RoleId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Person", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Person_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Group",
                 columns: table => new
                 {
@@ -260,6 +302,25 @@ namespace EasyToEnter.ASP.Migrations
                         name: "FK_Address_City_CityId",
                         column: x => x.CityId,
                         principalTable: "City",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Session",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    LifeSpan = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Session", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Session_Person_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Person",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -579,6 +640,7 @@ namespace EasyToEnter.ASP.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TrainingPeriod = table.Column<int>(type: "integer", nullable: false),
                     EntranceExams = table.Column<bool>(type: "boolean", nullable: false),
                     FormId = table.Column<int>(type: "integer", nullable: false),
                     PaymentId = table.Column<int>(type: "integer", nullable: false),
@@ -658,6 +720,32 @@ namespace EasyToEnter.ASP.Migrations
                     table.PrimaryKey("PK_HistoryVariability", x => x.Id);
                     table.ForeignKey(
                         name: "FK_HistoryVariability_Variability_VariabilityId",
+                        column: x => x.VariabilityId,
+                        principalTable: "Variability",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VariabilityFavorites",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    VariabilityId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VariabilityFavorites", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VariabilityFavorites_Person_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Person",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_VariabilityFavorites_Variability_VariabilityId",
                         column: x => x.VariabilityId,
                         principalTable: "Variability",
                         principalColumn: "Id",
@@ -836,6 +924,17 @@ namespace EasyToEnter.ASP.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Person_Login",
+                table: "Person",
+                column: "Login",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Person_RoleId",
+                table: "Person",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PhoneNumberUniversity_UniversityId_PhoneNumber",
                 table: "PhoneNumberUniversity",
                 columns: new[] { "UniversityId", "PhoneNumber" },
@@ -870,10 +969,21 @@ namespace EasyToEnter.ASP.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Role_Name",
+                table: "Role",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Science_Name",
                 table: "Science",
                 column: "Name",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Session_PersonId",
+                table: "Session",
+                column: "PersonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Specialization_Name",
@@ -962,6 +1072,17 @@ namespace EasyToEnter.ASP.Migrations
                 name: "IX_Variability_PaymentId",
                 table: "Variability",
                 column: "PaymentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VariabilityFavorites_PersonId",
+                table: "VariabilityFavorites",
+                column: "PersonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VariabilityFavorites_VariabilityId_PersonId",
+                table: "VariabilityFavorites",
+                columns: new[] { "VariabilityId", "PersonId" },
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -985,19 +1106,22 @@ namespace EasyToEnter.ASP.Migrations
                 name: "ProfessionFocus");
 
             migrationBuilder.DropTable(
+                name: "Session");
+
+            migrationBuilder.DropTable(
                 name: "SpecializationUniversity");
 
             migrationBuilder.DropTable(
                 name: "SubjectReplacement");
 
             migrationBuilder.DropTable(
+                name: "VariabilityFavorites");
+
+            migrationBuilder.DropTable(
                 name: "Area");
 
             migrationBuilder.DropTable(
                 name: "Discipline");
-
-            migrationBuilder.DropTable(
-                name: "Variability");
 
             migrationBuilder.DropTable(
                 name: "Profession");
@@ -1009,6 +1133,24 @@ namespace EasyToEnter.ASP.Migrations
                 name: "SubjectFocusUniversity");
 
             migrationBuilder.DropTable(
+                name: "Person");
+
+            migrationBuilder.DropTable(
+                name: "Variability");
+
+            migrationBuilder.DropTable(
+                name: "TypeProfession");
+
+            migrationBuilder.DropTable(
+                name: "Subject");
+
+            migrationBuilder.DropTable(
+                name: "Role");
+
+            migrationBuilder.DropTable(
+                name: "FocusUniversity");
+
+            migrationBuilder.DropTable(
                 name: "Form");
 
             migrationBuilder.DropTable(
@@ -1016,15 +1158,6 @@ namespace EasyToEnter.ASP.Migrations
 
             migrationBuilder.DropTable(
                 name: "Payment");
-
-            migrationBuilder.DropTable(
-                name: "TypeProfession");
-
-            migrationBuilder.DropTable(
-                name: "FocusUniversity");
-
-            migrationBuilder.DropTable(
-                name: "Subject");
 
             migrationBuilder.DropTable(
                 name: "LevelFocus");
