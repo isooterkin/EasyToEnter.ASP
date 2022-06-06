@@ -1,11 +1,8 @@
-﻿using EasyToEnter.ASP.Controllers.Authorization;
-using EasyToEnter.ASP.Models;
-using EasyToEnter.ASP.Tools;
+﻿using EasyToEnter.ASP.Models;
 using EasyToEnter.ASP.Tools.Authorization.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Reflection;
 
 namespace EasyToEnter.ASP.Controllers
 {
