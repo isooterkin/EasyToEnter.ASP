@@ -1,4 +1,5 @@
 ﻿using EasyToEnter.ASP.Models.Dependence;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
@@ -6,6 +7,7 @@ using System.Text.Json.Serialization;
 namespace EasyToEnter.ASP.Models.Models
 {
     [Display(Name = "ВУЗ")]
+    // [Index(nameof(AddressId), nameof(Abbreviation), nameof(Name), IsUnique = true)]
     public class UniversityModel: ModelWithIdNameDescription
     {
         [Required(ErrorMessage = "Укажите aббревиатурe.")]
