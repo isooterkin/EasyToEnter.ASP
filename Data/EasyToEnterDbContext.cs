@@ -129,5 +129,8 @@ namespace EasyToEnter.ASP.Data
 
         // Таблица "Вакансия"
         public DbSet<VacancyModel> Vacancy { get; set; }
+
+        // Таблица "Вакансия - Профессия"
+        public DbSet<ProfessionVacancyModel> ProfessionVacancy { get; set; }
     }
 }
