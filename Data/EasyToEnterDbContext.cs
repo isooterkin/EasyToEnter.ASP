@@ -123,5 +123,8 @@ namespace EasyToEnter.ASP.Data
 
         // Таблица "Организация"
         public DbSet<OrganizationModel> Organization { get; set; }
+
+        // Таблица "Сотрудник организации"
+        public DbSet<EmployerOrganizationModel> EmployerOrganization { get; set; }
     }
 }
