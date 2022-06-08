@@ -117,5 +117,8 @@ namespace EasyToEnter.ASP.Data
 
         // Таблица "Сотрудник ВУЗа"
         public DbSet<EmployeeUniversityModel> EmployeeUniversity { get; set; }
+
+        // Таблица "Избранный ВУЗ"
+        public DbSet<UniversityFavoritesModel> UniversityFavorites { get; set; }
     }
 }
