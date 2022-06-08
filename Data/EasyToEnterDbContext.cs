@@ -10,11 +10,6 @@ namespace EasyToEnter.ASP.Data
         // Конструктор
         public EasyToEnterDbContext(DbContextOptions options) : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-
-        }
-
         // Таблица "Уровень"
         public DbSet<LevelModel> Level { get; set; }
 
