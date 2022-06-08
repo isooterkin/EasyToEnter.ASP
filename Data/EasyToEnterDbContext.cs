@@ -120,5 +120,8 @@ namespace EasyToEnter.ASP.Data
 
         // Таблица "Избранный ВУЗ"
         public DbSet<UniversityFavoritesModel> UniversityFavorites { get; set; }
+
+        // Таблица "Организация"
+        public DbSet<OrganizationModel> Organization { get; set; }
     }
 }
