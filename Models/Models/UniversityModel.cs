@@ -7,7 +7,8 @@ using System.Text.Json.Serialization;
 namespace EasyToEnter.ASP.Models.Models
 {
     [Display(Name = "ВУЗ")]
-    // [Index(nameof(AddressId), nameof(Abbreviation), nameof(Name), IsUnique = true)]
+    // [Index(nameof(Abbreviation) IsUnique = true)]
+    // [Index(nameof(AddressId), IsUnique = true)]
     public class UniversityModel: ModelWithIdNameDescription
     {
         [Required(ErrorMessage = "Укажите aббревиатурe.")]
