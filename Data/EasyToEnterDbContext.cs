@@ -119,5 +119,8 @@ namespace EasyToEnter.ASP.Data
 
         // Таблица "Избранная вариативность"
         public DbSet<VariabilityFavoritesModel> VariabilityFavorites { get; set; }
+
+        // Таблица "Сотрудник ВУЗа"
+        public DbSet<EmployeeUniversityModel> EmployeeUniversity { get; set; }
     }
 }
