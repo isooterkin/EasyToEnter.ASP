@@ -1,5 +1,172 @@
-﻿@model List<EasyToEnter.ASP.Models.Models.VariabilityModel>;
+﻿@model List<EasyToEnter.ASP.Models.Models.VariabilityFavoritesModel>;
+@using static EasyToEnter.ASP.Tools.Colors;
 
 @{
     ViewData["Title"] = "Сравнение вариативностей";
 }
+
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    @for (var i = 0; i < Model.Count; i++)
+    {
+        <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 2px solid @ColorList[i];">
+            <a class="row p-2 text-decoration-none text-black" href="/Applicant/Variability?variability=@Model[i].VariabilityId">
+                <div class="col text-start text-truncate">
+                    @Model[i].VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name
+                </div>
+                <div class="col-auto text-end">
+                    @Model[i].VariabilityModel!.FocusUniversityModel!.UniversityModel!.Abbreviation
+                </div>
+            </a>
+        </div>
+    }
+</div>
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    <canvas id="variabilityChartTuition"></canvas>
+</div>
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    <canvas id="variabilityChartNumberSeats"></canvas>
+</div>
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    <canvas id="variabilityChartPassingGrade"></canvas>
+</div>
+
+<script src="https://npmcdn.com/chart.js@latest/dist/chart.min.js"></script>
+
+<script>
+
+    @{
+        // История за последнии 5 лет
+
+        string labels = "";
+
+        var years = Model.SelectMany(a => a.VariabilityModel!.HistoryVariabilitys!)
+            .OrderBy(c => c.Year)
+            .Select(b => b.Year)
+            .Distinct()
+            .ToList();
+
+        for (var i = 0; i < years.Count; i++)
+        {
+            labels += $"{years[i]}, ";
+        }
+    }
+
+    var variabilityTuition = document.getElementById("variabilityChartTuition");
+    var variabilityNumberSeats = document.getElementById("variabilityChartNumberSeats");
+    var variabilityPassingGrade = document.getElementById("variabilityChartPassingGrade");
+
+    var variabilityChartTuition = new Chart(variabilityTuition, {
+        type: "line",
+        data: {
+            labels: [@labels],
+            datasets: [
+                @for (var i = 0; i < Model.Count; i++)
+                {
+                    string data = "";
+
+                    var history = Model[i].VariabilityModel!.HistoryVariabilitys!.OrderByDescending(hv => hv.Year).ToList();
+
+                    for (var y = 0; y < history.Count; y++)
+                    {
+                        data += "{x:" + history[y].Year.ToString() + ", y:" + history[y].Tuition.ToString() + "}, ";
+                    }
+
+                    @:{
+                        @:label: '@Model[i].VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name',
+                        @:data: [@data],
+                        @:borderColor: '@ColorList[i]'
+                    @:},
+                }
+            ]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Стоимость обучения (рублей в год)'
+                }
+            }
+        }
+    });
+
+    var variabilityChartNumberSeats = new Chart(variabilityNumberSeats, {
+            type: "line",
+            data: {
+                labels: [@labels],
+                datasets: [
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+                        string data = "";
+
+                        var history = Model[i].VariabilityModel!.HistoryVariabilitys!.OrderByDescending(hv => hv.Year).ToList();
+
+                        for (var y = 0; y < history.Count; y++)
+                        {
+                            data += "{x:" + history[y].Year.ToString() + ", y:" + history[y].NumberSeats.ToString() + "}, ";
+                        }
+
+                        @:{
+                            @:label: '@Model[i].VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name',
+                            @:data: [@data],
+                            @:borderColor: '@ColorList[i]'
+                        @:},
+                    }
+                ]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Количество мест'
+                    }
+                }
+            }
+        });
+
+    var variabilityChartPassingGrade = new Chart(variabilityPassingGrade, {
+            type: "line",
+            data: {
+                labels: [@labels],
+                datasets: [
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+                        string data = "";
+
+                        var history = Model[i].VariabilityModel!.HistoryVariabilitys!.OrderByDescending(hv => hv.Year).ToList();
+
+                        for (var y = 0; y < history.Count; y++)
+                        {
+                            data += "{x:" + history[y].Year.ToString() + ", y:" + history[y].PassingGrade.ToString() + "}, ";
+                        }
+
+                        @:{
+                            @:label: '@Model[i].VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name',
+                            @:data: [@data],
+                            @:borderColor: '@ColorList[i]'
+                        @:},
+                    }
+                ]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Проходной балл'
+                    }
+                }
+            }
+        });
+</script>
