@@ -1,4 +1,5 @@
 ﻿@model List<EasyToEnter.ASP.Models.Models.VariabilityFavoritesModel>;
+@using EasyToEnter.ASP.Models.Models;
 @using static EasyToEnter.ASP.Tools.Colors;
 
 @{
@@ -9,8 +10,8 @@
 <div class="bg-white rounded-20 shadow p-1 mb-3">
     @for (var i = 0; i < Model.Count; i++)
     {
-        <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 2px solid @ColorList[i];">
-            <a class="row p-2 text-decoration-none text-black" href="/Applicant/Variability?variability=@Model[i].VariabilityId">
+        <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 3px solid @ColorList[i];">
+            <a class="row px-2 py-1 text-decoration-none text-black" href="/Applicant/Variability?variability=@Model[i].VariabilityId">
                 <div class="col text-start text-truncate">
                     @Model[i].VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name
                 </div>
@@ -23,19 +24,90 @@
 </div>
 
 <div class="bg-white rounded-20 shadow p-1 mb-3">
-    <canvas id="variabilityChartTuition"></canvas>
+    <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVariabilityTuition">
+        <div class="col btn">
+            <div class="text-center">
+                История стоимости обучения <small class="text-muted">(показать)</small>
+            </div>
+        </div>
+    </a>
+    <div class="collapse" id="collapseVariabilityTuition">
+        <canvas id="variabilityChartTuition"></canvas>
+    </div>
 </div>
 
 <div class="bg-white rounded-20 shadow p-1 mb-3">
-    <canvas id="variabilityChartNumberSeats"></canvas>
+    <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVariabilityNumberSeats">
+        <div class="col btn">
+            <div class="text-center">
+                История количества мест <small class="text-muted">(показать)</small>
+            </div>
+        </div>
+    </a>
+    <div class="collapse" id="collapseVariabilityNumberSeats">
+        <canvas id="variabilityChartNumberSeats"></canvas>
+    </div>
 </div>
 
 <div class="bg-white rounded-20 shadow p-1 mb-3">
-    <canvas id="variabilityChartPassingGrade"></canvas>
+    <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVariabilityPassingGrade">
+        <div class="col btn">
+            <div class="text-center">
+                История проходного балла <small class="text-muted">(показать)</small>
+            </div>
+        </div>
+    </a>
+    <div class="collapse" id="collapseVariabilityPassingGrade">
+        <canvas id="variabilityChartPassingGrade"></canvas>
+    </div>
+</div>
+
+@{
+    List<DisciplineModel> disciplineList = Model
+        .SelectMany(vf => vf.VariabilityModel!.FocusUniversityModel!.DisciplineFocusUniversitys!)
+        .Select(dfu => dfu.DisciplineModel!)
+        .Distinct()
+        .ToList();
+}
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+
+    <div class="col text-center my-2">
+        Сравнение дисциплин
+    </div>
+
+    @for (var i = 0; i < disciplineList.Count; i++)
+    {
+        <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
+            <div class="row px-2 py-1 justify-content-center align-items-center">
+                <div class="col text-start text-truncate">
+                    @disciplineList[i].Name
+                </div>
+
+                @for (var j = 0; j < Model.Count; j++)
+                {
+                    var disciplineFocusUniversityList = Model[j].VariabilityModel!.FocusUniversityModel!.DisciplineFocusUniversitys!;
+
+                    var data = disciplineFocusUniversityList.SingleOrDefault(d => d.DisciplineModel!.Id == disciplineList[i].Id);
+
+                    if (data != null)
+                    {
+                        <div class="col-auto fw-bold text-end rounded-circle p-0 mr-2 d-flex justify-content-center align-items-center" style="background-color: @ColorList[j]; width: 40px; height: 40px;">
+                            @data.DisciplineCredit <small class="text-black fw-bold"> з.е.</small>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-auto text-end rounded-circle p-0 mr-2" style="width: 40px; height: 40px">
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    }
 </div>
 
 <script src="https://npmcdn.com/chart.js@latest/dist/chart.min.js"></script>
-
 <script>
 
     @{
