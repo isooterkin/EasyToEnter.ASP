@@ -1,5 +1,4 @@
-﻿using EasyToEnter.ASP.Controllers.Authorization;
-using EasyToEnter.ASP.Models.Models;
+﻿using EasyToEnter.ASP.Models.Models;
 using EasyToEnter.ASP.ViewsModels.Applicant;
 using EasyToEnter.ASP.ViewsModels.Components;
 using Microsoft.AspNetCore.Mvc;

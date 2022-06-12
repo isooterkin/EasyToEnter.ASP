@@ -1,0 +1,110 @@
+﻿@model EasyToEnter.ASP.ViewsModels.Account.AccountViewModel;
+
+@using EasyToEnter.ASP.Models.Models;
+
+@{
+    ViewData["Title"] = "Профиль";
+}
+
+<div class="bg-white rounded-20 shadow p-2 mb-3">
+    <div class="col btn">
+        <div class="text-start">
+            Профиль <small class="text-muted">(редактировать)</small>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-20 shadow p-2 mb-3">
+    @if (Model.VariabilityFavoritesList.Any())
+    {
+        <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVariability">
+            <div class="col btn">
+                <div class="text-start">
+                    Избранные вариативности <small class="text-muted">(@Model.VariabilityFavoritesList.Count)</small>
+                </div>
+            </div>
+        </a>
+        <div class="collapse" id="collapseVariability">
+            <div class="row mt-2">
+                <div class="container">
+                    @for (var i = 0; i < Model.VariabilityFavoritesList.Count; i++)
+                    {
+                        <div class="rounded-20 shadow-sm bg-white mb-2 px-2" style="border: 1px solid #e6e6e6;">
+                            <a class="row p-2 text-decoration-none text-black" href="/Applicant/Variability?variability=@Model.VariabilityFavoritesList[i].VariabilityId">
+                                <div class="col text-start text-truncate">
+                                    @Model.VariabilityFavoritesList[i].VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name
+                                </div>
+                                <div class="col-auto text-end">
+                                    @Model.VariabilityFavoritesList[i].VariabilityModel!.FocusUniversityModel!.UniversityModel!.Abbreviation
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+                    <div class="rounded-20 shadow-sm bg-white mb-2 px-2" style="border: 1px solid #e6e6e6;">
+                        <a class="row p-2 text-decoration-none text-black" href="/Applicant/ComparisonVariability">
+                            <div class="col text-center text-truncate">
+                                Сравнить
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col btn">
+            <div class="text-start">
+                Избранные вариативности <small class="text-muted">(нет)</small>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="bg-white rounded-20 shadow p-2 mb-3">
+    @if (Model.UniversityFavoritesList.Any())
+    {
+        <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseUniversity">
+            <div class="col btn">
+                <div class="text-start">
+                    Избранные ВУЗы <small class="text-muted">(@Model.UniversityFavoritesList.Count)</small>
+                </div>
+            </div>
+        </a>
+        <div class="collapse" id="collapseUniversity">
+            <div class="row mt-2">
+                <div class="container">
+                    @for (var i = 0; i < Model.UniversityFavoritesList.Count; i++)
+                    {
+                        <div class="rounded-20 shadow-sm bg-white mb-2 px-2" style="border: 1px solid #e6e6e6;">
+                            <a class="row p-2 text-decoration-none text-black" href="/Applicant/University?university=@Model.UniversityFavoritesList[i].UniversityId">
+                                <div class="col text-start text-truncate">
+                                    @Model.UniversityFavoritesList[i].UniversityModel!.Name
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+                    <div class="rounded-20 shadow-sm bg-white mb-2 px-2" style="border: 1px solid #e6e6e6;">
+                        <a class="row p-2 text-decoration-none text-black" href="/Applicant/ComparisonUniversity">
+                            <div class="col text-center text-truncate">
+                                Сравнить
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col btn">
+            <div class="text-start">
+                Избранные ВУЗЫ <small class="text-muted">(нет)</small>
+            </div>
+        </div>
+    }
+</div>

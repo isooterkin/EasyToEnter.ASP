@@ -73,5 +73,17 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Роль")]
         [JsonPropertyName(nameof(RoleModel))]
         public RoleModel? RoleModel { get; set; }
+
+
+
+        [Display(Name = "Избранные вариативности")]
+        [JsonPropertyName("VariabilityFavoritess")]
+        public List<VariabilityFavoritesModel>? VariabilityFavoritess { get; set; }
+
+
+
+        [Display(Name = "Избранные ВУЗы")]
+        [JsonPropertyName("UniversityFavoritess")]
+        public List<UniversityFavoritesModel>? UniversityFavoritess { get; set; }
     }
 }

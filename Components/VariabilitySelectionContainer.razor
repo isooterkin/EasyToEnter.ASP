@@ -123,13 +123,13 @@
     {
         if (variability.Favorites)
         {
-            var resultDelete = await VariabilityFavoritesService.DeleteFavorites(variability.FocusUniversityId);
+            var resultDelete = await VariabilityFavoritesService.DeleteFavorites(variability.Id);
 
             if (resultDelete == true) variability.Favorites = false;
         }
         else 
         {
-            var resultAdd = await VariabilityFavoritesService.AddFavorites(variability.FocusUniversityId);
+            var resultAdd = await VariabilityFavoritesService.AddFavorites(variability.Id);
 
             if (resultAdd == true) variability.Favorites = true;
         }
