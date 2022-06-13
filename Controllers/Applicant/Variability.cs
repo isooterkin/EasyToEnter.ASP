@@ -12,32 +12,22 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 
             // "Вариативность"
             VariabilityModel? variabilityModel = _context.Variability
+                .Where(v => v.Id == variability)
                 .Include(v => v.FormatModel)
                 .Include(v => v.FormModel)
                 .Include(v => v.PaymentModel)
                 .Include(v => v.HistoryVariabilitys)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.DisciplineFocusUniversitys)
-                        !.ThenInclude(dfu => dfu!.DisciplineModel)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.LevelFocusModel)
-                        .ThenInclude(lf => lf!.LevelModel)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.LevelFocusModel)
-                        .ThenInclude(lf => lf!.FocusModel)
-                            .ThenInclude(f => f!.DirectionModel)
-                                .ThenInclude(d => d!.GroupModel)
-                                    .ThenInclude(g => g!.ScienceModel)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.UniversityModel)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.SubjectFocusUniversitys)
-                        !.ThenInclude(sfu => sfu!.SubjectModel)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.SubjectFocusUniversitys)
-                        !.ThenInclude(sfu => sfu!.SubjectReplacements)
-                            !.ThenInclude(sr => sr!.SubjectModel)
-                .FirstOrDefault(v => v.Id == variability);
+                .Include(v => v.FocusUniversityModel!.DisciplineFocusUniversitys!)
+                    .ThenInclude(dfu => dfu!.DisciplineModel)
+                .Include(v => v.FocusUniversityModel!.LevelFocusModel!.LevelModel)
+                .Include(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceModel)
+                .Include(v => v.FocusUniversityModel!.UniversityModel)
+                .Include(v => v.FocusUniversityModel!.SubjectFocusUniversitys!)
+                    .ThenInclude(sfu => sfu!.SubjectModel)
+                .Include(v => v.FocusUniversityModel!.SubjectFocusUniversitys!)
+                    .ThenInclude(sfu => sfu!.SubjectReplacements!)
+                        .ThenInclude(sr => sr!.SubjectModel)
+                .FirstOrDefault();
 
             if (variabilityModel == null) return NotFound();
 

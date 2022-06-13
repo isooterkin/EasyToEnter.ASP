@@ -19,28 +19,14 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 
             // Все "Вариативность"
             List<VariabilityModel> variabilityList = await _context.Variability
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.LevelFocusModel)
-                        .ThenInclude(lf => lf!.LevelModel)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.LevelFocusModel)
-                        .ThenInclude(lf => lf!.FocusModel)
-                            .ThenInclude(f => f!.DirectionModel)
-                                .ThenInclude(d => d!.GroupModel)
-                                    .ThenInclude(g => g!.ScienceModel)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.LevelFocusModel)
-                        .ThenInclude(lf => lf!.FocusModel)
-                            .ThenInclude(f => f!.AreaFocuss)
-                                !.ThenInclude(af => af!.AreaModel)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.LevelFocusModel)
-                        .ThenInclude(lf => lf!.FocusModel)
-                            .ThenInclude(f => f!.ProfessionFocuss)
-                                !.ThenInclude(pf => pf!.ProfessionModel)
-                                    !.ThenInclude(p => p!.TypeProfessionModel)
+                .Include(v => v.FocusUniversityModel!.LevelFocusModel!.LevelModel)
                 .Where(v => v.FocusUniversityModel!.LevelFocusModel!.LevelId == level)
+                .Include(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceModel)
                 .Where(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionId == direction)
+                .Include(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.AreaFocuss!)
+                    .ThenInclude(af => af!.AreaModel)
+                .Include(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.ProfessionFocuss!)
+                    .ThenInclude(pf => pf!.ProfessionModel!.TypeProfessionModel)
                 .ToListAsync();
 
             // Все "Область"

@@ -11,9 +11,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
         {
             // Все "Вариативность"
             List<VariabilityModel> variabilityList = await _context.Variability
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.LevelFocusModel)
-                        .ThenInclude(lf => lf!.LevelModel)
+                .Include(v => v.FocusUniversityModel!.LevelFocusModel!.LevelModel)
                 .ToListAsync();
 
             List<LevelModel> levelList = variabilityList

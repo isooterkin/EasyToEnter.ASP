@@ -14,22 +14,12 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             // "Вариативность"
             List<VariabilityModel> variabilityList = _context.Variability
                 .Include(v => v.HistoryVariabilitys) // Возможно историю выведу!
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.UniversityModel)
-                        .ThenInclude(u => u!.AccreditationModel)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.UniversityModel)
-                        .ThenInclude(u => u!.AddressModel)
-                            .ThenInclude(a => a!.CityModel)
-                                .ThenInclude(c => c!.RegionModel)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.UniversityModel)
-                        .ThenInclude(u => u!.Dormitorys)
-                            !.ThenInclude(d => d!.AddressModel)
-                .Include(v => v.FocusUniversityModel)
-                    .ThenInclude(fu => fu!.UniversityModel)
-                        .ThenInclude(u => u!.PhoneNumbers)
+                .Include(v => v.FocusUniversityModel!.UniversityModel!.AccreditationModel)
                 .Where(v => v.FocusUniversityModel!.UniversityId == university)
+                .Include(v => v.FocusUniversityModel!.UniversityModel!.AddressModel!.CityModel!.RegionModel)
+                .Include(v => v.FocusUniversityModel!.UniversityModel!.Dormitorys!)
+                    .ThenInclude(d => d!.AddressModel)
+                .Include(v => v.FocusUniversityModel!.UniversityModel!.PhoneNumbers)
                 .ToList();
 
             if (!variabilityList.Any()) return NotFound();
