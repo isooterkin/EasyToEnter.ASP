@@ -71,15 +71,13 @@
 }
 
 <div class="bg-white rounded-20 shadow p-1 mb-3">
-
     <div class="col text-center my-2">
         Сравнение дисциплин
     </div>
-
     @for (var i = 0; i < disciplineList.Count; i++)
     {
         <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
-            <div class="row px-2 py-1 justify-content-center align-items-center">
+            <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
                 <div class="col text-start text-truncate">
                     @disciplineList[i].Name
                 </div>
@@ -92,16 +90,121 @@
 
                     if (data != null)
                     {
-                        <div class="col-auto fw-bold text-end rounded-circle p-0 mr-2 d-flex justify-content-center align-items-center" style="background-color: @ColorList[j]; width: 40px; height: 40px;">
+                        <div class="col-auto fw-bold text-end rounded-circle p-0 mr-1 d-flex justify-content-center align-items-center" style="background-color: @ColorList[j]; width: 35px; height: 35px;">
                             @data.DisciplineCredit <small class="text-black fw-bold"> з.е.</small>
                         </div>
                     }
                     else
                     {
-                        <div class="col-auto text-end rounded-circle p-0 mr-2" style="width: 40px; height: 40px">
+                        <div class="col-auto text-end rounded-circle p-0 mr-1" style="width: 35px; height: 35px">
                         </div>
                     }
                 }
+            </div>
+        </div>
+    }
+</div>
+
+@{
+    List<FormModel> formList = Model
+        .Select(vf => vf.VariabilityModel!.FormModel!)
+        .Distinct()
+        .ToList();
+}
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    <div class="col text-center my-2">
+        Форма обучения
+    </div>
+    @for (var i = 0; i < formList.Count; i++)
+    {
+        <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
+            <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+                <div class="col text-start text-truncate">
+                    @formList[i].Name
+                </div>
+
+                @for (var j = 0; j < Model.Count; j++)
+                    if (Model[j].VariabilityModel!.FormModel! == formList[i])
+                    {
+                        <div class="col-auto fw-bold text-end rounded-circle p-0 mr-1" style="background-color: @ColorList[j]; width: 35px; height: 35px;">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-auto text-end rounded-circle p-0 mr-1" style="width: 35px; height: 35px">
+                        </div>
+                    }
+            </div>
+        </div>
+    }
+</div>
+
+@{
+    List<FormatModel> formatList = Model
+        .Select(vf => vf.VariabilityModel!.FormatModel!)
+        .Distinct()
+        .ToList();
+}
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    <div class="col text-center my-2">
+        Формат обучения
+    </div>
+    @for (var i = 0; i < formatList.Count; i++)
+    {
+        <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
+            <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+                <div class="col text-start text-truncate">
+                    @formatList[i].Name
+                </div>
+
+                @for (var j = 0; j < Model.Count; j++)
+                    if (Model[j].VariabilityModel!.FormatModel! == formatList[i])
+                    {
+                        <div class="col-auto fw-bold text-end rounded-circle p-0 mr-1" style="background-color: @ColorList[j]; width: 35px; height: 35px;">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-auto text-end rounded-circle p-0 mr-1" style="width: 35px; height: 35px">
+                        </div>
+                    }
+            </div>
+        </div>
+    }
+</div>
+
+@{
+    List<PaymentModel> paymentList = Model
+        .Select(vf => vf.VariabilityModel!.PaymentModel!)
+        .Distinct()
+        .ToList();
+}
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    <div class="col text-center my-2">
+        Оплата обучения
+    </div>
+    @for (var i = 0; i < paymentList.Count; i++)
+    {
+        <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
+            <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+                <div class="col text-start text-truncate">
+                    @paymentList[i].Name
+                </div>
+
+                @for (var j = 0; j < Model.Count; j++)
+                    if (Model[j].VariabilityModel!.PaymentModel! == paymentList[i])
+                    {
+                        <div class="col-auto fw-bold text-end rounded-circle p-0 mr-1" style="background-color: @ColorList[j]; width: 35px; height: 35px;">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-auto text-end rounded-circle p-0 mr-1" style="width: 35px; height: 35px">
+                        </div>
+                    }
             </div>
         </div>
     }

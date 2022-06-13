@@ -11,30 +11,21 @@ namespace EasyToEnter.ASP.Controllers.Applicant
         [Authorized]
         public async Task<IActionResult> ComparisonVariabilityAsync()
         {
-            // Пользователь
-            PersonModel personModel = await _context.Person
-                .Include(p => p.VariabilityFavoritess)
-                    !.ThenInclude(vf => vf.VariabilityModel)
-                        !.ThenInclude(v => v!.FocusUniversityModel)
-                            !.ThenInclude(fu => fu!.UniversityModel)
-                .Include(p => p.VariabilityFavoritess)
-                    !.ThenInclude(vf => vf.VariabilityModel)
-                        !.ThenInclude(v => v!.FocusUniversityModel)
-                            !.ThenInclude(fu => fu!.LevelFocusModel)
-                                !.ThenInclude(lf => lf!.FocusModel)
-                .Include(p => p.VariabilityFavoritess)
-                    !.ThenInclude(vf => vf.VariabilityModel)
-                        !.ThenInclude(v => v!.FocusUniversityModel)
-                            !.ThenInclude(fu => fu!.DisciplineFocusUniversitys)
-                                !.ThenInclude(dfu => dfu!.DisciplineModel)
-                .Include(p => p.VariabilityFavoritess)
-                    !.ThenInclude(vf => vf.VariabilityModel)
-                        !.ThenInclude(v => v!.HistoryVariabilitys)
-                .Include(p => p.UniversityFavoritess)
-                    !.ThenInclude(uf => uf!.UniversityModel)
-                .SingleAsync(p => p.Id == User.Id());
+            // Избранные вариативности
+            List<VariabilityFavoritesModel> variabilityFavoritesList = await _context.VariabilityFavorites
+                .Include(vf => vf.VariabilityModel!.FocusUniversityModel!.UniversityModel)
+                .Include(vf => vf.VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel)
+                .Include(vf => vf.VariabilityModel!.FocusUniversityModel!.DisciplineFocusUniversitys!)
+                        .ThenInclude(v => v!.DisciplineModel)
+                .Include(vf => vf.VariabilityModel!.HistoryVariabilitys)
+                .Include(vf => vf.VariabilityModel!.FormModel)
+                .Include(vf => vf.VariabilityModel!.FormatModel)
+                .Include(vf => vf.VariabilityModel!.PaymentModel)
+                .Include(vf => vf.PersonModel)
+                .Where(p => p.PersonId == User.Id())
+                .ToListAsync();
 
-            return View(personModel.VariabilityFavoritess);
+            return View(variabilityFavoritesList);
         }
     }
 }
