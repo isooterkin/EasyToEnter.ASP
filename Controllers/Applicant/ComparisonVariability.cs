@@ -13,16 +13,16 @@ namespace EasyToEnter.ASP.Controllers.Applicant
         {
             // Избранные вариативности
             List<VariabilityFavoritesModel> variabilityFavoritesList = await _context.VariabilityFavorites
+                .Where(p => p.PersonId == User.Id())
                 .Include(vf => vf.VariabilityModel!.FocusUniversityModel!.UniversityModel)
                 .Include(vf => vf.VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel)
                 .Include(vf => vf.VariabilityModel!.FocusUniversityModel!.DisciplineFocusUniversitys!)
-                        .ThenInclude(v => v!.DisciplineModel)
+                    .ThenInclude(v => v!.DisciplineModel)
                 .Include(vf => vf.VariabilityModel!.HistoryVariabilitys)
                 .Include(vf => vf.VariabilityModel!.FormModel)
                 .Include(vf => vf.VariabilityModel!.FormatModel)
                 .Include(vf => vf.VariabilityModel!.PaymentModel)
                 .Include(vf => vf.PersonModel)
-                .Where(p => p.PersonId == User.Id())
                 .ToListAsync();
 
             return View(variabilityFavoritesList);
