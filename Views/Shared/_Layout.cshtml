@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using static EasyToEnter.ASP.Tools.Authorization.IdentityAssistant;
+
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8" />
@@ -48,15 +50,33 @@
                     </span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    
+                    <partial name="_LoginPartial"/>
+
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Панель администратора</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Applicant" asp-action="LevelSelection">Поиск</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                Поиск
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Applicant" asp-action="LevelSelection">
+                                        Программы
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Applicant" asp-action="VacancySelection">
+                                        Вакансии
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Applicant" asp-action="UniversitySelection">
+                                        ВУЗы
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
-                    <partial name="_LoginPartial"/>
                 </div>
             </div>
         </nav>

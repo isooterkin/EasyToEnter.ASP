@@ -12,8 +12,13 @@ namespace EasyToEnter.ASP.Tools.Authorization
 
 
 
-        public static string? Login(this ClaimsPrincipal user)
+        public static string Login(this ClaimsPrincipal user)
             => user.FindFirst(x => x.Type == "Login")?.Value ?? string.Empty;
+
+
+
+        public static string Role(this ClaimsPrincipal user)
+            => user.FindFirst(x => x.Type == "Role")?.Value ?? string.Empty;
 
 
 

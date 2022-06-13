@@ -40,7 +40,7 @@ namespace EasyToEnter.ASP.Controllers.Authorization
             ClaimsIdentity claimsIdentity = new(new[]
                 {
                     new Claim("SessionId", session.Id.ToString()),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, person.RoleModel!.Name),
+                    new Claim("Role", person.RoleModel!.Name),
                     new Claim("Login", person.Login),
                     new Claim("Id", person.Id.ToString())
                 }, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -70,7 +70,7 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
 
 
-        [HttpPost]
+        [HttpGet]
         [Authorized]
         public async Task<IActionResult> Logout()
         {

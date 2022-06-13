@@ -1,25 +1,53 @@
 ﻿@using EasyToEnter.ASP.Tools;
 @using EasyToEnter.ASP.Tools.Authorization;
 
+
 <ul class="navbar-nav">
-@if (User != null && User.Identity != null && User.Identity.IsAuthenticated == true)
-{
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-controller="Account" asp-action="Index">@User.Login()</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-controller="Authentication" asp-action="Logout" method="post">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Выйти</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Authentication" asp-action="Login">Войти</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Authentication" asp-action="Register">Регистрация</a>
-    </li>
-}
+    @if (User != null && User.Identity != null && User.Identity.IsAuthenticated == true)
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                Профиль
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" asp-controller="Applicant" asp-action="LevelSelection">Личный кабинет</a>
+                </li>
+                <li>
+                    @switch (User.Role())
+                    {
+                        case "Администратор":
+                        {
+                            <a class="dropdown-item" asp-controller="Administrator" asp-action="Index">Администрирование</a>
+                            break;
+                        }
+                        case "Сотрудник ВУЗа":
+                        {
+                            <a class="dropdown-item" asp-controller="EmployeeUniversity" asp-action="Index">Мой ВУЗ</a>
+                            break;
+                        }
+                        case "Работодатель":
+                        {
+                            <a class="dropdown-item" asp-controller="EmployeeOrganization" asp-action="Index">Моя организация</a>
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-controller="Authentication" asp-action="Logout">Выйти</a>
+                </li>
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Authentication" asp-action="Login">Войти</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Authentication" asp-action="Register">Регистрация</a>
+        </li>
+    }
 </ul>
