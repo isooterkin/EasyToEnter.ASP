@@ -1,6 +1,4 @@
-﻿@using EasyToEnter.ASP.Tools;
-@using EasyToEnter.ASP.Tools.Authorization;
-
+﻿@using static EasyToEnter.ASP.Tools.Authorization.IdentityAssistant;
 
 <ul class="navbar-nav">
     @if (User != null && User.Identity != null && User.Identity.IsAuthenticated == true)
@@ -11,24 +9,24 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a class="dropdown-item" asp-controller="Applicant" asp-action="LevelSelection">Личный кабинет</a>
+                    <a class="dropdown-item" asp-controller="Account">Личный кабинет</a>
                 </li>
                 <li>
                     @switch (User.Role())
                     {
                         case "Администратор":
                         {
-                            <a class="dropdown-item" asp-controller="Administrator" asp-action="Index">Администрирование</a>
+                            <a class="dropdown-item" asp-controller="Administrator">Администрирование</a>
                             break;
                         }
                         case "Сотрудник ВУЗа":
                         {
-                            <a class="dropdown-item" asp-controller="EmployeeUniversity" asp-action="Index">Мой ВУЗ</a>
+                            <a class="dropdown-item" asp-controller="EmployeeUniversity">Мой ВУЗ</a>
                             break;
                         }
                         case "Работодатель":
                         {
-                            <a class="dropdown-item" asp-controller="EmployeeOrganization" asp-action="Index">Моя организация</a>
+                            <a class="dropdown-item" asp-controller="EmployeeOrganization">Моя организация</a>
                             break;
                         }
                         default:
