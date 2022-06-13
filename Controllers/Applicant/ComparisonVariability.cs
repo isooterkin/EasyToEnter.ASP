@@ -14,8 +14,10 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             // Избранные вариативности
             List<VariabilityFavoritesModel> variabilityFavoritesList = await _context.VariabilityFavorites
                 .Where(vf => vf.PersonId == User.Id())
-                .Include(vf => vf.VariabilityModel!.FocusUniversityModel!.UniversityModel)
-                .Include(vf => vf.VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel)
+                .Include(vf => vf.VariabilityModel!.FocusUniversityModel!.UniversityModel!.Dormitorys!)
+                .Include(vf => vf.VariabilityModel!.FocusUniversityModel!.UniversityModel!.AddressModel!.CityModel!.RegionModel)
+                .Include(vf => vf.VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel!.AreaFocuss!)
+                    .ThenInclude(af => af!.AreaModel)
                 .Include(vf => vf.VariabilityModel!.FocusUniversityModel!.DisciplineFocusUniversitys!)
                     .ThenInclude(v => v!.DisciplineModel)
                 .Include(vf => vf.VariabilityModel!.HistoryVariabilitys)

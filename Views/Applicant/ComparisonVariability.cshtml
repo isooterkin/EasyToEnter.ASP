@@ -1,11 +1,15 @@
 ﻿@model List<EasyToEnter.ASP.Models.Models.VariabilityFavoritesModel>;
 @using EasyToEnter.ASP.Models.Models;
 @using static EasyToEnter.ASP.Tools.Colors;
+@using static EasyToEnter.ASP.Tools.StringConverting;
 
 @{
     ViewData["Title"] = "Сравнение вариативностей";
 }
 
+@*Карта начало*@
+<vc:map-university-list data="@Model.Select(v => v.VariabilityModel!.FocusUniversityModel!.UniversityModel!).Distinct().ToList()"/>
+@*Карта конец*@
 
 <div class="bg-white rounded-20 shadow p-1 mb-3">
     @for (var i = 0; i < Model.Count; i++)
@@ -24,43 +28,214 @@
 </div>
 
 <div class="bg-white rounded-20 shadow p-1 mb-3">
-    <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVariabilityTuition">
-        <div class="col btn">
-            <div class="text-center">
-                История стоимости обучения <small class="text-muted">(показать)</small>
+    <div class="col text-center my-2">
+        Стоимость обучения <small class="text-muted">(на текущий год)</small>
+    </div>
+    @for(var i = 0; i < Model.Count; i++)
+    {
+    <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 3px solid @ColorList[i];">
+        <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+            <div class="col text-start text-truncate">
+                @Model[i].VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name
+            </div>
+            <div class="col-auto text-end">
+                @if (Model[i].VariabilityModel!.YearHistoryVariability != null)
+                {
+                    @IntToString(Model[i].VariabilityModel!.YearHistoryVariability!.Tuition) 
+                    <small class="text-muted"> руб.</small>
+                }
+                else
+                {
+                    <small class="text-muted">нет информации</small>
+                }
             </div>
         </div>
-    </a>
-    <div class="collapse" id="collapseVariabilityTuition">
-        <canvas id="variabilityChartTuition"></canvas>
+    </div>
+    }
+
+    <div class="bg-white rounded-20 shadow-sm mx-2 mb-1" style="border: 1px solid #e6e6e6;">
+        <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVariabilityTuition">
+            <div class="col btn">
+                <div class="text-center">
+                    История стоимости обучения <small class="text-muted">(показать)</small>
+                </div>
+            </div>
+        </a>
+        <div class="collapse" id="collapseVariabilityTuition">
+            <canvas id="variabilityChartTuition"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    <div class="col text-center my-2">
+        Количество мест <small class="text-muted">(на текущий год)</small>
+    </div>
+    @for(var i = 0; i < Model.Count; i++)
+    {
+    <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 3px solid @ColorList[i];">
+        <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+            <div class="col text-start text-truncate">
+                @Model[i].VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name
+            </div>
+            <div class="col-auto text-end">
+                @if (Model[i].VariabilityModel!.YearHistoryVariability != null)
+                {
+                    @IntToString(Model[i].VariabilityModel!.YearHistoryVariability!.NumberSeats) 
+                    <small class="text-muted"> мест</small>
+                }
+                else
+                {
+                    <small class="text-muted">нет информации</small>
+                }
+            </div>
+        </div>
+    </div>
+    }
+    <div class="bg-white rounded-20 shadow-sm mx-2 mb-1" style="border: 1px solid #e6e6e6;">
+        <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVariabilityNumberSeats">
+            <div class="col btn">
+                <div class="text-center">
+                    История количества мест <small class="text-muted">(показать)</small>
+                </div>
+            </div>
+        </a>
+        <div class="collapse" id="collapseVariabilityNumberSeats">
+            <canvas id="variabilityChartNumberSeats"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    <div class="col text-center my-2">
+        Проходной балл <small class="text-muted">(на текущий год)</small>
+    </div>
+    @for(var i = 0; i < Model.Count; i++)
+    {
+    <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 3px solid @ColorList[i];">
+        <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+            <div class="col text-start text-truncate">
+                @Model[i].VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel!.Name
+            </div>
+            <div class="col-auto text-end">
+                @if (Model[i].VariabilityModel!.YearHistoryVariability != null)
+                {
+                    <small class="text-muted"> от</small>
+                    @IntToString(Model[i].VariabilityModel!.YearHistoryVariability!.PassingGrade) 
+                    <small class="text-muted"> баллов</small>
+                }
+                else
+                {
+                    <small class="text-muted">нет информации</small>
+                }
+            </div>
+        </div>
+    </div>
+    }
+    <div class="bg-white rounded-20 shadow-sm mx-2 mb-1" style="border: 1px solid #e6e6e6;">
+        <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVariabilityPassingGrade">
+            <div class="col btn">
+                <div class="text-center">
+                    История проходного балла <small class="text-muted">(показать)</small>
+                </div>
+            </div>
+        </a>
+        <div class="collapse" id="collapseVariabilityPassingGrade">
+            <canvas id="variabilityChartPassingGrade"></canvas>
+        </div>
     </div>
 </div>
 
 <div class="bg-white rounded-20 shadow p-1 mb-3">
-    <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVariabilityNumberSeats">
-        <div class="col btn">
-            <div class="text-center">
-                История количества мест <small class="text-muted">(показать)</small>
-            </div>
-        </div>
-    </a>
-    <div class="collapse" id="collapseVariabilityNumberSeats">
-        <canvas id="variabilityChartNumberSeats"></canvas>
+    <div class="col text-center my-2">
+        Основная информация
     </div>
+
+    <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
+        <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+            <div class="col text-start text-truncate">
+                Период обучения <small class="text-muted">(лет)</small>
+            </div>
+
+            @for (var j = 0; j < Model.Count; j++)
+            {
+                <div class="col-auto fw-bold text-end rounded-circle p-0 mr-1 d-flex justify-content-center align-items-center" style="background-color: @ColorList[j]; width: 35px; height: 35px;">
+                    @Model[j].VariabilityModel!.TrainingPeriod
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
+        <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+            <div class="col text-start text-truncate">
+                Вступительные экзамены <small class="text-muted">(наличие)</small>
+            </div>
+
+            @for (var j = 0; j < Model.Count; j++)
+            {
+                if (Model[j].VariabilityModel!.EntranceExams)
+                {
+                    <div class="col-auto fw-bold text-end rounded-circle p-0 mr-1 d-flex justify-content-center align-items-center" style="background-color: @ColorList[j]; width: 35px; height: 35px;">
+                    </div>
+                }
+                else
+                {
+                    <div class="col-auto text-end rounded-circle p-0 mr-1" style="width: 35px; height: 35px">
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
+        <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+            <div class="col text-start text-truncate">
+                Военная кафедра <small class="text-muted">(наличие в ВУЗе)</small>
+            </div>
+
+            @for (var j = 0; j < Model.Count; j++)
+            {
+                if (Model[j].VariabilityModel!.FocusUniversityModel!.UniversityModel!.MilitaryDepartment)
+                {
+                    <div class="col-auto fw-bold text-end rounded-circle p-0 mr-1 d-flex justify-content-center align-items-center" style="background-color: @ColorList[j]; width: 35px; height: 35px;">
+                    </div>
+                }
+                else
+                {
+                    <div class="col-auto text-end rounded-circle p-0 mr-1" style="width: 35px; height: 35px">
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
+        <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+            <div class="col text-start text-truncate">
+                Общежитие <small class="text-muted">(наличие в ВУЗе)</small>
+            </div>
+
+            @for (var j = 0; j < Model.Count; j++)
+            {
+                if (Model[j].VariabilityModel!.FocusUniversityModel!.UniversityModel!.Dormitorys!.Any())
+                {
+                    <div class="col-auto fw-bold text-end rounded-circle p-0 mr-1 d-flex justify-content-center align-items-center" style="background-color: @ColorList[j]; width: 35px; height: 35px;">
+                    </div>
+                }
+                else
+                {
+                    <div class="col-auto text-end rounded-circle p-0 mr-1" style="width: 35px; height: 35px">
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
 </div>
 
-<div class="bg-white rounded-20 shadow p-1 mb-3">
-    <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVariabilityPassingGrade">
-        <div class="col btn">
-            <div class="text-center">
-                История проходного балла <small class="text-muted">(показать)</small>
-            </div>
-        </div>
-    </a>
-    <div class="collapse" id="collapseVariabilityPassingGrade">
-        <canvas id="variabilityChartPassingGrade"></canvas>
-    </div>
-</div>
 
 @{
     List<DisciplineModel> disciplineList = Model
@@ -92,6 +267,49 @@
                     {
                         <div class="col-auto fw-bold text-end rounded-circle p-0 mr-1 d-flex justify-content-center align-items-center" style="background-color: @ColorList[j]; width: 35px; height: 35px;">
                             @data.DisciplineCredit <small class="text-black fw-bold"> з.е.</small>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-auto text-end rounded-circle p-0 mr-1" style="width: 35px; height: 35px">
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    }
+</div>
+
+
+@{
+    List<AreaModel> areaList = Model
+        .SelectMany(vf => vf.VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel!.AreaFocuss!)
+        .Select(a => a.AreaModel!)
+        .Distinct()
+        .ToList();
+}
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    <div class="col text-center my-2">
+        Сравнение областей направленности
+    </div>
+    @for (var i = 0; i < areaList.Count; i++)
+    {
+        <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
+            <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+                <div class="col text-start text-truncate">
+                    @areaList[i].Name
+                </div>
+
+                @for (var j = 0; j < Model.Count; j++)
+                {
+                    var areaVariabilityList = Model[j].VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel!.AreaFocuss!;
+
+                    var data = areaVariabilityList.SingleOrDefault(d => d.AreaModel!.Id == areaList[i].Id);
+
+                    if (data != null)
+                    {
+                        <div class="col-auto text-end rounded-circle p-0 mr-1" style="background-color: @ColorList[j]; width: 35px; height: 35px;">
                         </div>
                     }
                     else
@@ -191,7 +409,20 @@
         <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
             <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
                 <div class="col text-start text-truncate">
-                    @paymentList[i].Name
+                    @paymentList[i].Name 
+                    @if (paymentList[i].Id == 2)
+                    {
+                        HistoryVariabilityModel? historyVariability = @Model.Select(vf => vf.VariabilityModel!.YearHistoryVariability).OrderBy(yhv => yhv?.Tuition).FirstOrDefault();
+                        
+                        if (historyVariability != null)
+                        {
+                            <small class="text-muted"> (от @IntToString(historyVariability.Tuition) руб.)</small>
+                        }
+                        else
+                        {
+                            <small class="text-muted"> (от 0 руб.)</small>
+                        }
+                    }
                 </div>
 
                 @for (var j = 0; j < Model.Count; j++)
@@ -209,6 +440,33 @@
         </div>
     }
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script src="https://npmcdn.com/chart.js@latest/dist/chart.min.js"></script>
 <script>
