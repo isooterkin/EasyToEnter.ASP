@@ -12,13 +12,16 @@
 <div class="bg-white rounded-20 shadow p-2 mb-3">
     @if (Model.Any())
     {
-        <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVacancy">
+        <div class="row px-2 d-flex justify-content-center align-items-center">
             <div class="col btn">
                 <div class="text-start">
                     Вакансии <small class="text-muted">(@Model.Count)</small>
                 </div>
             </div>
-        </a>
+            <a class="col-auto pl-0 pr-4 text-decoration-none" href="/EmployeeOrganization/NewVacancy">
+                <span class="fs-5 bi bi-plus-circle text-success"/>
+            </a>
+        </div>
         <div class="collapse show" id="collapseVacancy">
             <div class="row mt-2">
                 <div class="container">
@@ -27,44 +30,33 @@
                         VacancyModel vacancy = Model[i];
 
                         <div class="rounded-20 shadow-sm bg-white mb-2 px-2" style="border: 1px solid #e6e6e6;">
-                            <div class="row p-2 text-black">
+                            <div class="row p-2 text-black d-flex justify-content-center align-items-center">
                                 <a class="col text-truncate text-decoration-none text-black" href="/EmployeeOrganization/EditVacancy?vacancyId=@vacancy.Id">
                                     @vacancy.Name
                                 </a>
                                 <div class="col-auto">
                                     @IntToString(vacancy.Wages) <small class="text-muted"> рублей</small>
                                 </div>
-                                <a class="col-auto" href="" @onclick:preventDefault @onclick="(() => DeleteVacancy(vacancy.Id))">
+                                <a class="col-auto pl-0" href="" @onclick:preventDefault @onclick="(() => DeleteVacancy(vacancy))">
                                     <span class="fs-5 bi bi-trash text-danger"/>
                                 </a>
                             </div>
                         </div>
                     }
-
-                    <div class="rounded-20 shadow-sm bg-white mb-2 px-2" style="border: 1px solid #e6e6e6;">
-                        <a class="row p-2 text-decoration-none text-black" href="/EmployeeOrganization/NewVacancy">
-                            <div class="col text-center text-truncate">
-                                Добавить
-                            </div>
-                        </a>
-                    </div>
-
                 </div>
             </div>
         </div>
     }
     else
     {
-        <div class="col btn">
-            <div class="text-start">
-                Вакансии <small class="text-muted">(нет)</small>
-            </div>
-        </div>
-        <div class="rounded-20 shadow-sm bg-white mb-2 px-2" style="border: 1px solid #e6e6e6;">
-            <a class="row p-2 text-decoration-none text-black" href="/EmployeeOrganization/NewVacancy">
-                <div class="col text-center text-truncate">
-                    Добавить
+        <div class="row px-2 d-flex justify-content-center align-items-center">
+            <div class="col btn">
+                <div class="text-start">
+                    Вакансии <small class="text-muted">(нет)</small>
                 </div>
+            </div>
+            <a class="col-auto pl-0 pr-4 text-decoration-none" href="/EmployeeOrganization/NewVacancy">
+                <span class="fs-5 bi bi-plus-circle text-success"/>
             </a>
         </div>
     }
@@ -75,10 +67,10 @@
     [Parameter]
     public List<VacancyModel> Model { get; set; } = new List<VacancyModel>();
 
-    private async Task DeleteVacancy(int vacancyId) 
+    private async Task DeleteVacancy(VacancyModel vacancy) 
     {
-        bool result = await VacancyService.DeleteVacancy(vacancyId);
+        bool result = await VacancyService.DeleteVacancy(vacancy);
 
-        if (result) Model.RemoveAll(v => v.Id == vacancyId);
+        if (result) Model.Remove(vacancy);
     }
 }
