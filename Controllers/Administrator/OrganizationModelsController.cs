@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
 
-namespace EasyToEnter.ASP.Controllers.EmployeeOrganization
+namespace EasyToEnter.ASP.Controllers.Administrator
 {
     public class OrganizationModelsController : Controller
     {
@@ -22,9 +22,9 @@ namespace EasyToEnter.ASP.Controllers.EmployeeOrganization
         // GET: OrganizationModels
         public async Task<IActionResult> Index()
         {
-              return _context.Organization != null ? 
-                          View(await _context.Organization.ToListAsync()) :
-                          Problem("Entity set 'EasyToEnterDbContext.Organization'  is null.");
+            return _context.Organization != null ?
+                        View(await _context.Organization.ToListAsync()) :
+                        Problem("Entity set 'EasyToEnterDbContext.Organization'  is null.");
         }
 
         // GET: OrganizationModels/Details/5
@@ -150,14 +150,14 @@ namespace EasyToEnter.ASP.Controllers.EmployeeOrganization
             {
                 _context.Organization.Remove(organizationModel);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrganizationModelExists(int id)
         {
-          return (_context.Organization?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Organization?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

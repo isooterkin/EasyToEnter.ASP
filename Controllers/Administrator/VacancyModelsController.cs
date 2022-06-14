@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
 
-namespace EasyToEnter.ASP.Controllers.EmployeeOrganization
+namespace EasyToEnter.ASP.Controllers.Administrator
 {
     public class VacancyModelsController : Controller
     {
@@ -155,14 +155,14 @@ namespace EasyToEnter.ASP.Controllers.EmployeeOrganization
             {
                 _context.Vacancy.Remove(vacancyModel);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool VacancyModelExists(int id)
         {
-          return (_context.Vacancy?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Vacancy?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

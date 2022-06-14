@@ -1,4 +1,5 @@
 ﻿using EasyToEnter.ASP.Services.Discipline;
+using EasyToEnter.ASP.Services.Vacancy;
 using EasyToEnter.ASP.Services.VariabilityFavorites;
 
 namespace EasyToEnter.ASP.HostBuilders
@@ -11,6 +12,7 @@ namespace EasyToEnter.ASP.HostBuilders
             {
                 services.AddScoped<IDisciplineService, DisciplineService>();
                 services.AddScoped<IVariabilityFavoritesService, VariabilityFavoritesService>();
+                services.AddScoped<IVacancyService, VacancyService>();
             });
         }
     }
