@@ -9,24 +9,24 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a class="dropdown-item" asp-controller="Account">Личный кабинет</a>
+                    <a class="dropdown-item" asp-controller="Account" asp-action="Index">Личный кабинет</a>
                 </li>
                 <li>
                     @switch (User.Role())
                     {
                         case "Администратор":
                         {
-                            <a class="dropdown-item" asp-controller="Administrator">Администрирование</a>
+                            <a class="dropdown-item" asp-controller="Administrator" asp-action="Index">Администрирование</a>
                             break;
                         }
                         case "Сотрудник ВУЗа":
                         {
-                            <a class="dropdown-item" asp-controller="EmployeeUniversity">Мой ВУЗ</a>
+                            <a class="dropdown-item" asp-controller="EmployeeUniversity" asp-action="Index">Мой ВУЗ</a>
                             break;
                         }
                         case "Работодатель":
                         {
-                            <a class="dropdown-item" asp-controller="EmployeeOrganization">Моя организация</a>
+                            <a class="dropdown-item" asp-controller="EmployeeOrganization" asp-action="Index">Моя организация</a>
                             break;
                         }
                         default:
