@@ -1,8 +1,72 @@
-﻿@model EasyToEnter.ASP.ViewsModels.Account.AccountViewModel;
+﻿@model List<EasyToEnter.ASP.Models.Models.VacancyModel>;
 
+@using static EasyToEnter.ASP.Tools.StringConverting;
 @using EasyToEnter.ASP.Models.Models;
 
 @{
     ViewData["Title"] = "Организация";
 }
 
+<div class="bg-white rounded-20 shadow p-2 mb-3">
+    <div class="col btn">
+        <div class="text-start">
+            Организация <small class="text-muted">(редактировать)</small>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-20 shadow p-2 mb-3">
+    @if (Model.Any())
+    {
+        <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVacancy">
+            <div class="col btn">
+                <div class="text-start">
+                    Вакансии <small class="text-muted">(@Model.Count)</small>
+                </div>
+            </div>
+        </a>
+        <div class="collapse" id="collapseVacancy">
+            <div class="row mt-2">
+                <div class="container">
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+                        <div class="rounded-20 shadow-sm bg-white mb-2 px-2" style="border: 1px solid #e6e6e6;">
+                            <a class="row p-2 text-decoration-none text-black" href="/EmployeeOrganization/EditVacancy?vacancyId=@Model[i].Id">
+                                <div class="col text-start text-truncate">
+                                    @Model[i].Name
+                                </div>
+                                <div class="col-auto text-end">
+                                    @IntToString(Model[i].Wages) <small class="text-muted"> рублей</small>
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+                    <div class="rounded-20 shadow-sm bg-white mb-2 px-2" style="border: 1px solid #e6e6e6;">
+                        <a class="row p-2 text-decoration-none text-black" href="/EmployeeOrganization/NewVacancy">
+                            <div class="col text-center text-truncate">
+                                Добавить
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col btn">
+            <div class="text-start">
+                Вакансии <small class="text-muted">(нет)</small>
+            </div>
+        </div>
+        <div class="rounded-20 shadow-sm bg-white mb-2 px-2" style="border: 1px solid #e6e6e6;">
+            <a class="row p-2 text-decoration-none text-black" href="/Applicant/ComparisonVariability">
+                <div class="col text-center text-truncate">
+                    Добавить
+                </div>
+            </a>
+        </div>
+    }
+</div>

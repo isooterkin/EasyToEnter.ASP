@@ -22,5 +22,17 @@ namespace EasyToEnter.ASP.Models.Models
         [EmailAddress(ErrorMessage = "Неверная электронная почта.")]
         [JsonPropertyName(nameof(EmailAddress))]
         public string EmailAddress { get; set; }
+
+
+
+        [Display(Name = "Сотрудники ВУЗа")]
+        [JsonPropertyName(nameof(EmployerOrganizations))]
+        public List<EmployerOrganizationModel>? EmployerOrganizations { get; set; }
+
+
+
+        [Display(Name = "Вакансии организации")]
+        [JsonPropertyName(nameof(Vacancys))]
+        public List<VacancyModel>? Vacancys { get; set; }
     }
 }
