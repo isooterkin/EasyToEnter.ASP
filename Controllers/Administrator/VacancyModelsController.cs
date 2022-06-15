@@ -22,7 +22,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
         // GET: VacancyModels
         public async Task<IActionResult> Index()
         {
-            var easyToEnterDbContext = _context.Vacancy.Include(v => v.OrganizationModel);
+            var easyToEnterDbContext = _context.Vacancy.Include(v => v.OrganizationModel).Include(v => v.ProfessionModel);
             return View(await easyToEnterDbContext.ToListAsync());
         }
 
@@ -36,6 +36,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
 
             var vacancyModel = await _context.Vacancy
                 .Include(v => v.OrganizationModel)
+                .Include(v => v.ProfessionModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (vacancyModel == null)
             {
@@ -48,7 +49,8 @@ namespace EasyToEnter.ASP.Controllers.Administrator
         // GET: VacancyModels/Create
         public IActionResult Create()
         {
-            ViewData["OrganizationId"] = new SelectList(_context.Organization, "Id", "Name");
+            ViewData["OrganizationId"] = new SelectList(_context.Organization, "Id", "EmailAddress");
+            ViewData["ProfessionId"] = new SelectList(_context.Profession, "Id", "Name");
             return View();
         }
 
@@ -57,7 +59,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Wages,OrganizationId,Description,Name,Id")] VacancyModel vacancyModel)
+        public async Task<IActionResult> Create([Bind("Wages,Name,Description,OrganizationId,ProfessionId,Id")] VacancyModel vacancyModel)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +68,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
                 return RedirectToAction(nameof(Index));
             }
             ViewData["OrganizationId"] = new SelectList(_context.Organization, "Id", "EmailAddress", vacancyModel.OrganizationId);
+            ViewData["ProfessionId"] = new SelectList(_context.Profession, "Id", "Name", vacancyModel.ProfessionId);
             return View(vacancyModel);
         }
 
@@ -83,6 +86,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
                 return NotFound();
             }
             ViewData["OrganizationId"] = new SelectList(_context.Organization, "Id", "EmailAddress", vacancyModel.OrganizationId);
+            ViewData["ProfessionId"] = new SelectList(_context.Profession, "Id", "Name", vacancyModel.ProfessionId);
             return View(vacancyModel);
         }
 
@@ -91,7 +95,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Wages,OrganizationId,Description,Name,Id")] VacancyModel vacancyModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Wages,Name,Description,OrganizationId,ProfessionId,Id")] VacancyModel vacancyModel)
         {
             if (id != vacancyModel.Id)
             {
@@ -119,6 +123,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
                 return RedirectToAction(nameof(Index));
             }
             ViewData["OrganizationId"] = new SelectList(_context.Organization, "Id", "EmailAddress", vacancyModel.OrganizationId);
+            ViewData["ProfessionId"] = new SelectList(_context.Profession, "Id", "Name", vacancyModel.ProfessionId);
             return View(vacancyModel);
         }
 
@@ -132,6 +137,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
 
             var vacancyModel = await _context.Vacancy
                 .Include(v => v.OrganizationModel)
+                .Include(v => v.ProfessionModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (vacancyModel == null)
             {
@@ -155,14 +161,14 @@ namespace EasyToEnter.ASP.Controllers.Administrator
             {
                 _context.Vacancy.Remove(vacancyModel);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool VacancyModelExists(int id)
         {
-            return (_context.Vacancy?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Vacancy?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

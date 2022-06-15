@@ -17,7 +17,7 @@ namespace EasyToEnter.ASP.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -722,30 +722,6 @@ namespace EasyToEnter.ASP.Migrations
                     b.ToTable("Profession");
                 });
 
-            modelBuilder.Entity("EasyToEnter.ASP.Models.Models.ProfessionVacancyModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ProfessionId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("VacancyId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VacancyId");
-
-                    b.HasIndex("ProfessionId", "VacancyId")
-                        .IsUnique();
-
-                    b.ToTable("ProfessionVacancy");
-                });
-
             modelBuilder.Entity("EasyToEnter.ASP.Models.Models.RegionModel", b =>
                 {
                     b.Property<int>("Id")
@@ -1065,15 +1041,17 @@ namespace EasyToEnter.ASP.Migrations
                     b.Property<int>("OrganizationId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("ProfessionId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Wages")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.HasIndex("OrganizationId");
+
+                    b.HasIndex("ProfessionId");
 
                     b.ToTable("Vacancy");
                 });
@@ -1254,7 +1232,7 @@ namespace EasyToEnter.ASP.Migrations
             modelBuilder.Entity("EasyToEnter.ASP.Models.Models.EmployerOrganizationModel", b =>
                 {
                     b.HasOne("EasyToEnter.ASP.Models.Models.OrganizationModel", "OrganizationModel")
-                        .WithMany()
+                        .WithMany("EmployerOrganizations")
                         .HasForeignKey("OrganizationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1393,25 +1371,6 @@ namespace EasyToEnter.ASP.Migrations
                     b.Navigation("TypeProfessionModel");
                 });
 
-            modelBuilder.Entity("EasyToEnter.ASP.Models.Models.ProfessionVacancyModel", b =>
-                {
-                    b.HasOne("EasyToEnter.ASP.Models.Models.ProfessionModel", "ProfessionModel")
-                        .WithMany()
-                        .HasForeignKey("ProfessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EasyToEnter.ASP.Models.Models.VacancyModel", "VacancyModel")
-                        .WithMany()
-                        .HasForeignKey("VacancyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProfessionModel");
-
-                    b.Navigation("VacancyModel");
-                });
-
             modelBuilder.Entity("EasyToEnter.ASP.Models.Models.SessionModel", b =>
                 {
                     b.HasOne("EasyToEnter.ASP.Models.Models.PersonModel", "PersonModel")
@@ -1483,7 +1442,7 @@ namespace EasyToEnter.ASP.Migrations
             modelBuilder.Entity("EasyToEnter.ASP.Models.Models.UniversityFavoritesModel", b =>
                 {
                     b.HasOne("EasyToEnter.ASP.Models.Models.PersonModel", "PersonModel")
-                        .WithMany()
+                        .WithMany("UniversityFavoritess")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1521,18 +1480,26 @@ namespace EasyToEnter.ASP.Migrations
             modelBuilder.Entity("EasyToEnter.ASP.Models.Models.VacancyModel", b =>
                 {
                     b.HasOne("EasyToEnter.ASP.Models.Models.OrganizationModel", "OrganizationModel")
-                        .WithMany()
+                        .WithMany("Vacancys")
                         .HasForeignKey("OrganizationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EasyToEnter.ASP.Models.Models.ProfessionModel", "ProfessionModel")
+                        .WithMany()
+                        .HasForeignKey("ProfessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("OrganizationModel");
+
+                    b.Navigation("ProfessionModel");
                 });
 
             modelBuilder.Entity("EasyToEnter.ASP.Models.Models.VariabilityFavoritesModel", b =>
                 {
                     b.HasOne("EasyToEnter.ASP.Models.Models.PersonModel", "PersonModel")
-                        .WithMany()
+                        .WithMany("VariabilityFavoritess")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1621,6 +1588,20 @@ namespace EasyToEnter.ASP.Migrations
             modelBuilder.Entity("EasyToEnter.ASP.Models.Models.LevelModel", b =>
                 {
                     b.Navigation("LevelFocuss");
+                });
+
+            modelBuilder.Entity("EasyToEnter.ASP.Models.Models.OrganizationModel", b =>
+                {
+                    b.Navigation("EmployerOrganizations");
+
+                    b.Navigation("Vacancys");
+                });
+
+            modelBuilder.Entity("EasyToEnter.ASP.Models.Models.PersonModel", b =>
+                {
+                    b.Navigation("UniversityFavoritess");
+
+                    b.Navigation("VariabilityFavoritess");
                 });
 
             modelBuilder.Entity("EasyToEnter.ASP.Models.Models.RegionModel", b =>

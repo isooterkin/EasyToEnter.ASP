@@ -96,6 +96,22 @@ namespace EasyToEnter.ASP.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Organization",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
+                    EmailAddress = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Organization", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Payment",
                 columns: table => new
                 {
@@ -307,6 +323,32 @@ namespace EasyToEnter.ASP.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EmployerOrganization",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployerOrganization", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EmployerOrganization_Organization_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalTable: "Organization",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmployerOrganization_Person_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Person",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Session",
                 columns: table => new
                 {
@@ -343,6 +385,35 @@ namespace EasyToEnter.ASP.Migrations
                         name: "FK_Direction_Group_GroupId",
                         column: x => x.GroupId,
                         principalTable: "Group",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Vacancy",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Wages = table.Column<int>(type: "integer", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    OrganizationId = table.Column<int>(type: "integer", nullable: false),
+                    ProfessionId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vacancy", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Vacancy_Organization_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalTable: "Organization",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Vacancy_Profession_ProfessionId",
+                        column: x => x.ProfessionId,
+                        principalTable: "Profession",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -430,6 +501,32 @@ namespace EasyToEnter.ASP.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EmployeeUniversity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UniversityId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployeeUniversity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EmployeeUniversity_Person_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Person",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmployeeUniversity_University_UniversityId",
+                        column: x => x.UniversityId,
+                        principalTable: "University",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PhoneNumberUniversity",
                 columns: table => new
                 {
@@ -470,6 +567,32 @@ namespace EasyToEnter.ASP.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SpecializationUniversity_University_UniversityId",
+                        column: x => x.UniversityId,
+                        principalTable: "University",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UniversityFavorites",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UniversityId = table.Column<int>(type: "integer", nullable: false),
+                    PersonId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UniversityFavorites", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UniversityFavorites_Person_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Person",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UniversityFavorites_University_UniversityId",
                         column: x => x.UniversityId,
                         principalTable: "University",
                         principalColumn: "Id",
@@ -838,6 +961,28 @@ namespace EasyToEnter.ASP.Migrations
                 column: "UniversityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EmployeeUniversity_PersonId",
+                table: "EmployeeUniversity",
+                column: "PersonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeUniversity_UniversityId_PersonId",
+                table: "EmployeeUniversity",
+                columns: new[] { "UniversityId", "PersonId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployerOrganization_OrganizationId_PersonId",
+                table: "EmployerOrganization",
+                columns: new[] { "OrganizationId", "PersonId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployerOrganization_PersonId",
+                table: "EmployerOrganization",
+                column: "PersonId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Focus_DirectionId",
                 table: "Focus",
                 column: "DirectionId");
@@ -915,6 +1060,12 @@ namespace EasyToEnter.ASP.Migrations
                 name: "IX_LevelFocus_LevelId_FocusId",
                 table: "LevelFocus",
                 columns: new[] { "LevelId", "FocusId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Organization_Name",
+                table: "Organization",
+                column: "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -1053,6 +1204,27 @@ namespace EasyToEnter.ASP.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_UniversityFavorites_PersonId",
+                table: "UniversityFavorites",
+                column: "PersonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UniversityFavorites_UniversityId_PersonId",
+                table: "UniversityFavorites",
+                columns: new[] { "UniversityId", "PersonId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vacancy_OrganizationId",
+                table: "Vacancy",
+                column: "OrganizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vacancy_ProfessionId",
+                table: "Vacancy",
+                column: "ProfessionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Variability_FocusUniversityId",
                 table: "Variability",
                 column: "FocusUniversityId");
@@ -1097,6 +1269,12 @@ namespace EasyToEnter.ASP.Migrations
                 name: "Dormitory");
 
             migrationBuilder.DropTable(
+                name: "EmployeeUniversity");
+
+            migrationBuilder.DropTable(
+                name: "EmployerOrganization");
+
+            migrationBuilder.DropTable(
                 name: "HistoryVariability");
 
             migrationBuilder.DropTable(
@@ -1115,6 +1293,12 @@ namespace EasyToEnter.ASP.Migrations
                 name: "SubjectReplacement");
 
             migrationBuilder.DropTable(
+                name: "UniversityFavorites");
+
+            migrationBuilder.DropTable(
+                name: "Vacancy");
+
+            migrationBuilder.DropTable(
                 name: "VariabilityFavorites");
 
             migrationBuilder.DropTable(
@@ -1124,13 +1308,16 @@ namespace EasyToEnter.ASP.Migrations
                 name: "Discipline");
 
             migrationBuilder.DropTable(
-                name: "Profession");
-
-            migrationBuilder.DropTable(
                 name: "Specialization");
 
             migrationBuilder.DropTable(
                 name: "SubjectFocusUniversity");
+
+            migrationBuilder.DropTable(
+                name: "Organization");
+
+            migrationBuilder.DropTable(
+                name: "Profession");
 
             migrationBuilder.DropTable(
                 name: "Person");
@@ -1139,10 +1326,10 @@ namespace EasyToEnter.ASP.Migrations
                 name: "Variability");
 
             migrationBuilder.DropTable(
-                name: "TypeProfession");
+                name: "Subject");
 
             migrationBuilder.DropTable(
-                name: "Subject");
+                name: "TypeProfession");
 
             migrationBuilder.DropTable(
                 name: "Role");
