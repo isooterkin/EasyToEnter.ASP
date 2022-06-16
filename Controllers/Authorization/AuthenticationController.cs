@@ -129,7 +129,7 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
                     await Authenticate(person);
 
-                    return RedirectToAction("Applicant", "LevelSelection");
+                    return RedirectToAction("LevelSelection", "Applicant");
                 }
             }
             else return View(personLogin);
@@ -171,7 +171,7 @@ namespace EasyToEnter.ASP.Controllers.Authorization
 
                 await Authenticate(person);
 
-                return RedirectToAction("Applicant", "LevelSelection");
+                return RedirectToAction("LevelSelection", "Applicant");
             }
             else return View(personRegister);
         }
