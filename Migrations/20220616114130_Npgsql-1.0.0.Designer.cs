@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EasyToEnter.ASP.Migrations
 {
     [DbContext(typeof(EasyToEnterDbContext))]
-    [Migration("20220615064703_Npgsql-1.0.0")]
+    [Migration("20220616114130_Npgsql-1.0.0")]
     partial class Npgsql100
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

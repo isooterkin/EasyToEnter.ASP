@@ -93,7 +93,7 @@ namespace EasyToEnter.ASP.HostBuilders
                 // InitializationSpecializationUniversity.Initialize(context);
 
                 // Добавляем в базу данных "Направленность ВУЗа"
-                // InitializationFocusUniversity.Initialize(context);
+                InitializationFocusUniversity.Initialize(context);
 
                 // Добавляем в базу данных "Предмет направленности ВУЗа"
                 // InitializationSubjectFocusUniversity.Initialize(context);
@@ -108,7 +108,7 @@ namespace EasyToEnter.ASP.HostBuilders
                 // InitializationDisciplineFocusUniversity.Initialize(context);
 
                 // Добавляем в базу данных "Вариативность"
-                // InitializationVariability.Initialize(context);
+                InitializationVariability.Initialize(context);
 
                 // Добавляем в базу данных "История вариативности"
                 // InitializationHistoryVariability.Initialize(context);
