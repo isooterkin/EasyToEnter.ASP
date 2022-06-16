@@ -367,24 +367,6 @@ namespace EasyToEnter.ASP.Data.Initialization
                     PaymentId = 1, // бюджет
                     EntranceExams = true,
                     TrainingPeriod = 2
-                },
-                new Class // 40
-                {
-                    FocusUniversityId = 18,
-                    FormId = 4, // очно
-                    FormatId = 2, // полный курс
-                    PaymentId = 1, // бюджет
-                    EntranceExams = true,
-                    TrainingPeriod = 2
-                },
-                new Class // 41
-                {
-                    FocusUniversityId = 18,
-                    FormId = 4, // очно
-                    FormatId = 2, // полный курс
-                    PaymentId = 2, // платно
-                    EntranceExams = true,
-                    TrainingPeriod = 2
                 }
             });
 

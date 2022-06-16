@@ -62,43 +62,33 @@ namespace EasyToEnter.ASP.Data.Initialization
                 },
                 new Class // 11
                 {
-                    FocusId = 4,
-                    LevelId = 1
+                    FocusId = 11,
+                    LevelId = 2
                 },
                 new Class // 12
                 {
-                    FocusId = 11,
-                    LevelId = 1
+                    FocusId = 12,
+                    LevelId = 2
                 },
                 new Class // 13
                 {
-                    FocusId = 12,
-                    LevelId = 1
+                    FocusId = 13,
+                    LevelId = 2
                 },
                 new Class // 14
                 {
-                    FocusId = 13,
-                    LevelId = 1
+                    FocusId = 14,
+                    LevelId = 2
                 },
                 new Class // 15
                 {
-                    FocusId = 14,
-                    LevelId = 1
+                    FocusId = 15,
+                    LevelId = 2
                 },
                 new Class // 16
                 {
-                    FocusId = 15,
-                    LevelId = 1
-                },
-                new Class // 17
-                {
                     FocusId = 16,
-                    LevelId = 1
-                },
-                new Class // 18
-                {
-                    FocusId = 17,
-                    LevelId = 1
+                    LevelId = 2
                 }
             });
 
