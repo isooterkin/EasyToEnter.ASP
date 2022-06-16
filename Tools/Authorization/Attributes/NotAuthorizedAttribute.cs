@@ -12,7 +12,7 @@ namespace EasyToEnter.ASP.Tools.Authorization.Attributes
                 .GetRequiredService<SessionPerson>();
 
             if (SessionPerson.IsAuthenticated)
-                authorizationFilterContext.Result = new RedirectResult("/Home/Index");
+                authorizationFilterContext.Result = new RedirectResult("/Applicant/LevelSelection");
         }
     }
 }

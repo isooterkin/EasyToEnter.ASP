@@ -51,7 +51,7 @@ namespace EasyToEnter.ASP
                     pattern: "{controller}/{action}/{id?}",
                     defaults: new
                     {
-                        controller = "Home",
+                        controller = "Applicant",
                         action = "Index"
                     });
             });
