@@ -11,14 +11,86 @@ namespace EasyToEnter.ASP.Data.Initialization
                 new Class // 1
                 {
                     RoleId = 1, // Администратор
-                    Login = "isooterkin",
-                    PasswordHash = "$2a$11$4OjopWvrfAhOlskDSuwNKexbTrkcFbZfabelkGBjoAfDyTBcP9SFu",
-                    FirstName = "Кирилл",
-                    MiddleName = "Александрович",
-                    LastName = "Пархом",
-                    PhoneNumber = "89121858950",
-                    EmailAddress = "isooterkin@gmail.com",
-                    DateOfBirth = new DateOnly(1998, 12, 21)
+                    Login = "administrator",
+                    PasswordHash = "$2a$11$5/kzRaV.CL45VhQw8kGOpunl1x2UR/odjA8dB2AAAHrQ3gxAJYTaa",
+                    FirstName = null,
+                    MiddleName = null,
+                    LastName = null,
+                    PhoneNumber = null,
+                    EmailAddress = null,
+                    DateOfBirth = null
+                },
+                new Class // 2
+                {
+                    RoleId = 2, // Абитуриент
+                    Login = "applicant1",
+                    PasswordHash = "$2a$11$5/kzRaV.CL45VhQw8kGOpunl1x2UR/odjA8dB2AAAHrQ3gxAJYTaa",
+                    FirstName = "Виктория",
+                    MiddleName = null,
+                    LastName = null,
+                    PhoneNumber = null,
+                    EmailAddress = null,
+                    DateOfBirth = null
+                },
+                new Class // 3
+                {
+                    RoleId = 2, // Абитуриент
+                    Login = "applicant2",
+                    PasswordHash = "$2a$11$5/kzRaV.CL45VhQw8kGOpunl1x2UR/odjA8dB2AAAHrQ3gxAJYTaa",
+                    FirstName = "Мария",
+                    MiddleName = null,
+                    LastName = null,
+                    PhoneNumber = null,
+                    EmailAddress = null,
+                    DateOfBirth = null
+                },
+                new Class // 4
+                {
+                    RoleId = 3, // Сотрудник ВУЗа
+                    Login = "university1",
+                    PasswordHash = "$2a$11$5/kzRaV.CL45VhQw8kGOpunl1x2UR/odjA8dB2AAAHrQ3gxAJYTaa",
+                    FirstName = "Костя",
+                    MiddleName = null,
+                    LastName = null,
+                    PhoneNumber = null,
+                    EmailAddress = null,
+                    DateOfBirth = null
+                },
+                new Class // 5
+                {
+                    RoleId = 3, // Сотрудник ВУЗа
+                    Login = "university2",
+                    PasswordHash = "$2a$11$5/kzRaV.CL45VhQw8kGOpunl1x2UR/odjA8dB2AAAHrQ3gxAJYTaa",
+                    FirstName = "Никита",
+                    MiddleName = null,
+                    LastName = null,
+                    PhoneNumber = null,
+                    EmailAddress = null,
+                    DateOfBirth = null
+                },
+                new Class // 6
+                {
+                    RoleId = 4, // Работодатель
+                    Login = "organization1",
+                    PasswordHash = "$2a$11$5/kzRaV.CL45VhQw8kGOpunl1x2UR/odjA8dB2AAAHrQ3gxAJYTaa",
+                    FirstName = "Влад",
+                    MiddleName = null,
+                    LastName = null,
+                    PhoneNumber = null,
+                    EmailAddress = null,
+                    DateOfBirth = null
+                },
+                new Class // 7
+                {
+                    RoleId = 4, // Работодатель
+                    Login = "organization2",
+                    PasswordHash = "$2a$11$5/kzRaV.CL45VhQw8kGOpunl1x2UR/odjA8dB2AAAHrQ3gxAJYTaa",
+                    FirstName = "Артем",
+                    MiddleName = null,
+                    LastName = null,
+                    PhoneNumber = null,
+                    EmailAddress = null,
+                    DateOfBirth = null
                 }
             });
 

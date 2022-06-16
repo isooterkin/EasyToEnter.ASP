@@ -118,6 +118,15 @@ namespace EasyToEnter.ASP.HostBuilders
 
                 // Добавляем в базу данных "Пользователей"
                 InitializationPerson.Initialize(context);
+
+                // Добавляем в базу данных "Организация"
+                InitializationOrganization.Initialize(context);
+
+                // Добавляем в базу данных "Сотрудники организации"
+                InitializationEmployerOrganization.Initialize(context);
+
+                // Добавляем в базу данных "Сотрудники ВУЗа"
+                InitializationEmployeeUniversity.Initialize(context);
             }
             catch (Exception Exception)
             {
