@@ -1,7 +1,7 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.GroupSelectionCardViewModel;
 
 @*ПРИМЕР начало*@
-<div class="mb-3 text-dark bg-white shadow rounded-3">
+<div class="mb-3 text-dark bg-white shadow rounded-20">
     <div class="row g-0">
         <div class="col position-relative">
             <div class="card-body p-3">
@@ -20,11 +20,11 @@
                         @Model.Group.Name
                     </a>
                 </h5>
-                <p class="card-text text-truncate">
+                <p class="card-text text-wrap">
                     @Model.Group.Description
                 </p>
                 <div class="row px-3">
-                    <a class="col-3 btn m-0 text-truncate btn-secondary text-decoration-none" href="/Applicant/DirectionSelection?level=@Model.LevelId&group=@Model.Group.Id">
+                    <a class="col-auto btn m-0 text-truncate btn-secondary text-decoration-none" href="/Applicant/DirectionSelection?level=@Model.LevelId&group=@Model.Group.Id">
                         <span class="fs-5 fw-bold">
                             @Model.VariabilityCount
                         </span> 
