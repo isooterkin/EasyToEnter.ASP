@@ -1,8 +1,31 @@
-﻿@model EasyToEnter.ASP.ViewsModels.Account.AccountViewModel;
+﻿@model List<EasyToEnter.ASP.Models.Models.VariabilityModel>;
 
+@using static EasyToEnter.ASP.Tools.StringConverting;
 @using EasyToEnter.ASP.Models.Models;
+@using System.Text.Json.Serialization;
+@using Newtonsoft.Json;
 
 @{
     ViewData["Title"] = "ВУЗ";
 }
 
+<div class="bg-white rounded-20 shadow p-2 mb-3">
+    <div class="col btn">
+        <div class="text-start">
+            ВУЗ <small class="text-muted">(редактировать)</small>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-20 shadow p-2 mb-3">
+    <div class="row px-2 d-flex justify-content-center align-items-center">
+        <div class="col btn">
+            <div class="text-start">
+                Образовательные программы <small class="text-muted">(нет)</small>
+            </div>
+        </div>
+        <a class="col-auto pl-0 pr-4 text-decoration-none" href="/EmployeeOrganization/NewVacancy">
+            <span class="fs-5 bi bi-plus-circle text-success"/>
+        </a>
+    </div>
+</div>
