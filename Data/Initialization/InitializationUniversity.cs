@@ -14,7 +14,7 @@ namespace EasyToEnter.ASP.Data.Initialization
                     Abbreviation = "СПбГТИ(ТУ)",
                     AddressId = 1,
                     EmailAddress = "office@technolog.edu.ru",
-                    Description = "",
+                    Description = "Ведущий российский вуз в области химии, химической технологии, биотехнологии, нанотехнологии, механики, информационных технологий, управления и экономики. Современный учебный центр высшего профессионального образования. Основан в 1828 году.",
                     Website = "https://technolog.edu.ru/",
                     MilitaryDepartment = false,
                     AccreditationId = 1
@@ -37,7 +37,7 @@ namespace EasyToEnter.ASP.Data.Initialization
                     Abbreviation = "СПбПУ",
                     AddressId = 3,
                     EmailAddress = "abitur@spbstu.ru",
-                    Description = "",
+                    Description = "Санкт-Петербургский политехнический университет Петра Великого - старейший и крупнейший политехнический вуз России, ведущий подготовку по техническим, физическим и гуманитарно-экономическим направлениям.",
                     Website = "http://www.spbstu.ru/",
                     MilitaryDepartment = true,
                     AccreditationId = 1,

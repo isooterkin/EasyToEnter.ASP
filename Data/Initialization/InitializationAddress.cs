@@ -12,7 +12,7 @@ namespace EasyToEnter.ASP.Data.Initialization
                 {
                     CityId = 79,
                     Street = "Московский проспект",
-                    House = "24-26/49",
+                    House = "24-26",
                     Housing = "49",
                     Building = null,
                     Latitude = 59.917485f,
@@ -342,8 +342,8 @@ namespace EasyToEnter.ASP.Data.Initialization
                 {
                     CityId = 79,
                     Street = "Двинская",
-                    House = "5/7",
-                    Housing = null,
+                    House = "5",
+                    Housing = "7",
                     Building = null,
                     Latitude = 0,
                     Longitude = 0
@@ -532,9 +532,9 @@ namespace EasyToEnter.ASP.Data.Initialization
                 {
                     CityId = 79,
                     Street = "Аккуратова",
-                    House = "11А",
+                    House = "11",
                     Housing = null,
-                    Building = null,
+                    Building = "А",
                     Latitude = 0,
                     Longitude = 0
                 },
@@ -552,8 +552,8 @@ namespace EasyToEnter.ASP.Data.Initialization
                 {
                     CityId = 79,
                     Street = "Гагаринская",
-                    House = "6/1",
-                    Housing = null,
+                    House = "6",
+                    Housing = "1",
                     Building = "А",
                     Latitude = 0,
                     Longitude = 0
@@ -656,8 +656,8 @@ namespace EasyToEnter.ASP.Data.Initialization
                     House = "14",
                     Housing = null,
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.837770F,
+                    Longitude = 30.162678F
                 },
                 new Class // 66
                 {
@@ -666,8 +666,8 @@ namespace EasyToEnter.ASP.Data.Initialization
                     House = "14",
                     Housing = "3",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.838159F,
+                    Longitude = 30.134031F
                 },
                 new Class // 67
                 {
@@ -676,8 +676,8 @@ namespace EasyToEnter.ASP.Data.Initialization
                     House = "12",
                     Housing = null,
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.838570F,
+                    Longitude = 30.163190F
                 },
                 new Class // 68
                 {
@@ -686,8 +686,8 @@ namespace EasyToEnter.ASP.Data.Initialization
                     House = "8",
                     Housing = null,
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.873239F,
+                    Longitude = 30.323665F
                 },
                 new Class // 69
                 {
@@ -696,8 +696,8 @@ namespace EasyToEnter.ASP.Data.Initialization
                     House = "1",
                     Housing = null,
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.889494F,
+                    Longitude = 30.276459F
                 },
                 new Class // 70
                 {
@@ -706,59 +706,59 @@ namespace EasyToEnter.ASP.Data.Initialization
                     House = "21",
                     Housing = null,
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.828030F,
+                    Longitude = 30.208466F
                 },
                 // Общежития Политеха
                 new Class // 71
                 {
                     CityId = 79,
                     Street = "проспект Лесной",
-                    House = "65/1",
-                    Housing = null,
+                    House = "65",
+                    Housing = "1",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.986389F,
+                    Longitude = 30.342072F
                 },
                 new Class // 72
                 {
                     CityId = 79,
                     Street = "проспект Лесной",
-                    House = "65/3",
-                    Housing = null,
+                    House = "65",
+                    Housing = "3",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.986731F,
+                    Longitude = 30.343401F
                 },
                 new Class // 73
                 {
                     CityId = 79,
                     Street = "Парголовская",
-                    House = "11/1",
-                    Housing = null,
+                    House = "11",
+                    Housing = "1",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.986047F,
+                    Longitude = 30.345800F
                 },
                 new Class // 74
                 {
                     CityId = 79,
                     Street = "Парголовская",
-                    House = "11/3",
-                    Housing = null,
+                    House = "11",
+                    Housing = "3",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.986047F,
+                    Longitude = 30.346000F
                 },
                 new Class // 75
                 {
                     CityId = 79,
                     Street = "Парголовская",
-                    House = "11/2",
-                    Housing = null,
+                    House = "11",
+                    Housing = "2",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.986443F,
+                    Longitude = 30.347022F
                 },
                 new Class // 76
                 {
@@ -767,18 +767,18 @@ namespace EasyToEnter.ASP.Data.Initialization
                     House = "16",
                     Housing = null,
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.986695F,
+                    Longitude = 30.348136F
                 },
                 new Class // 77
                 {
                     CityId = 79,
                     Street = "проспект Лесной",
-                    House = "67/2",
-                    Housing = null,
+                    House = "67",
+                    Housing = "2",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.986686F,
+                    Longitude = 30.342539F
                 },
                 new Class // 78
                 {
@@ -787,88 +787,88 @@ namespace EasyToEnter.ASP.Data.Initialization
                     House = "24",
                     Housing = null,
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.985678F,
+                    Longitude = 30.345144F
                 },
                 new Class // 79
                 {
                     CityId = 79,
                     Street = "Хлопина",
-                    House = "9/2",
-                    Housing = null,
+                    House = "9",
+                    Housing = "2",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.999377F,
+                    Longitude = 30.372130F
                 },
                 new Class // 80
                 {
                     CityId = 79,
                     Street = "Непокорённых",
-                    House = "6/2",
-                    Housing = null,
+                    House = "6",
+                    Housing = "2",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.998400F,
+                    Longitude = 30.370602F
                 },
                 new Class // 81
                 {
                     CityId = 79,
                     Street = "Хлопина",
-                    House = "13/1",
-                    Housing = null,
+                    House = "13",
+                    Housing = "1",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.998828F,
+                    Longitude = 30.375858F
                 },
                 new Class // 82
                 {
                     CityId = 79,
                     Street = "Непокорённых",
-                    House = "8/2",
-                    Housing = null,
+                    House = "8",
+                    Housing = "2",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.998945F,
+                    Longitude = 30.374016F
                 },
                 new Class // 83
                 {
                     CityId = 79,
                     Street = "Непокорённых",
-                    House = "8/3",
-                    Housing = null,
+                    House = "8",
+                    Housing = "3",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.998139F,
+                    Longitude = 30.372902F
                 },
                 new Class // 84
                 {
                     CityId = 79,
                     Street = "Непокорённых",
-                    House = "8/4",
-                    Housing = null,
+                    House = "8",
+                    Housing = "4",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.998139F,
+                    Longitude = 30.373000F
                 },
                 new Class // 85
                 {
                     CityId = 79,
                     Street = "Вавиловых",
-                    House = "10/2",
-                    Housing = null,
+                    House = "10",
+                    Housing = "2",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 60.021721F,
+                    Longitude = 30.388254F
                 },
                 new Class // 86
                 {
                     CityId = 79,
                     Street = "Вавиловых",
-                    House = "10/3",
-                    Housing = null,
+                    House = "10",
+                    Housing = "3",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 60.022076F,
+                    Longitude = 30.387257F
                 },
                 new Class // 87
                 {
@@ -877,8 +877,8 @@ namespace EasyToEnter.ASP.Data.Initialization
                     House = "30",
                     Housing = null,
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 60.008608F,
+                    Longitude = 30.391884F
                 },
                 new Class // 88
                 {
@@ -887,18 +887,18 @@ namespace EasyToEnter.ASP.Data.Initialization
                     House = "28",
                     Housing = null,
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 60.007555F,
+                    Longitude = 30.390797F
                 },
                 new Class // 89
                 {
                     CityId = 79,
                     Street = "Энгельса",
-                    House = "129/4",
-                    Housing = null,
+                    House = "129",
+                    Housing = "4",
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 60.047694F,
+                    Longitude = 30.334319F
                 },
                 new Class // 90
                 {
@@ -907,8 +907,8 @@ namespace EasyToEnter.ASP.Data.Initialization
                     House = "20",
                     Housing = null,
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.859095F,
+                    Longitude = 30.326908F
                 },
                 new Class // 91
                 {
@@ -917,8 +917,8 @@ namespace EasyToEnter.ASP.Data.Initialization
                     House = "27",
                     Housing = null,
                     Building = null,
-                    Latitude = 0,
-                    Longitude = 0
+                    Latitude = 59.911624F,
+                    Longitude = 30.319857F
                 }
             });
 
