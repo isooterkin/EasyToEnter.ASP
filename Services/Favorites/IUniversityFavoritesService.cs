@@ -1,4 +1,4 @@
-﻿namespace EasyToEnter.ASP.Services.UniversityFavorites
+﻿namespace EasyToEnter.ASP.Services.Favorites
 {
     public interface IUniversityFavoritesService
     {

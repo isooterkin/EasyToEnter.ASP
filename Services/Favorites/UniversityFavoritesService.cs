@@ -2,9 +2,9 @@
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Tools.Authorization;
 
-namespace EasyToEnter.ASP.Services.UniversityFavorites
+namespace EasyToEnter.ASP.Services.Favorites
 {
-    public class UniversityFavoritesService: IUniversityFavoritesService
+    public class UniversityFavoritesService : IUniversityFavoritesService
     {
         private readonly EasyToEnterDbContext Context;
         private readonly IHttpContextAccessor HttpContextAccessor;

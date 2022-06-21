@@ -132,5 +132,8 @@ namespace EasyToEnter.ASP.Data
 
         // Таблица "Вакансия - Профессия"
         // public DbSet<ProfessionVacancyModel> ProfessionVacancy { get; set; }
+
+        // Таблица "Избранная вакансия"
+        public DbSet<VacancyFavoritesModel> VacancyFavorites { get; set; }
     }
 }

@@ -2,16 +2,16 @@
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Tools.Authorization;
 
-namespace EasyToEnter.ASP.Services.VariabilityFavorites
+namespace EasyToEnter.ASP.Services.Favorites
 {
-    public class VariabilityFavoritesService : IVariabilityFavoritesService
+    public class VacancyFavoritesService: IVacancyFavoritesService
     {
         private readonly EasyToEnterDbContext Context;
         private readonly IHttpContextAccessor HttpContextAccessor;
 
 
 
-        public VariabilityFavoritesService(EasyToEnterDbContext context, IHttpContextAccessor httpContextAccessor)
+        public VacancyFavoritesService(EasyToEnterDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             Context = context;
             HttpContextAccessor = httpContextAccessor;
@@ -19,7 +19,7 @@ namespace EasyToEnter.ASP.Services.VariabilityFavorites
 
 
 
-        public async Task<bool> AddFavorites(int variabilityId)
+        public async Task<bool> AddFavorites(VacancyModel vacancy)
         {
             SessionPerson sessionPerson = new(Context, HttpContextAccessor);
 
@@ -27,10 +27,10 @@ namespace EasyToEnter.ASP.Services.VariabilityFavorites
 
             try
             {
-                Context.VariabilityFavorites.Add(new VariabilityFavoritesModel()
+                Context.VacancyFavorites.Add(new VacancyFavoritesModel()
                 {
                     PersonId = sessionPerson.Person!.Id,
-                    VariabilityId = variabilityId
+                    VacancyId = vacancy.Id
                 });
 
                 await Context.SaveChangesAsync();
@@ -42,7 +42,7 @@ namespace EasyToEnter.ASP.Services.VariabilityFavorites
 
 
 
-        public async Task<bool> DeleteFavorites(int variabilityId)
+        public async Task<bool> DeleteFavorites(VacancyModel vacancy)
         {
             SessionPerson sessionPerson = new(Context, HttpContextAccessor);
 
@@ -50,13 +50,13 @@ namespace EasyToEnter.ASP.Services.VariabilityFavorites
 
             try
             {
-                VariabilityFavoritesModel? variabilityFavorites = Context
-                    .VariabilityFavorites
-                    .SingleOrDefault(fuf => fuf.VariabilityId == variabilityId && fuf.PersonId == sessionPerson.Person!.Id);
+                VacancyFavoritesModel? vacancyFavorites = Context
+                    .VacancyFavorites
+                    .SingleOrDefault(vf => vf.VacancyId == vacancy.Id && vf.PersonId == sessionPerson.Person!.Id);
 
-                if (variabilityFavorites == null) return true;
+                if (vacancyFavorites == null) return true;
 
-                Context.VariabilityFavorites.Remove(variabilityFavorites);
+                Context.VacancyFavorites.Remove(vacancyFavorites);
                 await Context.SaveChangesAsync();
             }
             catch { return false; }

@@ -1,4 +1,4 @@
-﻿namespace EasyToEnter.ASP.Services.VariabilityFavorites
+﻿namespace EasyToEnter.ASP.Services.Favorites
 {
     public interface IVariabilityFavoritesService
     {
