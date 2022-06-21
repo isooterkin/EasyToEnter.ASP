@@ -1,6 +1,10 @@
 ﻿@model EasyToEnter.ASP.ViewsModels.Applicant.VacancySelectionContainerViewModel;
 @using EasyToEnter.ASP.ViewsModels.Components;
 @using EasyToEnter.ASP.ViewsModels.Components.Path;
+@using EasyToEnter.ASP.ViewsModels.Applicant;
+@using EasyToEnter.ASP.Models.Models;
+@using System.Text.Json.Serialization;
+@using Newtonsoft.Json;
 
 @{
     ViewData["Title"] = "Выбор вакансии";
@@ -10,7 +14,12 @@
 <div class="container p-0">
     <div class="row">
         <div class="col-xl-8 col-md-12 order-xl-first order-last">
-            @*<vc:focus-container data="@Model"/>*@
+            @{
+                string ModelJson = JsonConvert.SerializeObject(Model.VacancyFavoritesViewModelList, Formatting.None, new JsonSerializerSettings(){ ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
+                List<VacancyFavoritesViewModel>? ModelNotJson = System.Text.Json.JsonSerializer.Deserialize<List<VacancyFavoritesViewModel>>(ModelJson);
+            }
+
+            <component type="typeof(VacancySelectionContainer)" render-mode="ServerPrerendered" param-Model="ModelNotJson"/>
         </div>
         @*Фильтр начало*@
         <div class="col-xl col-md-12 mb-3 order-xl-last order-first">

@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     // Модель "ВУЗ"
-    [Display(Name = "Вариативность")]
+    [Display(Name = "ВУЗ")]
     public class UniversityFavoritesViewModel
     {
         [Display(Name = "ВУЗ")]

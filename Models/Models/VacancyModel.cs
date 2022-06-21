@@ -49,5 +49,11 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Профессия")]
         [JsonPropertyName(nameof(ProfessionModel))]
         public ProfessionModel? ProfessionModel { get; set; }
+
+
+
+        [Display(Name = "Избранные вакансии")]
+        [JsonPropertyName(nameof(VacancyFavoritess))]
+        public List<VacancyFavoritesModel>? VacancyFavoritess { get; set; }
     }
 }

@@ -1,16 +1,15 @@
-﻿using EasyToEnter.ASP.Models.Models;
-using EasyToEnter.ASP.ViewsModels.Components;
+﻿using EasyToEnter.ASP.ViewsModels.Components;
 
 namespace EasyToEnter.ASP.ViewsModels.Applicant
 {
     public class VacancySelectionContainerViewModel
     {
-        public readonly List<VacancyModel> VacancyList;
+        public readonly List<VacancyFavoritesViewModel> VacancyFavoritesViewModelList;
         public readonly List<SelectListItemSubtext> ProfessionSelectListItem;
 
-        public VacancySelectionContainerViewModel(List<VacancyModel> vacancyList, List<SelectListItemSubtext> professionList)
+        public VacancySelectionContainerViewModel(List<VacancyFavoritesViewModel> vacancyFavoritesViewModelList, List<SelectListItemSubtext> professionList)
         {
-            VacancyList = vacancyList;
+            VacancyFavoritesViewModelList = vacancyFavoritesViewModelList;
             ProfessionSelectListItem = professionList;
         }
     }

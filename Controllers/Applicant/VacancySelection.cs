@@ -17,6 +17,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             List<VacancyModel> vacancyList = await _context.Vacancy
                 .Include(v => v.OrganizationModel)
                 .Include(v => v.ProfessionModel!.TypeProfessionModel)
+                .Include(v => v.VacancyFavoritess)
                 .ToListAsync();
 
             // Все "Профессии"
@@ -50,7 +51,26 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                     .ToList();
             }
 
-            return View(new VacancySelectionContainerViewModel(vacancyList, professionSelectListItem));
+            List<VacancyFavoritesViewModel> vacancyFavoritesViewModel = new();
+
+            for (var i = 0; i < vacancyList.Count; i++)
+                vacancyFavoritesViewModel.Add(new VacancyFavoritesViewModel()
+                {
+                    Vacancy = vacancyList[i]
+                });
+
+            if (User.Id() != null)
+            {
+                PersonModel person = _context.Session
+                    .Include(s => s.PersonModel)
+                    .Single(s => s.Id == User.SessionId()).PersonModel!;
+
+                for (var i = 0; i < vacancyList.Count; i++)
+                    vacancyFavoritesViewModel[i].Favorites = vacancyList[i].VacancyFavoritess!
+                        .Any(vf => vf.PersonId == person.Id);
+            }
+
+            return View(new VacancySelectionContainerViewModel(vacancyFavoritesViewModel, professionSelectListItem));
         }
     }
 }
