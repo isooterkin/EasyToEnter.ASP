@@ -1,5 +1,4 @@
-﻿using EasyToEnter.ASP.Models.Models;
-using EasyToEnter.ASP.ViewsModels.Components;
+﻿using EasyToEnter.ASP.ViewsModels.Components;
 
 namespace EasyToEnter.ASP.ViewsModels.Applicant
 {

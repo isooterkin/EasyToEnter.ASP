@@ -6,13 +6,13 @@
 
 
 @*Api*@
-@inject EasyToEnter.ASP.Services.VariabilityFavorites.IVariabilityFavoritesService VariabilityFavoritesService;
+@inject EasyToEnter.ASP.Services.UniversityFavorites.IUniversityFavoritesService UniversityFavoritesService;
 
 
 
 @for(var i = 0; i < Model.Count; i++)
 {
-    var variability = Model[i];
+    UniversityFavoritesViewModel university = Model[i];
 
     <div class="icon-card mb-3 text-dark bg-white shadow rounded-20">
         <div class="row g-0">
@@ -23,12 +23,12 @@
                         @*Хедер*@
                         <p class="col m-0 p-0 card-text text-truncate">
                             <small class="text-muted">
-                                @variability.FocusUniversityModel!.UniversityModel!.Name
+                                @university.University.Name
                             </small>
                         </p>
 
                         @*Значек "Государственный вуз"*@
-                        @if (variability.FocusUniversityModel!.UniversityModel!.AccreditationId == 1)
+                        @if (university.University.AccreditationId == 1)
                         {
                             <a class="col-auto m-0 p-0 ml-2 align-self-end" data-bs-placement="top" data-bs-toggle="tooltip" title="Государственный" href="#">
                                 <span class="fs-5 bi bi-hospital text-success"/>
@@ -36,7 +36,7 @@
                         }
 
                         @*Значек "Наличие общежития"*@
-                        @if (variability.FocusUniversityModel!.UniversityModel!.Dormitorys!.Any())
+                        @if (university.University.Dormitorys!.Any())
                         {
                             <a class="col-auto m-0 p-0 ml-2 align-self-end" data-bs-placement="top" data-bs-toggle="tooltip" title="Наличие общежития" href="#">
                                 <span class="fs-5 bi bi-building text-warning"/>
@@ -44,22 +44,22 @@
                         }
 
                         @*Значек "Военная кафедра"*@
-                        @if (variability.FocusUniversityModel!.UniversityModel!.MilitaryDepartment)
+                        @if (university.University.MilitaryDepartment)
                         {
-                        <div class="col-auto m-0 p-0 ml-2 align-self-end">
-                            <a class="align-top" data-bs-toggle="tooltip" data-bs-placement="top" title="Наличие военной кафедры" href="#">
-                                <span class="fs-5 bi bi-shield text-info align-top"/>
-                            </a>
-                        </div>
+                            <div class="col-auto m-0 p-0 ml-2 align-self-end">
+                                <a class="align-top" data-bs-toggle="tooltip" data-bs-placement="top" title="Наличие военной кафедры" href="#">
+                                    <span class="fs-5 bi bi-shield text-info align-top"/>
+                                </a>
+                            </div>
                         }
 
                         @*Значек "В избранное"*@
                         <a class="col-auto m-0 p-0 ml-4 align-self-end" 
                             data-bs-placement="top" 
                             data-bs-toggle="tooltip" 
-                            href="" @onclick:preventDefault @onclick="(() => ChangeStatusFavorites(variability))">
+                            href="" @onclick:preventDefault @onclick="(() => ChangeStatusFavorites(university))">
 
-                            @if (variability.Favorites)
+                            @if (university.Favorites)
                             {
                                 <span class="fs-5 bi bi-heart-fill text-danger"/>
                             }
@@ -72,42 +72,35 @@
 
                     @*Значек "Тайтл"*@
                     <h5 class="card-title text-truncate">
-                        <a href="/Applicant/University?university=@variability.FocusUniversityModel!.UniversityId" class="text-decoration-none text-dark fw-bold">
-                            @variability.FocusUniversityModel!.UniversityModel!.Abbreviation
+                        <a href="/Applicant/University?university=@university.University.Id" class="text-decoration-none text-dark fw-bold">
+                            @university.University.Abbreviation
                         </a>
                     </h5>
 
                     @*Значек "Описание"*@
                     <p class="card-text text-truncate mb-2 text-wrap">
-                        @variability.FocusUniversityModel!.UniversityModel!.Description
-                    </p>
-
-                    @*Значек "Особенности"*@
-                    <p class="card-text text-truncate">
-                        <kbd class="mr-1 rounded-3 fw-semibold bg-success">@variability.PaymentModel!.Name</kbd>
-                        <kbd class="mr-1 rounded-3 fw-semibold bg-warning">@variability.FormatModel!.Name</kbd>
-                        <kbd class="mr-1 rounded-3 fw-semibold bg-info">@variability.FormModel!.Name</kbd>
+                        @university.University.Description
                     </p>
 
                     <div class="row px-3">
                         <div class="col-sm order-sm-first order-4 px-0">
-                            <a class="btn text-truncate btn-secondary text-decoration-none col col-sm-auto" href="/Applicant/Variability?variability=@variability.Id">
+                            <a class="btn text-truncate btn-secondary text-decoration-none col col-sm-auto" href="/Applicant/University?university=@university.University.Id">
                                 Подробнее
                             </a>
                         </div>
                         <div class="col-sm-auto order-1 order-xl-2 align-self-center">
                             <p class="text-center m-0">
-                                от <span class="fs-6 fw-bold text-truncate">@IntToString(@variability.YearHistoryVariability?.PassingGrade)</span> баллов
+                                <span class="fs-6 fw-bold text-truncate"> @university.NumberSeats </span> мест
                             </p>
                         </div>
                         <div class="col-sm-auto order-2 order-xl-3 align-self-center">
                             <p class="text-center m-0">
-                                <span class="fs-6 fw-bold text-truncate">@IntToString(@variability.YearHistoryVariability?.NumberSeats)</span> мест
+                                от <span class="fs-6 fw-bold text-truncate"> @university.PassingGrade </span> баллов
                             </p>
                         </div>
-                        <div class="col-sm-auto order-3 order-xl-4 align-self-center mb-sm-0 mb-2">
+                        <div class="col-sm-auto order-3 order-xl-4 align-self-center">
                             <p class="text-center m-0">
-                                от <span class="fs-6 fw-bold text-truncate">@IntToString(variability.YearHistoryVariability?.Tuition)</span> руб.
+                                <span class="fs-6 fw-bold text-truncate"> @university.VariabilityCount </span> программ
                             </p>
                         </div>
                     </div>
@@ -118,24 +111,28 @@
     </div>
 }
 
+
+
 @code {
 
     [Parameter]
-    public List<VariabilityViewModel> Model { get; set; } = new ();
+    public List<UniversityFavoritesViewModel> Model { get; set; } = new();
 
-    private async Task ChangeStatusFavorites(VariabilityViewModel variability)
+
+
+    private async Task ChangeStatusFavorites(UniversityFavoritesViewModel universityFavorites)
     {
-        if (variability.Favorites)
+        if (universityFavorites.Favorites)
         {
-            var resultDelete = await VariabilityFavoritesService.DeleteFavorites(variability.Id);
+            var resultDelete = await UniversityFavoritesService.DeleteFavorites(universityFavorites.University.Id);
 
-            if (resultDelete == true) variability.Favorites = false;
+            if (resultDelete == true) universityFavorites.Favorites = false;
         }
         else 
         {
-            var resultAdd = await VariabilityFavoritesService.AddFavorites(variability.Id);
+            var resultAdd = await UniversityFavoritesService.AddFavorites(universityFavorites.University.Id);
 
-            if (resultAdd == true) variability.Favorites = true;
+            if (resultAdd == true) universityFavorites.Favorites = true;
         }
     }
 }

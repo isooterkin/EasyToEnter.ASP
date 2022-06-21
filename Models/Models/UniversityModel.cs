@@ -78,5 +78,17 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Контактные телефоны выбранного вуза")]
         [JsonPropertyName("PhoneNumbers")]
         public List<PhoneNumberUniversityModel>? PhoneNumbers { get; set; }
+
+
+
+        [Display(Name = "Избранные ВУЗы")]
+        [JsonPropertyName(nameof(UniversityFavoritess))]
+        public List<UniversityFavoritesModel>? UniversityFavoritess { get; set; }
+
+
+
+        [Display(Name = "Направленности ВУЗа")]
+        [JsonPropertyName(nameof(FocusUniversitys))]
+        public List<FocusUniversityModel>? FocusUniversitys { get; set; }
     }
 }

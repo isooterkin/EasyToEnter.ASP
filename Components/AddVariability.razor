@@ -1,0 +1,510 @@
+﻿@using EasyToEnter.ASP.Services.Variability;
+
+<div class="bg-white rounded-20 shadow p-4 mb-3">
+
+    @*Уровень подготовки*@
+    <div class="mb-2">
+        <label class="control-label">
+            Уровень подготовки
+        </label>
+        <select class="form-select" @onchange="ChangeLevel">
+            @for (var i = 0; i < LevelList.Count; i++)
+            {
+                <option value="@LevelList[i].Id">@LevelList[i].Name</option>
+            }
+        </select>
+    </div>
+
+    @*Наука*@
+    <div class="mb-2">
+        <label class="control-label">
+            Наука
+        </label>
+        <select class="form-select" @onchange="ChangeScience">
+            @for (var i = 0; i < ScienceList.Count; i++)
+            {
+                <option value="@ScienceList[i].Id">@ScienceList[i].Name</option>
+            }
+        </select>
+    </div>
+
+    @*Укрупнённая группа*@
+    <div class="mb-2">
+        <label class="control-label">
+            Укрупнённая группа
+        </label>
+        <select class="form-select" @onchange="ChangeGroup">
+            @for (var i = 0; i < GroupList.Count; i++)
+            {
+                <option value="@GroupList[i].Id">@GroupList[i].Name</option>
+            }
+        </select>
+    </div>
+
+    @*Направление подготовки*@
+    <div class="mb-2">
+        <label class="control-label">
+            Направление подготовки
+        </label>
+        <select class="form-select" @onchange="ChangeDirection">
+            @for (var i = 0; i < DirectionList.Count; i++)
+            {
+                <option value="@DirectionList[i].Id">@DirectionList[i].Name</option>
+            }
+        </select>
+    </div>
+
+    @*Направленность подготовки*@
+    <div class="mb-2">
+        <label class="control-label">
+            Направленность подготовки
+        </label>
+        <select class="form-select" @onchange="ChangeFocus">
+            @for (var i = 0; i < FocusList.Count; i++)
+            {
+                <option value="@FocusList[i].Id">@FocusList[i].Name</option>
+            }
+        </select>
+    </div>
+
+</div>
+
+<div class="bg-white rounded-20 shadow py-4 mb-3">
+    <div class="row">
+        <a class="col text-decoration-none" data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVacancy">
+            <div class="text-center text-dark">
+                Вариативности <small class="text-muted">(@VariabilityList.Count)</small>
+            </div>
+        </a>
+        <div class="col-auto pl-0 pr-4" @onclick="AppendVariability">
+            <span class="fs-5 bi bi-plus-circle text-success"/>
+        </div>
+    </div>
+    <div class="collapse" id="collapseVacancy">
+        <div class="row mt-2">
+            <div class="container">
+                @for (var i = 0; i < VariabilityList.Count; i++)
+                {
+                    VariabilityModel variability = VariabilityList[i];
+            
+                    <div class="bg-white rounded-20 shadow p-1 mb-3 mx-4">
+                        
+                        <div class="container">
+
+                            @*Навигация*@
+                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    @{
+                                        string navInformation = $"Information{i}";
+                                        string navHistory = $"History{i}";
+                                    }
+                                    <a class="nav-link active" href="#@navInformation" data-toggle="pill" role="tab" aria-selected="true">
+                                        Основная информация
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#@navHistory" data-toggle="pill" role="tab" aria-selected="false">
+                                        История
+                                    </a>
+                                </li>
+                            </ul>
+
+                            @*Страницы*@
+                            <div class="tab-content mt-2">
+
+                                @*Основная информация*@
+                                <div class="tab-pane fade show active" id="@navInformation">
+                                    <div class="container">
+
+                                        @*Период обучения*@
+                                        <div class="mb-2">
+                                            <label class="control-label">
+                                                Период обучения @variability.TrainingPeriod
+                                            </label>
+                                            <input class="form-control" type="number" @bind-value="variability.TrainingPeriod"/>
+                                        </div>
+
+                                        @*Вступительные экзамены*@
+                                        <div class="mb-2 pl-4 form-check">
+                                            <input class="form-check-input" type="checkbox" @bind="variability.EntranceExams" id="@i" @onclick="(() => ChangeEntranceExams(variability))">
+                                            <label class="form-check-label pl-1" for="@i">
+                                                Вступительные экзамены @variability.EntranceExams
+                                            </label>
+                                        </div>
+
+                                        @*Форма обучения*@
+                                        <div class="mb-2">
+                                            <label class="control-label">
+                                                Форма обучения @variability.FormId
+                                            </label>
+                                            <select class="form-select" @bind="variability.FormId">
+                                                @for (var j = 0; j < FormList.Count; j++)
+                                                {
+                                                    <option value="@FormList[j].Id">@FormList[j].Name</option>
+                                                }
+                                            </select>
+                                        </div>
+
+                                        @*Формат обучения*@
+                                        <div class="mb-2">
+                                            <label class="control-label">
+                                                Формат обучения @variability.FormatId
+                                            </label>
+                                            <select class="form-select" @bind="variability.FormatId">
+                                                @for (var j = 0; j < FormatList.Count; j++)
+                                                {
+                                                    <option value="@FormatList[j].Id">@FormatList[j].Name</option>
+                                                }
+                                            </select>
+                                        </div>
+
+                                        @*Оплата обучения*@
+                                        <div class="mb-2">
+                                            <label class="control-label">
+                                                Оплата обучения @variability.PaymentId
+                                            </label>
+                                            <select class="form-select" @bind="variability.PaymentId">
+                                                @for (var j = 0; j < PaymentList.Count; j++)
+                                                {
+                                                    <option value="@PaymentList[j].Id">@PaymentList[j].Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*История*@
+                                <div class="tab-pane" id="@navHistory">
+                                    <div class="container">
+
+                                        <div class="btn btn-outline-success mb-3" @onclick="(() => AppendHistoryVariability(variability))">
+                                            Добавить
+                                        </div>
+
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            Launch demo modal
+                                        </button>
+
+                                        @for (var h = 0; h < variability.HistoryVariabilitys.Count; h++)
+                                        {
+                                            HistoryVariabilityModel historyVariability = variability.HistoryVariabilitys[h];
+
+                                            <div class="bg-white rounded-20 shadow p-4 mb-3">
+                                                @*Год*@
+                                                <div class="mb-2">
+                                                    <label class="control-label">
+                                                        Год @historyVariability.Year
+                                                    </label>
+                                                    <input class="form-control" type="number" @bind-value="historyVariability.Year"/>
+                                                </div>
+
+                                                @*Проходной балл*@
+                                                <div class="mb-2">
+                                                    <label class="control-label">
+                                                        Проходной балл @historyVariability.PassingGrade
+                                                    </label>
+                                                    <input class="form-control" type="number" @bind-value="historyVariability.PassingGrade"/>
+                                                </div>
+
+                                                @*Проходной балл*@
+                                                <div class="mb-2">
+                                                    <label class="control-label">
+                                                        Проходной балл @historyVariability.Tuition
+                                                    </label>
+                                                    <input class="form-control" type="number" @bind-value="historyVariability.Tuition"/>
+                                                </div>
+
+                                                @*Количество мест*@
+                                                <div class="mb-2">
+                                                    <label class="control-label">
+                                                        Количество мест @historyVariability.NumberSeats
+                                                    </label>
+                                                    <input class="form-control" type="number" @bind-value="historyVariability.NumberSeats"/>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Добавление года*@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            @*Шапка*@
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавление истории</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            @*Тело*@
+            <div class="modal-body">
+                ...
+            </div>
+
+            @*Кнопки*@
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Отменить</button>
+                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Сохранить</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@code {
+    [Inject]
+    private IVariabilityService? VariabilityService { get; set; }
+
+
+    private List<FormModel> FormList = new();
+    private List<FormatModel> FormatList = new();
+    private List<PaymentModel> PaymentList = new();
+    private List<LevelFocusModel> LevelFocusList = new();
+    protected override async Task OnInitializedAsync()
+    {
+        if (VariabilityService != null)
+        {
+            LevelFocusList = await VariabilityService.GetLevelFocusList();
+            LevelList = LevelFocusList
+                .Select(lf => lf.LevelModel!)
+                .Distinct()
+                .ToList();
+            if (LevelList.Any()) LevelId = LevelList[0].Id;
+
+            ScienceList = LevelFocusList
+                .Where(lf => lf.LevelId == LevelId)
+                .Select(lf => lf.FocusModel!.DirectionModel!.GroupModel!.ScienceModel!)
+                .Distinct()
+                .ToList();
+            if (ScienceList.Any()) ScienceId = ScienceList[0].Id;
+
+            GroupList = LevelFocusList
+                .Where(lf => lf.LevelId == LevelId && lf.FocusModel!.DirectionModel!.GroupModel!.ScienceId == ScienceId)
+                .Select(lf => lf.FocusModel!.DirectionModel!.GroupModel!)
+                .Distinct()
+                .ToList();
+            if (GroupList.Any()) GroupId = GroupList[0].Id;
+
+            DirectionList = LevelFocusList
+                .Where(lf => lf.LevelId == LevelId && lf.FocusModel!.DirectionModel!.GroupId == GroupId)
+                .Select(lf => lf.FocusModel!.DirectionModel!)
+                .Distinct()
+                .ToList();
+            if (DirectionList.Any()) DirectionId = DirectionList[0].Id;
+
+            FocusList = LevelFocusList
+                .Where(lf => lf.LevelId == LevelId && lf.FocusModel!.DirectionId == DirectionId)
+                .Select(lf => lf.FocusModel!)
+                .Distinct()
+                .ToList();
+            if (FocusList.Any()) FocusId = FocusList[0].Id;
+
+            FormList = await VariabilityService.GetFormList();
+            FormatList = await VariabilityService.GetFormatList();
+            PaymentList = await VariabilityService.GetPaymentList();
+        }
+    }
+
+    private void ChangeScienceDependencies()
+    {
+        ScienceList = LevelFocusList
+            .Where(lf => lf.LevelId == LevelId)
+            .Select(lf => lf.FocusModel!.DirectionModel!.GroupModel!.ScienceModel!)
+            .Distinct()
+            .ToList();
+        if (ScienceList.Any()) ScienceId = ScienceList[0].Id;
+
+        ChangeGroupDependencies();
+    }
+
+    private void ChangeGroupDependencies()
+    {
+        GroupList = LevelFocusList
+            .Where(lf => lf.LevelId == LevelId && lf.FocusModel!.DirectionModel!.GroupModel!.ScienceId == ScienceId)
+            .Select(lf => lf.FocusModel!.DirectionModel!.GroupModel!)
+            .Distinct()
+            .ToList();
+        if (GroupList.Any()) GroupId = GroupList[0].Id;
+
+        ChangeDirectionDependencies();
+    }
+
+    private void ChangeDirectionDependencies()
+    {
+        DirectionList = LevelFocusList
+            .Where(lf => lf.LevelId == LevelId && lf.FocusModel!.DirectionModel!.GroupId == GroupId)
+            .Select(lf => lf.FocusModel!.DirectionModel!)
+            .Distinct()
+            .ToList();
+        if (DirectionList.Any()) DirectionId = DirectionList[0].Id;
+
+        ChangeFocusDependencies();
+    }
+
+    private void ChangeFocusDependencies()
+    {
+        FocusList = LevelFocusList
+            .Where(lf => lf.LevelId == LevelId && lf.FocusModel!.DirectionId == DirectionId)
+            .Select(lf => lf.FocusModel!)
+            .Distinct()
+            .ToList();
+        if (FocusList.Any()) FocusId = FocusList[0].Id;
+    }
+
+    private int? LevelId;
+    List<LevelModel> LevelList = new();
+    private void ChangeLevel(ChangeEventArgs args) 
+    {
+        string? id = args.Value?.ToString();
+        if (id == null) return;
+        LevelId = int.Parse(id);
+
+        ChangeScienceDependencies();
+    }
+
+
+
+    private int? ScienceId;
+    List<ScienceModel> ScienceList = new();
+    private void ChangeScience(ChangeEventArgs args) 
+    {
+        string? id = args.Value?.ToString();
+        if (id == null) return;
+        ScienceId = int.Parse(id);
+
+        ChangeGroupDependencies();
+    }
+
+
+
+    private int? GroupId;
+    List<GroupModel> GroupList = new();
+    private void ChangeGroup(ChangeEventArgs args) 
+    {
+        string? id = args.Value?.ToString();
+        if (id == null) return;
+        GroupId = int.Parse(id);
+
+        ChangeDirectionDependencies();
+    }
+
+
+
+    private int? DirectionId;
+    List<DirectionModel> DirectionList = new();
+    private void ChangeDirection(ChangeEventArgs args) 
+    {
+        string? id = args.Value?.ToString();
+        if (id == null) return;
+        DirectionId = int.Parse(id);
+
+        ChangeFocusDependencies();
+    }
+
+
+
+    private int? FocusId;
+    List<FocusModel> FocusList = new();
+    private void ChangeFocus(ChangeEventArgs args) 
+    {
+        string? id = args.Value?.ToString();
+        if (id == null) return;
+        FocusId = int.Parse(id);
+    }
+
+
+
+
+    private List<VariabilityModel> VariabilityList = new();
+
+
+    private void AppendVariability()
+    {
+        VariabilityModel variability = new()
+        {
+            TrainingPeriod = 4,
+            EntranceExams = true,
+            FormatId = 1,
+            FormId = 1,
+            PaymentId = 1,
+            HistoryVariabilitys = new List<HistoryVariabilityModel>()
+        };
+
+        VariabilityList.Add(variability);
+    }
+
+    private void RemoveVariability(VariabilityModel variability) => VariabilityList.Remove(variability);
+
+    private void ChangeEntranceExams(VariabilityModel variability) => variability.EntranceExams = !variability.EntranceExams;
+
+    private void AppendHistoryVariability(VariabilityModel variability)
+    {
+        variability.HistoryVariabilitys.Add(new HistoryVariabilityModel()
+        {
+            
+        });
+    }
+}
+
+@*    <div class="mb-2">
+        <label class="control-label">
+            Период обучения
+        </label>
+        <input class="form-control" type="number" @bind-value="@TrainingPeriod"/>
+    </div>
+
+
+    <div class="mb-2 pl-4 form-check">
+        <input class="form-check-input" type="checkbox" value="" id="CheckEntranceExams" @onclick="ChangeEntranceExams">
+        <label class="form-check-label pl-1" for="CheckEntranceExams">
+            Вступительные экзамены
+        </label>
+    </div>
+
+
+    <div class="mb-2">
+        <label class="control-label">
+            Форма обучения
+        </label>
+        <select class="form-select" @bind="@FormId">
+            <option value="1">Форма 1</option>
+            <option value="2">Форма 2</option>
+            <option value="3">Форма 3</option>
+            <option value="4">Форма 4</option>
+        </select>
+    </div>
+
+
+    <div class="mb-2">
+        <label class="control-label">
+            Формат обучения
+        </label>
+        <select class="form-select" @bind="@FormatId">
+            <option value="1">Формат 1</option>
+            <option value="2">Формат 2</option>
+            <option value="3">Формат 3</option>
+            <option value="4">Формат 4</option>
+        </select>
+    </div>
+
+
+    <div class="mb-2">
+        <label class="control-label">
+            Оплата обучения
+        </label>
+        <select class="form-select" @bind="@PaymentId">
+            <option value="1">Оплата 1</option>
+            <option value="2">Оплата 2</option>
+            <option value="3">Оплата 3</option>
+            <option value="4">Оплата 4</option>
+        </select>
+    </div>*@
