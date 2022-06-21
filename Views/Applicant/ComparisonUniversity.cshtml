@@ -39,32 +39,32 @@
                 <div class="col text-start text-truncate">
                     @Model[i].UniversityModel!.Abbreviation
                 </div>
+
                 <div class="col-auto text-end">
+                    @{
+                        List<VariabilityModel> variabilityList = Model[i].UniversityModel!.FocusUniversitys!.SelectMany(fu => fu.Variabilitys!).ToList();
 
-                @{
-                    List<VariabilityModel> variabilityList = Model[i].UniversityModel!.FocusUniversitys!.SelectMany(fu => fu.Variabilitys!).ToList();
+                        int numberSeats = 0;
 
-                    int numberSeats = 0;
+                        for (var j = 0; j < variabilityList.Count; j++)
+                        {
+                            HistoryVariabilityModel? yearHistoryVariability = variabilityList[j].YearHistoryVariability;
 
-                    for (var j = 0; j < variabilityList.Count; j++)
-                    {
-                        HistoryVariabilityModel? yearHistoryVariability = variabilityList[j].YearHistoryVariability;
+                            if (yearHistoryVariability != null)
+                                numberSeats += yearHistoryVariability.NumberSeats;
+                        }
 
-                        if (yearHistoryVariability != null)
-                            numberSeats += yearHistoryVariability.NumberSeats;
                     }
 
-                }
-
-                @if (numberSeats != 0)
-                {
-                    @numberSeats 
-                    <small class="text-muted"> мест</small>
-                }
-                else
-                {
-                    <small class="text-muted">нет информации</small>
-                }
+                    @if (numberSeats != 0)
+                    {
+                        @numberSeats 
+                        <small class="text-muted"> мест</small>
+                    }
+                    else
+                    {
+                        <small class="text-muted">нет информации</small>
+                    }
                 </div>
             </div>
         </div>
@@ -92,11 +92,12 @@
     {
         <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 3px solid @ColorList[i];">
             <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+                
                 <div class="col text-start text-truncate">
                     @Model[i].UniversityModel!.Abbreviation
                 </div>
-                <div class="col-auto text-end">
 
+                <div class="col-auto text-end">
                     @{
                         List<VariabilityModel> variabilityList = Model[i].UniversityModel!.FocusUniversitys!.SelectMany(fu => fu.Variabilitys!).ToList();
 

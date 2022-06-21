@@ -1,0 +1,57 @@
+﻿@model EasyToEnter.ASP.ViewsModels.Applicant.VacancySelectionContainerViewModel;
+@using EasyToEnter.ASP.ViewsModels.Components;
+@using EasyToEnter.ASP.ViewsModels.Components.Path;
+
+@{
+    ViewData["Title"] = "Выбор вакансии";
+}
+
+@*Контейнер начало*@
+<div class="container p-0">
+    <div class="row">
+        <div class="col-xl-8 col-md-12 order-xl-first order-last">
+            @*<vc:focus-container data="@Model"/>*@
+        </div>
+        @*Фильтр начало*@
+        <div class="col-xl col-md-12 mb-3 order-xl-last order-first">
+            <div class="col bg-white shadow px-3 rounded-20">
+                <div class="col position-relative">
+                    <div class="row">
+                        <div class="col p-0 my-1 text-center">
+                            Фильтры
+                        </div>
+                        <a class="col-auto m-0 p-0 align-self-end d-block d-xl-none text-decoration-none" data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseExample">
+                            <span class="fs-5 bi bi-sliders text-muted"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="collapse dont-collapse-sm pb-2" id="collapseExample">
+                    <div class="well">
+                        <!-- Фильтры -->
+                        <form method="get">
+                            <div class="container p-0">
+                                <div class="row">
+                                    <!-- Предыдущие значения -->
+                                    <vc:select data='@new SelectViewModel("profession", "Профессия", Model.ProfessionSelectListItem)'/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Фильтр конец*@
+    </div>
+</div>
+@*Контейнер конец*@
+
+<!-- Отправка формы при клике на select-->
+@section Scripts 
+{
+    <script>
+        $('.select_send_ajax').on('change', function() 
+        {
+            $(this.form).submit();
+        });
+    </script>
+}
