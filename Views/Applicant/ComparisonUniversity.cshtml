@@ -1,5 +1,231 @@
-﻿@model List<EasyToEnter.ASP.Models.Models.VariabilityModel>;
+﻿@model List<EasyToEnter.ASP.Models.Models.UniversityFavoritesModel>;
+@using EasyToEnter.ASP.Models.Models;
+@using static EasyToEnter.ASP.Tools.Colors;
+@using static EasyToEnter.ASP.Tools.StringConverting;
 
 @{
     ViewData["Title"] = "Сравнение ВУЗов";
 }
+
+@*Карта начало*@
+<vc:map-university-list data="@Model.Select(uf => uf.UniversityModel!).Distinct().ToList()"/>
+@*Карта конец*@
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    @for (var i = 0; i < Model.Count; i++)
+    {
+        <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 3px solid @ColorList[i];">
+            <a class="row px-2 py-1 text-decoration-none text-black" href="/Applicant/University?university=@Model[i].UniversityId">
+                <div class="col text-start text-truncate">
+                    @Model[i].UniversityModel!.Name
+                </div>
+                <div class="col-auto text-end">
+                    @Model[i].UniversityModel!.Abbreviation
+                </div>
+            </a>
+        </div>
+    }
+</div>
+
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    <div class="col text-center my-2">
+        Количество мест <small class="text-muted">(на текущий год)</small>
+    </div>
+    @for(var i = 0; i < Model.Count; i++)
+    {
+        <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 3px solid @ColorList[i];">
+            <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+                <div class="col text-start text-truncate">
+                    @Model[i].UniversityModel!.Abbreviation
+                </div>
+                <div class="col-auto text-end">
+
+                @{
+                    List<VariabilityModel> variabilityList = Model[i].UniversityModel!.FocusUniversitys!.SelectMany(fu => fu.Variabilitys!).ToList();
+
+                    int numberSeats = 0;
+
+                    for (var j = 0; j < variabilityList.Count; j++)
+                    {
+                        HistoryVariabilityModel? yearHistoryVariability = variabilityList[j].YearHistoryVariability;
+
+                        if (yearHistoryVariability != null)
+                            numberSeats += yearHistoryVariability.NumberSeats;
+                    }
+
+                }
+
+                @if (numberSeats != 0)
+                {
+                    @numberSeats 
+                    <small class="text-muted"> мест</small>
+                }
+                else
+                {
+                    <small class="text-muted">нет информации</small>
+                }
+                </div>
+            </div>
+        </div>
+    }
+    <div class="bg-white rounded-20 shadow-sm mx-2 mb-1" style="border: 1px solid #e6e6e6;">
+        <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVariabilityNumberSeats">
+            <div class="col btn">
+                <div class="text-center">
+                    История количества мест <small class="text-muted">(показать)</small>
+                </div>
+            </div>
+        </a>
+        <div class="collapse" id="collapseVariabilityNumberSeats">
+           @* <canvas id="variabilityChartNumberSeats"></canvas>*@
+        </div>
+    </div>
+</div>
+
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    <div class="col text-center my-2">
+        Проходной балл <small class="text-muted">(на текущий год)</small>
+    </div>
+    @for(var i = 0; i < Model.Count; i++)
+    {
+        <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 3px solid @ColorList[i];">
+            <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+                <div class="col text-start text-truncate">
+                    @Model[i].UniversityModel!.Abbreviation
+                </div>
+                <div class="col-auto text-end">
+
+                    @{
+                        List<VariabilityModel> variabilityList = Model[i].UniversityModel!.FocusUniversitys!.SelectMany(fu => fu.Variabilitys!).ToList();
+
+                        int? passingGrade = null;
+
+                        for (var j = 0; j < variabilityList.Count; j++)
+                        {
+                            HistoryVariabilityModel? yearHistoryVariability = variabilityList[j].YearHistoryVariability;
+
+                            if (yearHistoryVariability != null)
+                            {
+                                int passingGradeHistory = yearHistoryVariability.PassingGrade;
+
+                                if (passingGrade == null) passingGrade = passingGradeHistory;
+                                else if (passingGrade > passingGradeHistory) passingGrade = passingGradeHistory;
+                            }
+                        }
+                    }
+
+                    @if (passingGrade != null)
+                    {
+                        <small class="text-muted"> от</small>
+                        @passingGrade
+                        <small class="text-muted"> баллов</small>
+                    }
+                    else
+                    {
+                        <small class="text-muted">нет информации</small>
+                    }
+                </div>
+            </div>
+        </div>
+    }   
+    <div class="bg-white rounded-20 shadow-sm mx-2 mb-1" style="border: 1px solid #e6e6e6;">
+        <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" href="#collapseVariabilityPassingGrade">
+            <div class="col btn">
+                <div class="text-center">
+                    История проходного балла <small class="text-muted">(показать)</small>
+                </div>
+            </div>
+        </a>
+        <div class="collapse" id="collapseVariabilityPassingGrade">
+            @*<canvas id="variabilityChartPassingGrade"></canvas>*@
+        </div>
+    </div>
+</div>
+
+@{
+    List<AccreditationModel> accreditationList = Model
+        .Select(vf => vf.UniversityModel!.AccreditationModel!)
+        .Distinct()
+        .ToList();
+}
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    <div class="col text-center my-2">
+        Аккредитация ВУЗа
+    </div>
+    @for (var i = 0; i < accreditationList.Count; i++)
+    {
+        <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
+            <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+                <div class="col text-start text-truncate">
+                    @accreditationList[i].Name
+                </div>
+
+                @for (var j = 0; j < Model.Count; j++)
+                    if (Model[j].UniversityModel!.AccreditationModel! == accreditationList[i])
+                    {
+                        <div class="col-auto fw-bold text-end rounded-circle p-0 mr-1" style="background-color: @ColorList[j]; width: 35px; height: 35px;">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-auto text-end rounded-circle p-0 mr-1" style="width: 35px; height: 35px">
+                        </div>
+                    }
+            </div>
+        </div>
+    }
+</div>
+
+<div class="bg-white rounded-20 shadow p-1 mb-3">
+    <div class="col text-center my-2">
+        Основная информация
+    </div>
+
+    <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
+        <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+            <div class="col text-start text-truncate">
+                Военная кафедра <small class="text-muted">(наличие в ВУЗе)</small>
+            </div>
+
+            @for (var j = 0; j < Model.Count; j++)
+            {
+                if (Model[j].UniversityModel!.MilitaryDepartment)
+                {
+                    <div class="col-auto fw-bold text-end rounded-circle p-0 mr-1 d-flex justify-content-center align-items-center" style="background-color: @ColorList[j]; width: 35px; height: 35px;">
+                    </div>
+                }
+                else
+                {
+                    <div class="col-auto text-end rounded-circle p-0 mr-1" style="width: 35px; height: 35px">
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="rounded-20 shadow-sm bg-white p-1 m-2" style="border: 1px solid #e6e6e6;">
+        <div class="row pl-2 pr-3 py-1 justify-content-center align-items-center">
+            <div class="col text-start text-truncate">
+                Общежитие <small class="text-muted">(наличие в ВУЗе)</small>
+            </div>
+
+            @for (var j = 0; j < Model.Count; j++)
+            {
+                if (Model[j].UniversityModel!.Dormitorys!.Any())
+                {
+                    <div class="col-auto fw-bold text-end rounded-circle p-0 mr-1 d-flex justify-content-center align-items-center" style="background-color: @ColorList[j]; width: 35px; height: 35px;">
+                    </div>
+                }
+                else
+                {
+                    <div class="col-auto text-end rounded-circle p-0 mr-1" style="width: 35px; height: 35px">
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+</div>

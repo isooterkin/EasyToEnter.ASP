@@ -11,22 +11,21 @@ namespace EasyToEnter.ASP.Controllers.Applicant
         [Authorized]
         public async Task<IActionResult> ComparisonUniversityAsync()
         {
-            // Пользователь
-            PersonModel personModel = await _context.Person
-                .Include(p => p.VariabilityFavoritess)
-                    !.ThenInclude(vf => vf.VariabilityModel)
-                        !.ThenInclude(v => v!.FocusUniversityModel)
-                            !.ThenInclude(fu => fu!.UniversityModel)
-                .Include(p => p.VariabilityFavoritess)
-                    !.ThenInclude(vf => vf.VariabilityModel)
-                        !.ThenInclude(v => v!.FocusUniversityModel)
-                            !.ThenInclude(fu => fu!.LevelFocusModel)
-                                !.ThenInclude(lf => lf!.FocusModel)
-                .Include(p => p.UniversityFavoritess)
-                    !.ThenInclude(uf => uf!.UniversityModel)
-                .SingleAsync(p => p.Id == User.Id());
+            // Избранные вариативности
+            List<UniversityFavoritesModel> universityFavoritesList = await _context.UniversityFavorites
+                .Where(uf => uf.PersonId == User.Id())
+                .Include(uf => uf.UniversityModel!.Dormitorys)
+                .Include(uf => uf.UniversityModel!.AddressModel!.CityModel!.RegionModel)
+                .Include(uf => uf.UniversityModel!.AccreditationModel)
+                .Include(uf => uf.UniversityModel!.SpecializationUniversitys!)
+                    .ThenInclude(sp => sp.SpecializationModel)
+                .Include(uf => uf.UniversityModel!.FocusUniversitys!)
+                    .ThenInclude(fu => fu.Variabilitys!)
+                        .ThenInclude(v => v.HistoryVariabilitys)
+                .Include(vf => vf.PersonModel) // ???
+                .ToListAsync();
 
-            return View(personModel.UniversityFavoritess);
+            return View(universityFavoritesList);
         }
     }
 }

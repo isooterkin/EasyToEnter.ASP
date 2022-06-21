@@ -8,7 +8,7 @@
 }
 
 @*Карта начало*@
-<vc:map-university-list data="@Model.Select(v => v.VariabilityModel!.FocusUniversityModel!.UniversityModel!).Distinct().ToList()"/>
+<vc:map-university-list data="@Model.Select(vf => vf.VariabilityModel!.FocusUniversityModel!.UniversityModel!).Distinct().ToList()"/>
 @*Карта конец*@
 
 <div class="bg-white rounded-20 shadow p-1 mb-3">
