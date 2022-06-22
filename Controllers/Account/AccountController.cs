@@ -23,19 +23,16 @@ namespace EasyToEnter.ASP.Controllers.Account
             // Пользователь
             PersonModel personModel = await _context.Person
                 .Include(p => p.VariabilityFavoritess)
-                    !.ThenInclude(vf => vf.VariabilityModel)
-                        !.ThenInclude(v => v!.FocusUniversityModel)
-                            !.ThenInclude(fu => fu!.UniversityModel)
-                .Include(p => p.VariabilityFavoritess)
-                    !.ThenInclude(vf => vf.VariabilityModel)
-                        !.ThenInclude(v => v!.FocusUniversityModel)
-                            !.ThenInclude(fu => fu!.LevelFocusModel)
-                                !.ThenInclude(lf => lf!.FocusModel)
-                .Include(p => p.UniversityFavoritess)
-                    !.ThenInclude(uf => uf!.UniversityModel)
+                    !.ThenInclude(vf => vf.VariabilityModel!.FocusUniversityModel!.UniversityModel)
+                .Include(p => p.VariabilityFavoritess!)
+                    !.ThenInclude(vf => vf.VariabilityModel!.FocusUniversityModel!.LevelFocusModel!.FocusModel)
+                .Include(p => p.UniversityFavoritess!)
+                    .ThenInclude(uf => uf.UniversityModel)
+                .Include(p => p.VacancyFavoritess!)
+                    .ThenInclude(uf => uf.VacancyModel)
                 .SingleAsync(p => p.Id == User.Id());
 
-            return View(new AccountViewModel(personModel.VariabilityFavoritess!, personModel.UniversityFavoritess!));
+            return View(new AccountViewModel(personModel.VariabilityFavoritess!, personModel.UniversityFavoritess!, personModel.VacancyFavoritess!));
         }
     }
 }

@@ -77,13 +77,19 @@ namespace EasyToEnter.ASP.Models.Models
 
 
         [Display(Name = "Избранные вариативности")]
-        [JsonPropertyName("VariabilityFavoritess")]
+        [JsonPropertyName(nameof(VariabilityFavoritess))]
         public List<VariabilityFavoritesModel>? VariabilityFavoritess { get; set; }
 
 
 
         [Display(Name = "Избранные ВУЗы")]
-        [JsonPropertyName("UniversityFavoritess")]
+        [JsonPropertyName(nameof(UniversityFavoritess))]
         public List<UniversityFavoritesModel>? UniversityFavoritess { get; set; }
+
+
+
+        [Display(Name = "Избранные вакансии")]
+        [JsonPropertyName(nameof(VacancyFavoritess))]
+        public List<VacancyFavoritesModel>? VacancyFavoritess { get; set; }
     }
 }

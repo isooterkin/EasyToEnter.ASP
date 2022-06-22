@@ -10,6 +10,31 @@
     ViewData["Title"] = "Выбор вакансии";
 }
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+
+
+<script>
+    $( function() {
+        $( "#slider-range" ).slider({
+        range: true,
+        min: @Model.MinWages,
+        max: @Model.MaxWages,
+        values: [ @Model.SelectMinWages, @Model.SelectMaxWages ],
+        slide: function( event, ui ) {
+        $( "#amount" ).val(ui.values[ 0 ] + "-" + ui.values[ 1 ]);
+        }
+    });
+    
+    $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) +
+        "-" + $( "#slider-range" ).slider( "values", 1 ) );
+    } );
+</script>
+
+
 @*Контейнер начало*@
 <div class="container p-0">
     <div class="row">
@@ -23,7 +48,7 @@
         </div>
         @*Фильтр начало*@
         <div class="col-xl col-md-12 mb-3 order-xl-last order-first">
-            <div class="col bg-white shadow px-3 rounded-20">
+            <div class="col bg-white shadow px-3 rounded-20 pb-2">
                 <div class="col position-relative">
                     <div class="row">
                         <div class="col p-0 my-1 text-center">
@@ -40,8 +65,24 @@
                         <form method="get">
                             <div class="container p-0">
                                 <div class="row">
-                                    <!-- Предыдущие значения -->
                                     <vc:select data='@new SelectViewModel("profession", "Профессия", Model.ProfessionSelectListItem)'/>
+                                    
+                                    <div class="px-3">
+                                        <div class="mb-2 px-1">
+                                            <small>
+                                                Зарплата
+                                            </small>
+                                            <input type="text" id="amount" name="range" class="fw-bold small text-muted border-0 bg-white">
+                                        </div>
+                                        <div class="px-1">
+                                            <div id="slider-range"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="px-3 pt-3">
+                                        <button class="btn btn-outline-secondary w-100" type="submit">Применить</button>
+                                    </div>
+
                                 </div>
                             </div>
                         </form>

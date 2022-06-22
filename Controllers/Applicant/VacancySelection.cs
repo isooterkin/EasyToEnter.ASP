@@ -11,7 +11,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
     public partial class ApplicantController
     {
         [SessionCheck]
-        public async Task<IActionResult> VacancySelection([FromQuery(Name = "profession")] int? profession)
+        public async Task<IActionResult> VacancySelection([FromQuery(Name = "profession")] int? profession, [FromQuery(Name = "range")] string? range)
         {
             // Все Вакансии
             List<VacancyModel> vacancyList = await _context.Vacancy
@@ -35,6 +35,25 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                     Selected = a.Id == profession,
                     Subtext = vacancyList.Where(v => v.ProfessionId == a.Id).Count().ToString()
                 }).ToList();
+
+            int minWages = vacancyList.Min(v => v.Wages);
+            int maxWages = vacancyList.Max(v => v.Wages);
+            int selectMinWages = minWages;
+            int selectMaxWages = maxWages;
+
+            // Фильтрация по "Зарплате"
+            if (range != null)
+            {
+                string[] minAndMax = range.Split('-');
+
+                selectMinWages = int.Parse(minAndMax[0]);
+                selectMaxWages = int.Parse(minAndMax[1]);
+
+                // Фильтруем "Вакансии"
+                vacancyList = vacancyList
+                    .Where(v => v.Wages >= selectMinWages && v.Wages <= selectMaxWages)
+                    .ToList();
+            }
 
             // Фильтрация по "Профессии"
             if (profession != null)
@@ -70,7 +89,7 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                         .Any(vf => vf.PersonId == person.Id);
             }
 
-            return View(new VacancySelectionContainerViewModel(vacancyFavoritesViewModel, professionSelectListItem));
+            return View(new VacancySelectionContainerViewModel(vacancyFavoritesViewModel, professionSelectListItem, minWages, maxWages, selectMinWages, selectMaxWages));
         }
     }
 }

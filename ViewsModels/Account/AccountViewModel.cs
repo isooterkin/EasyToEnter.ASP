@@ -8,15 +8,21 @@ namespace EasyToEnter.ASP.ViewsModels.Account
 
         public readonly List<UniversityFavoritesModel> UniversityFavoritesList;
 
+        public readonly List<VacancyFavoritesModel> VacancyFavoritesList;
+
         public AccountViewModel(List<VariabilityFavoritesModel> variabilityFavoritesList, 
-            List<UniversityFavoritesModel> universityFavoritesList)
+            List<UniversityFavoritesModel> universityFavoritesList,
+            List<VacancyFavoritesModel> vacancyFavoritesList)
         {
             VariabilityFavoritesList = variabilityFavoritesList;
             UniversityFavoritesList = universityFavoritesList;
+            VacancyFavoritesList = vacancyFavoritesList;
         }
 
         public List<VariabilityModel> VariabilityList => VariabilityFavoritesList.Select(vf => vf.VariabilityModel!).ToList();
 
         public List<UniversityModel> UniversityList => UniversityFavoritesList.Select(uf => uf.UniversityModel!).ToList();
+
+        public List<VacancyModel> VacancyList => VacancyFavoritesList.Select(uf => uf.VacancyModel!).ToList();
     }
 }
