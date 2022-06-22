@@ -21,6 +21,8 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                     .ThenInclude(dfu => dfu!.DisciplineModel)
                 .Include(v => v.FocusUniversityModel!.LevelFocusModel!.LevelModel)
                 .Include(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.DirectionModel!.GroupModel!.ScienceModel)
+                .Include(v => v.FocusUniversityModel!.LevelFocusModel!.FocusModel!.ProfessionFocuss!)
+                    .ThenInclude(pf => pf.ProfessionModel)
                 .Include(v => v.FocusUniversityModel!.UniversityModel)
                 .Include(v => v.FocusUniversityModel!.SubjectFocusUniversitys!)
                     .ThenInclude(sfu => sfu!.SubjectModel)

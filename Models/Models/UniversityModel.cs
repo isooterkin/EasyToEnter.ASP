@@ -9,7 +9,7 @@ namespace EasyToEnter.ASP.Models.Models
     [Display(Name = "ВУЗ")]
     // [Index(nameof(Abbreviation) IsUnique = true)]
     // [Index(nameof(AddressId), IsUnique = true)]
-    public class UniversityModel: ModelWithIdNameDescription
+    public class UniversityModel : ModelWithIdNameDescription
     {
         [Required(ErrorMessage = "Укажите aббревиатурe.")]
         [Display(Name = "Аббревиатура")]
@@ -90,5 +90,88 @@ namespace EasyToEnter.ASP.Models.Models
         [Display(Name = "Направленности ВУЗа")]
         [JsonPropertyName(nameof(FocusUniversitys))]
         public List<FocusUniversityModel>? FocusUniversitys { get; set; }
+
+
+        public int PassingGrade()
+        {
+            if (FocusUniversitys == null) return 0;
+
+            if (!FocusUniversitys.Any()) return 0;
+
+            List<VariabilityModel> variabilityList = FocusUniversitys.SelectMany(fu => fu.Variabilitys!).ToList();
+
+            int? passingGrade = null;
+
+            for (var j = 0; j < variabilityList.Count; j++)
+            {
+                HistoryVariabilityModel? yearHistoryVariability = variabilityList[j].YearHistoryVariability;
+
+                if (yearHistoryVariability != null)
+                {
+                    int passingGradeHistory = yearHistoryVariability.PassingGrade;
+
+                    if (passingGrade == null) passingGrade = passingGradeHistory;
+                    else if (passingGrade > passingGradeHistory) passingGrade = passingGradeHistory;
+                }
+            }
+
+            return passingGrade != null ? (int) passingGrade : 0;
+        }
+
+        public int VariabilityCount()
+        {
+            if (FocusUniversitys == null) return 0;
+
+            if (!FocusUniversitys.Any()) return 0;
+
+            return FocusUniversitys.SelectMany(fu => fu.Variabilitys!).ToList().Count;
+        }
+
+        public int NumberSeats()
+        {
+            if (FocusUniversitys == null) return 0;
+
+            if (!FocusUniversitys.Any()) return 0;
+
+            List<VariabilityModel> variabilityList = FocusUniversitys.SelectMany(fu => fu.Variabilitys!).ToList();
+
+            int numberSeats = 0;
+
+            for (var j = 0; j < variabilityList.Count; j++)
+            {
+                HistoryVariabilityModel? yearHistoryVariability = variabilityList[j].YearHistoryVariability;
+
+                if (yearHistoryVariability != null)
+                    numberSeats += yearHistoryVariability.NumberSeats;
+            }
+
+            return numberSeats;
+        }
+
+        public int MinTuition()
+        {
+            if (FocusUniversitys == null) return 0;
+
+            if (!FocusUniversitys.Any()) return 0;
+
+            List<VariabilityModel> variabilityList = FocusUniversitys
+                .SelectMany(fu => fu.Variabilitys!)
+                .ToList();
+
+            int? minTuition = null;
+
+            for (var j = 0; j < variabilityList.Count; j++)
+            {
+                HistoryVariabilityModel? yearHistoryVariability = variabilityList[j].YearHistoryVariability;
+
+                if (yearHistoryVariability != null)
+                    if (yearHistoryVariability.Tuition != 0)
+                        if (minTuition == null) minTuition = yearHistoryVariability.Tuition;
+                        else if (minTuition > yearHistoryVariability.Tuition)
+                            minTuition = yearHistoryVariability.Tuition;
+            }
+
+            return minTuition != null ? (int)minTuition : 0;
+        }
     }
 }

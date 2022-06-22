@@ -10,7 +10,13 @@
 
 
 
-@for(var i = 0; i < Model.Count; i++)
+@if (!Model.Any())
+{
+    <div class="icon-card mb-3 text-dark bg-white shadow rounded-20 text-center p-2">
+        По вашему поисковому запросу ничего не нашлось.
+    </div>
+}
+else for(var i = 0; i < Model.Count; i++)
 {
     VacancyFavoritesViewModel vacancyFavorites = Model[i];
 

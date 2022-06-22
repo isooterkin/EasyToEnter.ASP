@@ -90,17 +90,17 @@
                         </div>
                         <div class="col-sm-auto order-1 order-xl-2 align-self-center">
                             <p class="text-center m-0">
-                                <span class="fs-6 fw-bold text-truncate"> @university.NumberSeats </span> мест
+                                <span class="fs-6 fw-bold text-truncate"> @university.University.NumberSeats() </span> мест
                             </p>
                         </div>
                         <div class="col-sm-auto order-2 order-xl-3 align-self-center">
                             <p class="text-center m-0">
-                                от <span class="fs-6 fw-bold text-truncate"> @university.PassingGrade </span> баллов
+                                от <span class="fs-6 fw-bold text-truncate"> @university.University.PassingGrade() </span> баллов
                             </p>
                         </div>
                         <div class="col-sm-auto order-3 order-xl-4 align-self-center">
                             <p class="text-center m-0">
-                                <span class="fs-6 fw-bold text-truncate"> @university.VariabilityCount </span> программ
+                                от <span class="fs-6 fw-bold text-truncate"> @IntToString(university.University.MinTuition()) </span> рублей
                             </p>
                         </div>
                     </div>

@@ -158,35 +158,10 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             List<UniversityFavoritesViewModel> universityFavoritesViewModel = new();
 
             for (var i = 0; i < universityList.Count; i++)
-            {
-                List<VariabilityModel> variabilityList = universityList[i].FocusUniversitys!.SelectMany(fu => fu.Variabilitys!).ToList();
-
-                int numberSeats = 0;
-                int? passingGrade = null;
-
-                for (var j = 0; j < variabilityList.Count; j++)
-                {
-                    HistoryVariabilityModel? yearHistoryVariability = variabilityList[j].YearHistoryVariability;
-
-                    if (yearHistoryVariability != null)
-                    {
-                        numberSeats += yearHistoryVariability.NumberSeats;
-
-                        int passingGradeHistory = yearHistoryVariability.PassingGrade;
-
-                        if (passingGrade == null) passingGrade = passingGradeHistory;
-                        else if (passingGrade > passingGradeHistory) passingGrade = passingGradeHistory;
-                    }
-                }
-
                 universityFavoritesViewModel.Add(new UniversityFavoritesViewModel()
                 {
-                    NumberSeats = numberSeats,
-                    PassingGrade = passingGrade != null ? (int)passingGrade : 0,
-                    VariabilityCount = variabilityList.Count,
                     University = universityList[i]
                 });
-            }
 
             if (User.Id() != null)
             {

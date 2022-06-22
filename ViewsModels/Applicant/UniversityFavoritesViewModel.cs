@@ -19,23 +19,5 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
         [Display(Name = "Избранная")]
         [JsonPropertyName("Favorites")]
         public bool Favorites { get; set; } = false;
-
-
-
-        [Display(Name = "Проходной балл")]
-        [JsonPropertyName("PassingGrade")]
-        public int PassingGrade { get; set; } = 0;
-
-
-
-        [Display(Name = "Количество программ")]
-        [JsonPropertyName("VariabilityCount")]
-        public int VariabilityCount { get; set; } = 0;
-
-
-
-        [Display(Name = "Количество мест")]
-        [JsonPropertyName("NumberSeats")]
-        public int NumberSeats { get; set; } = 0;
     }
 }

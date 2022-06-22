@@ -27,7 +27,7 @@
         <div class="col">
             <div class="row">
                 <div class="text-center fw-bold">
-                    @IntToString(Model.FocusUniversityCount)
+                    @IntToString(Model.University.VariabilityCount())
                 </div>
             </div>
             <div class="row">
@@ -40,10 +40,10 @@
         <div class="col">
             <div class="row">
                 <div class="text-center fw-bold">
-                    от @IntToString(Model.MinTuition)
+                    от @IntToString(Model.University.MinTuition())
                 </div>
             </div>
-            <div class="row">
+            <div class="row small">
                 <small class="text-center text-muted">
                     рублей в год
                 </small>
@@ -53,12 +53,25 @@
         <div class="col">
             <div class="row">
                 <div class="text-center fw-bold">
-                    @IntToString(Model.SumNumberSeats)
+                    @IntToString(Model.University.NumberSeats())
                 </div>
             </div>
             <div class="row">
                 <small class="text-center text-muted">
                     мест
+                </small>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="row">
+                <div class="text-center fw-bold">
+                    от @IntToString(Model.University.PassingGrade())
+                </div>
+            </div>
+            <div class="row">
+                <small class="text-center text-muted">
+                    баллов
                 </small>
             </div>
         </div>
@@ -211,22 +224,3 @@
     }
 </div>
 @*Общежития конец*@
-
-@*Вакансии и Профессии начало*@
-<div class="mb-3">
-    <div class="col">
-        <div class="row">
-            <a class="col-12 col-sm mr-sm-1 btn btn-light shadow-sm mb-sm-0 mb-2" href="#">
-                <div class="fw-bold text-center">
-                    Вакансии <small class="text-muted">(скоро)</small>
-                </div>
-            </a>
-            <a class="col-12 col-sm btn btn-light shadow-sm" href="#">
-                <div class="fw-bold text-center">
-                    Профессии <small class="text-muted">(скоро)</small>
-                </div>
-            </a>
-        </div>
-    </div>
-</div>
-@*Вакансии и Профессии конец*@
