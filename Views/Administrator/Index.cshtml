@@ -1,0 +1,26 @@
+﻿@model List<string?>?;
+
+@if (Model != null)
+{
+    for (var i = 0; i < Model.Count; i ++)
+    {
+        string? tableName = Model[i];
+
+        if (tableName != null)
+        {
+            string tableNameModels = $"{tableName}Models";
+
+            <div class="bg-white rounded-20 shadow p-3 mb-3">
+                <a class="text-decoration-none text-black" href="/@tableNameModels/Index">
+                    Редактировать @tableName
+                </a>
+            </div>
+        }
+    }
+}
+else
+{
+    <div class="bg-white rounded-20 shadow p-3 mb-3">
+        В базе данных нет таблиц.
+    </div>
+}

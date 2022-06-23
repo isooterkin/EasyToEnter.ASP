@@ -49,7 +49,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
         // GET: VacancyModels/Create
         public IActionResult Create()
         {
-            ViewData["OrganizationId"] = new SelectList(_context.Organization, "Id", "EmailAddress");
+            ViewData["OrganizationId"] = new SelectList(_context.Organization, "Id", "Name");
             ViewData["ProfessionId"] = new SelectList(_context.Profession, "Id", "Name");
             return View();
         }
@@ -67,7 +67,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrganizationId"] = new SelectList(_context.Organization, "Id", "EmailAddress", vacancyModel.OrganizationId);
+            ViewData["OrganizationId"] = new SelectList(_context.Organization, "Id", "Name", vacancyModel.OrganizationId);
             ViewData["ProfessionId"] = new SelectList(_context.Profession, "Id", "Name", vacancyModel.ProfessionId);
             return View(vacancyModel);
         }
@@ -85,7 +85,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
             {
                 return NotFound();
             }
-            ViewData["OrganizationId"] = new SelectList(_context.Organization, "Id", "EmailAddress", vacancyModel.OrganizationId);
+            ViewData["OrganizationId"] = new SelectList(_context.Organization, "Id", "Name", vacancyModel.OrganizationId);
             ViewData["ProfessionId"] = new SelectList(_context.Profession, "Id", "Name", vacancyModel.ProfessionId);
             return View(vacancyModel);
         }
@@ -122,7 +122,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrganizationId"] = new SelectList(_context.Organization, "Id", "EmailAddress", vacancyModel.OrganizationId);
+            ViewData["OrganizationId"] = new SelectList(_context.Organization, "Id", "Name", vacancyModel.OrganizationId);
             ViewData["ProfessionId"] = new SelectList(_context.Profession, "Id", "Name", vacancyModel.ProfessionId);
             return View(vacancyModel);
         }
