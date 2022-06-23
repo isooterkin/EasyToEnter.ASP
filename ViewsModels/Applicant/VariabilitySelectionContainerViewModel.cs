@@ -24,11 +24,33 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
         public readonly int DirectionId = 0;
         public readonly string FocusName = string.Empty;
 
+        // Фильтры Range
+        public readonly int MinTrainingPeriod;
+        public readonly int MaxTrainingPeriod;
+        public readonly int SelectMinTrainingPeriod;
+        public readonly int SelectMaxTrainingPeriod;
+        public readonly int MinPassingGrade;
+        public readonly int MaxPassingGrade;
+        public readonly int SelectMinPassingGrade;
+        public readonly int SelectMaxPassingGrade;
+        public readonly int MinTuition;
+        public readonly int MaxTuition;
+        public readonly int SelectMinTuition;
+        public readonly int SelectMaxTuition;
+        public readonly int MinNumberSeats;
+        public readonly int MaxNumberSeats;
+        public readonly int SelectMinNumberSeats;
+        public readonly int SelectMaxNumberSeats;
+
         public VariabilitySelectionContainerViewModel(List<VariabilityViewModel> variabilityViewModelList, List<SelectListItemSubtext> formSelectListItem, 
             List<SelectListItemSubtext> formatSelectListItem, List<SelectListItemSubtext> paymentSelectListItem, 
             List<SelectListItemSubtext> entranceExamsSelectListItem, List<SelectListItemSubtext> accreditationSelectListItem, 
             List<SelectListItemSubtext> militaryDepartmentSelectListItem, List<SelectListItemSubtext> dormitoryDepartmentSelectListItem,
-            List<SelectListItemSubtext> specializationSelectListItem, int levelFocus)
+            List<SelectListItemSubtext> specializationSelectListItem, int levelFocus, int minTrainingPeriod, 
+            int maxTrainingPeriod, int selectMinTrainingPeriod, int selectMaxTrainingPeriod,
+            int minPassingGrade, int maxPassingGrade, int selectMinPassingGrade, int selectMaxPassingGrade,
+            int minTuition, int maxTuition, int selectMinTuition, int selectMaxTuition, int minNumberSeats, 
+            int maxNumberSeats, int selectMinNumberSeats, int selectMaxNumberSeats)
         {
             VariabilityViewModelList = variabilityViewModelList;
             FormSelectListItem = formSelectListItem;
@@ -40,6 +62,23 @@ namespace EasyToEnter.ASP.ViewsModels.Applicant
             DormitoryDepartmentSelectListItem = dormitoryDepartmentSelectListItem;
             SpecializationSelectListItem = specializationSelectListItem;
             LevelFocusId = levelFocus;
+
+            MinTrainingPeriod = minTrainingPeriod;
+            MaxTrainingPeriod = maxTrainingPeriod;
+            SelectMinTrainingPeriod = selectMinTrainingPeriod;
+            SelectMaxTrainingPeriod = selectMaxTrainingPeriod;
+            MinPassingGrade = minPassingGrade;
+            MaxPassingGrade = maxPassingGrade;
+            SelectMinPassingGrade = selectMinPassingGrade;
+            SelectMaxPassingGrade = selectMaxPassingGrade;
+            MinTuition = minTuition;
+            MaxTuition = maxTuition;
+            SelectMinTuition = selectMinTuition;
+            SelectMaxTuition = selectMaxTuition;
+            MinNumberSeats = minNumberSeats;
+            MaxNumberSeats = maxNumberSeats;
+            SelectMinNumberSeats = selectMinNumberSeats;
+            SelectMaxNumberSeats = selectMaxNumberSeats;
 
             if (!VariabilityViewModelList.Any()) return;
 

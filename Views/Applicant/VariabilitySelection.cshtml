@@ -6,10 +6,69 @@
 @using System.Text.Json.Serialization;
 @using Newtonsoft.Json;
 
-
 @{
     ViewData["Title"] = "Вырианты обучения";
 }
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+@*Настройки фильтра "Период обучения"*@
+<script>
+    $( function() {
+        $( "#training-period" ).slider({
+        range: true,
+        min: @Model.MinTrainingPeriod,
+        max: @Model.MaxTrainingPeriod,
+        values: [ @Model.SelectMinTrainingPeriod, @Model.SelectMaxTrainingPeriod ],
+        slide: function( event, ui ) {
+        $( "#training-period-amount" ).val(ui.values[ 0 ] + "-" + ui.values[ 1 ]);
+        }});
+
+        $( "#passing-grade" ).slider({
+        range: true,
+        min: @Model.MinPassingGrade,
+        max: @Model.MaxPassingGrade,
+        values: [ @Model.SelectMinPassingGrade, @Model.SelectMaxPassingGrade ],
+        slide: function( event, ui ) {
+        $( "#passing-grade-amount" ).val(ui.values[ 0 ] + "-" + ui.values[ 1 ]);
+        }});
+
+        $( "#tuition" ).slider({
+        range: true,
+        min: @Model.MinTuition,
+        max: @Model.MaxTuition,
+        values: [ @Model.SelectMinTuition, @Model.SelectMaxTuition ],
+        slide: function( event, ui ) {
+        $( "#tuition-amount" ).val(ui.values[ 0 ] + "-" + ui.values[ 1 ]);
+        }});
+
+        $( "#number-seats" ).slider({
+        range: true,
+        min: @Model.MinNumberSeats,
+        max: @Model.MaxNumberSeats,
+        values: [ @Model.SelectMinNumberSeats, @Model.SelectMaxNumberSeats ],
+        slide: function( event, ui ) {
+        $( "#number-seats-amount" ).val(ui.values[ 0 ] + "-" + ui.values[ 1 ]);
+        }});
+    
+        $( "#training-period-amount" ).val($( "#training-period" ).slider( "values", 0 ) +
+            "-" + $( "#training-period" ).slider( "values", 1 ) );
+
+        $( "#passing-grade-amount" ).val($( "#passing-grade" ).slider( "values", 0 ) +
+            "-" + $( "#passing-grade" ).slider( "values", 1 ) );
+
+        $( "#tuition-amount" ).val($( "#tuition" ).slider( "values", 0 ) +
+            "-" + $( "#tuition" ).slider( "values", 1 ) );
+
+        $( "#number-seats-amount" ).val($( "#number-seats" ).slider( "values", 0 ) +
+            "-" + $( "#number-seats" ).slider( "values", 1 ) );
+    } );
+
+</script>
+
 
 @*Путь начало*@
 <vc:path data="new PathContainerViewModel(Model)"/>
@@ -61,11 +120,68 @@
                                     <vc:select data='@new SelectViewModel("form", "Форма обучания", Model.FormSelectListItem)'/>
                                     <vc:select data='@new SelectViewModel("format", "Формат обучания", Model.FormatSelectListItem)'/>
                                     <vc:select data='@new SelectViewModel("payment", "Оплата обучания", Model.PaymentSelectListItem)'/>
-                                    @*<vc:select data='@new SelectViewModel("tuition", "Стоимость обучения", Model.PaymentSelectListItem)'/>*@
-                                    @*<vc:select data='@new SelectViewModel("passingGrade", "Проходной балл", Model.PaymentSelectListItem)'/>*@
                                     <vc:select data='@new SelectViewModel("entranceExams", "Вступительные экзамены", Model.EntranceExamsSelectListItem)'/>
-                                    @*Предметы и предметы на замену*@
                                     
+                                    @*Фильтр "Период обучения"*@
+                                    <div class="px-3">
+                                        <div class="mb-2 px-1">
+                                            <small>
+                                                Период обучения
+                                            </small>
+                                            <input type="text" id="training-period-amount" name="rangeTrainingPeriod" class="fw-bold small text-muted border-0 bg-white">
+                                        </div>
+                                        <div class="px-1">
+                                            <div id="training-period"></div>
+                                        </div>
+                                    </div>
+
+                                    @if (Model.LevelId != 2)
+                                    {
+                                        @*Фильтр "Проходной балл ЕГЭ"*@
+                                        <div class="px-3">
+                                            <div class="mb-2 px-1">
+                                                <small>
+                                                    Проходной балл ЕГЭ
+                                                </small>
+                                                <input type="text" id="passing-grade-amount" name="rangePassingGrade" class="fw-bold small text-muted border-0 bg-white">
+                                            </div>
+                                            <div class="px-1">
+                                                <div id="passing-grade"></div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    @*Фильтр "Стоимость обучения"*@
+                                    <div class="px-3">
+                                        <div class="mb-2 px-1">
+                                            <small>
+                                                Стоимость обучения
+                                            </small>
+                                            <input type="text" id="tuition-amount" name="rangeTuition" class="fw-bold small text-muted border-0 bg-white">
+                                        </div>
+                                        <div class="px-1">
+                                            <div id="tuition"></div>
+                                        </div>
+                                    </div>
+
+                                    @*Фильтр "Количество мест"*@
+                                    <div class="px-3">
+                                        <div class="mb-2 px-1">
+                                            <small>
+                                                Количество мест
+                                            </small>
+                                            <input type="text" id="number-seats-amount" name="rangeNumberSeats" class="fw-bold small text-muted border-0 bg-white">
+                                        </div>
+                                        <div class="px-1">
+                                            <div id="number-seats"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    @*Кнопка "Применить фильтры"*@
+                                    <div class="px-3 pt-3">
+                                        <button class="btn btn-outline-secondary w-100" type="submit">Применить</button>
+                                    </div>
+
                                     <h5 class="mt-3 px-3"></h5>
                                     <vc:select data='@new SelectViewModel("accreditation", "Аккредитация", Model.AccreditationSelectListItem)'/>
                                     <vc:select data='@new SelectViewModel("militaryDepartment", "Военная кафедра", Model.MilitaryDepartmentSelectListItem)'/>

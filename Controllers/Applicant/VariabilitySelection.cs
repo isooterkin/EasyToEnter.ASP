@@ -20,7 +20,11 @@ namespace EasyToEnter.ASP.Controllers.Applicant
             [FromQuery(Name = "accreditation")] int? accreditation,
             [FromQuery(Name = "militaryDepartment")] int? militaryDepartment,
             [FromQuery(Name = "dormitory")] int? dormitory,
-            [FromQuery(Name = "specialization")] int? specialization
+            [FromQuery(Name = "specialization")] int? specialization,
+            [FromQuery(Name = "rangeTrainingPeriod")] string? rangeTrainingPeriod,
+            [FromQuery(Name = "rangePassingGrade")] string? rangePassingGrade,
+            [FromQuery(Name = "rangeTuition")] string? rangeTuition,
+            [FromQuery(Name = "rangeNumberSeats")] string? rangeNumberSeats
             )
         {
             if ((levelFocus <= 0) || 
@@ -187,6 +191,101 @@ namespace EasyToEnter.ASP.Controllers.Applicant
 
             // "Город" -> Фильтр
 
+            int minTrainingPeriod = variabilityList.Min(v => v.TrainingPeriod);
+            int maxTrainingPeriod = variabilityList.Max(v => v.TrainingPeriod);
+
+
+            int minPassingGrade = 0, maxPassingGrade = 0, minTuition = 0,
+                maxTuition = 0, minNumberSeats = 0, maxNumberSeats = 0;
+            try
+            {
+                minPassingGrade = variabilityList.Min(v => v.YearHistoryVariability!.PassingGrade);
+                maxPassingGrade = variabilityList.Max(v => v.YearHistoryVariability!.PassingGrade);
+                minTuition = variabilityList.Min(v => v.YearHistoryVariability!.Tuition);
+                maxTuition = variabilityList.Max(v => v.YearHistoryVariability!.Tuition);
+                minNumberSeats = variabilityList.Min(v => v.YearHistoryVariability!.NumberSeats);
+                maxNumberSeats = variabilityList.Max(v => v.YearHistoryVariability!.NumberSeats);
+            }
+            catch{ }
+
+            int selectMinTrainingPeriod = minTrainingPeriod;
+            int selectMaxTrainingPeriod = maxTrainingPeriod;
+            int selectMinPassingGrade = minPassingGrade;
+            int selectMaxPassingGrade = maxPassingGrade;
+            int selectMinTuition = minTuition;
+            int selectMaxTuition = maxTuition;
+            int selectMinNumberSeats = minNumberSeats;
+            int selectMaxNumberSeats = maxNumberSeats;
+
+            // Фильтрация по "Периоду обучения"
+            if (rangeTrainingPeriod != null)
+            {
+                string[] minAndMax = rangeTrainingPeriod.Split('-');
+
+                selectMinTrainingPeriod = int.Parse(minAndMax[0]);
+                selectMaxTrainingPeriod = int.Parse(minAndMax[1]);
+
+                // Фильтруем "Вакансии"
+                variabilityList = variabilityList
+                    .Where(v => v.TrainingPeriod >= selectMinTrainingPeriod && v.TrainingPeriod <= selectMaxTrainingPeriod)
+                    .ToList();
+            }
+
+            // Фильтрация по "Проходному баллу ЕГЭ"
+            if (rangePassingGrade != null)
+            {
+                string[] minAndMax = rangePassingGrade.Split('-');
+
+                selectMinPassingGrade = int.Parse(minAndMax[0]);
+                selectMaxPassingGrade = int.Parse(minAndMax[1]);
+
+                try
+                {
+                    // Фильтруем "Вакансии"
+                    variabilityList = variabilityList
+                        .Where(v => v.YearHistoryVariability!.PassingGrade >= selectMinPassingGrade && v.YearHistoryVariability!.PassingGrade <= selectMaxPassingGrade)
+                        .ToList();
+                }
+                catch { }
+            }
+
+            // Фильтрация по "Стоимости обучения"
+            if (rangeTuition != null)
+            {
+                string[] minAndMax = rangeTuition.Split('-');
+
+                selectMinTuition = int.Parse(minAndMax[0]);
+                selectMaxTuition = int.Parse(minAndMax[1]);
+
+                try
+                {
+                    // Фильтруем "Вакансии"
+                    variabilityList = variabilityList
+                        .Where(v => v.YearHistoryVariability!.Tuition >= selectMinTuition && v.YearHistoryVariability!.Tuition <= selectMaxTuition)
+                        .ToList();
+                }
+                catch { }
+            }
+
+            // Фильтрация по "Количеству мест"
+            if (rangeNumberSeats != null)
+            {
+                string[] minAndMax = rangeNumberSeats.Split('-');
+
+                selectMinNumberSeats = int.Parse(minAndMax[0]);
+                selectMaxNumberSeats = int.Parse(minAndMax[1]);
+
+                try
+                {
+                    // Фильтруем "Вакансии"
+                    variabilityList = variabilityList
+                        .Where(v => v.YearHistoryVariability!.NumberSeats >= selectMinNumberSeats && v.YearHistoryVariability!.NumberSeats <= selectMaxNumberSeats)
+                        .ToList();
+                }
+                catch { }
+            }
+
+
 
             // Фильтрация по "Форма"
             if (form != null) 
@@ -314,7 +413,13 @@ namespace EasyToEnter.ASP.Controllers.Applicant
                         .Any(fuf => fuf.PersonId == person.Id);
             }
 
-            return View(new VariabilitySelectionContainerViewModel(variabilityViewModelList, formSelectListItem, formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, accreditationSelectListItem, militaryDepartmentSelectListItem, dormitorySelectListItem, specializationSelectListItem, levelFocus));
+            return View(new VariabilitySelectionContainerViewModel(variabilityViewModelList, formSelectListItem, 
+                formatSelectListItem, paymentSelectListItem, entranceExamsSelectListItem, 
+                accreditationSelectListItem, militaryDepartmentSelectListItem, dormitorySelectListItem, 
+                specializationSelectListItem, levelFocus, minTrainingPeriod, maxTrainingPeriod,
+                selectMinTrainingPeriod, selectMaxTrainingPeriod, minPassingGrade, maxPassingGrade,
+                selectMinPassingGrade, selectMaxPassingGrade, minTuition, maxTuition, selectMinTuition,
+                selectMaxTuition, minNumberSeats, maxNumberSeats, selectMinNumberSeats, selectMaxNumberSeats));
         }
     }
 }

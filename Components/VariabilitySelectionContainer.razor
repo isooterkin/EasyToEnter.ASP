@@ -95,11 +95,16 @@
                                 Подробнее
                             </a>
                         </div>
-                        <div class="col-sm-auto order-1 order-xl-2 align-self-center">
-                            <p class="text-center m-0">
-                                от <span class="fs-6 fw-bold text-truncate">@IntToString(@variability.YearHistoryVariability?.PassingGrade)</span> баллов
-                            </p>
-                        </div>
+
+                        @if (variability.FocusUniversityModel!.LevelFocusModel!.LevelId != 2)
+                        {
+                            <div class="col-sm-auto order-1 order-xl-2 align-self-center">
+                                <p class="text-center m-0">
+                                    от <span class="fs-6 fw-bold text-truncate">@IntToString(@variability.YearHistoryVariability?.PassingGrade)</span> баллов
+                                </p>
+                            </div>
+                        }
+
                         <div class="col-sm-auto order-2 order-xl-3 align-self-center">
                             <p class="text-center m-0">
                                 <span class="fs-6 fw-bold text-truncate">@IntToString(@variability.YearHistoryVariability?.NumberSeats)</span> мест

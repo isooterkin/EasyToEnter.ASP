@@ -9,21 +9,25 @@
                     <small class="text-muted">на</small> @Model.Year <small class="text-muted">год</small>
                 </h4>
                 <div class="raw card-text">
+
                     <div class="col">
                         <h6 class="card-title text-center">
                             <small class="text-muted">от</small> @IntToString(Model.Tuition) <small class="text-muted">рублей</small>
                         </h6>
                     </div>
+
                     <div class="col">
                         <h6 class="card-title text-center">
                             <small class="text-muted">до</small> @IntToString(Model.NumberSeats) <small class="text-muted">мест</small>
                         </h6>
                     </div>
-                    <div class="col">
+
+@*                    <div class="col">
                         <h6 class="card-title text-center mb-0">
                             <small class="text-muted">от</small> @IntToString(Model.PassingGrade) <small class="text-muted">баллов</small>
                         </h6>
-                    </div>
+                    </div>*@
+
                 </div>
             </div>
         </div>
