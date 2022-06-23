@@ -1,11 +1,13 @@
 ﻿using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models;
+using EasyToEnter.ASP.Tools.Authorization.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace EasyToEnter.ASP.Controllers.Administrator
 {
+    [AdministratorRole]
     public class AdministratorController : Controller
     {
         private readonly EasyToEnterDbContext _context;

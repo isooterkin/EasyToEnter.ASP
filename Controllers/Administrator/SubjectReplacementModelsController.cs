@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
+using EasyToEnter.ASP.Tools.Authorization.Attributes;
 
 namespace EasyToEnter.ASP.Controllers.Administrator
 {
+    [AdministratorRole]
     public class SubjectReplacementModelsController : Controller
     {
         private readonly EasyToEnterDbContext _context;

@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using EasyToEnter.ASP.Data;
 using EasyToEnter.ASP.Models.Models;
+using EasyToEnter.ASP.Tools.Authorization.Attributes;
 
 namespace EasyToEnter.ASP.Controllers.Administrator
 {
+    [AdministratorRole]
     public class TypeProfessionModelsController : Controller
     {
         private readonly EasyToEnterDbContext _context;

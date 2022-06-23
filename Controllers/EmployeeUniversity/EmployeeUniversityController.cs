@@ -12,8 +12,7 @@ namespace EasyToEnter.ASP.Controllers.EmployeeUniversity
 
 
         [HttpGet]
-        [Authorized]
-        //[EmployeeUniversity]
+        [EmployerUniversityRole]
         public IActionResult Index()
         {
             return View();

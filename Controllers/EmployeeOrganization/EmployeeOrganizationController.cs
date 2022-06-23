@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyToEnter.ASP.Controllers.EmployeeOrganization
 {
+    [EmployerOrganizationRole]
     public class EmployeeOrganizationController : Controller
     {
         private readonly EasyToEnterDbContext _context;
@@ -16,8 +17,6 @@ namespace EasyToEnter.ASP.Controllers.EmployeeOrganization
 
 
         [HttpGet]
-        [Authorized]
-        //[EmployeeOrganization]
         public async Task<IActionResult> Index()
         {
             List<VacancyModel> vacancyList = await _context.EmployerOrganization
@@ -32,8 +31,6 @@ namespace EasyToEnter.ASP.Controllers.EmployeeOrganization
 
 
         [HttpGet]
-        [Authorized]
-        //[EmployeeOrganization]
         public async Task<IActionResult> EditVacancyAsync(int? vacancyId)
         {
             if (vacancyId == null || _context.Vacancy == null) return NotFound();
@@ -91,7 +88,6 @@ namespace EasyToEnter.ASP.Controllers.EmployeeOrganization
 
         [HttpGet]
         [Authorized]
-        //[EmployeeOrganization]
         public IActionResult NewVacancyAsync()
         {
             ViewData["ProfessionId"] = new SelectList(_context.Profession, "Id", "Name");
@@ -103,7 +99,6 @@ namespace EasyToEnter.ASP.Controllers.EmployeeOrganization
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[EmployeeOrganization]
         public async Task<IActionResult> NewVacancyAsync([Bind("Name,Description,ProfessionId,Wages")] VacancyModel vacancyModel)
         {
             OrganizationModel organization = (await _context.EmployerOrganization
