@@ -15,7 +15,7 @@ namespace EasyToEnter.ASP.Data.Initialization
                 },
                 new Class // 2
                 {
-                    OrganizationId = 1,
+                    OrganizationId = 2,
                     PersonId = 7,
                 }
             });

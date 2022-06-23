@@ -12,6 +12,11 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TrainingPeriod" class="control-label"></label>
+                <input asp-for="TrainingPeriod" class="form-control" />
+                <span asp-validation-for="TrainingPeriod" class="text-danger"></span>
+            </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="EntranceExams" /> @Html.DisplayNameFor(model => model.EntranceExams)

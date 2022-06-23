@@ -63,7 +63,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EntranceExams,FormId,PaymentId,FormatId,FocusUniversityId,Id")] VariabilityModel variabilityModel)
+        public async Task<IActionResult> Create([Bind("TrainingPeriod,EntranceExams,FormId,PaymentId,FormatId,FocusUniversityId,Id")] VariabilityModel variabilityModel)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace EasyToEnter.ASP.Controllers.Administrator
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EntranceExams,FormId,PaymentId,FormatId,FocusUniversityId,Id")] VariabilityModel variabilityModel)
+        public async Task<IActionResult> Edit(int id, [Bind("TrainingPeriod,EntranceExams,FormId,PaymentId,FormatId,FocusUniversityId,Id")] VariabilityModel variabilityModel)
         {
             if (id != variabilityModel.Id)
             {
@@ -173,14 +173,14 @@ namespace EasyToEnter.ASP.Controllers.Administrator
             {
                 _context.Variability.Remove(variabilityModel);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool VariabilityModelExists(int id)
         {
-            return (_context.Variability?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Variability?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
